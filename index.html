@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" href="g-glass-alpha.webp?v=2" as="image" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=61">
+  <link rel="stylesheet" href="styles.css?v=62">
 
   <script>
     (function () {
@@ -1423,6 +1423,62 @@
     </div>
   </section>
 
+  <!-- ============ EQUIPO ============
+       Los roles del equipo (freelancers con experiencia), sin nombres -->
+  <section class="section" id="equipo">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow" data-reveal>Equipo</p>
+        <h2 class="h2" data-reveal>Nuestro equipo.<br><em>Cada uno enfocado en su especialidad.</em></h2>
+        <p class="lead" data-reveal>En nuestro equipo están freelancers con experiencia real en cada área. Cada parte de tu proyecto la lleva el especialista indicado.</p>
+      </header>
+      <ul class="team-grid" data-stagger>
+        <li class="team-card glass spot">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-pen"/></svg></span>
+          <small class="team-kicker">Especialista</small>
+          <h3>Diseño gráfico moderno</h3>
+          <p>Identidad visual, piezas para redes y la imagen de tu web, con un estilo actual y coherente.</p>
+          <span class="team-tags"><i>Marca</i><i>Redes</i><i>Web</i></span>
+        </li>
+        <li class="team-card glass spot">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-code"/></svg></span>
+          <small class="team-kicker">Especialista</small>
+          <h3>Desarrollo de software y webs</h3>
+          <p>Páginas y sistemas a medida: rápidos, seguros y perfectos en celular.</p>
+          <span class="team-tags"><i>Webs</i><i>Software</i><i>Paneles</i></span>
+        </li>
+        <li class="team-card glass spot">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-spark"/></svg></span>
+          <small class="team-kicker">Especialista</small>
+          <h3>Automatización con agentes de IA</h3>
+          <p>Agentes de IA personalizados para tu negocio, que responden, agendan y hacen seguimiento solos.</p>
+          <span class="team-tags"><i>Agentes IA</i><i>WhatsApp</i><i>Flujos</i></span>
+        </li>
+        <li class="team-card glass spot">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span>
+          <small class="team-kicker">Especialista</small>
+          <h3>Análisis de datos</h3>
+          <p>Mide lo que pasa en tu web y en tus redes para saber qué mejorar y optimizar tu negocio.</p>
+          <span class="team-tags"><i>Métricas</i><i>Reportes</i><i>Optimización</i></span>
+        </li>
+        <li class="team-card glass spot">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-social"/></svg></span>
+          <small class="team-kicker">Especialista</small>
+          <h3>Mercadeo por tendencias</h3>
+          <p>Estrategias y contenido basados en lo que es tendencia, para llevar más visitas a tu web.</p>
+          <span class="team-tags"><i>Tendencias</i><i>Campañas</i><i>Contenido</i></span>
+        </li>
+        <li class="team-card glass spot">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-gear"/></svg></span>
+          <small class="team-kicker">Especialista</small>
+          <h3>Sistemas integrados en tu web</h3>
+          <p>Conecta tu página con pagos, reservas, CRM e inventario para que todo funcione solo.</p>
+          <span class="team-tags"><i>Pagos</i><i>CRM</i><i>Integraciones</i></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ============ CONTACTO ============ -->
   <section class="section" id="contacto">
     <div class="container">
@@ -1525,6 +1581,8 @@
 
 <!-- bubbles.js y scenes.js (la versión 3D) los carga main.js solo si se elige el 3D: ver gotia.fx en el <head> -->
 <script src="contacto.js?v=1" defer></script>
+<script src="supabase-config.js?v=1" defer></script>
+<script src="analytics.js?v=1" defer></script>
 <script src="main.js?v=26" defer></script>
 </body>
 </html>
