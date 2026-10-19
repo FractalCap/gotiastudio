@@ -1,0 +1,1530 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gotiastudio — Más visitas para tu negocio, con datos reales</title>
+  <meta name="description" content="Gotiastudio es un estudio digital premium: páginas web con automatizaciones, catálogos con panel de administrador, posicionamiento en Google y redes sociales, datos verificables semanales y contenido de estudio con IA.">
+  <meta name="theme-color" content="#eaf3ff">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gotiastudio — Más visitas para tu negocio, con datos reales">
+  <meta property="og:description" content="Webs con automatizaciones, panel de administrador, Google, redes sociales, datos semanales y contenido de estudio con IA. Todo conectado.">
+  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="g-glass-alpha.webp?v=2" as="image" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=61">
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      // dos versiones de la web: "esencial" (simple y rápida), la que se ve al entrar, y "3d"
+      // (efectos y movimiento), que se carga con el botón "3D" del menú. La elección dura toda la
+      // visita (sessionStorage). Un enlace con ?version=3d o ?version=esencial entra directo a esa versión.
+      var gotia = window.gotia = window.gotia || {};
+      // scripts de la versión 3D: solo se descargan si se elige el 3D (main.js los carga)
+      gotia.fx = ['bubbles.js?v=13', 'scenes.js?v=4'];
+      var v = null;
+      try {
+        var params = new URLSearchParams(location.search), q = params.get('version');
+        if (q === '3d' || q === 'esencial') {
+          v = q;
+          sessionStorage.setItem('gotia-version', v);
+          params.delete('version');
+          var rest = params.toString();
+          history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
+        } else {
+          v = sessionStorage.getItem('gotia-version');
+        }
+      } catch (e) {}
+      if (v === '3d') {
+        root.classList.add('is-loading');
+        gotia.fx.forEach(function (src) {
+          var l = document.createElement('link');
+          l.rel = 'preload'; l.as = 'script'; l.href = src;
+          document.head.appendChild(l);
+        });
+      } else {
+        root.classList.add('lite');
+      }
+    })();
+    // modo negro: si el visitante lo eligió antes, se aplica antes de pintar nada (sin destello claro)
+    try {
+      if (localStorage.getItem('gotia-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+        document.querySelector('meta[name="theme-color"]').content = '#000000';
+        document.querySelector('meta[name="color-scheme"]').content = 'dark';
+      }
+    } catch (e) {}
+    // red de seguridad: si el JS no llega, la pantalla de carga nunca deja la página bloqueada
+    setTimeout(function () {
+      if (window.gotia.loaderRunning) return;
+      document.documentElement.classList.remove('is-loading');
+      document.body.classList.add('is-ready');
+      document.dispatchEvent(new Event('gotia:reveal'));
+    }, 6000);
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Gotiastudio",
+    "description": "Estudio digital premium: páginas web con automatizaciones, catálogos con panel de administrador, posicionamiento en Google y redes sociales, datos verificables y contenido de estudio con IA.",
+    "email": "hola@gotiastudio.com",
+    "makesOffer": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Páginas web: Plan Lite, Start, Pro, Business y Max"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automatización Web"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automatización Completa con WhatsApp, Google Calendar, Gmail, Google Sheets e Instagram"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Planes mensuales: Mantenimiento Web, Datos y Asesoría, Datos 360, Crecimiento"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Catálogo con panel de administrador"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Posicionamiento en el ecosistema de Google"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Datos verificables y reporte semanal"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Posicionamiento en Instagram, TikTok y Facebook"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Contenido de estudio con IA avanzada"}}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ============ PANTALLA DE CARGA ============ -->
+<div class="loader" id="loader" role="status" aria-label="Cargando Gotiastudio">
+  <div class="loader-bubbles" aria-hidden="true">
+    <span class="lb far" style="--s:22vmin;left:-2%;top:3%;--d:10s;--dy:-24px"></span>
+    <span class="lb far" style="--s:13vmin;left:13%;top:22%;--d:7s;--dl:.05s;--dy:-30px"></span>
+    <span class="lb" style="--s:7vmin;left:84%;top:16%;--d:8s;--dl:.15s;--dy:-22px;--dx:8px"></span>
+    <span class="lb far" style="--s:16vmin;left:88%;top:70%;--d:9s;--dl:.1s;--dy:-34px"></span>
+    <span class="lb" style="--s:8vmin;left:9%;top:77%;--d:7.5s;--dl:.2s;--dy:-24px;--dx:-6px"></span>
+    <span class="lb" style="--s:4vmin;left:27%;top:89%;--d:6s;--dl:.3s;--dy:-18px"></span>
+    <span class="lb" style="--s:5.5vmin;left:71%;top:90%;--d:6.5s;--dl:.25s;--dy:-20px"></span>
+    <span class="lb" style="--s:3vmin;left:31%;top:10%;--d:5.5s;--dl:.35s;--dy:-14px"></span>
+    <span class="lb" style="--s:2.6vmin;left:65%;top:8%;--d:6s;--dl:.4s;--dy:-16px"></span>
+    <span class="lb" style="--s:3.4vmin;left:95%;top:43%;--d:5s;--dl:.3s;--dy:-12px"></span>
+    <span class="lb" style="--s:2.4vmin;left:4%;top:47%;--d:5.5s;--dl:.45s;--dy:-14px"></span>
+    <span class="lb" style="--s:2vmin;left:43%;top:93%;--d:5s;--dl:.5s;--dy:-12px"></span>
+    <span class="lb" style="--s:1.6vmin;left:57%;top:14%;--d:4.5s;--dl:.5s;--dy:-10px"></span>
+    <span class="lb" style="--s:2.2vmin;left:79%;top:36%;--d:5s;--dl:.55s;--dy:-12px"></span>
+    <span class="lb" style="--s:2.8vmin;left:19%;top:58%;--d:6s;--dl:.4s;--dy:-16px"></span>
+    <span class="lb far" style="--s:20vmin;left:101%;top:101%;--d:11s;--dl:.1s;--dy:-28px"></span>
+  </div>
+
+  <div class="loader-core" aria-hidden="true">
+    <div class="loader-halo"><i></i></div>
+    <svg class="loader-ring" viewBox="0 0 220 220">
+      <defs>
+        <linearGradient id="ld-irid" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#4cc0ff"/>
+          <stop offset=".22" stop-color="#1f47ff"/>
+          <stop offset=".42" stop-color="#7a2bff"/>
+          <stop offset=".62" stop-color="#ff2fc6"/>
+          <stop offset=".82" stop-color="#ff7314"/>
+          <stop offset="1" stop-color="#ffcc59"/>
+        </linearGradient>
+      </defs>
+      <circle class="lr-track" cx="110" cy="110" r="104"/>
+      <circle class="lr-ticks" cx="110" cy="110" r="97" pathLength="120"/>
+      <circle class="lr-arc" cx="110" cy="110" r="104" pathLength="100"/>
+    </svg>
+    <div class="loader-head"></div>
+    <div class="loader-orbit" style="--in:13%;--t:5s;--o:-1.2s"><span class="lb" style="--s:9px;--dl:.6s"></span></div>
+    <div class="loader-orbit rev" style="--in:-5%;--t:7.5s;--o:-3s"><span class="lb" style="--s:20px;--dl:.5s"></span></div>
+    <div class="loader-orbit" style="--in:-11%;--t:10s;--o:-6s"><span class="lb" style="--s:13px;--dl:.7s"></span></div>
+  </div>
+
+  <div class="loader-meta" aria-hidden="true">
+    <span class="loader-word">Gotia<span>studio</span></span>
+    <i class="loader-sep"></i>
+    <span class="loader-count" id="loader-pct">000</span>
+  </div>
+</div>
+<div class="loader-g" id="loader-g" aria-hidden="true"><img src="g-glass-alpha.webp?v=2" alt="" width="648" height="608" decoding="async" fetchpriority="high"></div>
+
+<!-- ============ SVG sprite ============ -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="lg-fill" cx="34%" cy="28%" r="80%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".98"/>
+      <stop offset=".32" stop-color="#bfe0ff" stop-opacity=".55"/>
+      <stop offset=".7" stop-color="#4aa3ff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".32"/>
+    </radialGradient>
+    <linearGradient id="lg-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#4aa3ff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".7"/>
+    </linearGradient>
+  </defs>
+  <symbol id="logo" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="14.5" fill="url(#lg-fill)" stroke="url(#lg-rim)" stroke-width="1"/>
+    <ellipse cx="10.8" cy="9.6" rx="4.2" ry="2.2" transform="rotate(-38 10.8 9.6)" fill="#fff" opacity=".9"/>
+    <circle cx="22.5" cy="23" r="1.3" fill="#1f6fe5" opacity=".45"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="5.5" cy="6" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 6h8.6M6.6 8l4.3 8M17.4 8l-4.3 8"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M12.5 9H18M12.5 12.5H18M12.5 16h3"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.35-5.66"/><path d="M20 12h-7.5"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="5" width="3" height="12" rx="1"/><rect x="16" y="8.5" width="3" height="8.5" rx="1"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.5L12 12.5 3.5 8z"/><path d="M3.5 12L12 16.5l8.5-4.5M3.5 16L12 20.5l8.5-4.5"/></symbol>
+  <symbol id="i-social" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10.5l5-3v9l-5-3"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M14 3.5v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3.5c.6 2.6 2.4 4.3 5.2 4.6"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15.5 3.5H13A4.5 4.5 0 0 0 8.5 8v2.5H6v3.8h2.5v6.2h4v-6.2H15l.6-3.8h-3.1V8.4a1 1 0 0 1 1-1h2z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6h14M5 11h14M5 16h9"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M20.5 15.5l-5-5-9 9"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.2-4A8.3 8.3 0 1 1 8.3 19z"/><path d="M9.2 8.6c-.2 2.9 3.1 6.3 6.1 6.2l.9-1.6-1.9-1-1 .9c-1-.4-2-1.4-2.4-2.4l.9-1-1-1.9z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3.2 8.2-7.5 9.5-4.3-1.3-7.5-5-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3 3"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 15.5l-3.5-3.5C10 7.5 13.5 4 20 4c0 6.5-3.5 10-8 11.5z"/><path d="M8.5 12H5l2.5-3.5h4M12 15.5V19l3.5-2.5v-4"/><circle cx="15" cy="9" r="1.3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5L7 7M17 17l1.5 1.5M5.5 18.5L7 17M17 7l1.5-1.5"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5z"/><path d="M14.5 6.5L17 4l3 3-2.5 2.5"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M4 9h16M4 14.5h16M10 9v11.5"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.3 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.3-3.5-8.5s1.1-6.1 3.5-8.5z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H19l-3-3M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H5l3 3"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<!-- Escenario fijo: la "G" de cristal y sus burbujas acompañan el scroll y cambian en cada sección -->
+<div class="stage" aria-hidden="true">
+  <canvas class="stage-canvas" id="bubbles"></canvas>
+  <div class="stage-bubbles"></div>
+</div>
+<div class="cursor" aria-hidden="true"><span class="cursor-ring"></span></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <nav class="nav-inner glass" aria-label="Principal">
+    <a href="#top" class="brand" aria-label="Gotiastudio, inicio">
+      <img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async">
+      <span class="brand-word">Gotia<span>studio</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#automatizacion">Automatización</a></li>
+      <li><a href="#panel">Panel</a></li>
+      <li><a href="#datos">Datos</a></li>
+      <li><a href="#packs">Planes</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <!-- botón 3D: en el diseño normal carga la versión con efectos; en el 3D se ve encendido y vuelve al normal -->
+    <a href="?version=3d" class="fx-toggle ver-to-3d" aria-label="Ver la versión 3D con efectos" title="Ver la versión 3D con efectos"><svg class="ico"><use href="#i-spark"/></svg>3D</a>
+    <a href="?version=esencial" class="fx-toggle ver-to-lite" aria-label="Volver al diseño normal" title="Volver al diseño normal"><svg class="ico"><use href="#i-spark"/></svg>3D</a>
+    <button class="theme-toggle" type="button" aria-label="Modo negro" aria-pressed="false" title="Cambiar a negro">
+      <svg class="ico ico-moon"><use href="#i-moon"/></svg>
+      <svg class="ico ico-sun"><use href="#i-sun"/></svg>
+    </button>
+    <a href="#contacto" class="btn btn-primary btn-sm nav-cta">Agendar llamada</a>
+    <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu glass" id="mobile-menu">
+    <a href="#servicios">Servicios</a>
+    <a href="#automatizacion">Automatización</a>
+    <a href="#ecosistema">Ecosistema</a>
+    <a href="#panel">Panel de administrador</a>
+    <a href="#datos">Datos verificables</a>
+    <a href="#packs">Planes</a>
+    <a href="#faq">Preguntas frecuentes</a>
+    <a href="#contacto" class="btn btn-primary">Agendar llamada</a>
+    <a href="?version=esencial" class="ver-link ver-to-lite">Cambiar a la versión Esencial · simple y rápida</a>
+    <a href="?version=3d" class="ver-link ver-to-3d">Cambiar a la versión 3D · efectos y movimiento</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <!-- versión Esencial: la "G" de cristal como imagen fija (en 3D la dibuja bubbles.js en WebGL) -->
+    <div class="hero-g" aria-hidden="true">
+      <i class="hero-g-halo"></i>
+      <img src="g-glass-alpha.webp?v=2" alt="" width="648" height="608" decoding="async">
+      <span class="lb" style="--s:13cqw;left:92%;top:4%"></span>
+      <span class="lb far" style="--s:8cqw;left:6%;top:90%"></span>
+      <span class="lb" style="--s:4cqw;left:24%;top:2%"></span>
+      <span class="lb" style="--s:3cqw;left:97%;top:72%"></span>
+    </div>
+
+    <div class="container hero-content">
+      <h1 class="hero-title" data-split>Más <em>visitas</em> para tu negocio. Con datos <em>reales.</em></h1>
+      <p class="hero-lead" data-hero style="--i:3">Digitalizamos tu marca y automatizamos tu trabajo.</p>
+      <div class="hero-actions" data-hero style="--i:4">
+        <a href="#packs" class="btn btn-primary magnetic">Ver planes <svg class="ico"><use href="#i-arrow"/></svg></a>
+        <a href="#contacto" class="btn btn-glass glass magnetic">Agendar llamada</a>
+      </div>
+    </div>
+
+    <div class="container hero-bottom" data-hero style="--i:5">
+      <!-- icono + nombre: los seis de #servicios (cada uno abre su tarjeta) y los dos de #automatizacion -->
+      <ul class="hero-services" aria-label="Nuestros servicios">
+        <li><a href="#servicios" data-svc-go="0"><span class="hs-ico"><svg class="ico"><use href="#i-code"/></svg></span>Páginas web</a></li>
+        <li><a href="#servicios" data-svc-go="1"><span class="hs-ico"><svg class="ico"><use href="#i-panel"/></svg></span>Panel admin</a></li>
+        <li><a href="#servicios" data-svc-go="2"><span class="hs-ico"><svg class="ico"><use href="#i-google"/></svg></span>Google</a></li>
+        <li><a href="#servicios" data-svc-go="3"><span class="hs-ico"><svg class="ico"><use href="#i-data"/></svg></span>Datos</a></li>
+        <li><a href="#servicios" data-svc-go="4"><span class="hs-ico"><svg class="ico"><use href="#i-social"/></svg></span>Redes sociales</a></li>
+        <li><a href="#servicios" data-svc-go="5"><span class="hs-ico"><svg class="ico"><use href="#i-video"/></svg></span>Contenido IA</a></li>
+        <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="0"><span class="hs-ico"><svg class="ico"><use href="#i-globe"/></svg></span>Automatización Web</a></li>
+        <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="1"><span class="hs-ico"><svg class="ico"><use href="#i-auto"/></svg></span>Automatización Completa</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span class="mq">Automatizaciones</span><span class="mq-dot"></span>
+        <span class="mq"><em>Panel de administrador</em></span><span class="mq-dot"></span>
+        <span class="mq">Google Search</span><span class="mq-dot"></span>
+        <span class="mq">Google Maps</span><span class="mq-dot"></span>
+        <span class="mq"><em>Datos verificables</em></span><span class="mq-dot"></span>
+        <span class="mq">Instagram</span><span class="mq-dot"></span>
+        <span class="mq">TikTok</span><span class="mq-dot"></span>
+        <span class="mq">Facebook</span><span class="mq-dot"></span>
+        <span class="mq"><em>Contenido de estudio con IA</em></span><span class="mq-dot"></span>
+      </div>
+      <div class="marquee-group">
+        <span class="mq">Automatizaciones</span><span class="mq-dot"></span>
+        <span class="mq"><em>Panel de administrador</em></span><span class="mq-dot"></span>
+        <span class="mq">Google Search</span><span class="mq-dot"></span>
+        <span class="mq">Google Maps</span><span class="mq-dot"></span>
+        <span class="mq"><em>Datos verificables</em></span><span class="mq-dot"></span>
+        <span class="mq">Instagram</span><span class="mq-dot"></span>
+        <span class="mq">TikTok</span><span class="mq-dot"></span>
+        <span class="mq">Facebook</span><span class="mq-dot"></span>
+        <span class="mq"><em>Contenido de estudio con IA</em></span><span class="mq-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MANIFIESTO ============ -->
+  <section class="manifesto" id="estudio" aria-label="Manifiesto">
+    <div class="manifesto-sticky container">
+      <p class="eyebrow">Manifiesto</p>
+      <p class="manifesto-text" data-scrub><span class="m-hook">No garantizamos ventas.</span> <em>Atraemos tráfico</em> a tu negocio y <em>digitalizamos</em> tu marca.</p>
+      <div class="manifesto-bar" aria-hidden="true"><i></i></div>
+      <div class="manifesto-foot">
+        <p class="manifesto-note">Y automatizamos tu trabajo con datos reales que mides cada semana.</p>
+        <div class="manifesto-sign">
+          <img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async">
+          <span>Gotiastudio — Estudio digital</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============
+       Un servicio a la vez: la sección se queda fija y, al bajar, cada tarjeta pasa al centro
+       y se ajusta sola (main.js). Si alguna tarjeta no cabe en la pantalla (celulares), van una
+       debajo de otra y la página se ajusta para dejar centrada cada una. -->
+  <section class="section svc" id="servicios" style="--n:7">
+    <div class="svc-scroll">
+     <div class="svc-stage">
+      <div class="svc-view" data-reveal>
+      <div class="svc-track">
+
+        <!-- Presentación: el primer cuadro del recorrido, con el índice de los seis -->
+        <article class="card glass svc-card svc-intro">
+          <p class="eyebrow">Servicios</p>
+          <h2 class="h2">Seis servicios.<br><em>Un solo sistema.</em></h2>
+          <p class="si-lead">Cada pieza se conecta con la otra.</p>
+          <ol class="si-list">
+            <li><button type="button" data-svc-go="0"><span>01</span>Páginas web</button></li>
+            <li><button type="button" data-svc-go="1"><span>02</span>Panel admin</button></li>
+            <li><button type="button" data-svc-go="2"><span>03</span>Google</button></li>
+            <li><button type="button" data-svc-go="3"><span>04</span>Datos</button></li>
+            <li><button type="button" data-svc-go="4"><span>05</span>Redes sociales</button></li>
+            <li><button type="button" data-svc-go="5"><span>06</span>Contenido IA</button></li>
+          </ol>
+          <p class="si-hint">Baja para ver cada uno <svg class="ico"><use href="#i-arrow"/></svg></p>
+        </article>
+
+        <!-- 01 Automatizaciones -->
+        <article class="card glass spot svc-card svc-mid">
+          <div class="card-top"><span class="card-num">01</span><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span></div>
+          <div class="visual">
+            <div class="log">
+              <div class="log-row" style="--n:0"><span class="log-ico"><svg class="ico"><use href="#i-check"/></svg></span><span>Nuevo pedido #1042 recibido</span><time>09:41:02</time></div>
+              <div class="log-row" style="--n:1"><span class="log-ico"><svg class="ico"><use href="#i-check"/></svg></span><span>Confirmación enviada por WhatsApp</span><time>09:41:03</time></div>
+              <div class="log-row" style="--n:2"><span class="log-ico"><svg class="ico"><use href="#i-check"/></svg></span><span>Factura generada y enviada por email</span><time>09:41:03</time></div>
+              <div class="log-row" style="--n:3"><span class="log-ico"><svg class="ico"><use href="#i-check"/></svg></span><span>Cliente registrado en tu CRM</span><time>09:41:04</time></div>
+              <div class="log-row" style="--n:4"><span class="log-ico"><svg class="ico"><use href="#i-check"/></svg></span><span>Seguimiento y reseña programados</span><time>+3 días</time></div>
+            </div>
+          </div>
+          <h3>Páginas web con automatizaciones</h3>
+          <p>Tu web trabaja sola, 24/7: recibe pedidos, confirma reservas, responde por WhatsApp, envía facturas y registra clientes. <a class="more" href="#automatizacion">Ver automatizaciones</a></p>
+          <ul class="ticks">
+            <li>Pedidos, reservas y pagos</li>
+            <li>WhatsApp, email y CRM</li>
+            <li>Seguimiento automático</li>
+          </ul>
+        </article>
+
+        <!-- 02 Catálogo + Panel -->
+        <article class="card glass spot svc-card svc-mid">
+          <div class="card-top"><span class="card-num">02</span><span class="icon-bubble"><svg class="ico"><use href="#i-panel"/></svg></span></div>
+          <div class="visual">
+            <!-- dos ejemplos del mismo panel: productos y reservas (main.js los alterna) -->
+            <div class="mini-admin" data-tabs>
+              <div class="ma-tabs" role="tablist" aria-label="Ejemplos del panel">
+                <button class="ma-tab" type="button" role="tab" aria-selected="true">Productos</button>
+                <button class="ma-tab" type="button" role="tab" aria-selected="false">Reservas</button>
+              </div>
+              <div class="ma-panes">
+                <div class="ma-pane is-on" role="tabpanel" aria-label="Productos">
+                  <div class="ma-row"><span class="ma-thumb p1"></span><span class="ma-name">Perfume Noir</span><span class="ma-price"><s>$140</s> $120</span></div>
+                  <div class="ma-row is-edit"><span class="ma-thumb p2"></span><span class="ma-name">Reloj Steel</span><span class="ma-price swap"><b class="a">$380</b><b class="b">$340</b><i class="caret"></i></span></div>
+                  <div class="ma-row"><span class="ma-thumb p3"></span><span class="ma-name">Bolso Aurora</span><span class="ma-price">$189</span></div>
+                  <div class="ma-foot"><span class="ok-chip"><svg class="ico"><use href="#i-check"/></svg>Publicado</span><span>hace 2 s</span></div>
+                </div>
+                <div class="ma-pane" role="tabpanel" aria-label="Reservas">
+                  <div class="ma-row"><span class="ma-date"><b>12</b>jun</span><span class="ma-name">Laura M. · 10:30</span><span class="ma-chip ok">Confirmada</span></div>
+                  <div class="ma-row is-edit"><span class="ma-date"><b>12</b>jun</span><span class="ma-name">Diego R. · 16:00</span><span class="ma-chip wait">Pendiente</span></div>
+                  <div class="ma-row"><span class="ma-date"><b>13</b>jun</span><span class="ma-name">Ana P. · 09:00</span><span class="ma-chip">Seguimiento</span></div>
+                  <div class="ma-foot"><span class="ok-chip"><svg class="ico"><use href="#i-check"/></svg>Recordatorio enviado</span><span>por WhatsApp</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3>Catálogo con panel de administrador</h3>
+          <p>Toda tu web en un panel simple: productos, reservas, textos y fotos, y el seguimiento de cada cliente. Sin programar ni esperar a nadie.</p>
+          <ul class="ticks">
+            <li>Productos, precios y stock</li>
+            <li>Reservas y citas</li>
+            <li>Seguimiento de clientes</li>
+          </ul>
+        </article>
+
+        <!-- 03 Google -->
+        <article class="card glass spot svc-card svc-mid">
+          <div class="card-top"><span class="card-num">03</span><span class="icon-bubble"><svg class="ico"><use href="#i-google"/></svg></span></div>
+          <div class="visual">
+            <div class="serp">
+              <div class="serp-bar"><svg class="ico"><use href="#i-search"/></svg><span class="serp-type">perfumería de autor cerca de mí</span><i class="caret"></i></div>
+              <div class="serp-res">
+                <span class="serp-rank">1</span>
+                <div>
+                  <small>tunegocio.com</small>
+                  <strong>Tu Negocio — Perfumería de autor</strong>
+                  <span class="stars">★★★★★ <em>4,9 · Abierto ahora</em></span>
+                </div>
+              </div>
+              <div class="chips"><span>Search</span><span>Maps</span><span>Business</span><span>Shopping</span></div>
+            </div>
+          </div>
+          <h3>Posicionamiento en todo Google</h3>
+          <p>Aparece donde tus clientes ya te buscan. Más búsquedas, más visitas.</p>
+          <ul class="ticks">
+            <li>Search y Maps</li>
+            <li>Perfil de Empresa</li>
+            <li>Shopping e Imágenes</li>
+          </ul>
+        </article>
+
+        <!-- 04 Datos -->
+        <article class="card glass spot svc-card svc-mid">
+          <div class="card-top"><span class="card-num">04</span><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span></div>
+          <div class="visual">
+            <!-- el reporte que recibe el cliente cada semana, en pequeño (ejemplo con datos de muestra).
+                 main.js lo anima: recorre tres semanas, los números cuentan y las barras crecen -->
+            <div class="dash" data-dash>
+              <div class="dash-bar"><i></i><i></i><i></i><span>Reporte semanal · <span data-k="range">21–27 sep</span></span><b>Tu negocio</b></div>
+              <div class="dash-kpis">
+                <div><small>Visitas</small><strong data-k="v">4.812</strong><em>↑ 23%</em></div>
+                <div><small>Personas nuevas</small><strong data-k="n">3.021</strong><em>↑ 27%</em></div>
+                <div><small>Tiempo en la web</small><strong data-k="t">2:41</strong><em>↑ 8%</em></div>
+              </div>
+              <div class="dash-grid">
+                <div class="dash-box">
+                  <small>Visitas por día</small>
+                  <div class="mc-bars" role="img" aria-label="Visitas por día: lunes 540, martes 610, miércoles 580, jueves 720, viernes 860, sábado 820, domingo 682">
+                    <span style="--h:.63" data-tip="Lunes · 540"><i></i></span>
+                    <span style="--h:.71" data-tip="Martes · 610"><i></i></span>
+                    <span style="--h:.67" data-tip="Miércoles · 580"><i></i></span>
+                    <span style="--h:.84" data-tip="Jueves · 720"><i></i></span>
+                    <span style="--h:1" data-tip="Viernes · 860" class="peak"><i></i></span>
+                    <span style="--h:.95" data-tip="Sábado · 820"><i></i></span>
+                    <span style="--h:.79" data-tip="Domingo · 682"><i></i></span>
+                  </div>
+                  <div class="mc-days"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                </div>
+                <div class="dash-box">
+                  <small>De dónde llegan</small>
+                  <ul class="dash-src">
+                    <li><span>Google</span><b>61%</b><i style="--w:.61"></i></li>
+                    <li><span>Instagram</span><b>24%</b><i style="--w:.24"></i></li>
+                    <li><span>Directo</span><b>15%</b><i style="--w:.15"></i></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="dash-tip"><b>Dónde dudan:</b> <span data-k="doubt">el 38% se va en «Envíos».</span><span class="dash-rec">→ Recomendación: <span data-k="tip">mostrar el costo de envío en cada producto.</span></span></p>
+            </div>
+          </div>
+          <h3>Datos verificables, cada semana</h3>
+          <p>Cada semana recibes un reporte como este: cuántas personas llegan, de dónde vienen, dónde dudan y qué mejorar.</p>
+          <ul class="ticks">
+            <li>Visitas y de dónde llegan</li>
+            <li>Dónde se quedan y dónde dudan</li>
+            <li>Una recomendación concreta</li>
+          </ul>
+        </article>
+
+        <!-- 05 Redes -->
+        <article class="card glass spot svc-card svc-mid">
+          <div class="card-top"><span class="card-num">05</span><span class="icon-bubble"><svg class="ico"><use href="#i-social"/></svg></span></div>
+          <div class="visual">
+            <div class="social-flow">
+              <div class="sf-sources">
+                <span class="sf-src"><svg class="ico"><use href="#i-ig"/></svg>Instagram</span>
+                <span class="sf-src"><svg class="ico"><use href="#i-tt"/></svg>TikTok</span>
+                <span class="sf-src"><svg class="ico"><use href="#i-fb"/></svg>Facebook</span>
+              </div>
+              <!-- main.js hace viajar puntos de luz por estas líneas hasta "Tu web", que suma las visitas -->
+              <div class="sf-wire" aria-hidden="true">
+                <svg class="sf-lines" viewBox="0 0 100 144" preserveAspectRatio="none">
+                  <path d="M0 20 C55 20 45 72 100 72"/>
+                  <path d="M0 72 H100"/>
+                  <path d="M0 124 C55 124 45 72 100 72"/>
+                </svg>
+              </div>
+              <div class="sf-target"><strong>Tu web</strong><small><b data-sf-count>+1.284</b> visitas</small></div>
+            </div>
+          </div>
+          <h3>Posicionamiento en redes sociales</h3>
+          <p>Conectamos tus redes con tu web para que más personas nuevas lleguen a tu negocio.</p>
+          <ul class="ticks">
+            <li>Instagram, TikTok y Facebook</li>
+            <li>Conectados con tu web</li>
+            <li>Más personas nuevas</li>
+          </ul>
+        </article>
+
+        <!-- 06 Contenido IA -->
+        <article class="card glass spot svc-card card-wide svc-mid">
+          <div class="cw-copy">
+            <div class="card-top"><span class="card-num">06</span><span class="icon-bubble"><svg class="ico"><use href="#i-video"/></svg></span></div>
+            <h3>Contenido profesional de estudio con IA avanzada</h3>
+            <p>Videos y flyers de alta calidad para tu marca, creados con IA avanzada y dirigidos con criterio humano. Realistas, elegantes y nada saturados.</p>
+            <ul class="ticks">
+              <li>Videos para Reels, TikTok y anuncios</li>
+              <li>Flyers y fotos de producto</li>
+              <li>Con tu logo, colores y estilo</li>
+            </ul>
+          </div>
+          <div class="cw-visual">
+            <!-- dos ejemplos de lo que entregamos: un video y un flyer de tu marca (main.js los alterna) -->
+            <div class="vf-modes" data-tabs="8400,5000">
+              <div class="ma-tabs" role="tablist" aria-label="Ejemplos de contenido">
+                <button class="ma-tab" type="button" role="tab" aria-selected="true">Video</button>
+                <button class="ma-tab" type="button" role="tab" aria-selected="false">Flyer</button>
+              </div>
+              <div class="ma-panes vf-panes">
+                <div class="ma-pane is-on" role="tabpanel" aria-label="Video">
+                  <div class="viewfinder">
+                    <div class="vf-scene">
+                      <span class="vf-light"></span>
+                      <span class="vf-floor"></span>
+                      <span class="vf-shadow"></span>
+                      <span class="vf-orb"></span>
+                    </div>
+                    <!-- el video de ejemplo: tres tomas que se cortan solas (main.js) -->
+                    <div class="vf-title"><small>Tu marca</small><strong>Nueva colección</strong></div>
+                    <div class="vf-end"><small>Tu marca</small><strong>Disponible ahora</strong><i>tunegocio.com</i></div>
+                    <span class="vf-cut"></span>
+                    <span class="vf-grid"></span>
+                    <span class="vf-corner tl"></span><span class="vf-corner tr"></span><span class="vf-corner bl"></span><span class="vf-corner br"></span>
+                    <span class="vf-hud tl"><i class="rec"></i>REC</span>
+                    <span class="vf-hud tr">4K · 24 fps</span>
+                    <span class="vf-hud bl" id="timecode">00:00:12:04</span>
+                    <span class="vf-hud br" data-k="shot">Toma 1/3 · Primer plano</span>
+                    <span class="vf-bar"><i></i></span>
+                    <span class="vf-cross"></span>
+                  </div>
+                </div>
+                <div class="ma-pane" role="tabpanel" aria-label="Flyer">
+                  <div class="flyer">
+                    <span class="fl-glow"></span>
+                    <span class="fl-orb"></span>
+                    <div class="fl-copy">
+                      <small style="--i:0">Tu marca</small>
+                      <strong style="--i:1">Nueva<br>colección</strong>
+                      <span style="--i:2">Edición limitada · Otoño</span>
+                      <i style="--i:3">Disponible en tu web</i>
+                    </div>
+                    <span class="fl-mark tl"></span><span class="fl-mark tr"></span><span class="fl-mark bl"></span><span class="fl-mark br"></span>
+                    <span class="fl-hud">Flyer · listo para Instagram e impresión</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vs">
+              <div class="vs-col is-off">
+                <span class="vs-label">IA genérica</span>
+                <ul><li>Piel plástica</li><li>Colores saturados</li><li>Movimiento irreal</li></ul>
+              </div>
+              <div class="vs-col is-on">
+                <span class="vs-label">Gotiastudio</span>
+                <ul><li>Luz de estudio real</li><li>Texturas naturales</li><li>Movimiento orgánico</li></ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      </div>
+
+      <!-- controles: aparecen cuando main.js arma el recorrido -->
+      <div class="svc-ui glass">
+        <button class="svc-arrow svc-prev" type="button" aria-label="Servicio anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
+        <div class="svc-dots">
+          <button class="svc-dot" type="button" aria-label="Presentación de los servicios"></button>
+          <button class="svc-dot" type="button" aria-label="01 · Páginas web con automatizaciones"></button>
+          <button class="svc-dot" type="button" aria-label="02 · Catálogo con panel de administrador"></button>
+          <button class="svc-dot" type="button" aria-label="03 · Posicionamiento en todo Google"></button>
+          <button class="svc-dot" type="button" aria-label="04 · Datos verificables, cada semana"></button>
+          <button class="svc-dot" type="button" aria-label="05 · Posicionamiento en redes sociales"></button>
+          <button class="svc-dot" type="button" aria-label="06 · Contenido profesional de estudio con IA"></button>
+        </div>
+        <span class="svc-count" aria-hidden="true"><b>00</b> / 06</span>
+        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente servicio"><svg class="ico"><use href="#i-arrow"/></svg></button>
+      </div>
+     </div>
+    </div>
+  </section>
+
+  <!-- ============ AUTOMATIZACIÓN: dos servicios por aparte ============
+       El mismo recorrido de cuadros que Servicios (main.js): presentación, los dos servicios,
+       la diferencia punto por punto y cómo trabaja una automatización completa. -->
+  <section class="section svc" id="automatizacion" style="--n:6">
+    <div class="svc-scroll">
+     <div class="svc-stage">
+      <div class="svc-view" data-reveal>
+      <div class="svc-track">
+
+        <!-- Presentación -->
+        <article class="card glass svc-card svc-intro">
+          <p class="eyebrow">Automatización · Servicio por aparte</p>
+          <h2 class="h2">Automatiza tu web<br><em>o todo tu negocio.</em></h2>
+          <p class="si-lead">Tres niveles que puedes contratar por separado, aunque tu web la haya hecho otro proveedor.</p>
+          <ol class="si-list wrap">
+            <li><button type="button" data-svc-go="0"><span>01</span>Web</button></li>
+            <li><button type="button" data-svc-go="1"><span>02</span>Completa</button></li>
+            <li><button type="button" data-svc-go="2"><span>03</span>Avanzada</button></li>
+            <li><button type="button" data-svc-go="3"><span>04</span>La diferencia</button></li>
+            <li><button type="button" data-svc-go="4"><span>05</span>Cómo funciona</button></li>
+          </ol>
+          <p class="si-hint">Baja para ver cada uno <svg class="ico"><use href="#i-arrow"/></svg></p>
+        </article>
+
+        <!-- A · Automatización Web -->
+        <article class="card glass spot svc-card svc-mid auto-card">
+          <div class="card-top"><span class="auto-kicker">Servicio A · Dentro de tu web</span><span class="icon-bubble"><svg class="ico"><use href="#i-globe"/></svg></span></div>
+          <h3>Automatización Web</h3>
+          <p>Tu página atiende, guarda y responde sola: cada visitante interesado queda registrado y recibe respuesta al instante. Incluida desde el Plan Pro.</p>
+          <div class="visual">
+            <!-- demo paso a paso: alguien llena el formulario de tu web y la automatización hace
+                 el resto (main.js lo reproduce en bucle mientras se ve) -->
+            <div class="aw" data-aw>
+              <div class="aw-win">
+                <div class="aw-bar"><i></i><i></i><i></i><span>tunegocio.com/contacto</span></div>
+                <div class="aw-form">
+                  <span class="aw-field"><small>Nombre</small><span class="aw-in">Laura Martínez</span></span>
+                  <span class="aw-field"><small>WhatsApp</small><span class="aw-in">+57 300 123 4567</span></span>
+                  <span class="aw-field wide"><small>Mensaje</small><span class="aw-in">Quiero reservar una cita</span></span>
+                  <span class="aw-send">Enviar</span>
+                </div>
+              </div>
+              <ol class="aw-steps">
+                <li><span class="aw-ico"><svg class="ico"><use href="#i-check"/></svg></span><span><b>Formulario recibido</b><small>Los datos llegan solos</small></span><time>10:02:14</time></li>
+                <li><span class="aw-ico"><svg class="ico"><use href="#i-sheet"/></svg></span><span><b>Cliente guardado</b><small>En tu base de datos</small></span><time>10:02:14</time></li>
+                <li><span class="aw-ico"><svg class="ico"><use href="#i-mail"/></svg></span><span><b>Correo de bienvenida</b><small>Confirmación al instante</small></span><time>10:02:15</time></li>
+                <li><span class="aw-ico"><svg class="ico"><use href="#i-cal"/></svg></span><span><b>Cita reservada</b><small>Jue 10:30, desde tu web</small></span><time>10:02:40</time></li>
+                <li><span class="aw-ico"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Aviso para ti</b><small>Nuevo cliente potencial</small></span><time>10:02:41</time></li>
+              </ol>
+            </div>
+          </div>
+          <ul class="ticks">
+            <li>Formularios que guardan cada cliente</li>
+            <li>Correos de confirmación y bienvenida</li>
+            <li>Citas y reservas desde tu web</li>
+            <li>Aviso al llegar un cliente potencial</li>
+            <li>Respuestas a preguntas frecuentes, 24/7</li>
+            <li>WhatsApp con el mensaje listo</li>
+          </ul>
+          <a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Quiero información y precio de la Automatización Web"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+        </article>
+
+        <!-- B · Automatización Completa -->
+        <article class="card glass spot svc-card svc-mid auto-card is-full">
+          <div class="card-top"><span class="auto-kicker">Servicio B · Todo tu negocio</span><span class="pack-badge">Todo conectado</span></div>
+          <h3>Automatización Completa</h3>
+          <p>Conectamos tu web con tus herramientas de trabajo: mensajes, citas, recordatorios y clientes, en todos tus canales.</p>
+          <div class="visual">
+            <!-- demo: un cliente escribe por WhatsApp, el asistente responde y agenda, y cada
+                 herramienta conectada hace su parte (main.js lo reproduce en bucle mientras se ve) -->
+            <div class="ac" data-ac>
+              <div class="ac-chat">
+                <div class="ac-head"><span class="ac-av"><svg class="ico"><use href="#i-wa"/></svg></span><span><b>Tu negocio</b><small>WhatsApp Business · en línea</small></span></div>
+                <div class="ac-msgs">
+                  <div class="ac-msg in">Hola, ¿tienen cita el jueves?</div>
+                  <div class="ac-msg out">¡Hola! Elige una opción:<br>1 · Agendar cita<br>2 · Ver servicios<br>3 · Hablar con alguien</div>
+                  <div class="ac-msg in">1</div>
+                  <div class="ac-msg out">Listo ✓ Jueves 10:30. Te enviamos la confirmación por correo.</div>
+                  <span class="ac-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+                </div>
+              </div>
+              <div class="ac-tools">
+                <span><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</span>
+                <span><svg class="ico"><use href="#i-cal"/></svg>Calendar</span>
+                <span><svg class="ico"><use href="#i-mail"/></svg>Gmail</span>
+                <span><svg class="ico"><use href="#i-sheet"/></svg>CRM</span>
+                <span><svg class="ico"><use href="#i-bell"/></svg>Recordatorio</span>
+                <span><svg class="ico"><use href="#i-card"/></svg>Pagos</span>
+              </div>
+              <div class="ac-cap"><b data-k="tool">WhatsApp e Instagram</b> <span data-k="what">responden al instante con un menú</span></div>
+            </div>
+          </div>
+          <ul class="ticks">
+            <li><span><strong>WhatsApp Business:</strong> respuestas, menú y catálogo</span></li>
+            <li><span><strong>Google Calendar:</strong> citas sin cruces</span></li>
+            <li><span><strong>Recordatorios</strong> por WhatsApp y correo</span></li>
+            <li><span><strong>Sheets o CRM:</strong> el historial de cada cliente</span></li>
+            <li><span><strong>Gmail:</strong> cotizaciones y seguimiento</span></li>
+            <li><span><strong>Instagram y Facebook:</strong> respuestas automáticas</span></li>
+            <li><span><strong>Pagos y postventa:</strong> links de pago y reseñas</span></li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-sm" data-wa="Hola Gotia Studio 👋 Quiero información y precio de la Automatización Completa (WhatsApp, Google Calendar…)"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+        </article>
+
+        <!-- C · Automatización Avanzada: a medida, para procesos más complejos -->
+        <article class="card glass spot svc-card svc-mid auto-card is-pro">
+          <div class="card-top"><span class="auto-kicker">Servicio C · A medida</span><span class="pack-badge">Para empresas</span></div>
+          <h3>Automatización Avanzada</h3>
+          <p>Para procesos más complejos: diseñamos flujos a medida que conectan todos tus sistemas, con IA y las reglas de tu negocio.</p>
+          <div class="visual">
+            <!-- demo: un flujo a medida que se ejecuta paso a paso, con IA, una regla propia,
+                 tareas en paralelo y el panel al final (main.js lo reproduce mientras se ve) -->
+            <div class="av" data-av>
+              <div class="av-head"><span><small>Flujo a medida</small><b>Pedido mayorista</b></span><span class="av-status" data-k="status">Listo para ejecutar</span></div>
+              <div class="av-flow">
+                <div class="av-node"><span class="av-ico"><svg class="ico"><use href="#i-chat"/></svg></span><span><b>Pedido recibido</b><small>Desde la web o WhatsApp</small></span></div>
+                <span class="av-link"><i></i></span>
+                <div class="av-node"><span class="av-ico"><svg class="ico"><use href="#i-spark"/></svg></span><span><b>Asistente IA</b><small>Lo lee y lo califica: mayorista</small></span></div>
+                <span class="av-link"><i></i></span>
+                <div class="av-node av-rule"><span class="av-ico"><svg class="ico"><use href="#i-shield"/></svg></span><span><b>Regla propia</b><small data-k="rule">Si supera $2.000, pide aprobación</small></span></div>
+                <span class="av-link"><i></i></span>
+                <div class="av-split">
+                  <div class="av-node"><span class="av-ico"><svg class="ico"><use href="#i-box"/></svg></span><span><b>Inventario</b><small>3 sedes</small></span></div>
+                  <div class="av-node"><span class="av-ico"><svg class="ico"><use href="#i-card"/></svg></span><span><b>Factura</b><small>Electrónica</small></span></div>
+                  <div class="av-node"><span class="av-ico"><svg class="ico"><use href="#i-sheet"/></svg></span><span><b>CRM</b><small>Historial</small></span></div>
+                </div>
+                <span class="av-link"><i></i></span>
+                <div class="av-node"><span class="av-ico"><svg class="ico"><use href="#i-data"/></svg></span><span><b>Panel de datos</b><small>Indicadores en tiempo real</small></span></div>
+              </div>
+              <div class="av-cap" data-k="cap">Un flujo hecho a la medida de tu empresa, de punta a punta.</div>
+            </div>
+          </div>
+          <ul class="ticks">
+            <li><span><strong>Asistente con IA:</strong> responde, califica y deriva</span></li>
+            <li><span><strong>ERP, inventario y facturación</strong> conectados</span></li>
+            <li><span><strong>Reglas y aprobaciones</strong> propias de tu negocio</span></li>
+            <li><span><strong>Varias sedes,</strong> equipos o marcas</span></li>
+            <li><span><strong>Integraciones por API</strong> a medida</span></li>
+            <li><span><strong>Panel</strong> con indicadores en tiempo real</span></li>
+          </ul>
+          <a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Quiero información de una Automatización Avanzada a medida para mi empresa"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+        </article>
+
+        <!-- La diferencia, punto por punto -->
+        <article class="card glass svc-card svc-block compare diff">
+          <div class="card-top"><span class="auto-kicker">Comparación</span><span class="icon-bubble"><svg class="ico"><use href="#i-sheet"/></svg></span></div>
+          <h3 class="diff-title">La diferencia, <em>punto por punto</em></h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col"></th><th scope="col">Web</th><th scope="col">Completa</th><th scope="col">Avanzada</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Dónde</th><td data-label="Web">Tu web</td><td data-label="Completa">Web y canales</td><td data-label="Avanzada">Todos tus sistemas</td></tr>
+                <tr><th scope="row">Atención</th><td data-label="Web">Respuestas en la web</td><td data-label="Completa">WhatsApp e Instagram</td><td data-label="Avanzada">Asistente con IA</td></tr>
+                <tr><th scope="row">Citas</th><td data-label="Web">Agenda en tu web</td><td data-label="Completa">Google Calendar</td><td data-label="Avanzada">Varias sedes</td></tr>
+                <tr><th scope="row">Clientes</th><td data-label="Web">Base de datos</td><td data-label="Completa">Sheets o CRM</td><td data-label="Avanzada">CRM o ERP</td></tr>
+                <tr><th scope="row">Además</th><td data-label="Web">Aviso al instante</td><td data-label="Completa">Pagos y reseñas</td><td data-label="Avanzada">Facturas e inventario</td></tr>
+                <tr><th scope="row">Ideal para</th><td data-label="Web">Captar desde tu web</td><td data-label="Completa">Varios canales</td><td data-label="Avanzada">Procesos complejos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Así trabaja una automatización completa -->
+        <article class="card glass svc-card svc-block svc-flow" data-flow>
+          <div class="card-top"><span class="auto-kicker">Paso a paso</span><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span></div>
+          <header class="flow-head">
+            <h3>Así trabaja una <em>automatización completa</em></h3>
+            <p>Mientras tú atiendes tu negocio, o duermes.</p>
+          </header>
+          <!-- la línea se llena paso a paso y cada paso se enciende al llegar (main.js) -->
+          <div class="flow-box">
+            <span class="flow-fill" aria-hidden="true"></span>
+            <ol class="flow">
+              <li><span class="flow-dot"><svg class="ico"><use href="#i-chat"/></svg></span><div><small>01</small><strong>Te escriben</strong><span>WhatsApp, Instagram o web</span></div></li>
+              <li><span class="flow-dot"><svg class="ico"><use href="#i-auto"/></svg></span><div><small>02</small><strong>Responde al instante</strong><span>Con un menú de servicios</span></div></li>
+              <li><span class="flow-dot"><svg class="ico"><use href="#i-cal"/></svg></span><div><small>03</small><strong>Agenda sola</strong><span>Directo a tu Calendar</span></div></li>
+              <li><span class="flow-dot"><svg class="ico"><use href="#i-bell"/></svg></span><div><small>04</small><strong>Confirma y recuerda</strong><span>Por WhatsApp y correo</span></div></li>
+              <li><span class="flow-dot"><svg class="ico"><use href="#i-sheet"/></svg></span><div><small>05</small><strong>Todo registrado</strong><span>En tu CRM, con aviso</span></div></li>
+            </ol>
+          </div>
+          <p class="auto-note">¿Cuál te conviene? <a href="#" data-wa="Hola Gotia Studio 👋 Quiero saber qué automatización me conviene y su precio">Escríbenos por WhatsApp</a></p>
+        </article>
+
+      </div>
+      </div>
+
+      <div class="svc-ui glass">
+        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
+        <div class="svc-dots">
+          <button class="svc-dot" type="button" aria-label="Presentación de las automatizaciones"></button>
+          <button class="svc-dot" type="button" aria-label="01 · Automatización Web"></button>
+          <button class="svc-dot" type="button" aria-label="02 · Automatización Completa"></button>
+          <button class="svc-dot" type="button" aria-label="03 · Automatización Avanzada"></button>
+          <button class="svc-dot" type="button" aria-label="04 · La diferencia, punto por punto"></button>
+          <button class="svc-dot" type="button" aria-label="05 · Así trabaja una automatización completa"></button>
+        </div>
+        <span class="svc-count" aria-hidden="true"><b>00</b> / 05</span>
+        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
+      </div>
+     </div>
+    </div>
+  </section>
+
+  <!-- ============ ECOSISTEMA ============ -->
+  <section class="section section-tight" id="ecosistema">
+    <div class="container eco">
+      <div class="eco-copy">
+        <p class="eyebrow" data-reveal>Ecosistema</p>
+        <h2 class="h2" data-reveal>Tu web en el centro.<br><em>Todo gira a su alrededor.</em></h2>
+        <p class="lead" data-reveal>Dentro, lo que hace por ti. Fuera, los canales que te traen visitas. Toca una burbuja para verlo.</p>
+
+        <div class="eco-panel glass" id="eco-panel" data-reveal>
+          <div class="eco-swap">
+            <span class="kicker" id="eco-kicker">El núcleo</span>
+            <h3><span class="icon-bubble" id="eco-icon"><svg class="ico"><use href="#logo"/></svg></span><span id="eco-title">Tu web</span></h3>
+            <p id="eco-desc">Diseño a medida, rápida y perfecta en móvil. Es el lugar donde todo se conecta y donde tus visitantes se convierten en clientes.</p>
+          </div>
+        </div>
+
+        <div class="eco-legend" data-reveal>
+          <span><i class="lg-in"></i>Anillo interior: lo que hace tu web</span>
+          <span><i class="lg-out"></i>Anillo exterior: de dónde llegan tus clientes</span>
+        </div>
+      </div>
+
+      <div class="eco-visual" data-reveal>
+        <div class="orbit" id="orbit">
+          <div class="orbit-ring ring-out"></div>
+          <div class="orbit-ring ring-in"></div>
+
+          <div class="orbit-spin spin-out">
+            <span class="orbit-line" style="--a:45deg;--dl:0s"></span>
+            <span class="orbit-line" style="--a:135deg;--dl:.8s"></span>
+            <span class="orbit-line" style="--a:225deg;--dl:1.6s"></span>
+            <span class="orbit-line" style="--a:315deg;--dl:2.4s"></span>
+            <button class="orbit-item" type="button" style="--a:45deg" data-group="De dónde llegan tus clientes" data-title="Google" data-desc="Search, Maps, Perfil de Empresa y Shopping optimizados para que te encuentren justo cuando te están buscando."><span class="oi-inner"><svg class="ico"><use href="#i-google"/></svg><span class="oi-label">Google</span></span></button>
+            <button class="orbit-item" type="button" style="--a:135deg" data-group="De dónde llegan tus clientes" data-title="Instagram" data-desc="Tu catálogo y tu web conectados a tu perfil para convertir seguidores en compradores, con el camino más corto a la compra."><span class="oi-inner"><svg class="ico"><use href="#i-ig"/></svg><span class="oi-label">Instagram</span></span></button>
+            <button class="orbit-item" type="button" style="--a:225deg" data-group="De dónde llegan tus clientes" data-title="TikTok" data-desc="Contenido que atrae a nuevas audiencias y un recorrido directo desde el video hasta tu web y la compra."><span class="oi-inner"><svg class="ico"><use href="#i-tt"/></svg><span class="oi-label">TikTok</span></span></button>
+            <button class="orbit-item" type="button" style="--a:315deg" data-group="De dónde llegan tus clientes" data-title="Facebook" data-desc="Audiencias, catálogo y píxel configurados para volver a impactar a quien ya visitó tu web y no compró."><span class="oi-inner"><svg class="ico"><use href="#i-fb"/></svg><span class="oi-label">Facebook</span></span></button>
+          </div>
+
+          <div class="orbit-spin spin-in">
+            <span class="orbit-line" style="--a:0deg;--dl:.4s"></span>
+            <span class="orbit-line" style="--a:90deg;--dl:1.2s"></span>
+            <span class="orbit-line" style="--a:180deg;--dl:2s"></span>
+            <span class="orbit-line" style="--a:270deg;--dl:2.8s"></span>
+            <button class="orbit-item" type="button" style="--a:0deg" data-group="Lo que hace tu web" data-title="Automatizaciones" data-desc="Pedidos, reservas, WhatsApp, emails, facturas y CRM funcionando solos, las 24 horas, sin que tengas que intervenir."><span class="oi-inner"><svg class="ico"><use href="#i-auto"/></svg><span class="oi-label">Automatización</span></span></button>
+            <button class="orbit-item" type="button" style="--a:90deg" data-group="Lo que hace tu web" data-title="Panel de administrador" data-desc="Actualiza precios, nombres, fotos y textos de toda tu página desde un solo lugar. Sin programar, desde el ordenador o el móvil."><span class="oi-inner"><svg class="ico"><use href="#i-panel"/></svg><span class="oi-label">Panel</span></span></button>
+            <button class="orbit-item" type="button" style="--a:180deg" data-group="Lo que hace tu web" data-title="Datos verificables" data-desc="Cuántos llegan, en qué sección se quedan y en qué punto dudan de comprar. Un reporte claro cada semana, solo si lo deseas."><span class="oi-inner"><svg class="ico"><use href="#i-data"/></svg><span class="oi-label">Datos</span></span></button>
+            <button class="orbit-item" type="button" style="--a:270deg" data-group="Lo que hace tu web" data-title="Contenido con IA" data-desc="Videos y fotos de nivel estudio con IA avanzada y dirección de arte humana. Realistas, sobrios y listos para vender."><span class="oi-inner"><svg class="ico"><use href="#i-spark"/></svg><span class="oi-label">Contenido IA</span></span></button>
+          </div>
+
+          <div class="orbit-core">
+            <svg class="core-mark"><use href="#logo"/></svg>
+            <strong>Tu web</strong>
+            <small>El centro de todo</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL DEMO ============
+       El mismo recorrido de cuadros que Servicios (main.js): presentación, la demo para
+       probar el panel y lo que puedes hacer con él. -->
+  <section class="section svc" id="panel" style="--n:3">
+    <div class="svc-scroll">
+     <div class="svc-stage">
+      <div class="svc-view" data-reveal>
+      <div class="svc-track">
+
+        <!-- Presentación -->
+        <article class="card glass svc-card svc-intro">
+          <p class="eyebrow">Panel de administrador</p>
+          <h2 class="h2">Tu página, en tus manos.<br><em>Sin depender de nadie.</em></h2>
+          <p class="si-lead">Desde el Plan Pro, tu web incluye un panel privado para gestionar todo en un solo lugar.</p>
+          <ol class="si-list wrap">
+            <li><button type="button" data-svc-go="0"><span>01</span>Pruébalo</button></li>
+            <li><button type="button" data-svc-go="1"><span>02</span>Qué puedes hacer</button></li>
+          </ol>
+          <p class="si-hint">Baja para probarlo <svg class="ico"><use href="#i-arrow"/></svg></p>
+        </article>
+
+        <!-- 01 · La demo: cambia un campo del panel y mira el resultado al lado -->
+        <article class="card glass svc-card svc-block panel-try">
+          <p class="try-note"><strong>Pruébalo aquí:</strong> cambia un nombre o un precio y mira el resultado en vivo.</p>
+          <div class="demo">
+            <div class="window glass">
+              <div class="window-bar">
+                <span class="dots"><i></i><i></i><i></i></span>
+                <span class="window-url"><svg class="ico"><use href="#i-lock"/></svg>admin.tunegocio.com</span>
+                <span class="live"><i></i>En línea</span>
+              </div>
+              <div class="window-body">
+                <aside class="admin-side" aria-hidden="true">
+                  <span class="as-brand"><svg class="brand-mark"><use href="#logo"/></svg>Tu Negocio</span>
+                  <span class="on"><svg class="ico"><use href="#i-box"/></svg>Productos</span>
+                  <span><svg class="ico"><use href="#i-bag"/></svg>Pedidos <em class="badge">3</em></span>
+                  <span><svg class="ico"><use href="#i-text"/></svg>Páginas y textos</span>
+                  <span><svg class="ico"><use href="#i-image"/></svg>Imágenes</span>
+                  <span><svg class="ico"><use href="#i-data"/></svg>Estadísticas</span>
+                  <span><svg class="ico"><use href="#i-gear"/></svg>Ajustes</span>
+                </aside>
+                <div class="admin-main">
+                  <div class="admin-head">
+                    <div><h4>Productos</h4><span class="muted">3 productos · Catálogo principal</span></div>
+                    <span class="hint-chip"><svg class="ico"><use href="#i-pen"/></svg>Edita cualquier campo</span>
+                  </div>
+                  <div class="a-table" id="a-table">
+                    <div class="a-row head" aria-hidden="true"><span></span><span>Nombre</span><span>Precio</span><span>Visible</span></div>
+                    <div class="a-row sel" data-i="0">
+                      <span class="a-thumb p1"></span>
+                      <label class="field f-name"><span class="sr">Nombre del producto 1</span><input type="text" value="Perfume Noir 50 ml" data-k="name" maxlength="36" autocomplete="off"></label>
+                      <label class="field f-price"><span class="cur">$</span><span class="sr">Precio del producto 1</span><input type="number" value="120" min="0" step="1" data-k="price" inputmode="decimal"></label>
+                      <label class="switch"><input type="checkbox" checked data-k="visible"><span class="sw"></span><span class="sr">Visible en la tienda</span></label>
+                    </div>
+                    <div class="a-row" data-i="1">
+                      <span class="a-thumb p2"></span>
+                      <label class="field f-name"><span class="sr">Nombre del producto 2</span><input type="text" value="Reloj Minimal Steel" data-k="name" maxlength="36" autocomplete="off"></label>
+                      <label class="field f-price"><span class="cur">$</span><span class="sr">Precio del producto 2</span><input type="number" value="340" min="0" step="1" data-k="price" inputmode="decimal"></label>
+                      <label class="switch"><input type="checkbox" checked data-k="visible"><span class="sw"></span><span class="sr">Visible en la tienda</span></label>
+                    </div>
+                    <div class="a-row" data-i="2">
+                      <span class="a-thumb p3"></span>
+                      <label class="field f-name"><span class="sr">Nombre del producto 3</span><input type="text" value="Bolso Aurora" data-k="name" maxlength="36" autocomplete="off"></label>
+                      <label class="field f-price"><span class="cur">$</span><span class="sr">Precio del producto 3</span><input type="number" value="189" min="0" step="1" data-k="price" inputmode="decimal"></label>
+                      <label class="switch"><input type="checkbox" checked data-k="visible"><span class="sw"></span><span class="sr">Visible en la tienda</span></label>
+                    </div>
+                  </div>
+                  <div class="admin-foot">
+                    <span class="save-state" id="save-state"><i></i><span>Todo publicado</span></span>
+                    <button class="btn btn-primary btn-sm" id="publish" type="button">Publicar cambios</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <div class="preview glass">
+              <div class="pv-top"><span>Así se ve en tu web</span><span class="live"><i></i>En vivo</span></div>
+              <div class="pv-card" id="pv-card">
+                <div class="pv-img"><span class="pv-obj p1" id="pv-obj"></span><span class="pv-hidden">Oculto en la tienda</span></div>
+                <div class="pv-body">
+                  <span class="pv-cat" id="pv-cat">Fragancias</span>
+                  <h4 class="pv-name" id="pv-name">Perfume Noir 50 ml</h4>
+                  <div class="pv-price" id="pv-price">$120</div>
+                  <span class="pv-btn">Añadir al carrito</span>
+                </div>
+              </div>
+              <p class="pv-note">Cada cambio del panel se refleja en tu web al instante.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 · Lo que puedes hacer desde el panel -->
+        <article class="card glass svc-card svc-block svc-feats">
+          <h3>Todo, <em>en un solo lugar.</em></h3>
+          <ul class="feature-row">
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-pen"/></svg></span><div><strong>Precios y nombres</strong><span>Cámbialos en segundos, uno o todos a la vez.</span></div></li>
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-image"/></svg></span><div><strong>Fotos y textos</strong><span>Edita cualquier sección de tu página sin código.</span></div></li>
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-bag"/></svg></span><div><strong>Pedidos y stock</strong><span>Todo tu negocio visible en un solo lugar.</span></div></li>
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-phone"/></svg></span><div><strong>Desde tu móvil</strong><span>Gestiona tu web desde donde estés.</span></div></li>
+          </ul>
+        </article>
+
+      </div>
+      </div>
+
+      <div class="svc-ui glass">
+        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
+        <div class="svc-dots">
+          <button class="svc-dot" type="button" aria-label="Presentación del panel"></button>
+          <button class="svc-dot" type="button" aria-label="01 · Pruébalo"></button>
+          <button class="svc-dot" type="button" aria-label="02 · Qué puedes hacer"></button>
+        </div>
+        <span class="svc-count" aria-hidden="true"><b>00</b> / 02</span>
+        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
+      </div>
+     </div>
+    </div>
+  </section>
+
+  <!-- ============ DATOS ============
+       El mismo recorrido de cuadros que Servicios (main.js): presentación, el reporte semanal en
+       dos ventanas (los números y la recomendación; el embudo y el mapa de atención) y las
+       garantías. Las pestañas de semana (ventana 01) cambian también la ventana 02. -->
+  <section class="section svc" id="datos" style="--n:4">
+    <div class="svc-scroll">
+     <div class="svc-stage">
+      <div class="svc-view" data-reveal>
+      <div class="svc-track" id="report">
+
+        <!-- Presentación -->
+        <article class="card glass svc-card svc-intro">
+          <p class="eyebrow">Datos verificables · Opcional</p>
+          <h2 class="h2">Decide con datos,<br><em>no con intuición.</em></h2>
+          <p class="si-lead">Si lo deseas, instalamos medición verificable en tu web. Cada semana recibes un reporte claro: cuántas personas llegaron, en qué sección se quedaron, dónde dudaron y cuántas compraron.</p>
+          <ol class="si-list wrap">
+            <li><button type="button" data-svc-go="0"><span>01</span>Reporte semanal</button></li>
+            <li><button type="button" data-svc-go="1"><span>02</span>Embudo y atención</button></li>
+            <li><button type="button" data-svc-go="2"><span>03</span>Tú decides</button></li>
+          </ol>
+          <p class="si-hint">Baja para ver el reporte <svg class="ico"><use href="#i-arrow"/></svg></p>
+        </article>
+
+        <!-- 01 · Ventana del reporte: la semana en números y la recomendación -->
+        <article class="card glass svc-card svc-block data-card">
+          <div class="window glass data-win">
+            <div class="window-bar">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <span class="window-url"><svg class="ico"><use href="#i-lock"/></svg>tunegocio.com/reporte</span>
+              <span class="tag">Ejemplo ilustrativo</span>
+            </div>
+            <div class="data-body">
+              <div class="report-head">
+                <div class="report-title">
+                  <span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span>
+                  <div><strong>Reporte semanal</strong><span>tunegocio.com · <span id="r-range">21 – 27 sep</span></span></div>
+                </div>
+                <div class="tabs" role="tablist" aria-label="Seleccionar semana">
+                  <button class="tab" role="tab" type="button" aria-selected="false" data-w="36">Sem 36</button>
+                  <button class="tab" role="tab" type="button" aria-selected="false" data-w="37">Sem 37</button>
+                  <button class="tab" role="tab" type="button" aria-selected="false" data-w="38">Sem 38</button>
+                  <button class="tab" role="tab" type="button" aria-selected="true" data-w="39">Sem 39</button>
+                </div>
+              </div>
+
+              <div class="kpis">
+                <div class="kpi"><span class="kpi-label">Llegaron</span><strong class="kpi-value" id="k-v">4.812</strong><span class="kpi-delta" id="d-v">↑ 23% vs. semana anterior</span></div>
+                <div class="kpi"><span class="kpi-label">Se quedaron +1 min</span><strong class="kpi-value" id="k-s">3.021</strong><span class="kpi-delta" id="d-s">↑ 27% vs. semana anterior</span></div>
+                <div class="kpi"><span class="kpi-label">Dudaron <em>(carrito sin comprar)</em></span><strong class="kpi-value" id="k-d">544</strong><span class="kpi-delta" id="d-d">↑ 9% vs. semana anterior</span></div>
+                <div class="kpi is-hl"><span class="kpi-label">Compraron</span><strong class="kpi-value" id="k-c">168</strong><span class="kpi-delta" id="d-c">↑ 28% vs. semana anterior</span></div>
+              </div>
+
+              <div class="insight">
+                <span class="icon-bubble sm"><svg class="ico"><use href="#i-bulb"/></svg></span>
+                <div><small>Recomendación de la semana</small><p id="insight">Semana récord: las compras crecieron un 28%. La sección «Precios» sigue siendo el punto de duda: sugerimos añadir garantía y reseñas justo ahí.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 · Ventana del reporte: el embudo y el mapa de atención (las barras crecen al llegar) -->
+        <article class="card glass svc-card svc-block data-card">
+          <div class="window glass data-win">
+            <div class="window-bar">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <span class="window-url"><svg class="ico"><use href="#i-lock"/></svg>tunegocio.com/reporte</span>
+              <span class="tag">Ejemplo ilustrativo</span>
+            </div>
+            <div class="data-body">
+              <div class="report-grid">
+                <div class="r-block">
+                  <div class="r-block-head"><h4>Embudo de la semana</h4><span>De la visita a la compra</span></div>
+                  <div class="funnel" id="funnel">
+                    <div class="f-row"><span class="f-label">Llegaron</span><span class="f-track"><i class="f-bar" style="--w:1"></i></span><span class="f-val">100%</span></div>
+                    <div class="f-row"><span class="f-label">Se quedaron</span><span class="f-track"><i class="f-bar" style="--w:.63"></i></span><span class="f-val">63%</span></div>
+                    <div class="f-row"><span class="f-label">Llegaron al carrito</span><span class="f-track"><i class="f-bar" style="--w:.15"></i></span><span class="f-val">15%</span></div>
+                    <div class="f-row"><span class="f-label">Compraron</span><span class="f-track"><i class="f-bar is-final" style="--w:.035"></i></span><span class="f-val">3,5%</span></div>
+                  </div>
+                  <p class="f-note" id="f-note">↳ 544 personas dudaron: llegaron al carrito y no completaron la compra.</p>
+                </div>
+                <div class="r-block">
+                  <div class="r-block-head"><h4>Mapa de atención</h4><span>% de visitantes que llega a cada sección</span></div>
+                  <div class="heat" id="heat">
+                    <div class="hs"><span>Portada</span><b>100%</b></div>
+                    <div class="hs"><span>Catálogo</span><b>72%</b></div>
+                    <div class="hs"><span>Precios</span><b>52%</b></div>
+                    <div class="hs"><span>Envíos</span><b>36%</b></div>
+                    <div class="hs"><span>Pago</span><b>17%</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 · Las garantías de la medición -->
+        <article class="card glass svc-card svc-block svc-feats">
+          <h3>Opcional y <em>verificable.</em></h3>
+          <ul class="feature-row three">
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-check"/></svg></span><div><strong>Tú decides</strong><span>La medición es opcional y se activa solo si lo deseas.</span></div></li>
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-shield"/></svg></span><div><strong>Privacidad primero</strong><span>Datos agregados y anónimos, conforme a la normativa.</span></div></li>
+            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-cal"/></svg></span><div><strong>Cada semana</strong><span>Un reporte claro, con recomendaciones accionables.</span></div></li>
+          </ul>
+        </article>
+
+      </div>
+      </div>
+
+      <div class="svc-ui glass">
+        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
+        <div class="svc-dots">
+          <button class="svc-dot" type="button" aria-label="Presentación de los datos"></button>
+          <button class="svc-dot" type="button" aria-label="01 · Reporte semanal"></button>
+          <button class="svc-dot" type="button" aria-label="02 · Embudo y atención"></button>
+          <button class="svc-dot" type="button" aria-label="03 · Tú decides"></button>
+        </div>
+        <span class="svc-count" aria-hidden="true"><b>00</b> / 03</span>
+        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
+      </div>
+     </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESO ============ -->
+  <section class="section" id="proceso">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow" data-reveal>Proceso</p>
+        <h2 class="h2" data-reveal>Cuatro pasos.<br><em>Cero improvisación.</em></h2>
+        <p class="lead" data-reveal>Sabes siempre qué hacemos, cuándo lo entregamos y qué sigue.</p>
+      </header>
+
+      <!-- los círculos se encienden uno tras otro, en bucle mientras se ven (main.js, las dos versiones) -->
+      <div class="steps" id="steps">
+        <div class="steps-line" aria-hidden="true"></div>
+        <article class="step">
+          <span class="step-dot"><svg class="ico"><use href="#i-compass"/></svg></span>
+          <small>01</small>
+          <h3>Descubrimiento</h3>
+          <p>Tu negocio, tu cliente y qué debe lograr tu web.</p>
+        </article>
+        <article class="step">
+          <span class="step-dot"><svg class="ico"><use href="#i-pen"/></svg></span>
+          <small>02</small>
+          <h3>Diseño</h3>
+          <p>A medida. Apruebas cada pantalla antes de construir.</p>
+        </article>
+        <article class="step">
+          <span class="step-dot"><svg class="ico"><use href="#i-code"/></svg></span>
+          <small>03</small>
+          <h3>Desarrollo</h3>
+          <p>Web, automatizaciones, panel, Google y redes. Todo probado.</p>
+        </article>
+        <article class="step">
+          <span class="step-dot"><svg class="ico"><use href="#i-rocket"/></svg></span>
+          <small>04</small>
+          <h3>Lanzamiento</h3>
+          <p>Publicamos y mejoramos cada semana con datos reales.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLANES (sin precios: se consultan por WhatsApp o Instagram) ============
+       El mismo recorrido de cuadros que Servicios (main.js): presentación, un plan por cuadro,
+       centrado, y la comparación de los 5. Debajo, los servicios por aparte y la llamada a escribir. -->
+  <section class="section svc" id="packs" style="--n:7">
+    <div class="svc-scroll">
+     <div class="svc-stage">
+      <div class="svc-view" data-reveal>
+      <div class="svc-track">
+
+        <!-- Presentación -->
+        <article class="card glass svc-card svc-intro">
+          <p class="eyebrow">Planes</p>
+          <h2 class="h2">Elige tu <em>burbuja.</em></h2>
+          <p class="si-lead">Cinco planes de página web, de una landing sencilla a una presencia digital completa. Cada plan incluye todo lo del anterior. Pregúntanos por WhatsApp o Instagram y te enviamos precios, detalles y una demostración.</p>
+          <ol class="si-list wrap">
+            <li><button type="button" data-svc-go="0"><span>01</span>Lite</button></li>
+            <li><button type="button" data-svc-go="1"><span>02</span>Start</button></li>
+            <li><button type="button" data-svc-go="2"><span>03</span>Pro</button></li>
+            <li><button type="button" data-svc-go="3"><span>04</span>Business</button></li>
+            <li><button type="button" data-svc-go="4"><span>05</span>Max</button></li>
+            <li><button type="button" data-svc-go="5"><span>06</span>Comparar</button></li>
+          </ol>
+          <p class="si-hint">Baja para ver cada plan <svg class="ico"><use href="#i-arrow"/></svg></p>
+        </article>
+
+        <!-- 01 · Lite -->
+        <article class="card glass spot svc-card svc-block plan-card">
+          <div class="plan-main">
+            <div class="pack-orb-wrap"><span class="pack-orb" style="--o:26px;--tint:#2fbf71"></span></div>
+            <h3 class="pack-name">Lite</h3>
+            <p class="pack-tag">Una página para vender un producto o servicio</p>
+            <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del Plan Lite">Consultar precio</a>
+          </div>
+          <div class="plan-info">
+            <ul class="pack-list">
+              <li>Página de una sola sección con diseño moderno</li>
+              <li>Adaptada a celular, tablet y computador</li>
+              <li>Botón de WhatsApp, formulario y redes sociales</li>
+              <li>Dominio, hosting y candado SSL por 1 año</li>
+            </ul>
+            <p class="pack-ideal"><span>Ideal para</span> tus anuncios o el enlace de tu Instagram.</p>
+          </div>
+        </article>
+
+        <!-- 02 · Start -->
+        <article class="card glass spot svc-card svc-block plan-card">
+          <div class="plan-main">
+            <div class="pack-orb-wrap"><span class="pack-orb" style="--o:34px;--tint:#2b2f3a"></span></div>
+            <h3 class="pack-name">Start</h3>
+            <p class="pack-tag">Tu primera web para captar más clientes</p>
+            <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del Plan Start">Consultar precio</a>
+          </div>
+          <div class="plan-info">
+            <ul class="pack-list">
+              <li class="plus">Todo lo de Lite, más:</li>
+              <li>Inicio, Nosotros, Servicios y Contacto</li>
+              <li>Ubicación con Google Maps</li>
+              <li>SEO básico para aparecer en Google</li>
+              <li>1 mes de Mantenimiento Web incluido</li>
+            </ul>
+            <p class="pack-ideal"><span>Ideal para</span> negocios que están empezando en internet.</p>
+          </div>
+        </article>
+
+        <!-- 03 · Pro (recomendado) -->
+        <article class="card glass spot svc-card svc-block plan-card featured">
+          <span class="pack-badge">Recomendado</span>
+          <div class="plan-main">
+            <div class="pack-orb-wrap"><span class="pack-orb" style="--o:44px;--tint:#ff5fae"></span></div>
+            <h3 class="pack-name">Pro</h3>
+            <p class="pack-tag">Tu web con automatizaciones</p>
+            <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
+            <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del Plan Pro">Consultar precio <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-info">
+            <ul class="pack-list">
+              <li class="plus">Todo lo de Start, más:</li>
+              <li>Respuestas automáticas para atender 24/7</li>
+              <li>Formularios que guardan cada cliente</li>
+              <li>Correos automáticos y citas o reservas en línea</li>
+              <li>Panel para que hagas tus propios cambios</li>
+              <li>2 meses de Mantenimiento Web incluidos</li>
+            </ul>
+            <p class="pack-ideal"><span>Ideal para</span> negocios que reciben muchas consultas y quieren ahorrar tiempo.</p>
+          </div>
+        </article>
+
+        <!-- 04 · Business -->
+        <article class="card glass spot svc-card svc-block plan-card">
+          <div class="plan-main">
+            <div class="pack-orb-wrap"><span class="pack-orb" style="--o:54px;--tint:#f2f4f8"></span></div>
+            <h3 class="pack-name">Business</h3>
+            <p class="pack-tag">Tu web con datos reales para decidir mejor</p>
+            <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del Plan Business">Consultar precio</a>
+          </div>
+          <div class="plan-info">
+            <ul class="pack-list">
+              <li class="plus">Todo lo de Pro, más:</li>
+              <li>Panel de estadísticas en tiempo real</li>
+              <li>Google Analytics o panel personalizado</li>
+              <li>Pasarela de pagos inteligente</li>
+              <li>Catálogo con panel de ventas y facturas</li>
+              <li>3 meses de Datos y Asesoría incluidos</li>
+            </ul>
+            <p class="pack-ideal"><span>Ideal para</span> empresas con movimiento que quieren saber qué funciona.</p>
+          </div>
+        </article>
+
+        <!-- 05 · Max -->
+        <article class="card glass spot svc-card svc-block plan-card">
+          <div class="plan-main">
+            <div class="pack-orb-wrap"><span class="pack-orb" style="--o:64px;--tint:#ffc83d"></span></div>
+            <h3 class="pack-name">Max</h3>
+            <p class="pack-tag">Web + redes sociales + marketing en Google</p>
+            <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del Plan Max">Consultar precio</a>
+          </div>
+          <div class="plan-info">
+            <ul class="pack-list">
+              <li class="plus">Todo lo de Business, más:</li>
+              <li>Facebook, Instagram, TikTok y YouTube optimizados</li>
+              <li>Google Business y campaña de Google Ads</li>
+              <li>SEO avanzado con blogs</li>
+              <li>Acompañamiento estratégico</li>
+              <li>3 meses del Plan Crecimiento incluidos</li>
+            </ul>
+            <p class="pack-ideal"><span>Ideal para</span> marcas que quieren presencia digital total.</p>
+          </div>
+        </article>
+
+        <!-- 06 · Comparar los 5 planes: lo esencial, punto por punto -->
+        <article class="card glass svc-card svc-block plan-compare">
+          <h3>Compara los <em>5 planes.</em></h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col"><span class="sr">Incluye</span></th><th scope="col">Lite</th><th scope="col">Start</th><th scope="col" class="hl">Pro</th><th scope="col">Business</th><th scope="col">Max</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Secciones</th><td>1</td><td>4</td><td class="hl">4</td><td>+ Catálogo</td><td>+ Blog</td></tr>
+                <tr><th scope="row">Web adaptable, WhatsApp, dominio y SSL</th><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td><td class="y hl"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Google Maps y SEO</th><td class="n"><span class="sr">No</span></td><td>Básico</td><td class="hl">Básico</td><td>Básico</td><td>Avanzado</td></tr>
+                <tr><th scope="row">Automatizaciones</th><td class="n"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="hl">Web</td><td>+ Ventas</td><td>+ Ventas</td></tr>
+                <tr><th scope="row">Panel para tus cambios</th><td class="n"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="y hl"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Estadísticas y pagos</th><td class="n"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="n hl"><span class="sr">No</span></td><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Redes y Google Ads</th><td class="n"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="n hl"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Meses incluidos</th><td class="n"><span class="sr">Ninguno</span></td><td>1 mes</td><td class="hl">2 meses</td><td>3 meses</td><td>3 meses</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </div>
+      </div>
+
+      <div class="svc-ui glass">
+        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
+        <div class="svc-dots">
+          <button class="svc-dot" type="button" aria-label="Presentación de los planes"></button>
+          <button class="svc-dot" type="button" aria-label="01 · Plan Lite"></button>
+          <button class="svc-dot" type="button" aria-label="02 · Plan Start"></button>
+          <button class="svc-dot" type="button" aria-label="03 · Plan Pro"></button>
+          <button class="svc-dot" type="button" aria-label="04 · Plan Business"></button>
+          <button class="svc-dot" type="button" aria-label="05 · Plan Max"></button>
+          <button class="svc-dot" type="button" aria-label="06 · Comparar los 5 planes"></button>
+        </div>
+        <span class="svc-count" aria-hidden="true"><b>00</b> / 06</span>
+        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
+      </div>
+     </div>
+    </div>
+
+    <div class="container packs-more">
+      <div class="addons-head">
+        <h3 data-reveal>Servicios por aparte y planes mensuales</h3>
+        <p data-reveal>Súmalos a tu plan o contrátalos por separado.</p>
+      </div>
+      <div class="addons" data-stagger>
+        <a class="addon glass spot" href="#automatizacion" data-svc-for="automatizacion" data-svc-go="0">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-globe"/></svg></span><span class="addon-tag">Por aparte</span></div>
+          <h4>Automatización Web</h4>
+          <p>Tu página capta clientes, responde, agenda y te avisa sola. Incluida desde el Plan Pro.</p>
+        </a>
+        <a class="addon glass spot" href="#automatizacion" data-svc-for="automatizacion" data-svc-go="1">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-auto"/></svg></span><span class="addon-tag">Por aparte</span></div>
+          <h4>Automatización Completa</h4>
+          <p>WhatsApp, Google Calendar, Gmail, Sheets, Instagram y pagos trabajando juntos.</p>
+        </a>
+        <article class="addon glass spot">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-video"/></svg></span><span class="addon-tag">Por aparte</span></div>
+          <h4>Contenido de estudio con IA</h4>
+          <p>Videos y fotos realistas para reels, anuncios y tu web.</p>
+        </article>
+        <article class="addon glass spot is-month">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-wrench"/></svg></span><span class="addon-tag">Mensual</span></div>
+          <h4>Mantenimiento Web</h4>
+          <p>Hosting, dominio y SSL al día, copias de seguridad semanales, seguridad y hasta 5 cambios al mes.</p>
+        </article>
+        <article class="addon glass spot is-month">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-data"/></svg></span><span class="addon-tag">Mensual</span></div>
+          <h4>Datos y Asesoría</h4>
+          <p>Reporte mensual, análisis de comportamiento, reunión de estrategia y una mejora al mes en tu página.</p>
+        </article>
+        <article class="addon glass spot is-month">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-layers"/></svg></span><span class="addon-tag">Mensual</span></div>
+          <h4>Datos 360</h4>
+          <p>Todo tu negocio y tus redes en un solo panel: ventas, clientes, WhatsApp, anuncios, Instagram, TikTok y más.</p>
+        </article>
+        <article class="addon glass spot is-month">
+          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-rocket"/></svg></span><span class="addon-tag">Mensual</span></div>
+          <h4>Crecimiento</h4>
+          <p>Publicaciones y videos que llevan visitas a tu web, campañas en Google o Meta y Google Business activo.</p>
+        </article>
+      </div>
+
+      <div class="ask glass" data-reveal>
+        <span class="bubble" style="--s:150px;right:-40px;top:-60px" aria-hidden="true"></span>
+        <span class="bubble" style="--s:46px;left:46%;bottom:-18px;--dur:9s" aria-hidden="true"></span>
+        <div class="ask-copy">
+          <h3>¿Quieres conocer los <em>precios?</em></h3>
+          <p>Escríbenos y te enviamos todos los planes con sus valores, lo que incluye cada uno y una demostración. Te respondemos en persona, sin compromiso.</p>
+        </div>
+        <div class="ask-actions">
+          <a href="#" class="btn btn-primary magnetic" data-wa="Hola Gotia Studio 👋 Quiero conocer los planes y precios"><svg class="ico ico-l"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+          <a href="#" class="btn btn-glass glass magnetic" data-ig><svg class="ico ico-l"><use href="#i-ig"/></svg>Escribir por Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq">
+    <div class="container faq">
+      <div class="faq-copy">
+        <p class="eyebrow" data-reveal>Preguntas frecuentes</p>
+        <h2 class="h2" data-reveal>Todo claro,<br><em>desde el inicio.</em></h2>
+        <p class="lead" data-reveal>¿Tienes otra duda? Escríbenos y te respondemos en persona, sin respuestas automáticas.</p>
+        <a href="#contacto" class="btn btn-glass glass magnetic" data-reveal>Hablar con el estudio <svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="faq-list" data-stagger>
+        <details class="qa glass">
+          <summary>¿Cuánto cuesta mi página?<span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body">Depende del plan. Escríbenos por <a href="#" data-wa="Hola Gotia Studio 👋 Quiero conocer los planes y precios">WhatsApp</a> o <a href="#" data-ig>Instagram</a> y te enviamos los precios, lo que incluye cada plan y una demostración.</div>
+        </details>
+        <details class="qa glass">
+          <summary>¿Cuánto tarda?<span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body">Una landing es lo más rápido; los planes con automatizaciones, datos o redes toman más. Desde el primer día tienes un calendario con cada entrega.</div>
+        </details>
+        <details class="qa glass">
+          <summary>¿Hay pagos mensuales?<span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body">Los planes web son de pago único. Los mensuales (Mantenimiento, Datos y Asesoría, Datos 360 y Crecimiento) son opcionales, y varios planes ya traen meses incluidos. Mantenimiento, Datos y Asesoría y Datos 360 no tienen permanencia.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="contact glass" data-reveal>
+        <span class="bubble" style="--s:220px;right:-60px;top:-70px" aria-hidden="true"></span>
+        <span class="bubble" style="--s:90px;left:44%;bottom:-30px;--dur:10s" aria-hidden="true"></span>
+        <span class="bubble" style="--s:40px;left:8%;top:12%;--dur:8s" aria-hidden="true"></span>
+
+        <div class="contact-copy">
+          <p class="eyebrow">Contacto</p>
+          <h2 class="h2">Hagamos que tu web<br><em>trabaje por ti.</em></h2>
+          <p class="lead">Cuéntanos de tu negocio. Te respondemos en persona, sin compromiso.</p>
+          <ul class="contact-direct">
+            <li><a href="#" data-wa="Hola Gotia Studio 👋 Quiero conocer los planes y precios"><span class="icon-bubble sm"><svg class="ico"><use href="#i-wa"/></svg></span>WhatsApp · planes y precios</a></li>
+            <li><a href="#" data-ig><span class="icon-bubble sm"><svg class="ico"><use href="#i-ig"/></svg></span>@gotiastudio</a></li>
+            <li><a href="mailto:hola@gotiastudio.com"><span class="icon-bubble sm"><svg class="ico"><use href="#i-mail"/></svg></span>hola@gotiastudio.com</a></li>
+          </ul>
+        </div>
+
+        <form class="form" id="contact-form" novalidate>
+          <div class="row2">
+            <div class="input"><label for="f-name">Nombre</label><input id="f-name" name="nombre" type="text" autocomplete="name" required placeholder="Tu nombre"></div>
+            <div class="input"><label for="f-contact">Email o WhatsApp</label><input id="f-contact" name="contacto" type="text" autocomplete="email" required placeholder="Cómo te contactamos"></div>
+          </div>
+          <div class="input"><label for="f-msg">¿Qué quieres lograr?</label><textarea id="f-msg" name="mensaje" rows="4" placeholder="Tu negocio y lo que buscas"></textarea></div>
+          <button class="btn btn-primary btn-block" type="submit">Enviar <svg class="ico"><use href="#i-arrow"/></svg></button>
+          <p class="form-note">Tus datos solo se usan para contactarte.</p>
+          <div class="form-success" role="status" aria-live="polite">
+            <span class="icon-bubble"><svg class="ico"><use href="#i-check"/></svg></span>
+            <strong>Recibido.</strong>
+            <span>Te escribimos muy pronto.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand"><img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+        <p>Más visitas para tu negocio. Digitalizamos y automatizamos tu marca con estrategias basadas en datos reales.</p>
+      </div>
+      <div>
+        <h5>Servicios</h5>
+        <ul>
+          <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="0">Automatización web</a></li>
+          <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="1">Automatización completa</a></li>
+          <li><a href="#panel">Panel de administrador</a></li>
+          <li><a href="#servicios">Google y redes</a></li>
+          <li><a href="#datos">Datos verificables</a></li>
+          <li><a href="#servicios">Contenido con IA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Estudio</h5>
+        <ul>
+          <li><a href="#estudio">Manifiesto</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#packs">Planes</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="#" data-wa="Hola Gotia Studio 👋 Quiero más información">WhatsApp</a></li>
+          <li><a href="#" data-ig>Instagram</a></li>
+          <li><a href="mailto:hola@gotiastudio.com">hola@gotiastudio.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wordmark" aria-hidden="true">Gotiastudio</div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Gotiastudio. Todos los derechos reservados.</span>
+      <span class="ver-switch">
+        <a href="?version=esencial" class="ver-to-lite"><svg class="ico"><use href="#i-phone"/></svg>Ver versión Esencial</a>
+        <a href="?version=3d" class="ver-to-3d"><svg class="ico"><use href="#i-spark"/></svg>Ver versión 3D</a>
+      </span>
+      <span>Diseñado con precisión.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Invitación a los efectos: una burbuja pequeña que sale del botón "3D" del menú y lo señala.
+     Se cierra con la X y se va sola a los 20 s. Solo en Esencial y una vez por visita (main.js) -->
+<aside class="fx-invite" id="fx-invite" aria-label="Activar los efectos" hidden>
+  <div class="fxi-in">
+    <a class="fxi-go" href="?version=3d">Activa los efectos 3D <svg class="ico"><use href="#i-arrow"/></svg></a>
+    <button class="fxi-close" type="button" aria-label="Cerrar"><svg class="ico"><use href="#i-x"/></svg></button>
+    <i class="fxi-bar" aria-hidden="true"></i>
+  </div>
+</aside>
+
+<div class="toast glass" id="toast" role="status" aria-live="polite"><span class="icon-bubble sm"><svg class="ico"><use href="#i-check"/></svg></span><span id="toast-text">Cambios publicados en tu web</span></div>
+
+<!-- bubbles.js y scenes.js (la versión 3D) los carga main.js solo si se elige el 3D: ver gotia.fx en el <head> -->
+<script src="contacto.js?v=1" defer></script>
+<script src="main.js?v=26" defer></script>
+</body>
+</html>

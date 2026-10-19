@@ -1,0 +1,1607 @@
+<!doctype html>
+<html lang="es" class="snap">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Planes y precios — Gotiastudio</title>
+  <!-- Página privada: no sale en Google ni está enlazada desde la web.
+       Solo la ve quien recibe el enlace (por WhatsApp o Instagram). -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="description" content="Planes de página web, automatización y planes mensuales de Gotiastudio, con precios y todo lo que incluye cada uno.">
+  <meta name="theme-color" content="#eaf3ff">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Planes y precios — Gotiastudio">
+  <meta property="og:description" content="Elige tu página web, súmale automatización y mantenla creciendo. Todo explicado paso a paso.">
+  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=61">
+  <link rel="stylesheet" href="planes.css?v=7">
+
+  <script>
+    document.documentElement.classList.add('js');
+    // modo negro: el mismo que en la web principal (se recuerda entre las dos páginas)
+    try {
+      if (localStorage.getItem('gotia-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+        document.querySelector('meta[name="theme-color"]').content = '#000000';
+        document.querySelector('meta[name="color-scheme"]').content = 'dark';
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+<!-- ============ SVG sprite ============ -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="lg-fill" cx="34%" cy="28%" r="80%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".98"/>
+      <stop offset=".32" stop-color="#bfe0ff" stop-opacity=".55"/>
+      <stop offset=".7" stop-color="#4aa3ff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".32"/>
+    </radialGradient>
+    <linearGradient id="lg-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#4aa3ff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".7"/>
+    </linearGradient>
+  </defs>
+  <symbol id="logo" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="14.5" fill="url(#lg-fill)" stroke="url(#lg-rim)" stroke-width="1"/>
+    <ellipse cx="10.8" cy="9.6" rx="4.2" ry="2.2" transform="rotate(-38 10.8 9.6)" fill="#fff" opacity=".9"/>
+    <circle cx="22.5" cy="23" r="1.3" fill="#1f6fe5" opacity=".45"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="5.5" cy="6" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 6h8.6M6.6 8l4.3 8M17.4 8l-4.3 8"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="5" width="3" height="12" rx="1"/><rect x="16" y="8.5" width="3" height="8.5" rx="1"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.2-4A8.3 8.3 0 1 1 8.3 19z"/><path d="M9.2 8.6c-.2 2.9 3.1 6.3 6.1 6.2l.9-1.6-1.9-1-1 .9c-1-.4-2-1.4-2.4-2.4l.9-1-1-1.9z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 15.5l-3.5-3.5C10 7.5 13.5 4 20 4c0 6.5-3.5 10-8 11.5z"/><path d="M8.5 12H5l2.5-3.5h4M12 15.5V19l3.5-2.5v-4"/><circle cx="15" cy="9" r="1.3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5L7 7M17 17l1.5 1.5M5.5 18.5L7 17M17 7l1.5-1.5"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5z"/><path d="M14.5 6.5L17 4l3 3-2.5 2.5"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M4 9h16M4 14.5h16M10 9v11.5"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.3 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.3-3.5-8.5s1.1-6.1 3.5-8.5z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H19l-3-3M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H5l3 3"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="17" height="4" rx="1"/><path d="M5 12.5v8h14v-8M12 8.5v12M12 8.5C11 5 6.5 4 6.5 7c0 1.5 2.5 1.5 5.5 1.5zM12 8.5c1-3.5 5.5-4.5 5.5-1.5 0 1.5-2.5 1.5-5.5 1.5z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.8l8.8 15.7H3.2z"/><path d="M12 10v4.4M12 17.1v.2"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.8 0-6.5-2.6-6.5-6.1 0-3.2 2.3-5.2 3.6-7.4.3 1.9 1.3 3 2.4 3.6-.1-3.1 1.2-5.9 3.5-8.1.2 3.2 1.6 5 2.7 6.8.8 1.3 1.3 2.7 1.3 4.2 0 4.4-3.1 7-7 7z"/></symbol>
+  <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 6.8-1.2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15.5 3.5H13A4.5 4.5 0 0 0 8.5 8v2.5H6v3.8h2.5v6.2h4v-6.2H15l.6-3.8h-3.1V8.4a1 1 0 0 1 1-1h2z"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M14 3.5v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3.5c.6 2.6 2.4 4.3 5.2 4.6"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.2v5.6l4.8-2.8z"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.35-5.66"/><path d="M20 12h-7.5"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4.5 10.5V20h15v-9.5"/><path d="M3 9.5l1.8-5h14.4l1.8 5a2.6 2.6 0 0 1-4.5 1.6 2.6 2.6 0 0 1-4.5 0 2.6 2.6 0 0 1-4.5 0A2.6 2.6 0 0 1 3 9.5z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.5L12 12.5 3.5 8z"/><path d="M3.5 12L12 16.5l8.5-4.5M3.5 16L12 20.5l8.5-4.5"/></symbol>
+  <symbol id="i-ads" viewBox="0 0 24 24"><path d="M4 10v4h3l7 4V6L7 10z"/><path d="M17.5 9a4 4 0 0 1 0 6M7 14l1 5h2.5l-1-4.5"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3 3"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3.2 8.2-7.5 9.5-4.3-1.3-7.5-5-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="cursor" aria-hidden="true"><span class="cursor-ring"></span></div>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- ============ NAV: los 4 pasos ============ -->
+<header class="nav" id="nav">
+  <nav class="nav-inner glass" aria-label="Pasos">
+    <a href="index.html" class="brand" aria-label="Gotiastudio, ir a la web">
+      <img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async">
+      <span class="brand-word">Gotia<span>studio</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#web"><b>1</b>Página web</a></li>
+      <li><a href="#automatizacion"><b>2</b>Automatización</a></li>
+      <li><a href="#mensuales"><b>3</b>Mensuales</a></li>
+      <li><a href="#beneficios"><b>4</b>Beneficios</a></li>
+    </ul>
+    <button class="theme-toggle" type="button" aria-label="Modo negro" aria-pressed="false" title="Cambiar a negro">
+      <svg class="ico ico-moon"><use href="#i-moon"/></svg>
+      <svg class="ico ico-sun"><use href="#i-sun"/></svg>
+    </button>
+    <a href="#" class="btn btn-primary btn-sm nav-cta" data-wa="Hola Gotia Studio 👋 Vi los planes y tengo una pregunta">Escríbenos</a>
+    <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu glass" id="mobile-menu">
+    <a href="#web"><b>1</b>Página web</a>
+    <a href="#automatizacion"><b>2</b>Automatización</a>
+    <a href="#mensuales"><b>3</b>Planes mensuales</a>
+    <a href="#beneficios"><b>4</b>Beneficios</a>
+    <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Vi los planes y tengo una pregunta">Escríbenos por WhatsApp</a>
+  </div>
+</header>
+
+<!-- Cada <section class="slide"> ocupa toda la pantalla; al hacer scroll, la página
+     se ajusta sola a la siguiente. data-title = nombre en los puntos de la derecha. -->
+<main id="main">
+
+  <!-- ============ PORTADA ============ -->
+  <section class="slide s-hero" id="top" data-title="Inicio">
+    <span class="bubble" style="--s:70px;left:10%;top:22%;--dur:11s" aria-hidden="true"></span>
+    <span class="bubble" style="--s:34px;right:12%;top:30%;--dur:8s" aria-hidden="true"></span>
+    <span class="bubble" style="--s:120px;right:4%;bottom:6%;--dur:13s" aria-hidden="true"></span>
+    <div class="container s-center">
+      <span class="hero-g-wrap" data-hero style="--i:0"><img class="hero-g" src="g-glass-alpha.webp?v=2" alt="" width="648" height="608" decoding="async"></span>
+      <h1 class="hero-title pl-title" data-split>Todo claro, <em>paso a paso.</em></h1>
+      <p class="hero-lead" data-hero style="--i:3">Tu web, la automatización y el plan mensual. Desliza para verlo.</p>
+      <ol class="roadmap" data-hero style="--i:4">
+        <li><a class="glass spot" href="#web"><span class="rm-num">01<svg class="ico"><use href="#i-down"/></svg></span><strong>Tu página web</strong></a></li>
+        <li><a class="glass spot" href="#automatizacion"><span class="rm-num">02<svg class="ico"><use href="#i-down"/></svg></span><strong>Automatización</strong></a></li>
+        <li><a class="glass spot" href="#mensuales"><span class="rm-num">03<svg class="ico"><use href="#i-down"/></svg></span><strong>Planes mensuales</strong></a></li>
+        <li><a class="glass spot" href="#beneficios"><span class="rm-num">04<svg class="ico"><use href="#i-down"/></svg></span><strong>Beneficios</strong></a></li>
+      </ol>
+      <a class="s-hint" href="#web" data-hero style="--i:5">Desliza para empezar <svg class="ico"><use href="#i-down"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ==================== PASO 1 · PÁGINA WEB ==================== -->
+  <div class="step-group" id="web">
+
+    <section class="slide" id="paso-1" data-title="Paso 1 · Página web">
+      <div class="container s-center">
+        <header class="s-head">
+          <span class="step-num" aria-hidden="true" data-reveal>01</span>
+          <p class="eyebrow" data-reveal>Paso 1 de 4 · Pago único</p>
+          <h2 class="h2" data-reveal>Elige tu <em>página web.</em></h2>
+          <p class="lead" data-reveal>Cinco planes, de menor a mayor. Cada uno incluye todo lo del anterior, más funciones nuevas.</p>
+        </header>
+        <nav class="ov" style="--n:5" aria-label="Los 5 planes" data-stagger>
+          <a class="ov-item glass spot" href="#ejemplo-lite"><span class="tint-orb" style="--tint:#2fbf71"></span><span class="ov-txt"><b>Lite</b><small>Una página para vender</small></span><span class="ov-price"><strong>$350.000</strong><em>COP</em></span></a>
+          <a class="ov-item glass spot" href="#ejemplo-start"><span class="tint-orb" style="--tint:#2b2f3a"></span><span class="ov-txt"><b>Start</b><small>Tu primera web</small></span><span class="ov-price"><strong>$580.000</strong><em>COP</em></span></a>
+          <a class="ov-item glass spot is-hl" href="#ejemplo-pro"><span class="tint-orb" style="--tint:#ff5fae"></span><span class="ov-txt"><b>Pro</b><small>Web con automatizaciones</small></span><span class="ov-price"><strong>$920.000</strong><em>COP</em></span></a>
+          <a class="ov-item glass spot" href="#ejemplo-business"><span class="tint-orb" style="--tint:#f2f4f8"></span><span class="ov-txt"><b>Business</b><small>Web con datos reales</small></span><span class="ov-price"><strong>$1.890.000</strong><em>COP</em></span></a>
+          <a class="ov-item glass spot" href="#ejemplo-max"><span class="tint-orb" style="--tint:#ffc83d"></span><span class="ov-txt"><b>Max</b><small>Web, redes y Google</small></span><span class="ov-price"><strong>$5.900.000</strong><em>COP</em></span></a>
+        </nav>
+        <a class="s-hint" href="#ejemplo-lite">Desliza para ver cada plan <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <!-- 🟢 LANDING · ejemplo de página -->
+    <section class="slide s-example" id="ejemplo-lite" data-title="Ejemplo · Plan Lite">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Plan 1 de 5 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#2fbf71"></span>Plan <em>Lite</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>auroraskin.co</span></div>
+            <!-- recorrido por todo lo que incluye el plan, en bucle mientras se ve (planes.js): la página con su dominio y candado → en cualquier pantalla → el botón de WhatsApp → el formulario y las redes -->
+            <div class="mock-page m-lite" style="--m-ac:#1f9d63" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Aurora Skin</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-globe"/></svg>Tu página</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-phone"/></svg>Celular</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-mail"/></svg>Formulario</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · La página: una sola sección, con su dominio y conexión segura -->
+                <div class="mx-scene xl-page" data-steps="200 +s-1; 250 +s-2; 250 +s-3; 250 +s-4; 600 +s-5; 2700 end">
+                  <div class="xl-copy">
+                    <span class="m-chip v1">Nuevo lanzamiento</span>
+                    <p class="m-h v2">Sérum Glow,<br>tu piel en 7 días</p>
+                    <p class="m-p v3">Una sola página, directo al grano: qué vendes, por qué elegirte y cómo comprar.</p>
+                    <div class="m-actions v4"><span class="m-btn"><svg class="ico"><use href="#i-wa"/></svg>Pedir por WhatsApp</span><span class="m-btn ghost">Ver detalles</span></div>
+                    <span class="xl-secure v5"><svg class="ico"><use href="#i-lock"/></svg><span><b>auroraskin.co</b> · dominio propio y conexión segura (SSL)</span></span>
+                  </div>
+                  <div class="xl-visual v2"><span class="xl-prod"></span></div>
+                </div>
+
+                <!-- 2 · En cualquier pantalla: computador, tablet y celular -->
+                <div class="mx-scene xl-dev" data-steps="200 +s-1; 450 +s-2; 450 +s-3; 500 +s-4; 2800 end">
+                  <div class="xl-devs">
+                    <span class="xl-d xl-laptop v1"><i class="xl-scr"><b></b><em></em><u></u><s></s></i></span>
+                    <span class="xl-d xl-tablet v2"><i class="xl-scr"><b></b><em></em><u></u><s></s></i></span>
+                    <span class="xl-d xl-phone v3"><i class="xl-scr"><b></b><em></em><u></u><s></s></i></span>
+                  </div>
+                  <p class="xl-cap v4"><b>La misma página, perfecta en cualquier pantalla</b><span>Computador · Tablet · Celular</span></p>
+                </div>
+
+                <!-- 3 · WhatsApp: un toque y el cliente ya está en tu chat -->
+                <div class="mx-scene xl-wa" data-steps="300 +s-click; 450 +s-clicked; 250 +s-2; 600 +s-3; 1200 +s-4; 2600 end">
+                  <div class="xl-chat m-card">
+                    <span class="xl-chat-top"><i class="xl-av"></i><span><b>Aurora Skin</b><small>en línea</small></span><svg class="ico"><use href="#i-wa"/></svg></span>
+                    <span class="xl-msgs">
+                      <span class="xl-bub me v2">Hola 👋 Quiero el Sérum Glow</span>
+                      <span class="xl-bub xl-dots v3"><i></i><i></i><i></i></span>
+                      <span class="xl-bub v4">¡Hola! Claro que sí 💚 Te lo enviamos hoy mismo.</span>
+                    </span>
+                  </div>
+                  <div class="xl-mini m-card">
+                    <span class="xl-mini-img"></span>
+                    <span class="xl-mini-tx"><b>Sérum Glow</b><small>Envío gratis</small></span>
+                    <span class="m-btn xl-wa-btn"><svg class="ico"><use href="#i-wa"/></svg>Pedir por WhatsApp<i class="mx-tap"></i></span>
+                  </div>
+                </div>
+
+                <!-- 4 · El formulario de contacto y los enlaces a tus redes -->
+                <div class="mx-scene xl-form" data-steps="300 type .xl-name 60; 200 type .xl-mail 45; 300 +s-click; 450 +s-clicked; 100 +s-ok; 400 each .xl-soc&gt;i 300; 2200 end">
+                  <div class="xl-fcard m-card">
+                    <b class="xl-ft">Escríbenos</b>
+                    <span class="m-field"><span class="xl-name" data-q="Camila Rojas" data-ph="Tu nombre"></span></span>
+                    <span class="m-field"><span class="xl-mail" data-q="camila@correo.com" data-ph="Correo o celular"></span></span>
+                    <span class="m-btn xl-send">Enviar<i class="mx-tap"></i></span>
+                    <span class="xl-ok"><svg class="ico"><use href="#i-check"/></svg>¡Gracias, Camila! Te escribimos pronto.</span>
+                  </div>
+                  <div class="xl-socs m-card">
+                    <b>Síguenos</b>
+                    <span class="xl-soc"><i style="--c:#e1306c"><svg class="ico"><use href="#i-ig"/></svg></i><i style="--c:#0866ff"><svg class="ico"><use href="#i-fb"/></svg></i><i style="--c:#ee1d52"><svg class="ico"><use href="#i-tt"/></svg></i></span>
+                    <small>Enlaces directos a tus redes</small>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal del Plan Lite" data-stagger>
+            <li style="--c:#25d366"><span class="ml-ico"><svg class="ico"><use href="#i-wa"/></svg></span><span><b>WhatsApp</b><small>Botón directo a tu chat</small></span></li>
+            <li style="--c:#10a37f"><span class="ml-ico"><svg class="ico"><use href="#i-lock"/></svg></span><span><b>Candado SSL</b><small>Dominio y hosting por 1 año</small></span></li>
+            <li style="--c:#e1306c"><span class="ml-ico"><svg class="ico"><use href="#i-ig"/></svg></span><span><b>Redes sociales</b><small>Enlaces a Instagram y más</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de una página hecha con el Plan Lite</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$350.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#plan-lite">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🟢 LANDING -->
+    <section class="slide" id="plan-lite" data-title="Plan Lite">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#2fbf71" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small>Plan 1 de 5</small><h3>Plan Lite</h3></div></div>
+            <p class="plan-tag">Una página para vender un producto o servicio</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$450.000</s></span>
+              <span class="pt-now"><strong>$350.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $100.000</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal si</span>solo necesitas una página sencilla para tus anuncios o el enlace de tu Instagram.</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el Plan Lite ($350.000)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list">
+              <li>Página de una sola sección con diseño moderno</li>
+              <li>Adaptada a celular, tablet y computador</li>
+              <li>Botón directo a WhatsApp</li>
+              <li>Formulario de contacto</li>
+              <li>Enlaces a tus redes sociales</li>
+              <li>Certificado de seguridad (candado SSL)</li>
+              <li>Dominio y hosting por 1 año</li>
+              <li>1 ronda de ajustes antes de publicar</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ⚫ INICIAL · ejemplo de página -->
+    <section class="slide s-example" id="ejemplo-start" data-title="Ejemplo · Plan Start">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Plan 2 de 5 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#2b2f3a"></span>Plan <em>Start</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>estudionativo.co</span></div>
+            <!-- recorrido por todo lo que incluye el plan, en bucle mientras se ve (planes.js): las 4 secciones → servicios y nosotros → la ubicación en Google Maps → aparecer en Google -->
+            <div class="mock-page m-start" style="--m-ac:#2b2f3a" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Estudio Nativo</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-layers"/></svg>Secciones</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-pen"/></svg>Servicios</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-pin"/></svg>Ubicación</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-google"/></svg>Google</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · Cuatro secciones: Inicio, Nosotros, Servicios y Contacto -->
+                <div class="mx-scene xs-secs" data-steps="200 +s-1; 350 +s-2; 250 +s-3; 250 +s-4; 250 +s-5; 2700 end">
+                  <div class="mi-hero v1">
+                    <p class="m-h">Interiores que se<br>sienten hogar</p>
+                    <p class="m-p">Espacios cálidos, funcionales y hechos a tu medida.</p>
+                    <span class="m-btn">Agenda una visita</span>
+                    <span class="m-img p3"></span>
+                  </div>
+                  <div class="xs-pages">
+                    <span class="xs-pg v2"><i class="xs-th xs-th1"></i><b>Inicio</b></span>
+                    <span class="xs-pg v3"><i class="xs-th xs-th2"></i><b>Nosotros</b></span>
+                    <span class="xs-pg v4"><i class="xs-th xs-th3"></i><b>Servicios</b></span>
+                    <span class="xs-pg v5"><i class="xs-th xs-th4"></i><b>Contacto</b></span>
+                  </div>
+                </div>
+
+                <!-- 2 · Servicios y Nosotros -->
+                <div class="mx-scene xs-svc" data-steps="200 +s-1; 250 +s-2; 250 +s-3; 400 +s-4; 2800 end">
+                  <div class="mi-services">
+                    <div class="m-card mi-svc v1"><span class="mi-ic"><svg class="ico"><use href="#i-pen"/></svg></span><b>Diseño</b><span class="m-p">Planos y renders de tu espacio</span></div>
+                    <div class="m-card mi-svc v2"><span class="mi-ic"><svg class="ico"><use href="#i-wrench"/></svg></span><b>Obra</b><span class="m-p">Construcción y acabados</span></div>
+                    <div class="m-card mi-svc v3"><span class="mi-ic"><svg class="ico"><use href="#i-chat"/></svg></span><b>Asesoría</b><span class="m-p">Elige materiales con expertos</span></div>
+                  </div>
+                  <div class="xs-about m-card v4">
+                    <span class="xs-team"><i class="p1"></i><i class="p2"></i><i class="p3"></i></span>
+                    <span><b>Nosotros</b><small>10 años creando hogares en Bogotá</small></span>
+                  </div>
+                </div>
+
+                <!-- 3 · Ubicación con Google Maps y los datos de contacto -->
+                <div class="mx-scene mx-maps xs-loc" data-steps="250 +s-pin; 500 +s-route; 300 +s-1; 250 +s-2; 250 +s-3; 600 +s-go; 2400 end">
+                  <div class="mx-map">
+                    <svg class="mx-route" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M20 80 L20 59 L47 59 L47 47 L53 47" pathLength="100"/></svg>
+                    <span class="mx-you"></span>
+                    <span class="mx-pin"><svg class="ico"><use href="#i-pin"/></svg></span>
+                    <span class="mx-label">Estudio Nativo</span>
+                  </div>
+                  <div class="xs-contact m-card">
+                    <b>Contacto</b>
+                    <span class="v1"><svg class="ico"><use href="#i-pin"/></svg>Cra. 11 #93-27, Bogotá</span>
+                    <span class="v2"><svg class="ico"><use href="#i-phone"/></svg>+57 601 345 6789</span>
+                    <span class="v3"><svg class="ico"><use href="#i-cal"/></svg>Lun a sáb · 8 a. m. – 6 p. m.</span>
+                    <span class="m-btn xs-go">Cómo llegar</span>
+                  </div>
+                </div>
+
+                <!-- 4 · SEO básico: aparecer en Google cuando te buscan -->
+                <div class="mx-scene mx-google" data-steps="0 +s-type; 0 type .mx-q 55; 300 -s-type; 0 +s-results; 1300 +s-click; 450 +s-clicked; 2100 end">
+                  <div class="mx-g-top"><span class="mx-glogo">Google</span><span class="mx-search"><svg class="ico"><use href="#i-search"/></svg><span class="mx-q" data-q="diseño de interiores bogotá"></span><i class="mx-caret"></i></span></div>
+                  <div class="mx-results">
+                    <div class="mx-res mx-ad m-card">
+                      <small>estudionativo.co</small>
+                      <span class="mx-rt">Estudio Nativo — Diseño de interiores en Bogotá</span>
+                      <span class="mx-rd">Interiores que se sienten hogar. Diseño, obra y asesoría a tu medida.</span>
+                      <span class="mx-links"><i>Nosotros</i><i>Servicios</i><i>Contacto</i></span>
+                      <i class="mx-tap"></i>
+                    </div>
+                    <div class="mx-res xs-pack"><span class="xs-pack-map"></span><span><b>Estudio Nativo</b><small>★ 4,8 · Diseño de interiores · Abierto</small></span></div>
+                    <div class="mx-res mx-other"><span class="m-ln" style="width:34%"></span><span class="m-ln" style="width:78%"></span></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal del Plan Start" data-stagger>
+            <li style="--c:#ea4335"><span class="ml-ico"><svg class="ico"><use href="#i-pin"/></svg></span><span><b>Google Maps</b><small>Tu ubicación en el mapa</small></span></li>
+            <li style="--c:#4285f4"><span class="ml-ico"><svg class="ico"><use href="#i-google"/></svg></span><span><b>Google</b><small>SEO básico para aparecer</small></span></li>
+            <li style="--c:#7c3aed"><span class="ml-ico"><svg class="ico"><use href="#i-layers"/></svg></span><span><b>4 secciones</b><small>Inicio, Nosotros, Servicios y Contacto</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de una página hecha con el Plan Start</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$580.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#plan-start">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚫ INICIAL -->
+    <section class="slide" id="plan-start" data-title="Plan Start">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#2b2f3a" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small>Plan 2 de 5</small><h3>Plan Start</h3></div></div>
+            <p class="plan-tag">Tu primera web para captar más clientes</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$690.000</s></span>
+              <span class="pt-now"><strong>$580.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $110.000</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal si</span>estás empezando o aún no tienes presencia en internet.</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el Plan Start ($580.000)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes"><b>Todo lo del Plan Lite</b>, más:</p>
+            <ul class="plan-list">
+              <li>Secciones: Inicio, Nosotros, Servicios y Contacto</li>
+              <li>Ubicación con Google Maps</li>
+              <li class="wide">Optimización básica para aparecer en Google (SEO)</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>1 mes de Mantenimiento Web</strong> incluido</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 🩷 DESPEGUE · ejemplo de página -->
+    <section class="slide s-example" id="ejemplo-pro" data-title="Ejemplo · Plan Pro">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Plan 3 de 5 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#ff5fae"></span>Plan <em>Pro</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>bloomspa.co</span></div>
+            <!-- recorrido por todo lo que incluye el plan, en bucle mientras se ve (planes.js): el chat que responde 24/7 → la reserva y los avisos → los correos automáticos y el cliente guardado → el panel para hacer tus cambios -->
+            <div class="mock-page m-pro" style="--m-ac:#e8559e" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Bloom Spa</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-chat"/></svg>Chat 24/7</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-cal"/></svg>Reservas</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-mail"/></svg>Correos</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-pen"/></svg>Panel</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · Respuestas automáticas, a cualquier hora -->
+                <div class="mx-scene xp-chat" data-steps="200 +s-1; 500 +s-2; 600 +s-pick; 400 +s-3; 500 +s-4; 1100 +s-5; 2400 end">
+                  <div class="m-card md-chat xp-win">
+                    <span class="xp-top"><i class="xp-bot"><svg class="ico"><use href="#i-chat"/></svg></i><span><b>Asistente Bloom</b><small>Responde al instante, 24/7</small></span></span>
+                    <span class="md-bub v1">¡Hola! Soy el asistente de Bloom. ¿En qué te ayudo?</span>
+                    <span class="md-opts v2"><i>Precios</i><i>Horarios</i><i class="xp-pick">Reservar</i></span>
+                    <span class="md-bub me v3">Quiero un masaje el jueves</span>
+                    <span class="md-bub xp-dots v4"><i></i><i></i><i></i></span>
+                    <span class="md-bub v5">¡Perfecto! Tengo el jueves 16 a las 10:30. ¿Te lo reservo?</span>
+                  </div>
+                  <div class="xp-clock m-card v1">
+                    <span class="xp-time">23:47</span>
+                    <small>Fuera de horario… y aun así responde</small>
+                    <span class="xp-fast"><svg class="ico"><use href="#i-check"/></svg>Respondido en 2 s</span>
+                  </div>
+                </div>
+
+                <!-- 2 · Reservas en línea y avisos al instante -->
+                <div class="mx-scene xp-book" data-steps="400 +s-1; 600 +s-2; 700 +s-3; 500 +s-4; 600 +s-5; 2400 end">
+                  <div class="m-card md-book xp-cal">
+                    <span class="md-title"><b>Octubre</b><small>Elige día y hora</small></span>
+                    <span class="md-cal"><i class="off">L</i><i class="off">M</i><i class="off">M</i><i class="off">J</i><i class="off">V</i><i class="off">S</i><i class="off">D</i><i>13</i><i>14</i><i>15</i><i class="xp-d">16</i><i>17</i><i>18</i><i class="off">19</i></span>
+                    <span class="md-times"><i>9:00</i><i class="xp-t">10:30</i><i>12:00</i><i>15:30</i></span>
+                    <span class="m-btn xp-confirm"><span class="a">Confirmar reserva</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Reserva confirmada</span></span>
+                  </div>
+                  <div class="xp-notes">
+                    <span class="m-toast m-card xp-n1"><span class="mt-ic"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Nuevo cliente</b>Laura M. · jue 16, 10:30</span></span>
+                    <span class="m-toast m-card xp-n2"><span class="mt-ic"><svg class="ico"><use href="#i-cal"/></svg></span><span><b>Recordatorio programado</b>Se le avisa 24 h antes</span></span>
+                  </div>
+                </div>
+
+                <!-- 3 · Correos automáticos y el cliente guardado -->
+                <div class="mx-scene xp-mail" data-steps="300 +s-1; 500 +s-2; 700 +s-3; 700 +s-4; 2600 end">
+                  <div class="xp-inbox m-card">
+                    <span class="xp-ib-top"><svg class="ico"><use href="#i-mail"/></svg><b>Bandeja de entrada</b><small>laura@correo.com</small></span>
+                    <span class="xp-row v1"><i class="xp-dot"></i><b>Bloom Spa</b><span>Tu cita está confirmada ✓</span><small>10:31</small></span>
+                    <span class="xp-row v2"><i class="xp-dot"></i><b>Bloom Spa</b><span>¡Bienvenida a Bloom, Laura!</span><small>10:31</small></span>
+                    <span class="xp-open v3"><b>Tu cita está confirmada</b><span class="m-p">Hola Laura, tu masaje relajante es el <b>jueves 16 a las 10:30</b>. Te esperamos.</span><span class="m-btn ghost">Añadir al calendario</span></span>
+                  </div>
+                  <div class="xp-saved m-card v4">
+                    <span class="xp-sv-top"><svg class="ico"><use href="#i-sheet"/></svg><b>Cliente guardado</b></span>
+                    <span class="xp-sv-row"><b>Laura Martínez</b><small>laura@correo.com · +57 300 123 4567</small></span>
+                    <span class="xp-sv-tag"><svg class="ico"><use href="#i-check"/></svg>En tu base de datos</span>
+                  </div>
+                </div>
+
+                <!-- 4 · El panel: cambias un precio y se publica -->
+                <div class="mx-scene xp-admin" data-steps="400 +s-1; 0 type .xp-price 90; 400 +s-2; 500 +s-pub; 2600 end">
+                  <div class="xp-panel m-card">
+                    <span class="xp-side"><i class="on"></i><i></i><i></i><i></i></span>
+                    <span class="xp-main">
+                      <span class="xp-ph"><b>Servicios</b><small>Edita lo que quieras, cuando quieras</small></span>
+                      <span class="xp-item"><span class="xp-thumb"></span><span class="xp-nm">Masaje relajante</span><span class="m-field xp-pf">$<span class="xp-price" data-start="120.000" data-q="110.000"></span></span><i class="xp-sw xp-sw1"></i></span>
+                      <span class="xp-item"><span class="xp-thumb t2"></span><span class="xp-nm">Facial hidratante</span><span class="m-field">$95.000</span><i class="xp-sw on"></i></span>
+                      <span class="m-btn xp-pub"><span class="a">Publicar cambios</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Publicado</span></span>
+                    </span>
+                  </div>
+                  <div class="xp-pv m-card">
+                    <small>Así se ve en tu web</small>
+                    <span class="xp-pv-img"></span>
+                    <b>Masaje relajante</b>
+                    <span class="xp-pv-price"><span class="a">$120.000</span><span class="b">$110.000</span></span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal del Plan Pro" data-stagger>
+            <li style="--c:#8b5cf6"><span class="ml-ico"><svg class="ico"><use href="#i-chat"/></svg></span><span><b>Respuestas 24/7</b><small>Atiende clientes solo</small></span></li>
+            <li style="--c:#1a73e8"><span class="ml-ico"><svg class="ico"><use href="#i-cal"/></svg></span><span><b>Reservas en línea</b><small>Citas agendadas desde la web</small></span></li>
+            <li style="--c:#ea4335"><span class="ml-ico"><svg class="ico"><use href="#i-mail"/></svg></span><span><b>Correos automáticos</b><small>Confirmación y bienvenida</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de una página hecha con el Plan Pro</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$920.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#plan-pro">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🩷 DESPEGUE -->
+    <section class="slide" id="plan-pro" data-title="Plan Pro">
+      <div class="container">
+        <article class="plan glass spot featured" style="--tint:#ff5fae" data-reveal>
+          <span class="pack-badge">Recomendado</span>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small data-badge="Recomendado">Plan 3 de 5</small><h3>Plan Pro</h3></div></div>
+            <p class="plan-tag">Tu web con automatizaciones</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$1.050.000</s></span>
+              <span class="pt-now"><strong>$920.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $130.000</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal para</span>negocios que reciben muchas consultas y quieren ahorrar tiempo.</p>
+            <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el Plan Pro ($920.000)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes"><b>Todo lo del Plan Start</b>, más:</p>
+            <ul class="plan-list">
+              <li>Respuestas automáticas para atender clientes 24/7</li>
+              <li>Formularios que guardan los datos de cada cliente interesado</li>
+              <li>Correos automáticos de confirmación y bienvenida</li>
+              <li>Agendamiento de citas o reservas en línea</li>
+              <li>Notificaciones inmediatas cuando llega un cliente potencial</li>
+              <li>Panel para que hagas tú mismo los cambios que quieras</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>2 meses de Mantenimiento Web</strong> incluidos</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ⚪ PYMES · ejemplo de página -->
+    <section class="slide s-example" id="ejemplo-business" data-title="Ejemplo · Plan Business">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Plan 4 de 5 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#f2f4f8"></span>Plan <em>Business</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>nordika.co</span></div>
+            <!-- recorrido por todo lo que incluye el plan, en bucle mientras se ve (planes.js): el catálogo y el carrito → el pago en línea y la factura → las estadísticas en tiempo real → el panel de ventas y sus automatizaciones -->
+            <div class="mock-page m-business" style="--m-ac:#1f6fe5" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Nórdika</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-bag"/></svg>Tienda</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-card"/></svg>Pago</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-data"/></svg>Estadísticas</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-sheet"/></svg>Ventas</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · Catálogo y carrito -->
+                <div class="mx-scene xb-shop" data-steps="200 +s-1; 200 +s-2; 200 +s-3; 600 +s-click; 450 +s-clicked; 0 count .xb-cart 300; 300 +s-4; 2400 end">
+                  <div class="mp-grid xb-grid">
+                    <div class="m-card mp-prod v1"><span class="m-img p1"></span><span class="xb-pn">Collar Aura</span><b>$89.000</b><span class="m-btn xb-buy"><span class="a">Comprar</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Agregado</span><i class="mx-tap"></i></span></div>
+                    <div class="m-card mp-prod v2"><span class="m-img p2"></span><span class="xb-pn">Reloj Fjord</span><b>$149.000</b><span class="m-btn">Comprar</span></div>
+                    <div class="m-card mp-prod v3"><span class="m-img p3"></span><span class="xb-pn">Aretes Luna</span><b>$59.000</b><span class="m-btn">Comprar</span></div>
+                  </div>
+                  <div class="xb-cartbox m-card">
+                    <span class="xb-ct"><span class="mp-cart"><svg class="ico"><use href="#i-bag"/></svg><i class="xb-cart" data-from="1" data-to="2">2</i></span><b>Tu carrito</b></span>
+                    <span class="xb-line"><span>Reloj Fjord</span><b>$149.000</b></span>
+                    <span class="xb-line v4"><span>Collar Aura</span><b>$89.000</b></span>
+                    <span class="xb-sum"><span>Total</span><b><span class="a">$149.000</span><span class="b">$238.000</span></b></span>
+                  </div>
+                </div>
+
+                <!-- 2 · Pasarela de pagos y factura automática -->
+                <div class="mx-scene xb-pay" data-steps="300 type .xb-cardno 40; 300 +s-click; 450 +s-clicked; 0 +s-pay; 900 +s-ok; 500 +s-inv; 2400 end">
+                  <div class="xb-check m-card">
+                    <span class="xb-ch-top"><svg class="ico"><use href="#i-lock"/></svg><b>Pago seguro</b><small>Pasarela certificada</small></span>
+                    <span class="xb-methods"><i class="on"><svg class="ico"><use href="#i-card"/></svg>Tarjeta</i><i>PSE</i><i>Nequi</i></span>
+                    <span class="m-field xb-cf"><svg class="ico"><use href="#i-card"/></svg><span class="xb-cardno" data-q="4242 4242 4242 4242" data-ph="Número de tarjeta"></span></span>
+                    <span class="m-btn xb-paybtn"><span class="a">Pagar $89.000</span><span class="w"><i class="xb-spin"></i>Procesando…</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Pago aprobado</span><i class="mx-tap"></i></span>
+                  </div>
+                  <div class="xb-invoice m-card">
+                    <span class="xb-iv-top"><svg class="ico"><use href="#i-sheet"/></svg><b>Factura electrónica</b></span>
+                    <span class="xb-iv-n">FE-1042 · $89.000</span>
+                    <small>Enviada a camila@correo.com</small>
+                    <span class="xb-iv-ok"><svg class="ico"><use href="#i-check"/></svg>Enviada sola, al instante</span>
+                  </div>
+                </div>
+
+                <!-- 3 · Estadísticas en tiempo real -->
+                <div class="mx-scene xb-stats" data-steps="300 +s-1; 0 count .xb-k 1300; 900 +s-2; 600 +s-3; 2600 end">
+                  <div class="xb-dash m-card">
+                    <span class="mp-dh"><b>Estadísticas</b><small>Esta semana · en tiempo real</small></span>
+                    <span class="xb-kpis">
+                      <span><small>Visitas</small><strong class="xb-k" data-from="0" data-to="1284">1.284</strong><em>↑ 18%</em></span>
+                      <span><small>Escribieron</small><strong class="xb-k" data-from="0" data-to="96">96</strong><em>↑ 12%</em></span>
+                      <span><small>Compraron</small><strong class="xb-k" data-from="0" data-to="41">41</strong><em>↑ 9%</em></span>
+                    </span>
+                    <span class="mp-bars xb-bars"><i style="--h:.42"></i><i style="--h:.55"></i><i style="--h:.48"></i><i style="--h:.7"></i><i style="--h:.62"></i><i style="--h:.84"></i><i style="--h:1"></i></span>
+                    <span class="xb-heat"><small>Dónde se quedan</small><i style="--v:1">Inicio</i><i style="--v:.72">Catálogo</i><i style="--v:.48">Producto</i><i style="--v:.24">Pago</i></span>
+                  </div>
+                  <div class="xb-src m-card">
+                    <span class="mp-dh"><b>De dónde llegan</b></span>
+                    <span class="mp-src"><span><small>Google</small><i style="--w:.54"></i></span><span><small>Redes</small><i style="--w:.31"></i></span><span><small>Referidos</small><i style="--w:.15"></i></span></span>
+                    <span class="xb-ga"><svg class="ico"><use href="#i-data"/></svg>Google Analytics conectado</span>
+                  </div>
+                </div>
+
+                <!-- 4 · Panel de ventas y facturas, con sus automatizaciones -->
+                <div class="mx-scene xb-sales" data-steps="200 +s-1; 800 +s-new; 0 count .xb-total 1200; 500 each .xb-auto&gt;span 350; 2200 end">
+                  <div class="xb-table m-card">
+                    <span class="mp-dh"><b>Panel de ventas</b><small>Hoy · <span class="xb-total" data-pre="$" data-from="1195000" data-to="1284000">$1.284.000</span></small></span>
+                    <span class="xb-tr xb-th"><span>Pedido</span><span>Cliente</span><span>Total</span><span>Estado</span><span>Factura</span></span>
+                    <span class="xb-tr xb-new"><span>#1043</span><span>Camila R.</span><span>$89.000</span><span><i class="ok">Pagado</i></span><span><svg class="ico"><use href="#i-check"/></svg></span></span>
+                    <span class="xb-tr v1"><span>#1042</span><span>Andrés P.</span><span>$149.000</span><span><i class="ok">Pagado</i></span><span><svg class="ico"><use href="#i-check"/></svg></span></span>
+                    <span class="xb-tr v1"><span>#1041</span><span>Sofía M.</span><span>$59.000</span><span><i class="go">Enviado</i></span><span><svg class="ico"><use href="#i-check"/></svg></span></span>
+                    <span class="xb-tr v1"><span>#1040</span><span>Julián T.</span><span>$238.000</span><span><i class="go">Enviado</i></span><span><svg class="ico"><use href="#i-check"/></svg></span></span>
+                  </div>
+                  <div class="xb-auto m-card">
+                    <b>Automatizaciones</b>
+                    <span><svg class="ico"><use href="#i-check"/></svg>Stock actualizado</span>
+                    <span><svg class="ico"><use href="#i-check"/></svg>Factura enviada</span>
+                    <span><svg class="ico"><use href="#i-check"/></svg>Aviso al cliente</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal del Plan Business" data-stagger>
+            <li style="--c:#f9ab00"><span class="ml-ico"><svg class="ico"><use href="#i-data"/></svg></span><span><b>Google Analytics</b><small>Estadísticas en tiempo real</small></span></li>
+            <li style="--c:#635bff"><span class="ml-ico"><svg class="ico"><use href="#i-card"/></svg></span><span><b>Pasarela de pagos</b><small>Cobra en línea con seguridad</small></span></li>
+            <li style="--c:#1f6fe5"><span class="ml-ico"><svg class="ico"><use href="#i-bag"/></svg></span><span><b>Catálogo</b><small>Panel de ventas y facturas</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de una página hecha con el Plan Business</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$1.890.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#plan-business">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚪ PYMES -->
+    <section class="slide" id="plan-business" data-title="Plan Business">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#f2f4f8" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small>Plan 4 de 5</small><h3>Plan Business</h3></div></div>
+            <p class="plan-tag">Tu web con datos reales para tomar mejores decisiones</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$2.600.000</s></span>
+              <span class="pt-now"><strong>$1.890.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $710.000</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal para</span>empresas que ya tienen movimiento y quieren saber qué funciona y qué no.</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el Plan Business ($1.890.000)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes"><b>Todo lo del Plan Pro</b>, más:</p>
+            <ul class="plan-list">
+              <li class="wide"><div>Panel de estadísticas en tiempo real:
+                <ul class="sub-list">
+                  <li>Visitas y usuarios activos</li>
+                  <li>Conversiones: cuántos escriben, llaman o compran</li>
+                  <li>De dónde llegan: Google, redes o referidos</li>
+                  <li>Ventas generadas desde la web</li>
+                  <li>En qué partes de la página se quedan</li>
+                </ul></div>
+              </li>
+              <li>Configuración de Google Analytics o panel personalizado</li>
+              <li>Pasarela de pagos inteligente</li>
+              <li class="wide">Catálogo con automatizaciones y panel de ventas y facturas</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses de Datos y Asesoría</strong> incluidos (reporte mensual + reunión de estrategia)</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 🟡 EMPRESARIAL · ejemplo de página -->
+    <section class="slide s-example" id="ejemplo-max" data-title="Ejemplo · Plan Max">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Plan 5 de 5 · Así se vería tu marca</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#ffc83d"></span>Plan <em>Max</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>aureajoyeria.co</span></div>
+            <!-- un recorrido por todo lo que incluye el plan, en bucle mientras se ve (planes.js):
+                 Google (anuncio + blog en el primer resultado) → Maps (perfil de empresa) →
+                 Redes (las 4 cuentas) → Tu web (adonde llega todo). Las pestañas también cambian de escena -->
+            <div class="mock-page m-max" style="--m-ac:#b8860b" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Áurea Joyería</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1" class="on"><svg class="ico"><use href="#i-search"/></svg>Google</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-pin"/></svg>Maps</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-ig"/></svg>Redes</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-globe"/></svg>Tu web</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · Google: el anuncio arriba y el blog como primer resultado -->
+                <div class="mx-scene mx-google" data-steps="0 +s-type; 0 type .mx-q 55; 300 -s-type; 0 +s-results; 1500 +s-click; 450 +s-clicked; 1900 end">
+                  <div class="mx-g-top"><span class="mx-glogo">Google</span><span class="mx-search"><svg class="ico"><use href="#i-search"/></svg><span class="mx-q" data-q="joyería cerca de mí">joyería cerca de mí</span><i class="mx-caret"></i></span></div>
+                  <div class="mx-results">
+                    <div class="mx-res mx-ad m-card">
+                      <small><b>Patrocinado</b> · aureajoyeria.co</small>
+                      <span class="mx-rt">Áurea Joyería — Joyas hechas a mano · Envío gratis hoy</span>
+                      <span class="mx-rd">Anillos, collares y aretes en oro y plata, con garantía de por vida.</span>
+                      <span class="mx-links"><i>Anillos</i><i>Collares</i><i>Aretes</i><i>Ofertas</i></span>
+                      <i class="mx-tap"></i>
+                    </div>
+                    <div class="mx-res mx-seo">
+                      <small>aureajoyeria.co › blog <em>1.º en Google</em></small>
+                      <span class="mx-rt">Cómo elegir tu anillo de compromiso: la guía completa</span>
+                      <span class="mx-rd">Tallas, metales y piedras: todo lo que debes saber antes de elegir.</span>
+                    </div>
+                    <div class="mx-res mx-other"><span class="m-ln" style="width:34%"></span><span class="m-ln" style="width:78%"></span><span class="m-ln" style="width:58%"></span></div>
+                  </div>
+                </div>
+
+                <!-- 2 · Google Maps: el perfil de empresa, con la ruta hasta la tienda -->
+                <div class="mx-scene mx-maps" data-steps="250 +s-pin; 600 +s-route; 500 +s-card; 1200 +s-go; 500 +s-review; 2100 end">
+                  <div class="mx-map">
+                    <svg class="mx-route" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M20 80 L20 59 L47 59 L47 47 L53 47" pathLength="100"/></svg>
+                    <span class="mx-you"></span>
+                    <span class="mx-pin"><svg class="ico"><use href="#i-pin"/></svg></span>
+                    <span class="mx-label">Áurea Joyería</span>
+                    <span class="mx-review"><b>★★★★★</b> “Atención excelente y entrega el mismo día.”</span>
+                  </div>
+                  <div class="mx-biz m-card">
+                    <span class="mx-photos"><i class="mx-j1"></i><i class="mx-j2"></i><i class="mx-j3"></i></span>
+                    <b>Áurea Joyería</b>
+                    <span class="mx-stars">4,9 <span>★★★★★</span> <small>(126 reseñas)</small></span>
+                    <small class="mx-open">Abierto ahora · Cierra a las 7 p. m.</small>
+                    <span class="mx-acts"><i class="go">Cómo llegar</i><i>Llamar</i><i>Sitio web</i></span>
+                  </div>
+                </div>
+
+                <!-- 3 · Redes: las cuatro cuentas con la misma imagen de marca -->
+                <div class="mx-scene mx-social" data-steps="200 +s-grid; 0 each .mx-nets&gt;i 320; 0 count .mx-foll 1600; 900 +s-like; 0 count .mx-likes 1200; 900 +s-liked; 1700 end">
+                  <div class="mx-prof m-card">
+                    <span class="me-prof"><i class="me-av"></i><span><b>@aurea.joyeria</b><small><span class="mx-foll" data-from="12400" data-to="12640">12.640</span> seguidores</small></span></span>
+                    <span class="mx-nets"><i style="--c:#e1306c"><svg class="ico"><use href="#i-ig"/></svg></i><i style="--c:#ee1d52"><svg class="ico"><use href="#i-tt"/></svg></i><i style="--c:#ff0000"><svg class="ico"><use href="#i-yt"/></svg></i><i style="--c:#0866ff"><svg class="ico"><use href="#i-fb"/></svg></i></span>
+                    <span class="mx-grid"><i class="mx-j1"></i><i class="mx-j2 play"></i><i class="mx-j3"></i><i class="mx-j3"></i><i class="mx-j1 play"></i><i class="mx-j2"></i></span>
+                  </div>
+                  <div class="mx-reel m-card">
+                    <span class="mx-reel-v mx-j2"><i class="mx-heart">♥</i></span>
+                    <span class="mx-reel-meta"><b>Reel · Colección Aurora</b><small><span class="mx-likes" data-from="1208" data-to="1264">1.264</span> me gusta</small></span>
+                  </div>
+                </div>
+
+                <!-- 4 · Tu web: adonde llegan las visitas de todos los canales -->
+                <div class="mx-scene mx-web" data-steps="350 +s-bars; 0 count .mx-count 1500; 1800 +s-toast; 3400 end">
+                  <div class="mx-stats m-card">
+                    <span class="mp-dh"><b>Visitas de hoy</b><small>Todos los canales</small></span>
+                    <span class="mx-total"><strong class="mx-count" data-from="0" data-to="846">846</strong><em>↑ 32%</em></span>
+                    <span class="mx-src">
+                      <span><small>Google Ads</small><i style="--w:.36"></i></span>
+                      <span><small>Instagram</small><i style="--w:.24"></i></span>
+                      <span><small>Google Maps</small><i style="--w:.2"></i></span>
+                      <span><small>TikTok</small><i style="--w:.12"></i></span>
+                      <span><small>Blog (SEO)</small><i style="--w:.08"></i></span>
+                    </span>
+                  </div>
+                  <div class="mx-site m-card">
+                    <div class="mx-hero"><span class="m-chip">Nueva colección</span><span class="m-h">Colección Aurora</span><span class="m-btn">Ver catálogo</span></div>
+                    <div class="mx-blog"><span class="mx-bimg mx-j3"></span><span><small>Blog</small><b>Cómo elegir tu anillo de compromiso</b></span></div>
+                  </div>
+                  <div class="m-card mx-toast"><span class="mt-ic"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Nueva consulta</b>Llegó desde Google Ads</span></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal del Plan Max" data-stagger>
+            <li style="--c:#e1306c"><span class="ml-ico"><svg class="ico"><use href="#i-ig"/></svg></span><span><b>Redes sociales</b><small>Facebook, Instagram, TikTok y YouTube</small></span></li>
+            <li style="--c:#4285f4"><span class="ml-ico"><svg class="ico"><use href="#i-ads"/></svg></span><span><b>Google Ads</b><small>Campaña lista para atraer clientes</small></span></li>
+            <li style="--c:#34a853"><span class="ml-ico"><svg class="ico"><use href="#i-store"/></svg></span><span><b>Google Business</b><small>Perfil optimizado en Maps</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de una marca con el Plan Max: web, Google y redes</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$5.900.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#plan-max">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🟡 EMPRESARIAL -->
+    <section class="slide" id="plan-max" data-title="Plan Max">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#ffc83d" data-reveal>
+          <span class="pack-badge">Más completo</span>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small data-badge="Más completo">Plan 5 de 5</small><h3>Plan Max</h3></div></div>
+            <p class="plan-tag">Página web + redes sociales + marketing en Google</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$7.900.000</s></span>
+              <span class="pt-now"><strong>$5.900.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $2.000.000</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal para</span>marcas que quieren presencia digital total. Nuestra solución más completa.</p>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el Plan Max ($5.900.000)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes"><b>Todo lo del Plan Business</b>, más:</p>
+            <ul class="plan-list">
+              <li>Configuración y optimización de Facebook, Instagram, TikTok y YouTube</li>
+              <li>Imagen de marca coherente en todas tus plataformas</li>
+              <li>Perfil de Google Business optimizado (para aparecer en Google Maps)</li>
+              <li>Campaña de Google Ads configurada y lista para atraer clientes</li>
+              <li>SEO avanzado con blogs para subir en los resultados de Google</li>
+              <li>Acompañamiento estratégico para que web, redes y anuncios trabajen juntos</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses del Plan Crecimiento</strong> incluidos (contenido, videos y campañas)</span></p>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-alert"/></svg><span>Pauta publicitaria no incluida (se paga directo a Google o Meta).</span></li>
+              <li><svg class="ico"><use href="#i-card"/></svg><span>Puedes pagarlo en 2 cuotas.</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- tabla: los 5 planes lado a lado -->
+    <section class="slide" id="comparar" data-title="Comparar los 5 planes">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Paso 1 · Resumen</p>
+          <h2 class="h2" data-reveal>Los 5 planes, <em>lado a lado.</em></h2>
+        </header>
+        <div class="compare glass hl-4 cmp" data-reveal>
+          <div class="table-wrap">
+            <table class="t-five">
+              <thead>
+                <tr><th scope="col">Incluye</th><th scope="col">Lite</th><th scope="col">Start</th><th scope="col">Pro</th><th scope="col">Business</th><th scope="col">Max</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Precio hoy (COP)</th><td><strong>$350.000</strong></td><td><strong>$580.000</strong></td><td><strong>$920.000</strong></td><td><strong>$1.890.000</strong></td><td><strong>$5.900.000</strong></td></tr>
+                <tr><th scope="row">Antes</th><td><s>$450.000</s></td><td><s>$690.000</s></td><td><s>$1.050.000</s></td><td><s>$2.600.000</s></td><td><s>$7.900.000</s></td></tr>
+                <tr><th scope="row">Secciones</th><td>1 sección</td><td>4 secciones</td><td>4 secciones</td><td>+ Catálogo</td><td>+ Blog</td></tr>
+                <tr><th scope="row">Celular, WhatsApp, dominio y SSL</th><td class="y">Sí</td><td class="y">Sí</td><td class="y">Sí</td><td class="y">Sí</td><td class="y">Sí</td></tr>
+                <tr><th scope="row">Google Maps y SEO</th><td class="n">—</td><td>Básico</td><td>Básico</td><td>Básico</td><td>Avanzado con blogs</td></tr>
+                <tr><th scope="row">Automatizaciones</th><td class="n">—</td><td class="n">—</td><td class="y">Automatización Web</td><td class="y">+ Catálogo y ventas</td><td class="y">+ Catálogo y ventas</td></tr>
+                <tr><th scope="row">Panel para hacer tus cambios</th><td class="n">—</td><td class="n">—</td><td class="y">Sí</td><td class="y">Sí</td><td class="y">Sí</td></tr>
+                <tr><th scope="row">Estadísticas y pasarela de pagos</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">Sí</td><td class="y">Sí</td></tr>
+                <tr><th scope="row">Redes sociales y Google Ads</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">Sí</td></tr>
+                <tr><th scope="row">Meses incluidos</th><td class="n">—</td><td>1 mes · Mantenimiento</td><td>2 meses · Mantenimiento</td><td>3 meses · Datos</td><td>3 meses · Crecimiento</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="cmp-hint">Desliza la tabla hacia los lados para ver los 5 planes →</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== PASO 2 · AUTOMATIZACIÓN ==================== -->
+  <div class="step-group" id="automatizacion">
+
+    <section class="slide" id="paso-2" data-title="Paso 2 · Automatización">
+      <div class="container s-center">
+        <header class="s-head">
+          <span class="step-num" aria-hidden="true" data-reveal>02</span>
+          <p class="eyebrow" data-reveal>Paso 2 de 4 · Opcional, por aparte</p>
+          <h2 class="h2" data-reveal>Súmale <em>automatización.</em></h2>
+          <p class="lead" data-reveal>Tres servicios que puedes sumar a tu plan o contratar solos, aunque tu web la haya hecho otro proveedor. La diferencia es hasta dónde llegan.</p>
+        </header>
+        <nav class="ov" style="--n:3" aria-label="Los 3 servicios de automatización" data-stagger>
+          <a class="ov-item glass spot" href="#ejemplo-auto-web"><span class="icon-bubble"><svg class="ico"><use href="#i-globe"/></svg></span><span class="ov-txt"><b>Automatización Web</b><small>Solo dentro de tu página</small></span><span class="ov-price"><strong>$390.000</strong><em>COP</em></span></a>
+          <a class="ov-item glass spot is-hl" href="#ejemplo-auto-completa"><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span><span class="ov-txt"><b>Automatización Completa</b><small>WhatsApp, Google Calendar y más</small></span><span class="ov-price"><strong>$1.190.000</strong><em>COP</em></span></a>
+          <a class="ov-item glass spot" href="#ejemplo-auto-avanzada"><span class="icon-bubble"><svg class="ico"><use href="#i-spark"/></svg></span><span class="ov-txt"><b>Automatización Avanzada</b><small>A medida, con IA y tus sistemas</small></span><span class="ov-price"><strong>$2.900.000</strong><em>COP · DESDE</em></span></a>
+        </nav>
+        <a class="s-hint" href="#ejemplo-auto-web">Desliza para ver cada servicio <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <!-- Precios de los tres servicios de automatización: edítalos aquí, en el resumen de arriba, en los
+         ejemplos y en la tabla de la diferencia. El de la Avanzada ("desde") lo propuso Claude: es a medida -->
+    <section class="slide s-example" id="ejemplo-auto-web" data-title="Ejemplo · Automatización Web">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Servicio A · Así trabaja por ti</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#0f9d8a"></span>Automatización <em>Web</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>vidayoga.co</span></div>
+            <!-- recorrido por todo lo que incluye el servicio, en bucle mientras se ve (planes.js): formularios que guardan clientes → respuestas 24/7 → reservas y correo → avisos y WhatsApp -->
+            <div class="mock-page" style="--m-ac:#0f9d8a" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Vida Yoga</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-sheet"/></svg>Formulario</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-chat"/></svg>Respuestas</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-cal"/></svg>Reservas</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-bell"/></svg>Avisos</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · Formularios: el cliente se guarda solo -->
+                <div class="mx-scene mx-2col ya-form" data-steps="300 type .ya-n 60; 150 type .ya-m 45; 300 +s-click; 450 +s-clicked; 150 +s-new; 2600 end">
+                  <div class="mx-box m-card">
+                    <b class="mx-t">Clase de prueba gratis</b>
+                    <span class="m-field"><span class="ya-n" data-q="Mariana López" data-ph="Tu nombre"></span></span>
+                    <span class="m-field"><span class="ya-m" data-q="mariana@correo.com" data-ph="Tu correo"></span></span>
+                    <span class="m-btn">Quiero mi clase<i class="mx-tap"></i></span>
+                  </div>
+                  <div class="mx-tb m-card" style="--cols:1.3fr 1fr">
+                    <span class="mx-h"><svg class="ico"><use href="#i-sheet"/></svg>Tus clientes<small>Se guardan solos</small></span>
+                    <span class="mx-tr new"><b>Mariana López</b><span>Clase de prueba</span></span>
+                    <span class="mx-tr"><b>Camilo Ruiz</b><span>Plan mensual</span></span>
+                    <span class="mx-tr"><b>Sara Gómez</b><span>Clase suelta</span></span>
+                  </div>
+                </div>
+
+                <!-- 2 · Respuestas automáticas a preguntas frecuentes, 24/7 -->
+                <div class="mx-scene mx-2col ya-faq" data-steps="200 +s-1; 600 +s-2; 900 +s-3; 400 +s-4; 2600 end">
+                  <div class="m-card md-chat xp-win">
+                    <span class="xp-top"><i class="xp-bot"><svg class="ico"><use href="#i-chat"/></svg></i><span><b>Vida Yoga</b><small>Responde al instante, 24/7</small></span></span>
+                    <span class="md-bub me v1">¿Tienen clases para principiantes?</span>
+                    <span class="md-bub xp-dots v2"><i></i><i></i><i></i></span>
+                    <span class="md-bub v3">¡Sí! Los sábados a las 9:00, con cupos limitados. ¿Te reservo una clase de prueba gratis?</span>
+                    <span class="md-opts v4"><i class="on">Reservar</i><i>Ver horarios</i><i>Precios</i></span>
+                  </div>
+                  <div class="xp-clock m-card v1">
+                    <span class="xp-time">23:10</span>
+                    <small>Domingo, con el estudio cerrado</small>
+                    <span class="xp-fast"><svg class="ico"><use href="#i-check"/></svg>Respondido al instante</span>
+                  </div>
+                </div>
+
+                <!-- 3 · Reservas desde la página y correo de confirmación -->
+                <div class="mx-scene mx-2col ya-book" data-steps="300 +s-1; 700 +s-2; 600 +s-3; 2800 end">
+                  <div class="mx-box m-card">
+                    <b class="mx-t">Elige tu clase</b>
+                    <span class="ya-slot ya-s1"><b>Sáb 9:00</b><span>Hatha para principiantes</span><small>6 cupos</small></span>
+                    <span class="ya-slot"><b>Sáb 11:00</b><span>Vinyasa</span><small>2 cupos</small></span>
+                    <span class="ya-slot"><b>Dom 10:00</b><span>Yin yoga</span><small>8 cupos</small></span>
+                    <span class="m-btn ya-go"><span class="a">Reservar</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Reservada</span></span>
+                  </div>
+                  <div class="mx-box m-card v3">
+                    <span class="mx-h"><svg class="ico"><use href="#i-mail"/></svg>Correo enviado<small>al instante</small></span>
+                    <b>¡Tu clase está reservada!</b>
+                    <span class="m-p">Hola Mariana, te esperamos el sábado a las 9:00. Trae ropa cómoda.</span>
+                    <span class="mx-ok-chip"><svg class="ico"><use href="#i-check"/></svg>Confirmación y bienvenida</span>
+                  </div>
+                </div>
+
+                <!-- 4 · Aviso inmediato y botón de WhatsApp con el mensaje listo -->
+                <div class="mx-scene mx-2col ya-alert" style="--c2:.85fr 1.15fr" data-steps="300 each .ya-ph&gt;.m-toast 700; 300 +s-1; 2800 end">
+                  <div class="ya-ph">
+                    <span class="ya-ph-time">10:24</span>
+                    <small class="ya-ph-date">sábado 18 de octubre</small>
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Nuevo cliente</b>Mariana López · clase de prueba</span></span>
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-cal"/></svg></span><span><b>Nueva reserva</b>Sáb 9:00 · quedan 5 cupos</span></span>
+                  </div>
+                  <div class="mx-box m-card v1">
+                    <span class="mx-h"><svg class="ico"><use href="#i-wa"/></svg>Botón de WhatsApp<small>con el mensaje listo</small></span>
+                    <span class="xl-bub me">Hola 👋 Quiero mi clase de prueba del sábado</span>
+                    <span class="m-btn ya-wa"><svg class="ico"><use href="#i-wa"/></svg>Escribir por WhatsApp</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal de la Automatización Web" data-stagger>
+            <li style="--c:#0f9d8a"><span class="ml-ico"><svg class="ico"><use href="#i-sheet"/></svg></span><span><b>Formularios</b><small>Cada cliente queda guardado</small></span></li>
+            <li style="--c:#ea4335"><span class="ml-ico"><svg class="ico"><use href="#i-mail"/></svg></span><span><b>Correos automáticos</b><small>Confirmación y bienvenida</small></span></li>
+            <li style="--c:#1a73e8"><span class="ml-ico"><svg class="ico"><use href="#i-cal"/></svg></span><span><b>Reservas en línea</b><small>Desde tu página, 24/7</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de la Automatización Web en un negocio</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$390.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#auto-web">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="auto-web" data-title="Automatización Web">
+      <div class="container">
+        <article class="plan glass spot" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-globe"/></svg></span><div><small>Servicio A · Dentro de tu web</small><h3>Automatización Web</h3></div></div>
+            <p class="plan-tag">Tu página atiende, guarda y responde sola</p>
+            <p class="plan-desc">Todo ocurre dentro de tu web: cada visitante interesado queda registrado y recibe respuesta al instante, sin que tengas que estar pendiente.</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$490.000</s></span>
+              <span class="pt-now"><strong>$390.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $100.000</span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa la Automatización Web">Quiero este servicio <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <div class="auto-scope"><span><svg class="ico"><use href="#i-globe"/></svg>Funciona en: tu página web</span></div>
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list">
+              <li>Formularios que guardan los datos de cada cliente interesado</li>
+              <li>Correos automáticos de confirmación y bienvenida</li>
+              <li>Agendamiento de citas o reservas desde tu página</li>
+              <li>Aviso inmediato cuando llega un cliente potencial</li>
+              <li>Respuestas automáticas a preguntas frecuentes, 24/7</li>
+              <li>Botón de WhatsApp con el mensaje listo según la página</li>
+              <li class="wide">Configuración, pruebas y explicación de cómo funciona</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-check"/></svg><span>Ya viene incluida en los planes <strong>Pro, Business y Max</strong>.</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide s-example" id="ejemplo-auto-completa" data-title="Ejemplo · Automatización Completa">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Servicio B · Así trabaja por ti</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#c2410c"></span>Automatización <em>Completa</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>barberianorte.co</span></div>
+            <!-- recorrido por todo lo que incluye el servicio, en bucle mientras se ve (planes.js): WhatsApp con menú → Google Calendar, Gmail y recordatorio → Sheets o CRM → pagos y reseñas -->
+            <div class="mock-page" style="--m-ac:#c2410c" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Barbería Norte</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-cal"/></svg>Calendar</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-sheet"/></svg>CRM</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-card"/></svg>Pagos</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · WhatsApp Business: menú y cita en segundos, en todos los canales -->
+                <div class="mx-scene mx-2col yc-wa" data-steps="200 +s-1; 600 +s-2; 700 +s-3; 400 +s-4; 900 +s-5; 200 each .yc-ch&gt;i 300; 2000 end">
+                  <div class="xl-chat m-card">
+                    <span class="xl-chat-top"><i class="xl-av"></i><span><b>Barbería Norte</b><small>WhatsApp Business · en línea</small></span><svg class="ico"><use href="#i-wa"/></svg></span>
+                    <span class="xl-msgs">
+                      <span class="xl-bub me v1">Hola, ¿tienen cita el jueves?</span>
+                      <span class="xl-bub v2">¡Hola! Elige una opción:<br>1 · Agendar cita<br>2 · Ver precios<br>3 · Hablar con alguien</span>
+                      <span class="xl-bub me v3">1</span>
+                      <span class="xl-bub xl-dots v4"><i></i><i></i><i></i></span>
+                      <span class="xl-bub v5">Listo ✓ Jueves 10:30 con Andrés. Te llega la confirmación por correo.</span>
+                    </span>
+                  </div>
+                  <div class="mx-box m-card">
+                    <span class="mx-h"><svg class="ico"><use href="#i-chat"/></svg>Responde en todos tus canales</span>
+                    <span class="mx-chips yc-ch"><i><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</i><i><svg class="ico"><use href="#i-ig"/></svg>Instagram</i><i><svg class="ico"><use href="#i-fb"/></svg>Facebook</i><i><svg class="ico"><use href="#i-globe"/></svg>Web</i></span>
+                    <small class="mx-sub">El mismo asistente, con tus precios y horarios.</small>
+                  </div>
+                </div>
+
+                <!-- 2 · Google Calendar sin cruces, confirmación y recordatorio -->
+                <div class="mx-scene mx-2col yc-cal" style="--c2:1.25fr .75fr" data-steps="300 +s-1; 800 each .yc-notes&gt;.m-toast 600; 2600 end">
+                  <div class="mx-box m-card">
+                    <span class="mx-h"><svg class="ico"><use href="#i-cal"/></svg>Google Calendar<small>Semana del 13 de octubre</small></span>
+                    <span class="yc-grid">
+                      <i class="d">Lun</i><i class="d">Mar</i><i class="d">Mié</i><i class="d">Jue</i><i class="d">Vie</i><i class="d">Sáb</i>
+                      <b class="ev" style="grid-column:1;grid-row:2 / span 2">Corte<small>9:00</small></b>
+                      <b class="ev" style="grid-column:2;grid-row:4 / span 2">Barba<small>11:30</small></b>
+                      <b class="ev" style="grid-column:3;grid-row:2 / span 2">Corte<small>9:00</small></b>
+                      <b class="ev new" style="grid-column:4;grid-row:3 / span 2">Juan P.<small>10:30</small></b>
+                      <b class="ev" style="grid-column:5;grid-row:5 / span 2">Corte + barba<small>12:00</small></b>
+                      <b class="ev" style="grid-column:6;grid-row:2 / span 2">Corte<small>9:00</small></b>
+                      <b class="ev" style="grid-column:6;grid-row:5 / span 2">Niño<small>12:00</small></b>
+                    </span>
+                  </div>
+                  <div class="mx-notes yc-notes">
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-mail"/></svg></span><span><b>Confirmación por Gmail</b>Enviada a Juan Pérez</span></span>
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-wa"/></svg></span><span><b>Recordatorio por WhatsApp</b>Programado 24 h antes</span></span>
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-check"/></svg></span><span><b>Sin cruces</b>Andrés queda ocupado</span></span>
+                  </div>
+                </div>
+
+                <!-- 3 · Google Sheets o CRM: cada cliente con su historial -->
+                <div class="mx-scene mx-2col yc-crm" style="--c2:1.3fr .7fr" data-steps="300 +s-new; 900 +s-1; 600 +s-2; 2600 end">
+                  <div class="mx-tb m-card" style="--cols:1.4fr 1fr 1fr .6fr">
+                    <span class="mx-h"><svg class="ico"><use href="#i-sheet"/></svg>Clientes<small>Google Sheets · se llena solo</small></span>
+                    <span class="mx-tr th"><span>Nombre</span><span>Canal</span><span>Última cita</span><span>Visitas</span></span>
+                    <span class="mx-tr new"><b>Juan Pérez</b><span>WhatsApp</span><span>Jue 16</span><span>4</span></span>
+                    <span class="mx-tr"><b>Diego Rojas</b><span>Instagram</span><span>Mar 14</span><span>2</span></span>
+                    <span class="mx-tr"><b>Luis Mora</b><span>Web</span><span>Sáb 11</span><span>7</span></span>
+                    <span class="mx-tr"><b>Felipe Ruiz</b><span>WhatsApp</span><span>Vie 10</span><span>1</span></span>
+                  </div>
+                  <div class="mx-box m-card v1">
+                    <span class="mx-h"><svg class="ico"><use href="#i-chat"/></svg>Juan Pérez</span>
+                    <small class="mx-sub">4 cortes · cliente frecuente · prefiere los jueves</small>
+                    <span class="mx-ok-chip v2"><svg class="ico"><use href="#i-cal"/></svg>Seguimiento en 4 semanas</span>
+                  </div>
+                </div>
+
+                <!-- 4 · Pagos y postventa: link de pago, confirmación y reseña en Google -->
+                <div class="mx-scene mx-2col yc-pay" data-steps="300 +s-1; 900 +s-2; 900 +s-3; 700 +s-4; 2400 end">
+                  <div class="xl-chat m-card">
+                    <span class="xl-chat-top"><i class="xl-av"></i><span><b>Barbería Norte</b><small>WhatsApp Business · en línea</small></span><svg class="ico"><use href="#i-wa"/></svg></span>
+                    <span class="xl-msgs">
+                      <span class="xl-bub v1">Tu link de pago para el jueves: <b>$35.000</b><span class="yc-link">Pagar en línea →</span></span>
+                      <span class="xl-bub v2 yc-paid"><svg class="ico"><use href="#i-check"/></svg>Pago recibido. ¡Gracias, Juan!</span>
+                      <span class="xl-bub v3">¿Cómo te fue con tu corte? Nos ayudas mucho con una reseña ⭐</span>
+                    </span>
+                  </div>
+                  <div class="mx-box m-card v4">
+                    <span class="mx-h"><svg class="ico"><use href="#i-google"/></svg>Nueva reseña en Google</span>
+                    <span class="yc-stars">★★★★★</span>
+                    <span class="m-p">“Excelente corte y muy puntuales.” — Juan P.</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal de la Automatización Completa" data-stagger>
+            <li style="--c:#25d366"><span class="ml-ico"><svg class="ico"><use href="#i-wa"/></svg></span><span><b>WhatsApp Business</b><small>Menú, citas y seguimiento</small></span></li>
+            <li style="--c:#1a73e8"><span class="ml-ico"><svg class="ico"><use href="#i-cal"/></svg></span><span><b>Google Calendar</b><small>Citas sin cruces</small></span></li>
+            <li style="--c:#0f9d58"><span class="ml-ico"><svg class="ico"><use href="#i-sheet"/></svg></span><span><b>Sheets o CRM</b><small>El historial de cada cliente</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de la Automatización Completa en un negocio</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$1.190.000</strong>COP · pago único</span>
+          <a class="s-hint" href="#auto-completa">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="auto-completa" data-title="Automatización Completa">
+      <div class="container">
+        <article class="plan glass spot featured" data-reveal>
+          <span class="pack-badge">Todo conectado</span>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span><div><small data-badge="Todo conectado">Servicio B · Todo tu negocio</small><h3>Automatización Completa</h3></div></div>
+            <p class="plan-tag">Tus herramientas trabajando juntas, solas</p>
+            <p class="plan-desc">Los mensajes se responden, las citas se agendan, los recordatorios salen y cada cliente queda registrado, en todos tus canales.</p>
+            <div class="price-tag">
+              <span class="pt-before">Antes <s>$1.490.000</s></span>
+              <span class="pt-now"><strong>$1.190.000</strong><small>COP · pago único</small></span>
+              <span class="pt-save">Ahorras $300.000</span>
+            </div>
+            <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa la Automatización Completa">Quiero este servicio <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <div class="auto-scope">
+              <span><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</span>
+              <span><svg class="ico"><use href="#i-cal"/></svg>Google Calendar</span>
+              <span><svg class="ico"><use href="#i-mail"/></svg>Gmail</span>
+              <span><svg class="ico"><use href="#i-sheet"/></svg>Sheets / CRM</span>
+              <span><svg class="ico"><use href="#i-ig"/></svg>Instagram</span>
+              <span><svg class="ico"><use href="#i-card"/></svg>Pagos</span>
+            </div>
+            <p class="plan-includes"><b>Todo lo de la Automatización Web</b>, más:</p>
+            <ul class="plan-list">
+              <li><span><strong>WhatsApp Business:</strong> respuestas automáticas, menú, catálogo y seguimiento</span></li>
+              <li><span><strong>Google Calendar:</strong> citas que se agendan solas, sin cruces</span></li>
+              <li><span><strong>Recordatorios</strong> por WhatsApp y correo antes de cada cita</span></li>
+              <li><span><strong>Google Sheets o CRM:</strong> cada cliente con su historial</span></li>
+              <li><span><strong>Gmail:</strong> cotizaciones, confirmaciones y seguimientos</span></li>
+              <li><span><strong>Instagram y Facebook:</strong> respuestas automáticas a mensajes</span></li>
+              <li class="wide"><span><strong>Pagos y postventa:</strong> links de pago, confirmación al pagar y reseñas en Google</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide s-example" id="ejemplo-auto-avanzada" data-title="Ejemplo · Automatización Avanzada">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Servicio C · Así trabaja por ti</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#6d28d9"></span>Automatización <em>Avanzada</em></h2>
+        </header>
+        <figure class="mock" data-reveal>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>andes.com.co</span></div>
+            <!-- recorrido por todo lo que incluye el servicio, en bucle mientras se ve (planes.js): el asistente con IA → reglas y aprobaciones → ERP, inventario, facturación y CRM a la vez → el panel por sede -->
+            <div class="mock-page" style="--m-ac:#6d28d9" aria-hidden="true" data-demo>
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Distribuidora Andes</span>
+                <span class="mx-tabs">
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-spark"/></svg>Asistente IA</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-shield"/></svg>Reglas</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-box"/></svg>Sistemas</button>
+                  <button type="button" tabindex="-1"><svg class="ico"><use href="#i-data"/></svg>Panel</button>
+                </span>
+                <i class="mx-prog"></i>
+              </div>
+              <div class="m-body mx-body">
+
+                <!-- 1 · Asistente con IA: lee, califica y deriva -->
+                <div class="mx-scene mx-2col yv-ai" style="--c2:1.3fr .7fr" data-steps="200 +s-1; 700 +s-2; 200 each .yv-tags&gt;i 350; 300 +s-3; 700 +s-4; 2400 end">
+                  <div class="mx-box m-card">
+                    <span class="mx-h"><svg class="ico"><use href="#i-chat"/></svg>Mensaje nuevo<small>WhatsApp · 08:12</small></span>
+                    <span class="yv-msg v1">“Hola, necesito 300 cajas de café para nuestras 3 sedes, con entrega el lunes.”</span>
+                    <span class="yv-bot v2"><i class="xp-bot"><svg class="ico"><use href="#i-spark"/></svg></i><b>Asistente IA</b><small>lo leyó y lo calificó</small></span>
+                    <span class="mx-chips yv-tags"><i>Cliente mayorista</i><i>300 cajas</i><i>3 sedes</i><i>Prioridad alta</i></span>
+                    <span class="yv-reply v3"><small>Respuesta sugerida</small>¡Hola! Tenemos disponibilidad para el lunes. Te enviamos la cotización en 5 minutos.</span>
+                  </div>
+                  <div class="mx-box m-card v4">
+                    <span class="mx-h"><svg class="ico"><use href="#i-arrow"/></svg>Derivado a</span>
+                    <b class="mx-t">Ventas mayoristas</b>
+                    <span class="mx-ok-chip"><svg class="ico"><use href="#i-check"/></svg>En 3 segundos</span>
+                  </div>
+                </div>
+
+                <!-- 2 · Reglas y aprobaciones propias del negocio -->
+                <div class="mx-scene mx-2col yv-rule" style="--c2:1.25fr .75fr" data-steps="300 +s-1; 700 +s-2; 1200 +s-click; 450 +s-clicked; 0 +s-3; 2400 end">
+                  <div class="yv-col">
+                    <span class="yv-flow">
+                      <span class="yv-node on"><svg class="ico"><use href="#i-bag"/></svg>Pedido<b>$8.400.000</b></span>
+                      <i class="yv-arrow"></i>
+                      <span class="yv-node yv-n2"><svg class="ico"><use href="#i-shield"/></svg>Regla<b>Más de $2.000.000</b></span>
+                      <i class="yv-arrow"></i>
+                      <span class="yv-node yv-n3"><svg class="ico"><use href="#i-check"/></svg>Aprobación<b>Gerente</b></span>
+                    </span>
+                    <span class="mx-box m-card v2">
+                      <span class="mx-h"><svg class="ico"><use href="#i-shield"/></svg>Aprobación requerida<small>Pedido #2381</small></span>
+                      <span class="m-p">Café Sur S.A.S. · 300 cajas · $8.400.000</span>
+                      <span class="yv-btns"><span class="m-btn yv-ok"><span class="a">Aprobar</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Aprobado por Laura</span><i class="mx-tap"></i></span><span class="m-btn ghost">Rechazar</span></span>
+                    </span>
+                  </div>
+                  <div class="mx-box m-card">
+                    <span class="mx-h"><svg class="ico"><use href="#i-pen"/></svg>Tus reglas</span>
+                    <span class="yv-r yv-r1">Más de $2.000.000 → aprobación</span>
+                    <span class="yv-r">Cliente nuevo → verificar datos</span>
+                    <span class="yv-r">Stock bajo 50 → aviso a compras</span>
+                  </div>
+                </div>
+
+                <!-- 3 · ERP, inventario, facturación y CRM conectados: todo a la vez -->
+                <div class="mx-scene mx-2col yv-sys" style="--c2:1.3fr .7fr" data-steps="300 +s-1; 300 each .yv-sys-list&gt;span 550; 300 +s-2; 2600 end">
+                  <div class="mx-box m-card">
+                    <span class="mx-h"><svg class="ico"><use href="#i-check"/></svg>Pedido #2381 aprobado<small>todo pasa a la vez</small></span>
+                    <span class="yv-sys-list">
+                      <span><i class="yv-ic"><svg class="ico"><use href="#i-box"/></svg></i><b>Inventario</b><small>−300 cajas, repartidas en 3 sedes</small><em>Listo</em></span>
+                      <span><i class="yv-ic"><svg class="ico"><use href="#i-card"/></svg></i><b>Factura electrónica</b><small>FE-2381 emitida y enviada</small><em>Listo</em></span>
+                      <span><i class="yv-ic"><svg class="ico"><use href="#i-sheet"/></svg></i><b>CRM</b><small>Historial del cliente actualizado</small><em>Listo</em></span>
+                      <span><i class="yv-ic"><svg class="ico"><use href="#i-rocket"/></svg></i><b>Despacho</b><small>Programado para el lunes</small><em>Listo</em></span>
+                    </span>
+                  </div>
+                  <div class="mx-box m-card v2">
+                    <span class="mx-h"><svg class="ico"><use href="#i-layers"/></svg>Conectado por API</span>
+                    <span class="mx-chips"><i class="on">ERP</i><i class="on">Facturación</i><i class="on">CRM</i><i class="on">Logística</i></span>
+                    <small class="mx-sub">Con los sistemas que ya usas.</small>
+                  </div>
+                </div>
+
+                <!-- 4 · Panel con indicadores en tiempo real, por sede -->
+                <div class="mx-scene mx-2col yv-dash" style="--c2:1.3fr .7fr" data-steps="300 +s-1; 0 count .yv-k 1300; 800 +s-2; 700 each .yv-alerts&gt;.m-toast 600; 2200 end">
+                  <div class="mx-box m-card">
+                    <span class="mx-h"><svg class="ico"><use href="#i-data"/></svg>Panel de la empresa<small>en tiempo real</small></span>
+                    <span class="xb-kpis">
+                      <span><small>Pedidos hoy</small><strong class="yv-k" data-from="0" data-to="128">128</strong><em>↑ 14%</em></span>
+                      <span><small>Respuesta</small><strong>3 s</strong><em class="mute">promedio</em></span>
+                      <span><small>Aprobados</small><strong class="yv-k" data-from="0" data-to="12">12</strong><em class="mute">hoy</em></span>
+                    </span>
+                    <span class="yv-sedes"><small>Ventas por sede</small><span><b>Bogotá</b><i style="--w:.92"></i></span><span><b>Medellín</b><i style="--w:.68"></i></span><span><b>Cali</b><i style="--w:.45"></i></span></span>
+                  </div>
+                  <div class="mx-notes yv-alerts">
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-alert"/></svg></span><span><b>Stock bajo en Cali</b>Café 250 g · quedan 40</span></span>
+                    <span class="m-toast m-card"><span class="mt-ic"><svg class="ico"><use href="#i-shield"/></svg></span><span><b>3 pedidos por aprobar</b>Esperan al gerente</span></span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ul class="mock-logos" aria-label="Lo principal de la Automatización Avanzada" data-stagger>
+            <li style="--c:#6d28d9"><span class="ml-ico"><svg class="ico"><use href="#i-spark"/></svg></span><span><b>Asistente con IA</b><small>Responde, califica y deriva</small></span></li>
+            <li style="--c:#0f9d58"><span class="ml-ico"><svg class="ico"><use href="#i-box"/></svg></span><span><b>ERP e inventario</b><small>Facturación conectada</small></span></li>
+            <li style="--c:#1a73e8"><span class="ml-ico"><svg class="ico"><use href="#i-data"/></svg></span><span><b>Panel en tiempo real</b><small>Indicadores por sede</small></span></li>
+          </ul>
+          <figcaption class="sr">Ejemplo ilustrativo de la Automatización Avanzada en un negocio</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>Desde $2.900.000</strong>COP · a medida</span>
+          <a class="s-hint" href="#auto-avanzada">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="auto-avanzada" data-title="Automatización Avanzada">
+      <div class="container">
+        <article class="plan glass spot" data-reveal>
+          <span class="pack-badge">Para empresas</span>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-spark"/></svg></span><div><small data-badge="Para empresas">Servicio C · A medida</small><h3>Automatización Avanzada</h3></div></div>
+            <p class="plan-tag">Flujos a medida que conectan todos tus sistemas</p>
+            <p class="plan-desc">Para procesos más complejos: diseñamos flujos con IA y las reglas de tu negocio, de punta a punta, entre tus sedes, equipos y sistemas.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>Desde $2.900.000</strong><small>COP · pago único, según el alcance</small></span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa una Automatización Avanzada a medida para mi empresa">Quiero una cotización <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <div class="auto-scope">
+              <span><svg class="ico"><use href="#i-spark"/></svg>Asistente IA</span>
+              <span><svg class="ico"><use href="#i-box"/></svg>ERP e inventario</span>
+              <span><svg class="ico"><use href="#i-card"/></svg>Facturación</span>
+              <span><svg class="ico"><use href="#i-sheet"/></svg>CRM</span>
+              <span><svg class="ico"><use href="#i-shield"/></svg>Reglas</span>
+              <span><svg class="ico"><use href="#i-data"/></svg>Panel</span>
+            </div>
+            <p class="plan-includes"><b>Todo lo de la Automatización Completa</b>, más:</p>
+            <ul class="plan-list">
+              <li><span><strong>Asistente con IA:</strong> responde, califica cada cliente y lo deriva a quien corresponde</span></li>
+              <li><span><strong>ERP, inventario y facturación electrónica</strong> conectados entre sí</span></li>
+              <li><span><strong>Reglas y aprobaciones</strong> propias de tu negocio</span></li>
+              <li><span><strong>Varias sedes,</strong> equipos o marcas en un mismo flujo</span></li>
+              <li><span><strong>Integraciones por API</strong> con los sistemas que ya usas</span></li>
+              <li><span><strong>Panel con indicadores</strong> en tiempo real</span></li>
+              <li class="wide"><span><strong>Diagnóstico de tus procesos,</strong> diseño del flujo, pruebas y capacitación a tu equipo</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- la diferencia, minimalista: frases cortas, solo líneas finas (las mismas de la web) -->
+    <section class="slide" id="diferencia" data-title="La diferencia">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Paso 2 · Resumen</p>
+          <h2 class="h2" data-reveal>La diferencia, <em>punto por punto.</em></h2>
+        </header>
+        <div class="compare glass diff cmp cmp-min" data-reveal>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col"><span class="sr">Punto</span></th><th scope="col">Web</th><th scope="col">Completa</th><th scope="col">Avanzada</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Dónde</th><td>Tu web</td><td>Web y canales</td><td>Todos tus sistemas</td></tr>
+                <tr><th scope="row">Atención</th><td>Respuestas en la web</td><td>WhatsApp e Instagram</td><td>Asistente con IA</td></tr>
+                <tr><th scope="row">Citas</th><td>Agenda en tu web</td><td>Google Calendar</td><td>Varias sedes</td></tr>
+                <tr><th scope="row">Clientes</th><td>Base de datos</td><td>Sheets o CRM</td><td>CRM o ERP</td></tr>
+                <tr><th scope="row">Además</th><td>Aviso al instante</td><td>Pagos y reseñas</td><td>Facturas e inventario</td></tr>
+                <tr><th scope="row">Ideal para</th><td>Captar desde tu web</td><td>Varios canales</td><td>Procesos complejos</td></tr>
+                <tr class="cmp-price"><th scope="row">Precio</th><td>$390.000</td><td>$1.190.000</td><td>Desde $2.900.000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="tools-note" data-reveal><svg class="ico"><use href="#i-alert"/></svg><span>Si una herramienta externa tiene costo propio (como la API oficial de WhatsApp), se paga directo a ese proveedor. Te lo explicamos antes de empezar.</span></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== PASO 3 · PLANES MENSUALES ==================== -->
+  <div class="step-group" id="mensuales">
+
+    <section class="slide" id="paso-3" data-title="Paso 3 · Planes mensuales">
+      <div class="container s-center">
+        <header class="s-head">
+          <span class="step-num" aria-hidden="true" data-reveal>03</span>
+          <p class="eyebrow" data-reveal>Paso 3 de 4 · Planes mensuales</p>
+          <h2 class="h2" data-reveal>Tu página no se <em>queda quieta.</em></h2>
+          <p class="lead" data-reveal>La mantenemos segura, medimos todo tu negocio y le traemos clientes. Cada plan cuesta menos que pagar cada servicio por separado.</p>
+        </header>
+        <nav class="ov" style="--n:4" aria-label="Los 4 planes mensuales" data-stagger>
+          <a class="ov-item glass spot" href="#mantenimiento"><span class="icon-bubble"><svg class="ico"><use href="#i-wrench"/></svg></span><span class="ov-txt"><b>Mantenimiento Web</b><small>Siempre funcionando y segura</small></span><span class="ov-price"><strong>$180.000</strong><em>COP/mes</em></span></a>
+          <a class="ov-item glass spot" href="#datos"><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span><span class="ov-txt"><b>Datos y Asesoría</b><small>Decide con números</small></span><span class="ov-price"><strong>$650.000</strong><em>COP/mes</em></span></a>
+          <a class="ov-item glass spot" href="#datos-360"><span class="icon-bubble"><svg class="ico"><use href="#i-layers"/></svg></span><span class="ov-txt"><b>Datos 360</b><small>Todo tu negocio y tus redes</small></span><span class="ov-price"><strong>$1.390.000</strong><em>COP/mes</em></span></a>
+          <a class="ov-item glass spot is-hl" href="#crecimiento"><span class="icon-bubble"><svg class="ico"><use href="#i-rocket"/></svg></span><span class="ov-txt"><b>Crecimiento</b><small>Más visitas, clientes y reservas</small></span><span class="ov-price"><strong>$1.900.000</strong><em>COP/mes</em></span></a>
+        </nav>
+        <a class="s-hint" href="#mantenimiento">Desliza para ver cada plan <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <!-- 🔧 MANTENIMIENTO WEB -->
+    <section class="slide" id="mantenimiento" data-title="Mantenimiento Web">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-wrench"/></svg></span><div><small>Mensual 1 de 4</small><h3>Mantenimiento Web</h3></div></div>
+            <p class="plan-tag">Para que tu página siempre funcione y esté segura</p>
+            <div class="m-pay"><span>Tú pagas</span><strong>$180.000</strong><small>COP/mes</small><em class="pt-save">Ahorras 41%</em></div>
+            <div class="m-bar"><div class="save-bar" style="--pay:.59" role="img" aria-label="Pagas el 59% del valor por separado"><i></i></div><div class="save-legend"><span>Tú pagas</span><span>Valor por separado</span></div></div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el plan mensual de Mantenimiento Web ($180.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye · valor por separado</p>
+            <ul class="receipt">
+              <li><span>Renovación de hosting, dominio y SSL</span><b>$35.000</b></li>
+              <li><span>Copias de seguridad semanales</span><b>$60.000</b></li>
+              <li><span>Actualizaciones y monitoreo de seguridad</span><b>$60.000</b></li>
+              <li><span>Hasta 5 cambios pequeños al mes (textos, fotos, precios)</span><b>$150.000</b></li>
+            </ul>
+            <div class="receipt-total"><span>Valor por separado</span><s>$305.000</s></div>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-unlock"/></svg><span>Sin permanencia: cancelas cuando quieras.</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 📊 DATOS Y ASESORÍA -->
+    <section class="slide" id="datos" data-title="Datos y Asesoría">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span><div><small>Mensual 2 de 4</small><h3>Datos y Asesoría</h3></div></div>
+            <p class="plan-tag">Para saber qué funciona y decidir con números, no con intuición</p>
+            <div class="m-pay"><span>Tú pagas</span><strong>$650.000</strong><small>COP/mes</small><em class="pt-save">Ahorras 38%</em></div>
+            <div class="m-bar"><div class="save-bar" style="--pay:.616" role="img" aria-label="Pagas el 62% del valor por separado"><i></i></div><div class="save-legend"><span>Tú pagas</span><span>Valor por separado</span></div></div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el plan mensual de Datos y Asesoría ($650.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye · valor por separado</p>
+            <ul class="receipt">
+              <li class="inherit"><span>Todo lo de Mantenimiento Web</span><b>$305.000</b></li>
+              <li><span>Reporte mensual: visitas, de dónde llegan y cuántos escriben o compran</span><b>$250.000</b></li>
+              <li><span>Análisis de comportamiento: en qué parte de la página se va la gente</span><b>$150.000</b></li>
+              <li><span>Reunión mensual de estrategia (1 hora)</span><b>$200.000</b></li>
+              <li><span>1 mejora mensual aplicada en tu página según los datos</span><b>$150.000</b></li>
+            </ul>
+            <div class="receipt-total"><span>Valor por separado</span><s>$1.055.000</s></div>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-unlock"/></svg><span>Sin permanencia: cancelas cuando quieras.</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 🌐 DATOS 360: los datos de todo el negocio y de las redes, en un solo panel
+         (precio propuesto por Claude: $1.390.000/mes frente a $2.305.000 por separado) -->
+    <section class="slide" id="datos-360" data-title="Datos 360">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-layers"/></svg></span><div><small>Mensual 3 de 4</small><h3>Datos 360</h3></div></div>
+            <p class="plan-tag">Todo tu negocio y tus redes sociales, medidos en un solo panel</p>
+            <div class="m-pay"><span>Tú pagas</span><strong>$1.390.000</strong><small>COP/mes</small><em class="pt-save">Ahorras 40%</em></div>
+            <div class="m-bar"><div class="save-bar" style="--pay:.603" role="img" aria-label="Pagas el 60% del valor por separado"><i></i></div><div class="save-legend"><span>Tú pagas</span><span>Valor por separado</span></div></div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el plan mensual Datos 360 ($1.390.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye · valor por separado</p>
+            <ul class="receipt">
+              <li class="inherit"><span>Todo lo de Datos y Asesoría</span><b>$1.055.000</b></li>
+              <li><span>Panel en tiempo real de todo el negocio: ventas, clientes, WhatsApp y anuncios</span><b>$450.000</b></li>
+              <li><span>Analítica de Instagram, Facebook, TikTok y YouTube: alcance, interacción, seguidores y mejores publicaciones</span><b>$350.000</b></li>
+              <li><span>Reporte semanal con recomendaciones para tu web y tus redes</span><b>$250.000</b></li>
+              <li><span>Una reunión de estrategia más al mes (2 en total)</span><b>$200.000</b></li>
+            </ul>
+            <div class="receipt-total"><span>Valor por separado</span><s>$2.305.000</s></div>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-layers"/></svg><span>Funciona con lo que ya usas: Google Analytics, Meta, tu CRM y tu tienda.</span></li>
+              <li><svg class="ico"><use href="#i-unlock"/></svg><span>Sin permanencia: cancelas cuando quieras.</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 🚀 CRECIMIENTO -->
+    <section class="slide" id="crecimiento" data-title="Crecimiento">
+      <div class="container">
+        <article class="plan month glass spot featured" data-reveal>
+          <span class="pack-badge">Más completo</span>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-rocket"/></svg></span><div><small data-badge="Más completo">Mensual 4 de 4</small><h3>Crecimiento</h3></div></div>
+            <p class="plan-tag">Para traer más visitas, clientes y reservas a tu página</p>
+            <div class="m-pay"><span>Tú pagas</span><strong>$1.900.000</strong><small>COP/mes</small><em class="pt-save">Ahorras 38%</em></div>
+            <div class="m-bar"><div class="save-bar" style="--pay:.622" role="img" aria-label="Pagas el 62% del valor por separado"><i></i></div><div class="save-legend"><span>Tú pagas</span><span>Valor por separado</span></div></div>
+            <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Vi los planes y me interesa el plan mensual de Crecimiento ($1.900.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye · valor por separado</p>
+            <ul class="receipt">
+              <li class="inherit"><span>Todo lo de Datos y Asesoría</span><b>$1.055.000</b></li>
+              <li><span>12 publicaciones al mes (incluye 4 videos o reels) pensadas para llevar visitas a tu web</span><b>$1.000.000</b></li>
+              <li><span>Gestión y optimización de campañas en Google o Meta</span><b>$800.000</b></li>
+              <li><span>Google Business activo: publicaciones y respuesta a reseñas</span><b>$200.000</b></li>
+            </ul>
+            <div class="receipt-total"><span>Valor por separado</span><s>$3.055.000</s></div>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-phone"/></svg><span>Trabajamos sobre tus redes actuales, no desde cero.</span></li>
+              <li><svg class="ico"><use href="#i-alert"/></svg><span>Pauta aparte: desde $1.000.000 COP/mes, pagada directo a Google o Meta.</span></li>
+              <li><svg class="ico"><use href="#i-cal"/></svg><span>Mínimo 3 meses: los anuncios necesitan tiempo para dar resultados.</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== PASO 4 · BENEFICIOS ==================== -->
+  <div class="step-group" id="beneficios">
+    <section class="slide" id="paso-4" data-title="Paso 4 · Beneficios">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <span class="step-num" aria-hidden="true" data-reveal>04</span>
+          <p class="eyebrow" data-reveal>Paso 4 de 4 · Beneficios</p>
+          <h2 class="h2" data-reveal>Lo que ya viene <em>incluido.</em></h2>
+        </header>
+        <div class="perks-grid">
+          <article class="perk-card glass spot" data-reveal>
+            <h3>¿Ya hiciste tu página con nosotros?</h3>
+            <p>Tu plan ya trae automatización y meses incluidos:</p>
+            <ul class="inc-list">
+              <li><span class="tint-orb" style="--tint:#2b2f3a"></span><b>Plan Start</b><span>1 mes de Mantenimiento Web</span></li>
+              <li><span class="tint-orb" style="--tint:#ff5fae"></span><b>Plan Pro</b><span>Automatización Web + 2 meses de Mantenimiento</span></li>
+              <li><span class="tint-orb" style="--tint:#f2f4f8"></span><b>Plan Business</b><span>Automatización Web + 3 meses de Datos y Asesoría</span></li>
+              <li><span class="tint-orb" style="--tint:#ffc83d"></span><b>Plan Max</b><span>Automatización Web + 3 meses de Crecimiento</span></li>
+            </ul>
+            <p class="inc-foot"><svg class="ico"><use href="#i-repeat"/></svg><span>Al terminar, continúas con el mismo plan <strong>sin pagar instalación de nuevo</strong>.</span></p>
+          </article>
+          <article class="perk-card glass spot" data-reveal style="--d:.1s">
+            <h3>Beneficios extra</h3>
+            <ul class="perk-list">
+              <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-gift"/></svg></span><div><strong>Pago anual: 2 meses gratis</strong><span>Pagas 10 meses y recibes 12.</span></div></li>
+              <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-unlock"/></svg></span><div><strong>Sin permanencia</strong><span>Mantenimiento, Datos y Asesoría y Datos 360: cancelas cuando quieras.</span></div></li>
+              <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-auto"/></svg></span><div><strong>Automatiza por partes</strong><span>Empieza con la Web y sube a Completa o Avanzada cuando lo necesites.</span></div></li>
+              <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-search"/></svg></span><div><strong>¿Tu página la hizo otro proveedor?</strong><span>La revisamos y te cotizamos; las automatizaciones funcionan igual.</span></div></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ FINAL: escríbenos ============ -->
+  <section class="slide s-final" id="contacto" data-title="Escríbenos">
+    <div class="container">
+      <div class="final glass" data-reveal>
+        <span class="bubble" style="--s:200px;right:-60px;top:-70px" aria-hidden="true"></span>
+        <span class="bubble" style="--s:70px;left:6%;bottom:-20px;--dur:10s" aria-hidden="true"></span>
+        <p class="eyebrow">Último paso</p>
+        <h2 class="h2">¿Cuál se ajusta mejor <em>a tu negocio?</em></h2>
+        <p class="lead">Con gusto resolvemos tus dudas o agendamos una llamada corta para revisarlo juntos, y te enviamos la demostración.</p>
+        <div class="ask-actions">
+          <a href="#" class="btn btn-primary magnetic" data-wa="Hola Gotia Studio 👋 Vi los planes y quiero que me recomienden el ideal para mi negocio"><svg class="ico ico-l"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+          <a href="#" class="btn btn-glass glass magnetic" data-ig><svg class="ico ico-l"><use href="#i-ig"/></svg>Escribir por Instagram</a>
+        </div>
+        <p class="final-note"><svg class="ico"><use href="#i-flame"/></svg>Los precios con descuento son por tiempo limitado.</p>
+      </div>
+    </div>
+    <footer class="slide-foot">
+      <a href="index.html" class="brand"><img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+      <span>© <span id="year">2026</span> · Precios en pesos colombianos (COP)</span>
+      <a href="index.html">Ver la web completa</a>
+    </footer>
+  </section>
+
+</main>
+
+<a href="#" class="wa-float" data-wa="Hola Gotia Studio 👋 Vi los planes y tengo una pregunta" aria-label="Escríbenos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span>¿Dudas? Escríbenos</span></a>
+
+<script src="contacto.js?v=1" defer></script>
+<script src="main.js?v=26" defer></script>
+<script src="planes.js?v=3" defer></script>
+</body>
+</html>
