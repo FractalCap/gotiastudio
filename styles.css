@@ -1410,6 +1410,32 @@ img.brand-mark { width: 28px; height: 28px; }
 .pv-btn { display: grid; place-items: center; margin-top: 12px; height: 42px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 14px; font-weight: 500; }
 .pv-note { font-size: 12.5px; color: var(--fg-3); text-align: center; padding: 0 8px 4px; }
 
+/* ---------- Equipo: un rol por tarjeta, sin nombres ---------- */
+#equipo .section-head .lead { max-width: 56ch; text-wrap: balance; }
+.team-grid { list-style: none; margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 900px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; } }
+.team-card { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: clamp(20px, 2.2vw, 28px); border-radius: var(--r-lg); }
+.team-card .icon-bubble { margin-bottom: 6px; }
+.team-kicker { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3); }
+.team-card h3 { font-size: clamp(18px, 1.6vw, 21px); font-weight: 500; letter-spacing: -.02em; line-height: 1.25; }
+.team-card p { font-size: 14.5px; line-height: 1.55; color: var(--fg-2); }
+.team-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+.team-tags i { padding: 4px 10px; border-radius: 999px; font-style: normal; font-size: 12px; color: var(--fg-2); box-shadow: inset 0 0 0 1px var(--line-2); }
+/* celular: tarjetas compactas, el ícono a la izquierda y el texto al lado */
+@media (max-width: 640px) {
+  .team-grid { gap: 10px; margin-top: 28px; }
+  .team-card { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; gap: 4px 14px; padding: 16px 16px 16px 14px; border-radius: 22px; }
+  .team-card .icon-bubble { grid-row: 1 / span 3; width: 40px; height: 40px; margin: 2px 0 0; }
+  .team-card .icon-bubble .ico { width: 18px; height: 18px; }
+  .team-card > :not(.icon-bubble) { grid-column: 2; }
+  .team-kicker { display: none; }
+  .team-card h3 { font-size: 16.5px; line-height: 1.3; }
+  .team-card p { font-size: 13.5px; line-height: 1.5; }
+  .team-tags { gap: 5px; margin-top: 4px; padding-top: 0; }
+  .team-tags i { padding: 3px 9px; font-size: 11.5px; }
+}
+
 .feature-row { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .feature-row.three { grid-template-columns: repeat(3, 1fr); }
 .feature-row li { display: flex; gap: 14px; padding: 22px 6px 0; border-top: 1px solid var(--line); }
@@ -2034,6 +2060,29 @@ html.lite .hero-g {
 .ver-switch .ico { width: 15px; height: 15px; }
 .mobile-menu a.ver-link { margin-top: 4px; padding: 12px 16px; font-size: 13.5px; letter-spacing: 0; text-align: center; color: var(--fg-3); }
 html.lite .ver-to-lite, html:not(.lite) .ver-to-3d { display: none; }
+
+/* =========================================================
+   Versión Lite (html.lowend): equipos de gama media-baja, internet lento o ahorro de datos
+   La web la elige sola (el <head> de index.html y de planes.html) o pasa a ella en el momento
+   si va a tirones (main.js). En la web principal es la Esencial (html.lite) con todo quieto: los
+   gráficos de cada sección se ven completos, como con "reducir movimiento", y no queda nada que
+   el equipo tenga que recalcular al desplazarse (desenfoques, transiciones, capas de más).
+   En planes.html es la misma idea sobre su diseño (allí no hay versión 3D).
+   ========================================================= */
+html.lowend *, html.lowend *::before, html.lowend *::after {
+  animation: none !important; transition: none !important; will-change: auto !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+html.lowend .cursor, html.lowend .spot::after, html.lowend body::after { display: none; }
+html.lowend [data-reveal], html.lowend [data-hero], html.lowend .hero-title .w { opacity: 1; transform: none; filter: none; }
+/* sin desenfoque detrás, el menú va casi opaco para que se lea bien */
+html.lowend .nav-inner, html.lowend .nav.scrolled .nav-inner { background: rgba(255, 255, 255, .95); }
+html.lowend[data-theme="dark"] .nav-inner, html.lowend[data-theme="dark"] .nav.scrolled .nav-inner { background: rgba(14, 14, 16, .94); }
+/* Manifiesto: el texto entero y nítido desde el principio */
+html.lowend .manifesto-text .sw { opacity: 1; filter: none; transform: none; }
+html.lowend .manifesto-foot { opacity: 1; transform: none; }
+/* Recorridos de cuadros: cada tarjeta entera, sin escalar ni atenuarse al pasar */
+html.lowend .svc-card, html.lowend .svc.is-pinned .svc-card { transform: none; opacity: 1; }
 
 /* ---------- Movimiento reducido ----------
    Si el sistema pide menos movimiento (en Windows: "Efectos de animación"

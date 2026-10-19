@@ -8,11 +8,16 @@
   const gotia = (window.gotia = window.gotia || {});
   // versión Esencial (simple y rápida): sin pantalla de carga, sin WebGL y sin efectos
   const isLite = () => root.classList.contains('lite');
+  // versión Lite (gama media-baja, internet lento, ahorro de datos): como Esencial, pero todo quieto.
+  // La elige el <head>, o la web pasa a ella en el momento si va a tirones (ver final)
+  const isLow = () => root.classList.contains('lowend');
   // efectos de la versión 3D: se registran aquí y arrancan solo si se elige el 3D (ver final)
   const fx = [];
   // con "reducir movimiento" la web sigue viva; solo se evitan los desplazamientos
-  // grandes (el vuelo de la "G" de la carga)
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // grandes (el vuelo de la "G" de la carga) y las demos de las secciones se quedan quietas
+  // y completas. En Lite, igual. Si la web pasa a Lite con una demo en marcha, termina la
+  // vuelta que lleva y se queda quieta (de ahí los isLow() en cada bucle)
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || isLow();
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const fmt = (n) => Math.round(n).toLocaleString('es-ES', { useGrouping: 'always' });
 
@@ -272,7 +277,7 @@
       let on = false, running = false;
       const run = async () => {
         running = true;
-        while (on) {
+        while (on && !isLow()) {
           steps.forEach((s) => s.classList.remove('is-now', 'is-done'));
           await wait(700);
           for (const s of steps) {
@@ -349,6 +354,7 @@
     addEventListener('touchend', untouch, { passive: true });
     addEventListener('touchcancel', untouch, { passive: true });
     (function follow() {
+      if (isLow()) return;
       rx += (x - rx) * 0.2;
       ry += (y - ry) * 0.2;
       const tr = `translate3d(${rx.toFixed(1)}px, ${ry.toFixed(1)}px, 0)`;
@@ -359,6 +365,7 @@
     // los botones siguen un poco al cursor o al dedo, y vuelven a su sitio al salir o soltar
     $$('.magnetic').forEach((el) => {
       el.addEventListener('pointermove', (e) => {
+        if (isLow()) return;
         const r = el.getBoundingClientRect();
         const dx = e.clientX - (r.left + r.width / 2);
         const dy = e.clientY - (r.top + r.height / 2);
@@ -380,7 +387,7 @@
     new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; }).observe(tc.parentElement);
     const pad = (n) => String(n).padStart(2, '0');
     setInterval(() => {
-      if (!onScreen || document.hidden) return;
+      if (!onScreen || document.hidden || isLow()) return;
       frame++;
       const f = frame % 24, s = Math.floor(frame / 24) % 60, m = Math.floor(frame / 1440) % 60;
       tc.textContent = `00:${pad(m)}:${pad(s)}:${pad(f)}`;
@@ -399,7 +406,7 @@
     const DUR = 2800;
     const pane = vfv.closest('.ma-pane');
     let shot = -1, on = false, zoomAnim = null, barAnim = null, was = false;
-    const playing = () => on && !document.hidden && (!pane || pane.classList.contains('is-on'));
+    const playing = () => on && !document.hidden && !isLow() && (!pane || pane.classList.contains('is-on'));
     const play = () => {
       const now = playing();
       if (now && !was) shot = -1;   // al volver a la pestaña "Video", empieza desde la primera toma
@@ -684,7 +691,7 @@
     tabs.forEach((t, i) => t.addEventListener('click', () => { show(i); hold = Date.now() + 12000; }));
     new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.5 }).observe(box);
     const next = () => setTimeout(() => {
-      if (inView && !document.hidden && Date.now() > hold) show((cur + 1) % tabs.length);
+      if (inView && !document.hidden && !isLow() && Date.now() > hold) show((cur + 1) % tabs.length);
       next();
     }, times[cur] || 4500);
     if (!reduce) next();
@@ -754,7 +761,7 @@
     let cur = WEEKS.length - 1, inView = false, started = false, timer = 0;
     const loop = () => {
       timer = setTimeout(() => {
-        if (inView && !document.hidden) { cur = (cur + 1) % WEEKS.length; show(WEEKS[cur]); }
+        if (inView && !document.hidden && !isLow()) { cur = (cur + 1) % WEEKS.length; show(WEEKS[cur]); }
         loop();
       }, cur === WEEKS.length - 1 ? 6000 : 3800);
     };
@@ -771,7 +778,7 @@
     if (!reduce) {
       new IntersectionObserver(([e]) => {
         inView = e.isIntersecting;
-        if (inView && !started) start();
+        if (inView && !started && !isLow()) start();
       }, { threshold: 0.35 }).observe(dash);
     }
   }
@@ -803,6 +810,7 @@
       hitTimer = setTimeout(() => target.classList.remove('is-hit'), 220);
     };
     const tick = (now) => {
+      if (isLow()) return stop();
       raf = requestAnimationFrame(tick);
       if (now >= nextAt) {
         const i = pick();
@@ -854,7 +862,7 @@
     };
     const run = async () => {
       running = true;
-      while (on) {
+      while (on && !isLow()) {
         aw.classList.add('is-live');
         ins.forEach((el) => { el.textContent = ''; });
         steps.forEach((s) => s.classList.remove('is-on', 'is-done'));
@@ -916,7 +924,7 @@
     };
     const run = async () => {
       running = true;
-      while (on) {
+      while (on && !isLow()) {
         ac.classList.add('is-live');
         msgs.forEach((m) => m.classList.remove('is-show'));
         tools.forEach((t) => t.classList.remove('is-on', 'is-done'));
@@ -994,7 +1002,7 @@
     ];
     const run = async () => {
       running = true;
-      while (on) {
+      while (on && !isLow()) {
         av.classList.add('is-live');
         $$('.av-node', av).forEach((n) => n.classList.remove('is-on', 'is-done'));
         rule.textContent = ruleText;
@@ -1036,7 +1044,7 @@
     let on = false, running = false;
     const run = async () => {
       running = true;
-      while (on) {
+      while (on && !isLow()) {
         flowCard.classList.add('is-live');
         items.forEach((li) => li.classList.remove('is-on', 'is-done'));
         box.style.setProperty('--p', 0);
@@ -1245,7 +1253,7 @@
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
-        show(Number(tab.dataset.w), true);
+        show(Number(tab.dataset.w), !isLow());   // en Lite, los números cambian sin contar
       });
     });
     show(39, false);
@@ -1285,7 +1293,8 @@
   if (year) year.textContent = new Date().getFullYear();
 
   /* ---------- Invitación a los efectos: sale del botón "3D" y se va sola a los 20 s ----------
-     Solo en Esencial (la 3D ya los tiene), una vez por visita y no con movimiento reducido.
+     Solo en Esencial (ni en la 3D, que ya los tiene, ni en Lite, que es para equipos que no
+     pueden con ellos), una vez por visita y no con movimiento reducido.
      Aparece a los 4 s de entrar, justo debajo del botón "3D" del menú, señalándolo (el botón se
      marca mientras tanto). La línea de abajo marca los 20 s y se detiene mientras el ratón está
      encima o el teclado dentro. Se va también al abrir el menú del celular. */
@@ -1330,7 +1339,7 @@
         if (line) line.pause();
       };
       setTimeout(() => {
-        if (gone) return;
+        if (gone || isLow()) return;
         try { sessionStorage.setItem('gotia-fx-invite', '1'); } catch (e) {}
         invite.hidden = false;
         place();
@@ -1349,11 +1358,14 @@
     }
   }
 
-  /* ---------- Versión: Agencia 3D o Agencia Esencial ----------
-     El <head> ya decidió: html.lite (Esencial, la que se ve al entrar) o ninguna (3D, con el botón
-     "3D" del menú, que recarga la página con ?version=3d).
+  /* ---------- Versión: Esencial, Lite o 3D ----------
+     El <head> ya decidió: html.lite (Esencial, la que se ve al entrar), html.lite.lowend (Lite,
+     para equipos de gama media-baja, internet lento o ahorro de datos) o ninguna (3D, con el
+     botón "3D" del menú, que recarga la página con ?version=3d).
      · 3D: carga bubbles.js + scenes.js (WebGL), la pantalla de carga y todos los efectos.
-     · Esencial: el mismo contenido y estilo, sin carga, sin WebGL y sin animaciones. */
+     · Esencial: el mismo contenido y estilo, sin carga, sin WebGL y sin animaciones.
+     · Lite: la Esencial con las demos quietas y completas, sin desenfoques ni transiciones.
+     En planes.html no hay 3D: sin html.lowend lleva sus efectos (cursor, brillo de las tarjetas…). */
   function start(version) {
     if (version === 'esencial') {
       ['#loader', '#loader-g'].forEach((s) => { const el = $(s); if (el) el.remove(); });
@@ -1372,5 +1384,84 @@
     fx.forEach((f) => f());
   }
 
-  start(isLite() ? 'esencial' : '3d');
+  /* ---------- Lite automática: las dos pruebas que no caben en el <head> ----------
+     Cuando la página ya cargó (para no frenarla) y solo si quien visita no eligió versión:
+     · gráficos: sin WebGL, dibujado por software o un chip gráfico de gama baja. Se mira una
+       vez por navegador y se recuerda (gotia-gpu).
+     · fluidez: mientras la página se desplaza se miden los cuadros por segundo; si dos tandas
+       seguidas van a tirones (menos de ~28 por segundo, o 1 de cada 5 cuadros muy lento), pasa
+       a Lite y lo recuerda 30 días (gotia-lento). Es la que decide en iPhone y Safari, que no
+       dicen su memoria ni sus núcleos.
+     Si alguna salta, la web pasa a Lite en el momento, sin recargar: el CSS lo aquieta todo y
+     las demos terminan la vuelta que llevan. */
+  const LOW_GPU = /SwiftShader|llvmpipe|Software|Basic Render|Mali-(4\d\d|T\d+|G(31|51|52|57|71|72)\b)|Adreno \(TM\) ([1-5]\d\d|610)\b|PowerVR|SGX/i;
+
+  function toLow(why) {
+    if (isLow()) return;
+    gotia.low = why;
+    root.classList.add('lowend');
+    // los bucles de Web Animations (el flyer que flota, el REC del visor…) se quedan quietos
+    if (document.getAnimations) {
+      document.getAnimations().forEach((a) => { if (a.effect && a.effect.getTiming().iterations === Infinity) a.cancel(); });
+    }
+    document.dispatchEvent(new CustomEvent('gotia:lowend', { detail: why }));   // lo escuchan planes.js y analytics.js
+  }
+
+  function probeGpu() {
+    let low = null;
+    try { if (localStorage.getItem('gotia-gpu')) return; } catch (e) {}   // ya se miró
+    try {
+      const gl = document.createElement('canvas').getContext('webgl', { failIfMajorPerformanceCaveat: true });
+      if (!gl) low = true;
+      else {
+        // Firefox da el nombre del chip directamente; Chrome y Safari, con la extensión
+        let gpu = String(gl.getParameter(gl.RENDERER));
+        const info = /WebKit/.test(gpu) && gl.getExtension('WEBGL_debug_renderer_info');
+        if (info) gpu = String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL));
+        low = LOW_GPU.test(gpu);
+        const lose = gl.getExtension('WEBGL_lose_context');
+        if (lose) lose.loseContext();
+      }
+    } catch (e) { return; }
+    try { localStorage.setItem('gotia-gpu', low ? 'bajo' : 'ok'); } catch (e) {}
+    if (low) toLow('gráficos');
+  }
+
+  function watchFlow() {
+    let until = 0, last = 0, raf = 0, frames = [], slow = 0;
+    const tick = (now) => {
+      raf = 0;
+      if (isLow()) return;
+      // un hueco de más de medio segundo es el navegador frenando la página (oculta, otra ventana), no el equipo
+      if (last && !document.hidden && now - last < 500) frames.push(now - last);
+      last = now;
+      if (frames.length >= 90) {
+        frames.sort((a, b) => a - b);
+        const median = frames[45], long = frames.filter((t) => t > 50).length / frames.length;
+        frames = [];
+        slow = median > 36 || long > 0.2 ? slow + (median > 60 ? 2 : 1) : 0;
+        if (slow >= 2) {
+          try { localStorage.setItem('gotia-lento', String(Date.now())); } catch (e) {}
+          toLow('iba lento');
+          return;
+        }
+      }
+      if (now < until) raf = requestAnimationFrame(tick);
+      else last = 0;   // la pausa entre un desplazamiento y otro no es un cuadro lento
+    };
+    // solo cuenta mientras la página se mueve: quieta, cualquier equipo va fluido
+    const poke = () => {
+      if (isLow()) return;
+      until = performance.now() + 250;
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    ['scroll', 'wheel', 'touchmove'].forEach((t) => addEventListener(t, poke, { passive: true }));
+  }
+
+  start(isLite() || isLow() ? 'esencial' : '3d');
+  if (!gotia.chosen && !isLow()) {
+    const later = () => setTimeout(() => { probeGpu(); if (!isLow()) watchFlow(); }, 1000);
+    if (document.readyState === 'complete') later();
+    else addEventListener('load', later, { once: true });
+  }
 })();

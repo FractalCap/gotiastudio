@@ -20,11 +20,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=61">
+  <link rel="stylesheet" href="styles.css?v=64">
   <link rel="stylesheet" href="planes.css?v=7">
 
   <script>
     document.documentElement.classList.add('js');
+    // versión Lite (html.lowend): con un equipo de gama media-baja, internet lento o ahorro de
+    // datos, todo quieto y sin desenfoques. Misma prueba que en index.html; si en la web principal
+    // se eligió el 3D (o se entró con ?version=lite), esa elección manda también aquí.
+    (function () {
+      var gotia = window.gotia = window.gotia || {};
+      function lowEnd() {
+        var n = navigator, c = n.connection || {};
+        var mq = function (q) { return matchMedia(q).matches; };
+        if (c.saveData || mq('(prefers-reduced-data: reduce)')) return 'ahorro de datos';
+        if (/2g|3g/.test(c.effectiveType || '')) return 'internet lento';
+        if (mq('(prefers-reduced-motion: reduce)')) return 'movimiento reducido';
+        if (n.deviceMemory && n.deviceMemory <= 4) return 'poca memoria';
+        var cores = n.hardwareConcurrency || 8;
+        if (!/Mac|iPhone|iPad|iPod/.test(n.platform || '') && cores <= (mq('(pointer: coarse)') ? 4 : 2)) return 'procesador';
+        try {
+          if (localStorage.getItem('gotia-gpu') === 'bajo') return 'gráficos';
+          if (Date.now() - Number(localStorage.getItem('gotia-lento')) < 2592e6) return 'iba lento';
+        } catch (e) {}
+        return '';
+      }
+      var v = null;
+      try { v = sessionStorage.getItem('gotia-version'); } catch (e) {}
+      if (v !== '3d' && v !== 'lite') v = null;
+      gotia.chosen = v;
+      gotia.low = v === '3d' ? '' : v === 'lite' ? 'enlace' : lowEnd();
+      if (gotia.low) document.documentElement.classList.add('lowend');
+    })();
     // modo negro: el mismo que en la web principal (se recuerda entre las dos páginas)
     try {
       if (localStorage.getItem('gotia-theme') === 'dark') {
@@ -1601,7 +1628,9 @@
 <a href="#" class="wa-float" data-wa="Hola Gotia Studio 👋 Vi los planes y tengo una pregunta" aria-label="Escríbenos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span>¿Dudas? Escríbenos</span></a>
 
 <script src="contacto.js?v=1" defer></script>
-<script src="main.js?v=26" defer></script>
-<script src="planes.js?v=3" defer></script>
+<script src="supabase-config.js?v=1" defer></script>
+<script src="analytics.js?v=3" defer></script>
+<script src="main.js?v=27" defer></script>
+<script src="planes.js?v=4" defer></script>
 </body>
 </html>

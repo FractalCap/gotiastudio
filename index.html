@@ -18,31 +18,58 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" href="g-glass-alpha.webp?v=2" as="image" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=62">
+  <link rel="stylesheet" href="styles.css?v=64">
 
   <script>
     (function () {
       var root = document.documentElement;
       root.classList.add('js');
-      // dos versiones de la web: "esencial" (simple y rápida), la que se ve al entrar, y "3d"
-      // (efectos y movimiento), que se carga con el botón "3D" del menú. La elección dura toda la
-      // visita (sessionStorage). Un enlace con ?version=3d o ?version=esencial entra directo a esa versión.
+      // tres versiones de la web:
+      //   · "esencial" (simple y rápida): la que se ve al entrar con un buen equipo (html.lite)
+      //   · "lite": la Esencial con todo quieto y sin desenfoques, para equipos de gama media-baja,
+      //     internet lento o ahorro de datos (html.lite.lowend). La web la elige sola (lowEnd, abajo)
+      //   · "3d" (efectos y movimiento): solo si quien visita la activa con el botón "3D" del menú
+      // La elección dura toda la visita (sessionStorage). Un enlace con ?version=3d o ?version=lite
+      // entra directo a esa versión; ?version=esencial sale del 3D y deja que la web vuelva a elegir.
       var gotia = window.gotia = window.gotia || {};
       // scripts de la versión 3D: solo se descargan si se elige el 3D (main.js los carga)
       gotia.fx = ['bubbles.js?v=13', 'scenes.js?v=4'];
+
+      // ¿equipo o conexión de gama media-baja? Devuelve el motivo, o '' si va bien con Esencial.
+      // Aquí solo lo que el navegador cuenta al instante: la prueba del chip gráfico y la de
+      // fluidez van después, sin frenar la carga (main.js), y se recuerdan para la próxima vez.
+      // (La misma prueba está en planes.html)
+      function lowEnd() {
+        var n = navigator, c = n.connection || {};
+        var mq = function (q) { return matchMedia(q).matches; };
+        if (c.saveData || mq('(prefers-reduced-data: reduce)')) return 'ahorro de datos';
+        if (/2g|3g/.test(c.effectiveType || '')) return 'internet lento';
+        if (mq('(prefers-reduced-motion: reduce)')) return 'movimiento reducido';
+        if (n.deviceMemory && n.deviceMemory <= 4) return 'poca memoria';
+        // los equipos de Apple no dicen sus núcleos reales: ahí decide la prueba de fluidez
+        var cores = n.hardwareConcurrency || 8;
+        if (!/Mac|iPhone|iPad|iPod/.test(n.platform || '') && cores <= (mq('(pointer: coarse)') ? 4 : 2)) return 'procesador';
+        try {
+          if (localStorage.getItem('gotia-gpu') === 'bajo') return 'gráficos';
+          if (Date.now() - Number(localStorage.getItem('gotia-lento')) < 2592e6) return 'iba lento';   // 30 días
+        } catch (e) {}
+        return '';
+      }
+
       var v = null;
       try {
         var params = new URLSearchParams(location.search), q = params.get('version');
-        if (q === '3d' || q === 'esencial') {
-          v = q;
-          sessionStorage.setItem('gotia-version', v);
+        if (q === '3d' || q === 'lite' || q === 'esencial') {
+          if (q === 'esencial') sessionStorage.removeItem('gotia-version');
+          else sessionStorage.setItem('gotia-version', q);
           params.delete('version');
           var rest = params.toString();
           history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
-        } else {
-          v = sessionStorage.getItem('gotia-version');
         }
+        v = sessionStorage.getItem('gotia-version');
       } catch (e) {}
+      if (v !== '3d' && v !== 'lite') v = null;
+      gotia.chosen = v;   // lo que eligió quien visita (null: decide la web)
       if (v === '3d') {
         root.classList.add('is-loading');
         gotia.fx.forEach(function (src) {
@@ -52,6 +79,8 @@
         });
       } else {
         root.classList.add('lite');
+        gotia.low = v === 'lite' ? 'enlace' : lowEnd();   // por qué está en Lite ('' = Esencial)
+        if (gotia.low) root.classList.add('lowend');
       }
     })();
     // modo negro: si el visitante lo eligió antes, se aplica antes de pintar nada (sin destello claro)
@@ -1582,7 +1611,7 @@
 <!-- bubbles.js y scenes.js (la versión 3D) los carga main.js solo si se elige el 3D: ver gotia.fx en el <head> -->
 <script src="contacto.js?v=1" defer></script>
 <script src="supabase-config.js?v=1" defer></script>
-<script src="analytics.js?v=1" defer></script>
-<script src="main.js?v=26" defer></script>
+<script src="analytics.js?v=3" defer></script>
+<script src="main.js?v=27" defer></script>
 </body>
 </html>

@@ -76,8 +76,9 @@
 /* ---------- Ejemplos de los planes: recorridos animados por todo lo que incluye cada uno ----------
    Cada ejemplo (.mock-page[data-demo]) tiene pestañas (.mx-tabs) y escenas (.mx-scene). Mientras
    se ve, cada escena sigue sus pasos y pasa a la siguiente, en bucle; la línea bajo el menú marca
-   el tiempo de la escena. Las pestañas saltan a cada escena. Con movimiento reducido, cada escena
-   se ve ya terminada y no cambia sola.
+   el tiempo de la escena. Las pestañas saltan a cada escena. Con movimiento reducido y en la
+   versión Lite (html.lowend), cada escena se ve ya terminada y no cambia sola; si la web pasa a
+   Lite con un recorrido en marcha (main.js, evento gotia:lowend), la escena se completa ahí.
    Los pasos van en data-steps, separados por ";": "espera acción [objetivo] [ms]"
      +clase / -clase   añade o quita a la escena un estado (.s-1, .s-pin…), que el CSS anima
      type sel [ms]     escribe en sel su data-q, letra a letra (antes muestra data-start o nada)
@@ -86,6 +87,7 @@
      end               solo espera, lo que queda de la escena */
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const still = () => reduce || document.documentElement.classList.contains('lowend');
   const fmt = (v) => Math.round(v).toLocaleString('es-CO');
   const setNum = (el, v) => { el.textContent = (el.dataset.pre || '') + fmt(v); };
 
@@ -189,20 +191,21 @@
 
     // tocar una pestaña lleva a esa escena (y el recorrido sigue desde ahí)
     tabs.forEach((t, i) => t.addEventListener('click', () => {
-      if (reduce) { reset(i, true); show(i); return; }
+      if (still()) { reset(i, true); show(i); return; }
       tour(i);
     }));
 
     // antes de verse (y con movimiento reducido): la primera escena, ya terminada
     reset(0, true);
     show(0);
-    if (reduce) return;
+    if (still()) return;
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting === visible) return;
       visible = e.isIntersecting;
-      if (visible) tour(at);
+      if (visible && !still()) tour(at);
       else stop();
     }, { threshold: 0.35 }).observe(demo);
+    document.addEventListener('gotia:lowend', () => { stop(); reset(at, true); });
   });
 })();
 
