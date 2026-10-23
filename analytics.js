@@ -123,6 +123,13 @@
     else if (a.matches('.ov-item')) interact('Resumen · ' + cut((a.querySelector('b') || a).textContent, 40));
     else if (a.matches('.dots a')) interact('Puntos · ' + (a.getAttribute('href') || '').slice(1));
     else if (a.matches('[data-svc-go]')) interact('Carrusel · ' + slideOf(a));
+    else if (a.matches('.tuto-steps button')) {
+      // los tutoriales de 3 pasos: qué tarjeta y qué paso toca
+      const card = a.closest('.svc-card');
+      const title = cut(((card && card.querySelector('h3')) || {}).textContent, 50);
+      interact('Tutorial · ' + (title || slideOf(a)) + ' · ' + text.replace(/^\d+\s*/, ''));
+    }
+    else if (a.matches('[data-plan-go]')) interact('Planes · ir a ' + text);
     else if (a.matches('.fxi-close')) interact('Aviso 3D · lo cerró');
     else if (a.matches('.ver-to-lite')) interact('Volvió a la versión Esencial');
     else if (a.matches('.theme-toggle')) interact(document.documentElement.dataset.theme === 'dark' ? 'Cambió a modo claro' : 'Cambió a modo negro');

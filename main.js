@@ -404,7 +404,8 @@
       { name: 'Cierre', zoom: [1, 1.05] }
     ];
     const DUR = 2800;
-    const pane = vfv.closest('.ma-pane');
+    // en una pestaña (version-conversion) o en un paso del tutorial (06): solo graba si se ve
+    const pane = vfv.closest('.ma-pane, .tuto-scene');
     let shot = -1, on = false, zoomAnim = null, barAnim = null, was = false;
     const playing = () => on && !document.hidden && !isLow() && (!pane || pane.classList.contains('is-on'));
     const play = () => {
@@ -432,7 +433,7 @@
       play();
     }
   }
-  const vfCard = $('.svc-card.card-wide');
+  const vfCard = (vfv && vfv.closest('.svc-card')) || $('.svc-card.card-wide');
   if (vfCard && !reduce && vfCard.animate) {
     const loopAnim = (el, frames, ms) => el && el.animate(frames, { duration: ms, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
     loopAnim($('.fl-orb', vfCard), [{ translate: '0 0' }, { translate: '0 -9px' }], 3200);
@@ -843,6 +844,93 @@
     }, { threshold: 0.3 }).observe(flow);
   }
 
+  /* ---------- 01 y 02: tutoriales de 3 pasos (las dos versiones) ----------
+     Como las historias: la barra del paso se llena y pasa al siguiente; al terminar el último
+     espera un momento y vuelve a empezar mientras se ve. Tocar un paso lo muestra y sigue desde
+     ahí. Con "reducir movimiento" o en Lite no avanza solo: los pasos se cambian tocándolos. */
+  $$('[data-tuto]').forEach((tuto) => {
+    const tabs = $$('.tuto-steps button', tuto), scenes = $$('.tuto-scene', tuto);
+    const STEP = 8400, HOLD = 4400;   // con calma: hay quien lee despacio
+    const auto = () => !reduce && !isLow();
+    let cur = 0, timer = 0, on = false;
+    tuto.style.setProperty('--tuto-t', STEP + 'ms');
+    const show = (i) => {
+      cur = i;
+      tabs.forEach((b, k) => {
+        b.setAttribute('aria-selected', String(k === i));
+        b.classList.toggle('is-done', k < i);
+        b.classList.remove('is-on');
+      });
+      scenes.forEach((s, k) => s.classList.toggle('is-on', k === i));
+      void tabs[i].offsetWidth;   // la barra del paso vuelve a llenarse desde cero
+      if (auto()) tabs[i].classList.add('is-on');
+    };
+    const next = () => {
+      clearTimeout(timer);
+      if (!auto()) { tuto.classList.add('is-still'); return; }
+      if (!on) return;
+      const last = cur === scenes.length - 1;
+      timer = setTimeout(() => { show(last ? 0 : cur + 1); next(); }, last ? STEP + HOLD : STEP);
+    };
+    tuto.classList.add('is-live');
+    if (!auto()) tuto.classList.add('is-still');
+    tabs.forEach((b, i) => b.addEventListener('click', () => { show(i); next(); }));
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting === on) return;
+      on = e.isIntersecting;
+      if (on) { show(0); next(); } else clearTimeout(timer);
+    }, { threshold: 0.3 }).observe(tuto);
+  });
+
+  /* ---------- Planes: el mazo (las dos versiones) ----------
+     Si cada plan cabe en la pantalla, se apilan al bajar (.is-on: position sticky) y el de atrás se
+     achica y se apaga un poco a medida que el siguiente lo tapa (--p de 0 a 1; con "reducir
+     movimiento" o en Lite se apilan, sin achicarse). Si alguno no cabe (celulares bajos), van uno
+     debajo de otro. Los botones de arriba llevan a cada plan, ya en su lugar del mazo. */
+  const stack = $('[data-stack]');
+  if (stack) {
+    const plans = $$('.stack-plan', stack);
+    const STEP = () => (innerWidth <= 760 ? 10 : 16);
+    const TOP = () => (innerWidth <= 760 ? 76 : 96);
+    let raf = 0;
+    const paint = () => {
+      raf = 0;
+      if (reduce || isLow() || !stack.classList.contains('is-on')) return;
+      const r = stack.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      plans.forEach((c, i) => {
+        const next = plans[i + 1];
+        const p = next ? clamp((c.getBoundingClientRect().bottom - next.getBoundingClientRect().top) / c.offsetHeight, 0, 1) : 0;
+        c.style.setProperty('--p', p.toFixed(3));
+      });
+    };
+    const fit = () => {
+      stack.style.setProperty('--stack-top', TOP() + 'px');
+      stack.classList.add('is-on');
+      const room = innerHeight - TOP() - STEP() * plans.length - 12;
+      const ok = plans.every((c) => c.offsetHeight <= room);
+      stack.classList.toggle('is-on', ok);
+      if (!ok) plans.forEach((c) => c.style.removeProperty('--p'));
+      paint();
+    };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(paint); }, { passive: true });
+    let rt = 0;
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 150); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    fit();
+    // a cada plan: donde queda en el mazo (su lugar sin sticky, menos su altura fija de arriba)
+    $$('[data-plan-go]').forEach((a) => a.addEventListener('click', (e) => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (!t) return;
+      e.preventDefault();
+      t.style.position = 'relative';
+      const y = t.getBoundingClientRect().top + scrollY;
+      t.style.position = '';
+      const off = stack.classList.contains('is-on') ? TOP() + plans.indexOf(t) * STEP() : TOP();
+      scrollTo({ top: y - off, behavior: reduce ? 'auto' : 'smooth' });
+    }));
+  }
+
   /* ---------- Automatización Web: demo paso a paso (las dos versiones) ----------
      Alguien escribe en el formulario de tu web, pulsa Enviar y cada automatización se
      enciende en orden: recibido, guardado, correo, cita y aviso. Vuelve a empezar mientras se ve. */
@@ -1130,10 +1218,14 @@
 
     const render = (flash) => {
       const d = read(rows[sel]);
-      pv.cat.textContent = cats[sel];
+      // la categoría y la foto salen de cada fila (data-cat y su miniatura con el producto);
+      // si la fila no las trae (version-conversion), las de siempre
+      const thumb = $('.a-thumb', rows[sel]);
+      pv.cat.textContent = rows[sel].dataset.cat || cats[sel];
       pv.name.textContent = d.name || 'Sin nombre';
       pv.price.textContent = d.price === '' ? '$—' : '$' + fmt(Math.max(0, Number(d.price)));
-      pv.obj.className = 'pv-obj ' + shapes[sel];
+      if (thumb && thumb.classList.contains('is-food')) pv.obj.textContent = thumb.textContent;
+      else pv.obj.className = 'pv-obj ' + shapes[sel];
       pv.card.classList.toggle('is-off', !d.visible);
       if (flash) {
         pv.card.classList.remove('flash');
@@ -1265,7 +1357,27 @@
     btn.addEventListener('click', () => { if (packSelect) packSelect.value = btn.dataset.pack; });
   });
 
-  /* ---------- Formulario de contacto ---------- */
+  /* ---------- Formulario de contacto ----------
+     Al enviar: 1) si Supabase está configurado (supabase-config.js), guarda el contacto con la
+     función submit_contact (supabase-setup.sql) y llega a "Contactados" en admin.html; la web solo
+     puede agregar, no leer. 2) Abre WhatsApp con todo lo que escribió la persona, ya ordenado (el
+     número está en contacto.js). La casilla de autorización es obligatoria. */
+  const saveContact = (d) => {
+    const cfg = window.GOTIA_SUPABASE || {};
+    if (!cfg.url || !cfg.anonKey) return;
+    const get = (store, k) => { try { return store.getItem(k); } catch (e) { return null; } };
+    const body = {
+      p_name: d.nombre.trim(), p_contact: d.contacto.trim(), p_business: d.negocio.trim(),
+      p_link: d.enlace.trim() || null, p_message: d.mensaje.trim() || null,
+      p_session: get(sessionStorage, 'gotia-sid'), p_visitor: get(localStorage, 'gotia-vid'), p_page: location.pathname
+    };
+    try {
+      fetch(cfg.url.replace(/\/+$/, '') + '/rest/v1/rpc/submit_contact', {
+        method: 'POST', keepalive: true, body: JSON.stringify(body),
+        headers: { apikey: cfg.anonKey, Authorization: 'Bearer ' + cfg.anonKey, 'Content-Type': 'application/json' }
+      }).catch(() => {});
+    } catch (e) {}
+  };
   const form = $('#contact-form');
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -1273,16 +1385,30 @@
       let ok = true;
       $$('[required]', form).forEach((input) => {
         const wrap = input.closest('.input');
-        const bad = !input.value.trim();
+        const bad = input.type === 'checkbox' ? !input.checked : !input.value.trim();
         wrap.classList.toggle('invalid', bad);
         if (bad && ok) { input.focus(); ok = false; }
       });
       if (!ok) return;
-      // TODO: conectar con tu servicio de formularios (Formspree, EmailJS, Make, WhatsApp API…)
-      // const data = Object.fromEntries(new FormData(form));
+      const d = Object.fromEntries(new FormData(form));
+      const msg = [
+        'Hola Gotia Studio 👋 Les escribo desde su web.',
+        'Nombre: ' + d.nombre.trim(),
+        'Negocio: ' + d.negocio.trim(),
+        d.enlace.trim() && 'Enlace: ' + d.enlace.trim(),
+        'Contacto: ' + d.contacto.trim(),
+        d.mensaje.trim() && 'Lo que busco: ' + d.mensaje.trim()
+      ].filter(Boolean).join('\n');
+      saveContact(d);
+      const num = (window.gotiaContacto || {}).whatsapp;
+      if (num) {
+        const url = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+        const win = window.open(url, '_blank', 'noopener');
+        if (!win) location.href = url;   // si el navegador bloquea la pestaña nueva
+      }
       form.classList.add('sent');
     });
-    $$('input, textarea', form).forEach((i) => i.addEventListener('input', () => i.closest('.input').classList.remove('invalid')));
+    $$('input, textarea', form).forEach((i) => i.addEventListener(i.type === 'checkbox' ? 'change' : 'input', () => i.closest('.input').classList.remove('invalid')));
   }
 
   /* ---------- Enlaces pendientes de configurar ---------- */
@@ -1292,10 +1418,78 @@
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
 
+  /* ---------- Sorteo de Lanzamiento: un pop-up al entrar que se va solo a los 5 s ----------
+     En todas las versiones y una vez por visita. Sale cuando la web ya está a la vista: al
+     terminar de cargar (o a los 3,5 s si la carga se alarga) y, en la 3D, después de la pantalla
+     de carga. La línea de abajo marca los 5 s y se detiene mientras el ratón está encima o el
+     teclado dentro. Se cierra también con la X, con Esc, tocando fuera o al ir a Instagram.
+     promoDone avisa cuando se cierra (true si llegó a salir): la invitación al 3D espera. */
+  const promo = $('#sorteo');
+  let promoDone = Promise.resolve(false);
+  if (promo) {
+    let seen = false;
+    try { seen = sessionStorage.getItem('gotia-sorteo') === '1'; } catch (e) {}
+    if (!seen) promoDone = new Promise((done) => {
+      const bar = $('.promo-bar', promo);
+      const LIFE = 5000;
+      // como en la invitación al 3D: el tiempo lo lleva un temporizador (left = lo que falta)
+      let line = null, timer = 0, left = LIFE, since = 0, gone = false;
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+      const onKey = (e) => { if (e.key === 'Escape') hide(); };
+      const hide = () => {
+        if (gone) return;
+        gone = true;
+        clearTimeout(timer);
+        promo.classList.remove('show');
+        removeEventListener('keydown', onKey);
+        setTimeout(() => { promo.hidden = true; if (line) line.cancel(); done(true); }, 500);
+      };
+      const run = () => {
+        if (gone || timer) return;
+        since = Date.now();
+        timer = setTimeout(hide, left);
+        if (line) line.play();
+      };
+      const hold = () => {
+        if (gone || !timer) return;
+        clearTimeout(timer);
+        timer = 0;
+        left = Math.max(0, left - (Date.now() - since));
+        if (line) line.pause();
+      };
+      const show = () => {
+        // en una pestaña de fondo espera a que se vea: si no, los 5 s pasarían sin que nadie lo vea
+        if (document.hidden) { document.addEventListener('visibilitychange', show, { once: true }); return; }
+        try { sessionStorage.setItem('gotia-sorteo', '1'); } catch (e) {}
+        promo.hidden = false;
+        void promo.offsetWidth;   // para que la entrada se anime
+        promo.classList.add('show');
+        document.addEventListener('visibilitychange', () => (document.hidden ? hold() : run()));
+        // en Lite todo va quieto: la línea no se mueve, pero el pop-up se va igual a los 5 s
+        if (bar.animate && !isLow()) line = bar.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: LIFE, fill: 'forwards' });
+        run();
+        addEventListener('keydown', onKey);
+        promo.addEventListener('pointerenter', hold);
+        promo.addEventListener('pointerleave', run);
+        promo.addEventListener('focusin', hold);
+        promo.addEventListener('focusout', () => setTimeout(() => { if (!promo.matches(':focus-within')) run(); }));
+      };
+      const loaded = new Promise((r) => (document.readyState === 'complete' ? r() : addEventListener('load', r, { once: true })));
+      // en la 3D, cuando la "G" de la carga ya llegó a su sitio (la red de seguridad, por si no llega)
+      const revealed = root.classList.contains('is-loading')
+        ? Promise.race([new Promise((r) => document.addEventListener('gotia:reveal', r, { once: true })), wait(7000)]).then(() => wait(700))
+        : Promise.resolve();
+      Promise.all([Promise.race([loaded, wait(3500)]), revealed]).then(() => wait(600)).then(show);
+      $('.promo-close', promo).addEventListener('click', hide);
+      $('[data-ig-perfil]', promo).addEventListener('click', hide);
+      promo.addEventListener('click', (e) => { if (e.target === promo) hide(); });
+    });
+  }
+
   /* ---------- Invitación a los efectos: sale del botón "3D" y se va sola a los 20 s ----------
      Solo en Esencial (ni en la 3D, que ya los tiene, ni en Lite, que es para equipos que no
      pueden con ellos), una vez por visita y no con movimiento reducido.
-     Aparece a los 4 s de entrar, justo debajo del botón "3D" del menú, señalándolo (el botón se
+     Aparece a los 4 s de entrar (o tras el pop-up del sorteo), justo debajo del botón "3D" del menú, señalándolo (el botón se
      marca mientras tanto). La línea de abajo marca los 20 s y se detiene mientras el ratón está
      encima o el teclado dentro. Se va también al abrir el menú del celular. */
   const invite = $('#fx-invite');
@@ -1338,7 +1532,8 @@
         left = Math.max(0, left - (Date.now() - since));
         if (line) line.pause();
       };
-      setTimeout(() => {
+      // a los 4 s de entrar; si salió el sorteo, 2,5 s después de que se cierre
+      promoDone.then((shown) => setTimeout(() => {
         if (gone || isLow()) return;
         try { sessionStorage.setItem('gotia-fx-invite', '1'); } catch (e) {}
         invite.hidden = false;
@@ -1352,7 +1547,7 @@
         invite.addEventListener('pointerleave', run);
         invite.addEventListener('focusin', hold);
         invite.addEventListener('focusout', () => setTimeout(() => { if (!invite.matches(':focus-within')) run(); }));
-      }, 4000);
+      }, shown ? 2500 : 4000));
       $('.fxi-close', invite).addEventListener('click', hide);
       if (burger) burger.addEventListener('click', hide);
     }

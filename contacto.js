@@ -4,15 +4,19 @@
    cambia aquí tu WhatsApp y tu Instagram y todos los botones se actualizan.
      · data-wa="mensaje"  → abre WhatsApp con ese mensaje ya escrito
      · data-ig            → abre un mensaje directo en Instagram
+     · data-ig-perfil     → abre el perfil de Instagram (para seguirlo: el sorteo)
+     · data-ig-user       → escribe el @ de Instagram en el texto
    ========================================================= */
 (() => {
   const CONTACTO = {
-    whatsapp: '573508676976',  // con indicativo, sin "+" ni espacios
+    whatsapp: '573027809730',  // con indicativo, sin "+" ni espacios
     instagram: 'gotiastudio'   // sin "@"
   };
 
   const num = CONTACTO.whatsapp.replace(/\D/g, '');
   const ig = CONTACTO.instagram.replace(/^@/, '').trim();
+  // el formulario de contacto (main.js) los usa para abrir WhatsApp con el mensaje
+  window.gotiaContacto = { whatsapp: num, instagram: ig };
   const open = (a, url) => {
     a.href = url;
     a.target = '_blank';
@@ -31,6 +35,13 @@
     if (!ig) { a.setAttribute('data-todo', 'instagram'); return; }
     open(a, `https://ig.me/m/${ig}`);
   });
+
+  document.querySelectorAll('[data-ig-perfil]').forEach((a) => {
+    if (!ig) { a.setAttribute('data-todo', 'instagram'); return; }
+    open(a, `https://www.instagram.com/${ig}/`);
+  });
+
+  if (ig) document.querySelectorAll('[data-ig-user]').forEach((el) => { el.textContent = '@' + ig; });
 
   if (!num) console.warn('Gotiastudio: falta el número de WhatsApp en contacto.js');
 })();

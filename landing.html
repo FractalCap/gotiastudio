@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<!--
+  Landing Gotiastudio · un solo objetivo: que te escriban por WhatsApp.
+  Todo lo que está [ENTRE CORCHETES] es para que pongas tus datos reales.
+  Las imágenes de muestra están en img/: reemplázalas con el mismo nombre y tamaño.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Páginas web para negocios en [CIUDAD] | Gotiastudio</title>
+<meta name="description" content="Tu página web lista en [X] días y conectada a tu WhatsApp. Diseño, dominio y hosting incluidos. Desde $[PRECIO] COP. Negocios en [CIUDAD] y toda Colombia.">
+<link rel="canonical" href="[URL DE LA PÁGINA]">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Para que el enlace se vea bien al compartirlo por WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Gotiastudio">
+<meta property="og:title" content="Página web para tu negocio, lista en [X] días">
+<meta property="og:description" content="Conectada a tu WhatsApp. Diseño, dominio y hosting incluidos. Desde $[PRECIO] COP en un solo pago.">
+<meta property="og:url" content="[URL DE LA PÁGINA]">
+<meta property="og:image" content="[URL DE LA PÁGINA]og-imagen.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Página web para tu negocio, conectada a tu WhatsApp · Gotiastudio">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="logo.webp" type="image/webp">
+
+<style>
+:root{
+  --azul:#1f6fe5;          /* marca */
+  --azul-suave:#eaf2fe;
+  --verde:#0a7f43;         /* WhatsApp: todos los botones */
+  --verde-osc:#086a37;
+  --tinta:#0d2347;         /* títulos */
+  --texto:#3b4a63;
+  --gris:#5f6d85;
+  --linea:#e3e9f2;
+  --fondo:#f5f8fc;
+  --estrella:#f5a524;
+  --radio:16px;
+  --fuente:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--texto);font:400 17px/1.55 var(--fuente);-webkit-font-smoothing:antialiased;padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{margin:0;color:var(--tinta);line-height:1.15;letter-spacing:-.02em}
+p,ul,ol,figure,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:inherit}
+strong{color:var(--tinta)}
+:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+.ico{width:22px;height:22px;flex:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.sec{padding:56px 0}
+.sec--fondo{background:var(--fondo)}
+.h2{font-size:28px;font-weight:800}
+.intro{margin-top:10px;color:var(--gris);max-width:36em}
+.aclara{color:var(--gris);font-weight:400}   /* explicación al lado de una palabra técnica */
+
+/* Botones */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;padding:0 24px;border:2px solid var(--verde);border-radius:14px;background:var(--verde);color:#fff;font-size:17px;font-weight:700;text-decoration:none;transition:background-color .15s,border-color .15s}
+.btn:hover{background:var(--verde-osc);border-color:var(--verde-osc)}
+.btn--grande{min-height:58px;font-size:18px}
+.btn--borde{background:#fff;color:var(--verde)}
+.btn--borde:hover{background:#eef8f2;border-color:var(--verde)}
+.nota{margin-top:10px;font-size:14px;color:var(--gris);text-align:center}
+
+/* Barra superior: sin menú ni enlaces */
+.top{border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
+.marca{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:800;color:var(--tinta);letter-spacing:-.01em}
+.marca img{width:30px;height:30px}
+.top__lugar{font-size:14px;color:var(--gris);text-align:right}
+
+/* 1. Encabezado */
+.hero{padding-top:28px;overflow:hidden}
+.hero h1{font-size:clamp(28px,7.8vw,36px);font-weight:800;letter-spacing:-.025em}
+.hero__sub{margin-top:14px;font-size:18px}
+.hero__sub strong{white-space:nowrap}
+.hero .btn{margin-top:22px}
+.hero__cel{height:190px;margin-top:28px;overflow:hidden}
+.cel{position:relative;width:248px;margin:0 auto;padding:9px 9px 0;border-radius:38px 38px 0 0;background:var(--tinta);box-shadow:0 18px 40px rgba(13,35,71,.18)}
+.cel::before{content:"";position:absolute;top:17px;left:50%;width:66px;height:18px;margin-left:-33px;border-radius:12px;background:var(--tinta)}
+.cel img{width:100%;border-radius:30px 30px 0 0}
+
+/* 2. Prueba rápida */
+.prueba{padding:28px 0 36px;background:var(--fondo);border-top:1px solid var(--linea)}
+.prueba__datos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dato{padding:14px 16px;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
+.dato strong{display:block;font-size:24px;font-weight:800;line-height:1.25}
+.dato > span{font-size:14px;color:var(--gris)}
+.estrella{color:var(--estrella)}
+.logos__titulo{margin-top:24px;font-size:14px;color:var(--gris);text-align:center}
+.logos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.logos img{width:100%;border-radius:10px}
+
+/* 3. El problema */
+.dolor{display:grid;gap:12px;margin-top:24px}
+.dolor li{display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid var(--linea);border-radius:var(--radio);color:var(--tinta);font-weight:600}
+.dolor .ico{width:28px;height:28px;padding:5px;border-radius:50%;background:var(--fondo);color:var(--gris)}
+.solucion{margin-top:20px;padding:20px;border-radius:var(--radio);background:var(--azul-suave);color:var(--tinta);font-size:20px;font-weight:700;line-height:1.35}
+
+/* 4. Portafolio */
+.trabajos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.trabajo{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
+.trabajo__foto{padding:12px 12px 0;background:var(--fondo)}
+.trabajo__foto img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border:1px solid var(--linea);border-bottom:0;border-radius:12px 12px 0 0}
+.trabajo__info{display:flex;flex:1;flex-direction:column;padding:12px 12px 0}
+.trabajo h3{font-size:16px;letter-spacing:-.01em}
+.trabajo__lugar{font-size:13px;color:var(--gris)}
+.trabajo__resultado{display:flex;gap:6px;margin-top:8px;color:var(--azul);font-size:14px;font-weight:700;line-height:1.35}
+.trabajo__resultado .ico{width:18px;height:18px}
+.trabajo__enlace{display:flex;align-items:center;gap:6px;min-height:48px;margin-top:auto;color:var(--tinta);font-size:15px;font-weight:700;text-decoration:none}
+.trabajo__enlace .ico{width:16px;height:16px}
+
+/* 5. Planes */
+.planes{display:grid;gap:24px;margin-top:32px}
+.plan{position:relative;display:flex;flex-direction:column;padding:24px 20px;border:1px solid var(--linea);border-radius:20px;background:#fff}
+.plan--top{border:2px solid var(--azul);box-shadow:0 12px 32px rgba(31,111,229,.12)}
+.plan__etiqueta{position:absolute;top:-13px;left:20px;padding:3px 12px;border-radius:999px;background:var(--azul);color:#fff;font-size:13px;font-weight:700}
+.plan h3{font-size:22px}
+.plan__para{margin-top:4px;color:var(--gris);font-size:15px}
+.plan__precio{margin-top:16px;color:var(--tinta);font-size:34px;font-weight:800;line-height:1.1;letter-spacing:-.02em;overflow-wrap:anywhere}
+.plan__precio small{color:var(--gris);font-size:16px;font-weight:600;letter-spacing:0}
+.plan__unico{color:var(--gris);font-size:14px}
+.plan__plazo{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:14px;padding:8px 12px;border-radius:10px;background:var(--fondo);color:var(--tinta);font-size:15px;font-weight:700}
+.plan__plazo .ico{width:18px;height:18px;color:var(--azul)}
+.lista{display:grid;gap:10px;margin:18px 0 24px;font-size:16px;line-height:1.45}
+.lista li{display:flex;gap:10px}
+.lista .ico{width:20px;height:20px;margin-top:1px;color:var(--azul)}
+.plan .btn{margin-top:auto}
+.despues{display:flex;gap:12px;margin-top:24px;padding:18px 20px;border-radius:var(--radio);background:var(--fondo);font-size:16px}
+.despues .ico{color:var(--azul)}
+
+/* 6. Cómo funciona */
+.pasos{display:grid;margin-top:28px}
+.paso{position:relative;display:grid;grid-template-columns:44px 1fr;gap:14px;padding-bottom:24px}
+.paso::before{content:"";position:absolute;top:48px;bottom:4px;left:21px;width:2px;background:var(--linea)}
+.paso:last-child{padding-bottom:0}
+.paso:last-child::before{display:none}
+.paso__n{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--azul);color:#fff;font-size:18px;font-weight:800}
+.paso h3{padding-top:9px;font-size:18px}
+.paso p{margin-top:4px;color:var(--gris);font-size:16px}
+.chip{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;background:var(--azul-suave);color:var(--azul);font-size:13px;font-weight:700}
+
+/* 7. Testimonios */
+.google{margin-top:10px;color:var(--tinta);font-weight:700}
+.resenas{display:grid;gap:16px;margin-top:24px}
+.resena{display:flex;flex-direction:column;gap:16px;padding:20px;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
+.resena blockquote{color:var(--tinta);font-size:17px;line-height:1.5}
+.resena figcaption{display:flex;align-items:center;gap:12px;margin-top:auto;color:var(--gris);font-size:14px;line-height:1.4}
+.resena figcaption img{width:48px;height:48px;border-radius:50%}
+.resena figcaption strong{display:block;font-size:15px}
+
+/* 8. Garantía y pagos */
+.garantia{display:grid;gap:12px;margin-top:24px}
+.garantia > div{padding:20px;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
+.icono{display:grid;place-items:center;width:44px;height:44px;margin-bottom:12px;border-radius:12px;background:var(--azul-suave);color:var(--azul)}
+.garantia h3{font-size:18px}
+.garantia p{margin-top:6px;color:var(--gris);font-size:16px}
+.pagos{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pagos li{padding:6px 12px;border:1px solid var(--linea);border-radius:999px;color:var(--tinta);font-size:14px;font-weight:600}
+
+/* 9. Preguntas frecuentes (acordeón sin JavaScript) */
+.faq{max-width:760px;margin-top:24px;border-top:1px solid var(--linea)}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:14px 0;color:var(--tinta);font-size:17px;font-weight:700;list-style:none;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:var(--fondo);color:var(--azul);font-size:22px;font-weight:600;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding-bottom:18px;font-size:16px}
+
+/* 10. Cierre y pie */
+.cierre{background:var(--tinta);text-align:center}
+.cierre h2{max-width:20em;margin:0 auto;color:#fff;font-size:28px;font-weight:800}
+.cierre .btn{max-width:420px;margin:24px auto 0}
+.cierre .nota{color:#b9c7e0}
+.pie{padding:32px 0 24px;color:var(--gris);font-size:14px}
+.pie .marca{font-size:17px}
+.pie__datos{display:grid;gap:6px;margin-top:12px}
+.pie__datos a{display:inline-block;padding:12px 0;color:var(--tinta);font-weight:600}
+.pie__datos li{line-height:1.4}
+.politica{margin-top:12px}
+.politica summary{display:flex;align-items:center;min-height:48px;color:var(--tinta);font-weight:600;text-decoration:underline;cursor:pointer}
+.politica div{display:grid;gap:8px;max-width:760px;padding-bottom:12px}
+.copy{margin-top:12px}
+
+/* Botón fijo de WhatsApp */
+.fijo{position:fixed;right:0;bottom:0;left:0;z-index:10;padding:10px 16px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--linea);background:rgba(255,255,255,.97);box-shadow:0 -6px 20px rgba(13,35,71,.08)}
+.fijo .btn{min-height:54px}
+
+@media (min-width:600px){
+  .wrap{padding:0 24px}
+  .planes,.resenas,.garantia{max-width:560px}
+}
+
+@media (min-width:900px){
+  body{padding-bottom:0;font-size:18px}
+  .wrap{padding:0 32px}
+  .sec{padding:96px 0}
+  .h2{font-size:40px}
+  .intro{font-size:19px}
+  .top .wrap{height:68px}
+  .top__lugar{font-size:15px}
+  .hero{padding-top:56px}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:48px}
+  .hero__texto{padding-bottom:56px}
+  .hero h1{font-size:50px}
+  .hero__sub{font-size:20px;max-width:30em}
+  .hero .btn{display:inline-flex;width:auto}
+  .hero .nota{text-align:left}
+  .hero__cel{align-self:end;height:470px;margin-top:0}
+  .cel{width:290px}
+  .prueba__datos{display:flex;justify-content:center;gap:16px}
+  .dato{min-width:260px;text-align:center}
+  .logos{grid-template-columns:repeat(6,1fr);max-width:960px;margin-left:auto;margin-right:auto}
+  .dolor{grid-template-columns:repeat(3,1fr);gap:16px}
+  .dolor li{flex-direction:column;padding:24px;font-size:19px}
+  .solucion{padding:28px 32px;font-size:26px;text-align:center}
+  .trabajos{grid-template-columns:repeat(3,1fr);gap:20px}
+  .trabajo__info{padding:16px 16px 0}
+  .trabajo h3{font-size:18px}
+  .trabajo__lugar,.trabajo__resultado{font-size:15px}
+  .planes,.resenas,.garantia{max-width:none}
+  .planes{grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+  .plan{padding:32px 26px}
+  .despues{justify-content:center;font-size:17px}
+  .pasos{grid-template-columns:repeat(4,1fr);gap:28px}
+  .paso{grid-template-columns:1fr;align-content:start;gap:12px;padding-bottom:0}
+  .paso::before{top:21px;bottom:auto;left:56px;right:-16px;width:auto;height:2px}
+  .paso:last-child::before{display:none}
+  .paso h3{padding-top:0}
+  .resenas{grid-template-columns:repeat(3,1fr);gap:20px}
+  .garantia{grid-template-columns:repeat(3,1fr);gap:20px}
+  .faq{margin-left:auto;margin-right:auto}
+  .faq-titulo{text-align:center}
+  .cierre h2{font-size:40px}
+  .pie{padding-bottom:40px}
+  .fijo{right:24px;bottom:24px;left:auto;padding:0;border:0;background:none;box-shadow:none}
+  .fijo .btn{width:auto;padding:0 22px;box-shadow:0 10px 30px rgba(10,127,67,.35)}
+}
+</style>
+
+<script>
+/* Medición. Pon tus identificadores: mientras tengan corchetes no se carga nada.
+   GA4: evento "click_whatsapp" con el parámetro "ubicacion" (encabezado, plan, cierre, boton_fijo).
+   Meta: evento "Contact" en esos mismos clics. Clarity: grabaciones y mapas de calor. */
+(function (w, d) {
+  var GA4 = '[ID GA4]', PIXEL = '[ID PÍXEL META]', CLARITY = '[ID CLARITY]';
+  var listo = function (id) { return id.indexOf('[') < 0; };
+  var pendientes = [];
+
+  w.dataLayer = w.dataLayer || [];
+  w.gtag = function () { w.dataLayer.push(arguments); };
+  if (listo(GA4)) {
+    gtag('js', new Date());
+    gtag('config', GA4);
+    pendientes.push('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+  }
+
+  if (listo(PIXEL)) {
+    var f = w.fbq = function () { f.callMethod ? f.callMethod.apply(f, arguments) : f.queue.push(arguments); };
+    w._fbq = f; f.push = f; f.loaded = true; f.version = '2.0'; f.queue = [];
+    fbq('init', PIXEL);
+    fbq('track', 'PageView');
+    pendientes.push('https://connect.facebook.net/en_US/fbevents.js');
+  }
+
+  if (listo(CLARITY)) {
+    w.clarity = w.clarity || function () { (w.clarity.q = w.clarity.q || []).push(arguments); };
+    pendientes.push('https://www.clarity.ms/tag/' + CLARITY);
+  }
+
+  // Los scripts de medición se descargan cuando la página ya cargó, para no frenarla.
+  // Los clics de antes quedan en cola y se envían al cargar.
+  w.addEventListener('load', function () {
+    var cargar = function () {
+      pendientes.forEach(function (src) {
+        var s = d.createElement('script');
+        s.async = true; s.src = src;
+        d.head.appendChild(s);
+      });
+    };
+    'requestIdleCallback' in w ? w.requestIdleCallback(cargar, { timeout: 2000 }) : setTimeout(cargar, 1);
+  });
+
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-wa]');
+    if (!a) return;
+    var datos = { ubicacion: a.getAttribute('data-wa') };
+    if (a.getAttribute('data-plan')) datos.plan = a.getAttribute('data-plan');
+    gtag('event', 'click_whatsapp', datos);
+    if (w.fbq) fbq('track', 'Contact', datos);
+  });
+})(window, document);
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Gotiastudio","description":"Páginas web para pymes y negocios en Colombia, conectadas a WhatsApp.","url":"[URL DE LA PÁGINA]","image":"[URL DE LA PÁGINA]og-imagen.jpg","telephone":"+573027809730","email":"gotiastudiocontacto@gmail.com","areaServed":{"@type":"Country","name":"Colombia"},"address":{"@type":"PostalAddress","addressLocality":"[CIUDAD]","addressCountry":"CO"},"sameAs":["https://www.instagram.com/gotiastudio/"]}
+</script>
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=[ID PÍXEL META]&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-sube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+  <symbol id="i-cambios" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
+  <symbol id="i-partes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <span class="marca"><img src="logo.webp" width="64" height="64" alt="">Gotiastudio</span>
+    <span class="top__lugar">Diseño web · Colombia</span>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Encabezado: debe decir lo mismo que tus anuncios (precio, plazo y promesa) -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__texto">
+        <h1>Página web para tu negocio, lista en [X] días y conectada a tu WhatsApp</h1>
+        <p class="hero__sub">Diseño, dominio <span class="aclara">(tu dirección web)</span> y hosting <span class="aclara">(donde vive tu página)</span> incluidos. Desde <strong>$[PRECIO] COP</strong> en un solo pago.</p>
+        <a class="btn btn--grande" href="https://wa.me/573027809730?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20una%20web%20para%20mi%20negocio%20de%20___" target="_blank" rel="noopener" data-wa="encabezado"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+        <p class="nota">Te respondemos en [MI TIEMPO REAL DE RESPUESTA] · Sin compromiso</p>
+      </div>
+      <div class="hero__cel">
+        <div class="cel">
+          <img src="hero-celular.webp" width="540" height="1170" fetchpriority="high" alt="Página web hecha por Gotiastudio, vista en un celular">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Prueba rápida -->
+  <section class="prueba" aria-label="Clientes y reseñas">
+    <div class="wrap">
+      <div class="prueba__datos">
+        <p class="dato"><strong>[N]</strong><span>webs entregadas</span></p>
+        <p class="dato"><strong>[CALIFICACIÓN] <span class="estrella">★</span></strong><span>en Google · [N] reseñas</span></p>
+      </div>
+      <p class="logos__titulo">Negocios que ya tienen su página con nosotros</p>
+      <ul class="logos">
+        <li><img src="logo-cliente-1.webp" width="240" height="96" loading="lazy" decoding="async" alt="[NOMBRE DEL CLIENTE 1]"></li>
+        <li><img src="logo-cliente-2.webp" width="240" height="96" loading="lazy" decoding="async" alt="[NOMBRE DEL CLIENTE 2]"></li>
+        <li><img src="logo-cliente-3.webp" width="240" height="96" loading="lazy" decoding="async" alt="[NOMBRE DEL CLIENTE 3]"></li>
+        <li><img src="logo-cliente-4.webp" width="240" height="96" loading="lazy" decoding="async" alt="[NOMBRE DEL CLIENTE 4]"></li>
+        <li><img src="logo-cliente-5.webp" width="240" height="96" loading="lazy" decoding="async" alt="[NOMBRE DEL CLIENTE 5]"></li>
+        <li><img src="logo-cliente-6.webp" width="240" height="96" loading="lazy" decoding="async" alt="[NOMBRE DEL CLIENTE 6]"></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. El problema -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="h2">¿Te suena familiar?</h2>
+      <ul class="dolor">
+        <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Vendes solo por redes y dependes del algoritmo.</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Tus clientes te buscan en Google y no apareces.</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg>Sin página web, tu negocio se ve menos serio.</li>
+      </ul>
+      <p class="solucion">Instagram te da seguidores; tu página te ayuda a convertirlos en clientes.</p>
+    </div>
+  </section>
+
+  <!-- 4. Portafolio: de 3 a 6 webs reales (borra las tarjetas que sobren) -->
+  <section class="sec sec--fondo">
+    <div class="wrap">
+      <h2 class="h2">Webs reales que ya entregamos</h2>
+      <p class="intro">Ábrelas y pruébalas desde tu celular.</p>
+      <ul class="trabajos">
+        <li class="trabajo">
+          <div class="trabajo__foto"><img src="portafolio-1.webp" width="400" height="720" loading="lazy" decoding="async" alt="Página de [NOMBRE DEL NEGOCIO 1] en un celular"></div>
+          <div class="trabajo__info">
+            <h3>[NOMBRE DEL NEGOCIO 1]</h3>
+            <p class="trabajo__lugar">[CIUDAD DEL CLIENTE]</p>
+            <p class="trabajo__resultado"><svg class="ico" aria-hidden="true"><use href="#i-sube"/></svg>[RESULTADO 1]</p>
+            <a class="trabajo__enlace" href="[ENLACE 1]" target="_blank" rel="noopener">Ver la página<svg class="ico" aria-hidden="true"><use href="#i-abrir"/></svg></a>
+          </div>
+        </li>
+        <li class="trabajo">
+          <div class="trabajo__foto"><img src="portafolio-2.webp" width="400" height="720" loading="lazy" decoding="async" alt="Página de [NOMBRE DEL NEGOCIO 2] en un celular"></div>
+          <div class="trabajo__info">
+            <h3>[NOMBRE DEL NEGOCIO 2]</h3>
+            <p class="trabajo__lugar">[CIUDAD DEL CLIENTE]</p>
+            <p class="trabajo__resultado"><svg class="ico" aria-hidden="true"><use href="#i-sube"/></svg>[RESULTADO 2]</p>
+            <a class="trabajo__enlace" href="[ENLACE 2]" target="_blank" rel="noopener">Ver la página<svg class="ico" aria-hidden="true"><use href="#i-abrir"/></svg></a>
+          </div>
+        </li>
+        <li class="trabajo">
+          <div class="trabajo__foto"><img src="portafolio-3.webp" width="400" height="720" loading="lazy" decoding="async" alt="Página de [NOMBRE DEL NEGOCIO 3] en un celular"></div>
+          <div class="trabajo__info">
+            <h3>[NOMBRE DEL NEGOCIO 3]</h3>
+            <p class="trabajo__lugar">[CIUDAD DEL CLIENTE]</p>
+            <p class="trabajo__resultado"><svg class="ico" aria-hidden="true"><use href="#i-sube"/></svg>[RESULTADO 3]</p>
+            <a class="trabajo__enlace" href="[ENLACE 3]" target="_blank" rel="noopener">Ver la página<svg class="ico" aria-hidden="true"><use href="#i-abrir"/></svg></a>
+          </div>
+        </li>
+        <li class="trabajo">
+          <div class="trabajo__foto"><img src="portafolio-4.webp" width="400" height="720" loading="lazy" decoding="async" alt="Página de [NOMBRE DEL NEGOCIO 4] en un celular"></div>
+          <div class="trabajo__info">
+            <h3>[NOMBRE DEL NEGOCIO 4]</h3>
+            <p class="trabajo__lugar">[CIUDAD DEL CLIENTE]</p>
+            <p class="trabajo__resultado"><svg class="ico" aria-hidden="true"><use href="#i-sube"/></svg>[RESULTADO 4]</p>
+            <a class="trabajo__enlace" href="[ENLACE 4]" target="_blank" rel="noopener">Ver la página<svg class="ico" aria-hidden="true"><use href="#i-abrir"/></svg></a>
+          </div>
+        </li>
+        <li class="trabajo">
+          <div class="trabajo__foto"><img src="portafolio-5.webp" width="400" height="720" loading="lazy" decoding="async" alt="Página de [NOMBRE DEL NEGOCIO 5] en un celular"></div>
+          <div class="trabajo__info">
+            <h3>[NOMBRE DEL NEGOCIO 5]</h3>
+            <p class="trabajo__lugar">[CIUDAD DEL CLIENTE]</p>
+            <p class="trabajo__resultado"><svg class="ico" aria-hidden="true"><use href="#i-sube"/></svg>[RESULTADO 5]</p>
+            <a class="trabajo__enlace" href="[ENLACE 5]" target="_blank" rel="noopener">Ver la página<svg class="ico" aria-hidden="true"><use href="#i-abrir"/></svg></a>
+          </div>
+        </li>
+        <li class="trabajo">
+          <div class="trabajo__foto"><img src="portafolio-6.webp" width="400" height="720" loading="lazy" decoding="async" alt="Página de [NOMBRE DEL NEGOCIO 6] en un celular"></div>
+          <div class="trabajo__info">
+            <h3>[NOMBRE DEL NEGOCIO 6]</h3>
+            <p class="trabajo__lugar">[CIUDAD DEL CLIENTE]</p>
+            <p class="trabajo__resultado"><svg class="ico" aria-hidden="true"><use href="#i-sube"/></svg>[RESULTADO 6]</p>
+            <a class="trabajo__enlace" href="[ENLACE 6]" target="_blank" rel="noopener">Ver la página<svg class="ico" aria-hidden="true"><use href="#i-abrir"/></svg></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Planes y precios -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="h2">Planes y precios</h2>
+      <p class="intro">Precios en pesos colombianos. Pagas una sola vez por tu página.</p>
+      <div class="planes">
+        <article class="plan">
+          <h3>Emprendedor</h3>
+          <p class="plan__para">Para empezar a mostrar tu negocio en internet.</p>
+          <p class="plan__precio">$[PRECIO] <small>COP</small></p>
+          <p class="plan__unico">Pago único</p>
+          <p class="plan__plazo"><svg class="ico" aria-hidden="true"><use href="#i-reloj"/></svg>Lista en [X] días</p>
+          <ul class="lista">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] secciones</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio <span class="aclara">(tu dirección web, como tunegocio.com)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Hosting <span class="aclara">(el espacio donde vive tu página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Certificado de seguridad <span class="aclara">(el candado que protege tu página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de WhatsApp <span class="aclara">(te escriben con un toque)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[Apareces en Google Maps]</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] rondas de cambios</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] meses de mantenimiento incluidos <span class="aclara">(la revisamos y la mantenemos al día)</span></span></li>
+          </ul>
+          <a class="btn btn--borde" href="https://wa.me/573027809730?text=Hola%2C%20me%20interesa%20el%20plan%20Emprendedor.%20Mi%20negocio%20es%20___" target="_blank" rel="noopener" data-wa="plan" data-plan="Emprendedor"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Quiero este plan</a>
+        </article>
+
+        <article class="plan plan--top">
+          <span class="plan__etiqueta">Recomendado</span>
+          <h3>Negocio</h3>
+          <p class="plan__para">Para negocios que quieren más clientes desde Google.</p>
+          <p class="plan__precio">$[PRECIO NEGOCIO] <small>COP</small></p>
+          <p class="plan__unico">Pago único</p>
+          <p class="plan__plazo"><svg class="ico" aria-hidden="true"><use href="#i-reloj"/></svg>Lista en [Y] días</p>
+          <ul class="lista">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] secciones</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio <span class="aclara">(tu dirección web, como tunegocio.com)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Hosting <span class="aclara">(el espacio donde vive tu página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Certificado de seguridad <span class="aclara">(el candado que protege tu página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de WhatsApp <span class="aclara">(te escriben con un toque)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[Apareces en Google Maps]</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] rondas de cambios</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] meses de mantenimiento incluidos <span class="aclara">(la revisamos y la mantenemos al día)</span></span></li>
+          </ul>
+          <a class="btn" href="https://wa.me/573027809730?text=Hola%2C%20me%20interesa%20el%20plan%20Negocio.%20Mi%20negocio%20es%20___" target="_blank" rel="noopener" data-wa="plan" data-plan="Negocio"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Quiero este plan</a>
+        </article>
+
+        <article class="plan">
+          <h3>Tienda online</h3>
+          <p class="plan__para">Para vender tus productos por internet.</p>
+          <p class="plan__precio">$[PRECIO TIENDA] <small>COP</small></p>
+          <p class="plan__unico">Pago único</p>
+          <p class="plan__plazo"><svg class="ico" aria-hidden="true"><use href="#i-reloj"/></svg>Lista en [Z] días</p>
+          <ul class="lista">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] secciones</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[Catálogo de hasta N productos]</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[Pagos en línea] <span class="aclara">(te pagan desde la página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio <span class="aclara">(tu dirección web, como tunegocio.com)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Hosting <span class="aclara">(el espacio donde vive tu página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Certificado de seguridad <span class="aclara">(el candado que protege tu página)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de WhatsApp <span class="aclara">(te escriben con un toque)</span></span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[Apareces en Google Maps]</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] rondas de cambios</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>[N] meses de mantenimiento incluidos <span class="aclara">(la revisamos y la mantenemos al día)</span></span></li>
+          </ul>
+          <a class="btn btn--borde" href="https://wa.me/573027809730?text=Hola%2C%20me%20interesa%20el%20plan%20Tienda%20online.%20Mi%20negocio%20es%20___" target="_blank" rel="noopener" data-wa="plan" data-plan="Tienda online"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Quiero este plan</a>
+        </article>
+      </div>
+      <p class="despues"><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg><span>Después de los [N] meses incluidos, el plan mensual cuesta <strong>$[VALOR MENSUAL] COP</strong>. Incluye mantenimiento y seguridad, asesoría con los datos de tu web y redes sociales para traerte visitas.</span></p>
+    </div>
+  </section>
+
+  <!-- 6. Cómo funciona -->
+  <section class="sec sec--fondo">
+    <div class="wrap">
+      <h2 class="h2">Cómo funciona</h2>
+      <p class="intro">Cuatro pasos y tu página queda lista.</p>
+      <ol class="pasos">
+        <li class="paso">
+          <span class="paso__n">1</span>
+          <div>
+            <h3>Hablamos 15 minutos por WhatsApp.</h3>
+            <p>Nos cuentas qué vendes y a quién le vendes.</p>
+            <span class="chip">15 minutos</span>
+          </div>
+        </li>
+        <li class="paso">
+          <span class="paso__n">2</span>
+          <div>
+            <h3>Diseñamos tu página en [X] días.</h3>
+            <p>Tú nos mandas tus fotos y datos. Nosotros hacemos el resto.</p>
+            <span class="chip">[X] días</span>
+          </div>
+        </li>
+        <li class="paso">
+          <span class="paso__n">3</span>
+          <div>
+            <h3>Ajustamos lo que quieras ([N] rondas de cambios).</h3>
+            <p>Revisas tu página y nos dices qué cambiar.</p>
+            <span class="chip">[N] rondas</span>
+          </div>
+        </li>
+        <li class="paso">
+          <span class="paso__n">4</span>
+          <div>
+            <h3>La publicamos y te entregamos tus accesos.</h3>
+            <p>Tus accesos son las claves para entrar a tu página. Todo queda a tu nombre.</p>
+            <span class="chip">Apenas la apruebes</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 7. Testimonios reales: foto, nombre, negocio, ciudad y resultado en palabras del cliente -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="h2">Lo que dicen nuestros clientes</h2>
+      <p class="google"><span class="estrella">★</span> [CALIFICACIÓN] en Google · [N] reseñas</p>
+      <div class="resenas">
+        <figure class="resena">
+          <blockquote>“[TESTIMONIO 1]”</blockquote>
+          <figcaption><img src="cliente-1.webp" width="96" height="96" loading="lazy" decoding="async" alt=""><span><strong>[NOMBRE 1]</strong>[NEGOCIO 1] · [CIUDAD DEL CLIENTE]</span></figcaption>
+        </figure>
+        <figure class="resena">
+          <blockquote>“[TESTIMONIO 2]”</blockquote>
+          <figcaption><img src="cliente-2.webp" width="96" height="96" loading="lazy" decoding="async" alt=""><span><strong>[NOMBRE 2]</strong>[NEGOCIO 2] · [CIUDAD DEL CLIENTE]</span></figcaption>
+        </figure>
+        <figure class="resena">
+          <blockquote>“[TESTIMONIO 3]”</blockquote>
+          <figcaption><img src="cliente-3.webp" width="96" height="96" loading="lazy" decoding="async" alt=""><span><strong>[NOMBRE 3]</strong>[NEGOCIO 3] · [CIUDAD DEL CLIENTE]</span></figcaption>
+        </figure>
+      </div>
+      <!-- Capturas de chats de WhatsApp: SOLO con permiso escrito del cliente. Para usarlas, quita este comentario:
+      <ul class="trabajos">
+        <li class="trabajo"><div class="trabajo__foto"><img src="img/chat-1.webp" width="400" height="720" loading="lazy" decoding="async" alt="Mensaje de un cliente por WhatsApp"></div></li>
+      </ul>
+      -->
+    </div>
+  </section>
+
+  <!-- 8. Garantía y pagos -->
+  <section class="sec sec--fondo">
+    <div class="wrap">
+      <h2 class="h2">Garantía y pagos</h2>
+      <div class="garantia">
+        <div>
+          <span class="icono"><svg class="ico" aria-hidden="true"><use href="#i-cambios"/></svg></span>
+          <h3>[N] rondas de cambios incluidas</h3>
+          <p>Revisas tu página y la ajustamos a tu gusto.</p>
+        </div>
+        <div>
+          <span class="icono"><svg class="ico" aria-hidden="true"><use href="#i-partes"/></svg></span>
+          <h3>Pagas por partes</h3>
+          <p>[50% al empezar y 50% al publicar]</p>
+        </div>
+        <div>
+          <span class="icono"><svg class="ico" aria-hidden="true"><use href="#i-pago"/></svg></span>
+          <h3>Paga como prefieras</h3>
+          <ul class="pagos">
+            <li>Nequi</li>
+            <li>Llave Bre-B o código QR</li>
+            <li>Transferencia</li>
+            <li>Tarjeta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Preguntas frecuentes: revisa que cada respuesta sea como trabajas tú -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="h2 faq-titulo">Preguntas frecuentes</h2>
+      <div class="faq">
+        <details>
+          <summary>¿El dominio queda a mi nombre?</summary>
+          <p>Sí. Tu dominio <span class="aclara">(tu dirección web)</span> se registra a tu nombre. Es tuyo, aunque dejes de trabajar con nosotros.</p>
+        </details>
+        <details>
+          <summary>¿Qué pago cada año?</summary>
+          <p>Solo la renovación del dominio y el hosting <span class="aclara">(el espacio donde vive tu página)</span>: $[VALOR ANUAL] COP al año. [El primer año va incluido en tu plan.]</p>
+        </details>
+        <details>
+          <summary>¿Puedo editarla yo?</summary>
+          <p>Sí. Te entregamos tus accesos y te enseñamos a cambiar textos y fotos. Si prefieres, lo hacemos nosotros.</p>
+        </details>
+        <details>
+          <summary>¿Mi negocio sale en Google?</summary>
+          <p>Sí. Dejamos tu página lista para que Google la encuentre. Eso se llama SEO <span class="aclara">(ayudar a que te encuentren en Google)</span>. [Con los planes Negocio y Tienda online también apareces en Google Maps.] Llegar a los primeros puestos toma tiempo. Nadie serio te lo promete en días.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto tarda?</summary>
+          <p>Emprendedor: [X] días. Negocio: [Y] días. Tienda online: [Z] días. Contamos desde que nos envías tus fotos y datos.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa cuando terminan los meses de mantenimiento incluidos?</summary>
+          <p>Puedes seguir con el plan mensual de $[VALOR MENSUAL] COP. Incluye mantenimiento, seguridad, asesoría con tus datos y redes sociales. [Si no lo tomas, tu página sigue funcionando igual.]</p>
+        </details>
+        <details>
+          <summary>¿Cómo pago?</summary>
+          <p>Pagas por partes: [50% al empezar y 50% al publicar]. Recibimos Nequi, llave Bre-B o código QR, transferencia y tarjeta.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Cierre -->
+  <section class="sec cierre">
+    <div class="wrap">
+      <h2>Tu página web lista en [X] días, conectada a tu WhatsApp y desde $[PRECIO] COP.</h2>
+      <a class="btn btn--grande" href="https://wa.me/573027809730?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20una%20web%20para%20mi%20negocio%20de%20___" target="_blank" rel="noopener" data-wa="cierre"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+      <p class="nota">Te respondemos en [MI TIEMPO REAL DE RESPUESTA] · Sin compromiso</p>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <p class="marca">Gotiastudio</p>
+    <ul class="pie__datos">
+      <li>[CIUDAD], Colombia</li>
+      <li>WhatsApp: <a href="https://wa.me/573027809730?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20una%20web%20para%20mi%20negocio%20de%20___" target="_blank" rel="noopener" data-wa="cierre">+57 302 780 9730</a></li>
+      <li>Instagram: @gotiastudio</li>
+      <li>Correo: gotiastudiocontacto@gmail.com</li>
+    </ul>
+    <details class="politica">
+      <summary>Política de tratamiento de datos</summary>
+      <div>
+        <p>Responsable: [NOMBRE O RAZÓN SOCIAL Y NIT], [CIUDAD], Colombia. Correo: gotiastudiocontacto@gmail.com.</p>
+        <p>Tratamos tus datos según la Ley 1581 de 2012. Usamos tu nombre y tu número solo para responderte y enviarte tu cotización.</p>
+        <p>Esta página usa Google Analytics, el píxel de Meta y Microsoft Clarity para contar visitas y mejorar la página.</p>
+        <p>Puedes pedir que actualicemos o borremos tus datos escribiendo a gotiastudiocontacto@gmail.com.</p>
+        <p>[PEGA AQUÍ TU POLÍTICA COMPLETA O REVISA ESTE TEXTO CON TU ABOGADO]</p>
+      </div>
+    </details>
+    <p class="copy">© 2026 Gotiastudio</p>
+  </div>
+</footer>
+
+<div class="fijo">
+  <a class="btn" href="https://wa.me/573027809730?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20una%20web%20para%20mi%20negocio%20de%20___" target="_blank" rel="noopener" data-wa="boton_fijo"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Cotizar por WhatsApp</a>
+</div>
+</body>
+</html>
