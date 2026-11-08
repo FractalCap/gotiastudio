@@ -1,0 +1,28 @@
+/* =========================================================
+   Gotiastudio — El panel de cada cliente (mi-panel.html)
+   Usa las piezas de admin.css; aquí solo lo que cambia: sin menú lateral,
+   con una barra arriba, y lo mismo en computador y en celular.
+   ========================================================= */
+.mp { width: 100%; max-width: 1180px; margin: 0 auto; padding: 12px clamp(12px, 2vw, 24px) 40px; display: flex; flex-direction: column; gap: 16px; }
+.mp-bar { position: sticky; top: 10px; z-index: 30; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 8px 10px 8px 16px; border-radius: 20px; }
+.mp-bar .adm-live { margin-left: auto; }
+.mp-pick select { max-width: 220px; height: 34px; padding: 0 30px 0 12px; border: 0; border-radius: 999px; font: inherit; font-size: 13px; color: var(--fg); cursor: pointer; appearance: none;
+  background: rgba(255, 255, 255, .6) linear-gradient(45deg, transparent 50%, currentColor 50%) calc(100% - 17px) 50% / 5px 5px no-repeat; box-shadow: inset 0 0 0 1px var(--line-2); }
+.mp-help { font-size: 13px; color: var(--fg-3); }
+.mp-help a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.mp-wait h2 { margin-bottom: 6px; font-size: 16px; font-weight: 500; letter-spacing: -.015em; }
+.mp-wait p { font-size: 14px; line-height: 1.5; color: var(--fg-2); }
+.mp .adm-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mp .adm-row-even { align-items: stretch; }
+.mp-t-visits { min-width: 640px; }
+.mp-t-visits td small { display: block; margin: 2px 0 0; font-size: 11.5px; }
+
+:where(html[data-theme="dark"]) .mp-pick select { background-color: rgba(255, 255, 255, .08); }
+
+@media (max-width: 760px) {
+  .mp .adm-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mp .adm-row-even { grid-template-columns: minmax(0, 1fr); }
+  .mp-bar { top: 6px; padding-left: 12px; }
+  .mp-bar .adm-live > span { display: none; }
+  .mp-bar .adm-live b::after { content: " ahora"; font-weight: 400; color: var(--fg-3); }
+}

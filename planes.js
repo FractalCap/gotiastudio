@@ -1,16 +1,17 @@
 /* =========================================================
-   Gotiastudio — Planes: presentación por pantallas
+   Gotiastudio — Paquetes: presentación por pantallas
    Cada .slide ocupa la ventana y el scroll se ajusta a la siguiente
    (scroll-snap, en planes.css). Aquí:
      · puntos a la derecha (uno por pantalla) y barra de progreso arriba
      · el botón flotante de WhatsApp (entre la portada y el cierre)
      · un punto de ajuste extra al final de una pantalla que no quepa
        (celulares pequeños), para poder leerla entera
+     · al llegar a una pantalla, todo lo suyo que aún no apareció aparece
    ========================================================= */
 (() => {
-  const slides = [...document.querySelectorAll('.slide')];
-  if (!slides.length) return;
-  const n = slides.length;
+  const all = [...document.querySelectorAll('.slide')];
+  if (!all.length) return;
+  let slides = all;   // solo las que se ven: dependen del camino elegido (caminos.js)
   const wa = document.querySelector('.wa-float');
   const bar = document.querySelector('.progress');
 
@@ -18,18 +19,20 @@
   const nav = document.createElement('nav');
   nav.className = 'dots';
   nav.setAttribute('aria-label', 'Pantallas');
-  const dots = slides.map((s) => {
+  const dots = all.map((s) => {
     const a = document.createElement('a');
     a.href = '#' + s.id;
     a.dataset.label = s.dataset.title || '';
     a.setAttribute('aria-label', s.dataset.title || s.id);
+    // la pantalla de cada mensualidad lleva su color (data-tint)
+    if (s.dataset.tint) a.style.setProperty('--dot', s.dataset.tint);
     nav.appendChild(a);
     return a;
   });
   document.body.appendChild(nav);
 
   // punto de ajuste al final de cada pantalla (solo se activa si no cabe)
-  slides.forEach((s) => {
+  all.forEach((s) => {
     const end = document.createElement('i');
     end.className = 'snap-end';
     end.setAttribute('aria-hidden', 'true');
@@ -37,23 +40,28 @@
   });
   const measure = () => slides.forEach((s) => s.classList.toggle('is-tall', s.offsetHeight > innerHeight + 4));
 
-  let current = -1;
+  let current = null;
   const update = () => {
     // pantalla actual: la última cuyo borde superior ya pasó la mitad de la ventana
     const mid = innerHeight * 0.5;
     let idx = 0;
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < slides.length; i++) {
       if (slides[i].getBoundingClientRect().top <= mid) idx = i;
       else break;
     }
-    if (idx !== current) {
-      current = idx;
+    const now = slides[idx];
+    if (now !== current) {
+      current = now;
+      // la pantalla actual se ve entera: lo que va pegado a su borde de abajo (el precio de cada
+      // ejemplo, en laptops) nunca entra en la zona en que main.js lo hace aparecer
+      now.querySelectorAll('[data-reveal]:not(.in)').forEach((el) => el.classList.add('in'));
       dots.forEach((d, i) => {
-        d.classList.toggle('on', i === idx);
-        if (i === idx) d.setAttribute('aria-current', 'step');
+        d.classList.toggle('on', all[i] === now);
+        if (all[i] === now) d.setAttribute('aria-current', 'step');
         else d.removeAttribute('aria-current');
       });
-      if (wa) wa.classList.toggle('show', idx > 0 && idx < n - 1);
+      // los casos de éxito ya traen su propio botón de WhatsApp
+      if (wa) wa.classList.toggle('show', idx > 0 && idx < slides.length - 1 && now.id !== 'casos');
     }
     if (bar) {
       const max = document.documentElement.scrollHeight - innerHeight;
@@ -67,145 +75,174 @@
     raf = requestAnimationFrame(() => { raf = 0; update(); });
   }, { passive: true });
   addEventListener('resize', () => { measure(); update(); });
-  measure();
-  update();
+  const camino = () => {
+    slides = all.filter((s) => s.getClientRects().length);
+    dots.forEach((d, i) => { d.hidden = !slides.includes(all[i]); });
+    current = null;
+    measure();
+    update();
+  };
+  document.addEventListener('gotia:camino', camino);
+  camino();
   // cuando llegan las fuentes las alturas pueden cambiar
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); update(); });
 })();
 
-/* ---------- Ejemplos de los planes: recorridos animados por todo lo que incluye cada uno ----------
-   Cada ejemplo (.mock-page[data-demo]) tiene pestañas (.mx-tabs) y escenas (.mx-scene). Mientras
-   se ve, cada escena sigue sus pasos y pasa a la siguiente, en bucle; la línea bajo el menú marca
-   el tiempo de la escena. Las pestañas saltan a cada escena. Con movimiento reducido y en la
-   versión Lite (html.lowend), cada escena se ve ya terminada y no cambia sola; si la web pasa a
-   Lite con un recorrido en marcha (main.js, evento gotia:lowend), la escena se completa ahí.
-   Los pasos van en data-steps, separados por ";": "espera acción [objetivo] [ms]"
-     +clase / -clase   añade o quita a la escena un estado (.s-1, .s-pin…), que el CSS anima
-     type sel [ms]     escribe en sel su data-q, letra a letra (antes muestra data-start o nada)
-     count sel [ms]    sube el número de sel de data-from a data-to, sin esperar (data-pre: "$")
-     each sel [ms]     enciende (.on) cada sel, uno tras otro
-     end               solo espera, lo que queda de la escena */
-(() => {
+/* ---------- Los recorridos de los 4 paquetes: tutorial sobre la página ----------
+   Cada figure[data-tour] es un tutorial. En cada paso la luz (.t-spot) se posa en su parte
+   ([data-tour-at="n"], que lleva .is-at mientras tanto), la nota (.t-tip) va al primer lado de su
+   data-place en que quepa entera dentro de la ventana, y la flecha se dibuja de la nota a la parte.
+   Si la página tiene más de lo que cabe (.t-scroll), baja sola hasta la parte, como al tocar un
+   enlace del menú: con data-tour-scroll="top" la deja arriba siempre; si no, solo cuando no se ve
+   entera (una parte fuera de la página vuelve arriba, salvo con data-tour-keep). Todo se mide
+   aquí, así sirve igual en computador y en celular. Los pasos se llenan como las historias (Web
+   Animations: se pausan si el ejemplo deja de verse; data-ms en la nota = lo que dura ese paso) y
+   vuelven a empezar al volver a verlo; tocar un paso lo muestra y sigue desde ahí.
+   Con movimiento reducido o en Lite no avanza solo: los pasos se cambian tocándolos. */
+document.querySelectorAll('[data-tour]').forEach((tour) => {
+  const win = tour.querySelector('.mock-win');
+  const spot = tour.querySelector('.t-spot');
+  const svg = tour.querySelector('.t-arrow');
+  const line = tour.querySelector('.t-line'), head = tour.querySelector('.t-head');
+  const sc = tour.querySelector('.t-scroll');
+  const tips = [...tour.querySelectorAll('.t-tip')];
+  const tabs = [...tour.querySelectorAll('.t-steps button')];
+  const parts = tips.map((t, i) => tour.querySelector(`[data-tour-at="${i + 1}"]`));
+  const STEP = 7000, HOLD = 1500;   // con calma: hay quien lee despacio (el último espera un poco más)
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const still = () => reduce || document.documentElement.classList.contains('lowend');
-  const fmt = (v) => Math.round(v).toLocaleString('es-CO');
-  const setNum = (el, v) => { el.textContent = (el.dataset.pre || '') + fmt(v); };
+  const auto = () => !reduce && !document.documentElement.classList.contains('lowend');
+  const clamp = (v, a, b) => Math.min(Math.max(v, a), Math.max(a, b));
+  const f = (n) => n.toFixed(1);
+  let cur = 0, anim = null, on = false;
 
-  document.querySelectorAll('[data-demo]').forEach((demo) => {
-    const tabs = [...demo.querySelectorAll('.mx-tabs button')];
-    const scenes = [...demo.querySelectorAll('.mx-scene')];
-    const prog = demo.querySelector('.mx-prog');
-    const plans = scenes.map((s) => (s.dataset.steps || '').split(';').map((x) => x.trim()).filter(Boolean).map((x) => {
-      const [ms, act, sel, arg] = x.split(/\s+/);
-      return { ms: Number(ms) || 0, act, sel, arg: Number(arg) || 0 };
-    }));
-    const all = (s, sel) => (sel ? [...s.querySelectorAll(sel)] : []);
-    // duración aproximada de cada escena, para la línea de tiempo
-    const lens = plans.map((p, i) => p.reduce((t, st) => {
-      const els = all(scenes[i], st.sel);
-      if (st.act === 'type') return t + st.ms + els.reduce((n, el) => n + (el.dataset.q || '').length * (st.arg || 55), 0);
-      if (st.act === 'each') return t + st.ms + els.length * (st.arg || 300);
-      return t + st.ms;
-    }, 0));
-    let run = 0, at = 0, visible = false;
+  // dónde está un elemento dentro de la ventana, en px de la ventana (aunque esté escalada al aparecer)
+  const box = (el) => {
+    const w = win.getBoundingClientRect(), r = el.getBoundingClientRect(), k = win.offsetWidth / w.width || 1;
+    return { x: (r.left - w.left) * k, y: (r.top - w.top) * k, w: r.width * k, h: r.height * k };
+  };
 
-    // espera que se corta si el recorrido cambió (otra pestaña, el ejemplo dejó de verse)
-    const wait = (ms, id) => new Promise((ok) => setTimeout(() => ok(id === run), ms));
-    const count = (el, ms, id) => {
-      const from = Number(el.dataset.from) || 0, to = Number(el.dataset.to) || 0, t0 = performance.now();
-      const step = () => {
-        if (id !== run) return;
-        const k = Math.min(1, (performance.now() - t0) / ms);
-        setNum(el, from + (to - from) * (1 - Math.pow(1 - k, 3)));
-        if (k < 1) setTimeout(step, 30);
-      };
-      step();
-    };
-
-    // deja la escena en su punto de partida, o ya terminada (done)
-    const reset = (i, done) => {
-      const s = scenes[i];
-      [...s.classList].filter((c) => c.startsWith('s-')).forEach((c) => s.classList.remove(c));
-      plans[i].forEach((st) => {
-        const els = all(s, st.sel);
-        if (st.act === 'type') els.forEach((el) => { el.textContent = done ? el.dataset.q : (el.dataset.start || ''); });
-        else if (st.act === 'count') els.forEach((el) => setNum(el, Number(done ? el.dataset.to : el.dataset.from) || 0));
-        else if (st.act === 'each') els.forEach((el) => el.classList.toggle('on', !!done));
-        else if (done && st.act[0] === '+') s.classList.add(st.act.slice(1));
-        else if (done && st.act[0] === '-') s.classList.remove(st.act.slice(1));
-      });
-    };
-    const show = (i) => {
-      at = i;
-      scenes.forEach((s, j) => s.classList.toggle('is-on', j === i));
-      tabs.forEach((t, j) => t.classList.toggle('on', j === i));
-    };
-    const timeLine = (ms) => {
-      if (!prog) return;
-      prog.style.transition = 'none';
-      prog.style.width = '0';
-      void prog.offsetWidth;
-      prog.style.transition = `width ${ms}ms linear`;
-      prog.style.width = '100%';
-    };
-
-    async function play(i, id) {
-      const s = scenes[i];
-      for (const st of plans[i]) {
-        if (!(await wait(st.ms, id))) return false;
-        const els = all(s, st.sel);
-        if (st.act[0] === '+') s.classList.add(st.act.slice(1));
-        else if (st.act[0] === '-') s.classList.remove(st.act.slice(1));
-        else if (st.act === 'type') {
-          for (const el of els) {
-            const t = el.dataset.q || '';
-            el.textContent = '';
-            for (let k = 1; k <= t.length; k++) {
-              el.textContent = t.slice(0, k);
-              if (!(await wait(st.arg || 55, id))) return false;
-            }
-          }
-        } else if (st.act === 'count') els.forEach((el) => count(el, st.arg || 1200, id));
-        else if (st.act === 'each') {
-          for (const el of els) {
-            el.classList.add('on');
-            if (!(await wait(st.arg || 300, id))) return false;
-          }
-        }
-      }
-      return true;
+  // baja (o sube) la página hasta la parte (t = dónde está ahora); devuelve cuánto se moverá
+  const scrollTo = (el, t) => {
+    const view = sc.parentElement;
+    const now = -new DOMMatrix(getComputedStyle(sc).transform).m42 || 0;
+    const inside = sc.contains(el);
+    if (!inside && el.closest('[data-tour-keep]')) return 0;   // este paso no mueve la página
+    let to = 0;
+    if (inside) {
+      const top = t.y - box(view).y + now;   // dónde queda la parte con la página arriba del todo
+      const max = sc.offsetTop + sc.offsetHeight + parseFloat(getComputedStyle(view).paddingBottom) - view.clientHeight;
+      const seen = top - now >= 4 && top - now + t.h <= view.clientHeight - 4;
+      to = clamp(tour.dataset.tourScroll === 'top' || !seen ? top - 12 : now, 0, max);
     }
+    sc.style.transform = to ? `translate3d(0, ${f(-to)}px, 0)` : '';
+    return inside ? now - to : 0;
+  };
 
-    // el recorrido: desde la escena i, una tras otra y vuelta a empezar
-    async function tour(i) {
-      const id = ++run;
-      while (id === run) {
-        reset(i);
-        show(i);
-        timeLine(lens[i]);
-        if (!(await play(i, id))) return;
-        i = (i + 1) % scenes.length;
-      }
+  // la luz, la nota y la flecha del paso i
+  const place = (i) => {
+    const W = win.offsetWidth, H = win.offsetHeight;
+    if (!W || !parts[i]) return;
+    const t = box(parts[i]);
+    if (sc) t.y += scrollTo(parts[i], t);
+    const pad = Math.max(5, W * 0.008);
+    const s = { x: t.x - pad, y: t.y - pad, w: t.w + pad * 2, h: t.h + pad * 2 };
+    Object.assign(spot.style, {
+      left: s.x + 'px', top: s.y + 'px', width: s.w + 'px', height: s.h + 'px',
+      borderRadius: (t.h < H * 0.16 ? s.h / 2 : Math.max(10, W * 0.016)) + 'px',   // botones: píldora
+    });
+
+    // la nota: el primer lado en que quepa entera; si no cabe en ninguno (ventana bajita), el que
+    // menos tape la parte señalada
+    const tip = tips[i], tw = tip.offsetWidth, th = tip.offsetHeight;
+    const m = 10, gap = clamp(W * 0.07, 34, 64), cx = s.x + s.w / 2, cy = s.y + s.h / 2;
+    const ax = clamp(cx - tw * 0.32, m, W - tw - m), ay = clamp(cy - th * 0.2, m, H - th - m);   // un poco a un lado: la flecha hace curva
+    const at = { below: [ax, s.y + s.h + gap], above: [ax, s.y - gap - th], right: [s.x + s.w + gap, ay], left: [s.x - gap - tw, ay] };
+    const pos = (k) => [clamp(at[k][0], m, W - tw - m), clamp(at[k][1], m, H - th - m)];
+    const fits = (k) => pos(k).every((v, j) => Math.abs(v - at[k][j]) < 1);
+    const over = (k) => {
+      const [x, y] = pos(k);
+      return Math.max(0, Math.min(x + tw, s.x + s.w) - Math.max(x, s.x)) * Math.max(0, Math.min(y + th, s.y + s.h) - Math.max(y, s.y));
+    };
+    const sides = (tip.dataset.place || 'below').split(' ');
+    const side = sides.find(fits) || sides.reduce((a, k) => (over(k) < over(a) ? k : a));
+    const [x, y] = pos(side);
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+
+    // la flecha: del borde de la nota que mira a la parte, hasta justo antes de la luz
+    // (si la nota quedó encima de la parte, sin flecha)
+    const free = { below: y >= s.y + s.h + 12, above: y + th <= s.y - 12, right: x >= s.x + s.w + 12, left: x + tw <= s.x - 12 }[side];
+    if (!free) { line.setAttribute('d', ''); head.setAttribute('d', ''); return; }
+    const n = 16, e = 5;
+    let a, b;
+    if (side === 'below' || side === 'above') {
+      const sx = clamp(cx, x + n, x + tw - n);
+      a = [sx, side === 'below' ? y - 4 : y + th + 4];
+      b = [clamp(sx, s.x + n, s.x + s.w - n), side === 'below' ? s.y + s.h + e : s.y - e];
+    } else {
+      const sy = clamp(cy, y + n, y + th - n);
+      a = [side === 'right' ? x - 4 : x + tw + 4, sy];
+      b = [side === 'right' ? s.x + s.w + e : s.x - e, clamp(sy, s.y + n / 2, s.y + s.h - n / 2)];
     }
-    const stop = () => { run++; if (prog) prog.style.transition = 'none'; };
+    const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, bow = len * 0.3 * (i % 2 ? 1 : -1);
+    const c = [(a[0] + b[0]) / 2 - (dy / len) * bow, (a[1] + b[1]) / 2 + (dx / len) * bow];
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    line.setAttribute('d', `M${f(a[0])} ${f(a[1])}Q${f(c[0])} ${f(c[1])} ${f(b[0])} ${f(b[1])}`);
+    // la punta: dos trazos cortos según la dirección en que llega la curva
+    const ang = Math.atan2(b[1] - c[1], b[0] - c[0]) + Math.PI, hs = clamp(W * 0.016, 8, 13);
+    const wing = (k) => `${f(b[0] + Math.cos(ang + k) * hs)} ${f(b[1] + Math.sin(ang + k) * hs)}`;
+    head.setAttribute('d', `M${wing(0.5)}L${f(b[0])} ${f(b[1])}L${wing(-0.5)}`);
+  };
 
-    // tocar una pestaña lleva a esa escena (y el recorrido sigue desde ahí)
-    tabs.forEach((t, i) => t.addEventListener('click', () => {
-      if (still()) { reset(i, true); show(i); return; }
-      tour(i);
-    }));
+  // la barra del paso se llena y, al llenarse, pasa al siguiente
+  const play = () => {
+    if (anim) anim.cancel();
+    anim = null;
+    if (!auto()) { tour.classList.add('is-still'); return; }
+    const fill = tabs[cur].querySelector('.t-fill');
+    anim = fill.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], {
+      duration: (Number(tips[cur].dataset.ms) || STEP) + (cur === tips.length - 1 ? HOLD : 0), easing: 'linear', fill: 'forwards',
+    });
+    anim.onfinish = () => show((cur + 1) % tips.length);
+    if (!on) anim.pause();
+  };
 
-    // antes de verse (y con movimiento reducido): la primera escena, ya terminada
-    reset(0, true);
-    show(0);
-    if (still()) return;
-    new IntersectionObserver(([e]) => {
-      if (e.isIntersecting === visible) return;
-      visible = e.isIntersecting;
-      if (visible && !still()) tour(at);
-      else stop();
-    }, { threshold: 0.35 }).observe(demo);
-    document.addEventListener('gotia:lowend', () => { stop(); reset(at, true); });
-  });
-})();
+  const show = (i) => {
+    cur = i;
+    tour.dataset.step = i + 1;   // el CSS de cada paquete cambia cosas según el paso (la sección del menú, Google…)
+    tabs.forEach((b, k) => {
+      b.setAttribute('aria-pressed', String(k === i));
+      b.classList.toggle('is-done', k < i);
+    });
+    tips.forEach((t, k) => t.classList.toggle('is-on', k === i));
+    parts.forEach((p, k) => p && p.classList.toggle('is-at', k === i));
+    tour.classList.remove('is-drawn');
+    place(i);
+    void svg.getBoundingClientRect();   // la flecha (y lo que se anima en la parte) vuelven a empezar
+    tour.classList.add('is-drawn');
+    play();
+  };
 
+  // si cambia el tamaño (girar el celular, fuentes que llegan), todo se recoloca sin animarse
+  const snap = () => {
+    tour.classList.add('is-snap');
+    place(cur);
+    void win.offsetWidth;
+    tour.classList.remove('is-snap');
+  };
+
+  tour.classList.add('is-live');
+  if (!auto()) tour.classList.add('is-still');
+  tabs.forEach((b, i) => b.addEventListener('click', () => show(i)));
+  show(0);
+  requestAnimationFrame(() => tour.classList.add('is-ready'));
+  if (window.ResizeObserver) new ResizeObserver(snap).observe(win);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(snap);
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting === on) return;
+    on = e.isIntersecting;
+    if (on) show(0);
+    else if (anim) anim.pause();
+  }, { threshold: 0.35 }).observe(tour);
+  document.addEventListener('gotia:lowend', () => { if (anim) anim.cancel(); anim = null; tour.classList.add('is-still'); });
+});

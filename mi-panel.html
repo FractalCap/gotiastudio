@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tu panel — Gotiastudio</title>
+  <!-- página privada de cada cliente: no se enlaza desde la web ni aparece en Google -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#eaf3ff">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=91">
+  <link rel="stylesheet" href="admin.css?v=6">
+  <link rel="stylesheet" href="mi-panel.css?v=1">
+  <script>
+    // el mismo modo claro / negro que eligió en la web
+    try {
+      if (localStorage.getItem('gotia-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+        document.querySelector('meta[name="theme-color"]').content = '#000000';
+        document.querySelector('meta[name="color-scheme"]').content = 'dark';
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body class="adm-body">
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ============ ENTRAR ============ -->
+<main class="adm-login" id="mp-login" hidden>
+  <form class="adm-login-card glass" id="mp-form" novalidate>
+    <img class="adm-logo" src="g-logo.webp?v=2" alt="" width="44" height="44">
+    <p class="eyebrow">Gotiastudio</p>
+    <h1>Tu <em>panel.</em></h1>
+    <p class="adm-sub">Entra para ver lo que pasa en tu web: quién llega, de dónde y cuántos te contactan.</p>
+    <label class="adm-field"><span>Correo</span><input type="email" id="mp-email" autocomplete="username" required></label>
+    <label class="adm-field"><span>Contraseña</span><input type="password" id="mp-pass" autocomplete="current-password" required></label>
+    <button class="btn btn-primary btn-block" type="submit" id="mp-go">Entrar</button>
+    <p class="adm-error" id="mp-error" role="alert"></p>
+    <p class="mp-help">¿Olvidaste tu contraseña? <a href="#" data-wa="Hola Gotia Studio 👋 Olvidé la contraseña de mi panel">Escríbenos</a></p>
+  </form>
+</main>
+
+<!-- ============ PANEL ============ -->
+<div class="mp" id="mp" hidden>
+  <header class="mp-bar glass">
+    <span class="adm-brand"><img src="g-logo.webp?v=2" alt="" width="26" height="26">Gotia<span>studio</span></span>
+    <!-- solo aparece si la cuenta ve más de un cliente (las de Gotia) -->
+    <label class="mp-pick" id="mp-pick" hidden><span class="sr">Cliente</span><select id="mp-client"></select></label>
+    <span class="adm-live" title="Visitas con actividad en los últimos 5 minutos"><i></i><b id="mp-live">0</b><span> en tu web ahora</span></span>
+    <button class="adm-ico-btn" type="button" id="mp-theme" aria-label="Modo claro u oscuro" title="Modo claro u oscuro"><svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+    <button class="btn btn-glass glass btn-sm" type="button" id="mp-logout">Salir</button>
+  </header>
+
+  <div class="adm-main">
+    <header class="adm-top">
+      <div class="adm-head">
+        <p class="adm-kicker" id="mp-kicker">Tu panel</p>
+        <h1 id="mp-name">Tu negocio</h1>
+      </div>
+      <div class="adm-controls">
+        <div class="adm-range" role="group" aria-label="Periodo">
+          <button type="button" data-days="1" aria-pressed="false">Hoy</button>
+          <button type="button" data-days="7" aria-pressed="false">7 días</button>
+          <button type="button" data-days="30" aria-pressed="true">30 días</button>
+          <button type="button" data-days="90" aria-pressed="false">90 días</button>
+        </div>
+        <button class="adm-ico-btn" type="button" id="mp-csv" aria-label="Descargar las visitas (Excel / CSV)" title="Descargar las visitas (Excel / CSV)"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg></button>
+        <button class="adm-ico-btn" type="button" id="mp-refresh" aria-label="Actualizar" title="Actualizar"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></button>
+      </div>
+      <p class="adm-period"><span id="mp-period"></span><span class="adm-status" id="mp-status" role="status"></span></p>
+    </header>
+
+    <p class="adm-demo" id="mp-demo" hidden><b>Cuenta de prueba:</b> son datos de ejemplo, para ver cómo se ve el panel de un cliente.</p>
+    <p class="adm-demo" id="mp-free" hidden></p>
+    <p class="adm-note" id="mp-note" hidden></p>
+
+    <!-- todavía sin visitas en el periodo -->
+    <section class="adm-card glass mp-wait" id="mp-wait" hidden>
+      <h2>Aún no hay visitas en este periodo</h2>
+      <p>Si acabamos de instalar tu panel, las primeras visitas aparecen aquí a los pocos minutos. También puedes elegir un periodo más largo arriba.</p>
+    </section>
+
+    <section class="adm-pane" id="mp-data">
+      <div class="adm-kpis" id="mp-kpis"></div>
+      <section class="adm-card glass">
+        <header class="adm-card-head">
+          <div class="adm-card-title"><h2 id="mp-main-title">Visitas</h2><small id="mp-main-sub"></small></div>
+          <div class="adm-seg" id="mp-metric" role="group" aria-label="Qué ver en la gráfica">
+            <button type="button" data-metric="visits" aria-pressed="true">Visitas</button>
+            <button type="button" data-metric="people" aria-pressed="false">Personas</button>
+            <button type="button" data-metric="contacts" aria-pressed="false">Te contactan</button>
+            <button type="button" data-metric="time" aria-pressed="false">Tiempo</button>
+          </div>
+        </header>
+        <div class="adm-lc" id="mp-chart"></div>
+        <p class="adm-hint">Toca cualquier número de arriba para verlo aquí. La línea punteada es el periodo anterior.</p>
+      </section>
+      <div class="adm-row adm-row-even">
+        <section class="adm-card glass"><header class="adm-card-head"><h2>De dónde llegan</h2><small>visitas</small></header><ul class="adm-bars" id="mp-sources"></ul></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Cómo te contactan</h2><small>visitas que te escriben, te llaman o compran</small></header><ul class="adm-bars" id="mp-contacts"></ul></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Qué páginas ven</h2><small>veces que las abren</small></header><ul class="adm-bars" id="mp-pages"></ul></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Desde qué dispositivo</h2><small>visitas</small></header><ul class="adm-bars" id="mp-devices"></ul></section>
+      </div>
+      <section class="adm-card glass">
+        <header class="adm-card-head"><h2>Últimas visitas</h2><small id="mp-vi-count"></small></header>
+        <div class="adm-table-wrap">
+          <table class="adm-table mp-t-visits">
+            <thead><tr><th>Cuándo</th><th>Entró a</th><th>Llegó desde</th><th>Dispositivo</th><th>Tiempo</th><th>Resultado</th></tr></thead>
+            <tbody id="mp-visits"></tbody>
+          </table>
+        </div>
+        <div class="adm-more"><button class="btn btn-glass glass btn-sm" type="button" id="mp-vi-more" hidden>Ver más visitas</button></div>
+      </section>
+    </section>
+
+    <p class="adm-foot">Datos anónimos: sin nombres ni direcciones IP. Cada navegador cuenta como una persona. El tiempo es activo: no suma si la pestaña queda abierta sin uso. Tus datos son tuyos: los descargas con el botón de la flecha.</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" defer></script>
+<script src="supabase-config.js?v=1" defer></script>
+<script src="contacto.js?v=5" defer></script>
+<script src="mi-panel.js?v=1" defer></script>
+</body>
+</html>

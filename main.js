@@ -272,26 +272,37 @@
     addEventListener('resize', placeLine);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeLine);
 
-    if (!reduce) {
+    // la guía en audio (flotantes.js) enciende el paso que explica; mientras tanto el bucle espera
+    let held = false, on = false, running = false;
+    const run = async () => {
       const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-      let on = false, running = false;
-      const run = async () => {
-        running = true;
-        while (on && !isLow()) {
-          steps.forEach((s) => s.classList.remove('is-now', 'is-done'));
-          await wait(700);
-          for (const s of steps) {
-            if (!on) break;
-            s.classList.add('is-now');
-            await wait(1100);
-            s.classList.remove('is-now');
-            s.classList.add('is-done');
-            await wait(200);
-          }
-          await wait(2400);
+      running = true;
+      while (on && !held && !isLow()) {
+        steps.forEach((s) => s.classList.remove('is-now', 'is-done'));
+        await wait(700);
+        for (const s of steps) {
+          if (!on || held) break;
+          s.classList.add('is-now');
+          await wait(1100);
+          if (held) break;
+          s.classList.remove('is-now');
+          s.classList.add('is-done');
+          await wait(200);
         }
-        running = false;
-      };
+        await wait(2400);
+      }
+      running = false;
+    };
+    stepsEl.addEventListener('gotia:marca', (e) => {
+      const k = e.detail;
+      held = k >= 0;
+      steps.forEach((s, i) => {
+        s.classList.toggle('is-now', i === k);
+        s.classList.toggle('is-done', i < k);
+      });
+      if (!held && on && !running && !reduce) run();
+    });
+    if (!reduce) {
       new IntersectionObserver(([e]) => {
         on = e.isIntersecting;
         if (on && !running) run();
@@ -1126,22 +1137,25 @@
      La línea se llena de un paso al siguiente; el que llega se enciende y los anteriores quedan
      marcados. Al terminar espera un momento y vuelve a empezar, solo mientras se ve. */
   const flowCard = $('[data-flow]');
-  if (flowCard && !reduce) {
+  if (flowCard) {
     const box = $('.flow-box', flowCard), items = $$('.flow li', flowCard);
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    let on = false, running = false;
+    // la guía en audio (flotantes.js) enciende el paso que explica; mientras tanto el bucle espera
+    let on = false, running = false, held = false;
     const run = async () => {
       running = true;
-      while (on && !isLow()) {
+      while (on && !held && !isLow()) {
         flowCard.classList.add('is-live');
         items.forEach((li) => li.classList.remove('is-on', 'is-done'));
         box.style.setProperty('--p', 0);
         await wait(700);
-        for (let i = 0; i < items.length; i++) {
+        for (let i = 0; i < items.length && !held; i++) {
           box.style.setProperty('--p', (i / (items.length - 1)).toFixed(3));
           await wait(i ? 450 : 0);
+          if (held) break;
           items[i].classList.add('is-on');
           await wait(900);
+          if (held) break;
           items[i].classList.remove('is-on');
           items[i].classList.add('is-done');
         }
@@ -1149,10 +1163,27 @@
       }
       running = false;
     };
-    new IntersectionObserver(([e]) => {
-      on = e.isIntersecting;
-      if (on && !running) run();
-    }, { threshold: 0.3 }).observe(flowCard);
+    flowCard.addEventListener('gotia:marca', (e) => {
+      const k = e.detail;
+      held = k >= 0;
+      if (held) {
+        flowCard.classList.add('is-live');
+        box.style.setProperty('--p', (k / (items.length - 1)).toFixed(3));
+        items.forEach((li, i) => {
+          li.classList.toggle('is-on', i === k);
+          li.classList.toggle('is-done', i < k);
+        });
+      } else if (reduce) {
+        flowCard.classList.remove('is-live');
+        items.forEach((li) => li.classList.remove('is-on', 'is-done'));
+      } else if (on && !running) run();
+    });
+    if (!reduce) {
+      new IntersectionObserver(([e]) => {
+        on = e.isIntersecting;
+        if (on && !running) run();
+      }, { threshold: 0.3 }).observe(flowCard);
+    }
   }
 
   /* ---------- Ecosistema (órbita) ----------
@@ -1560,7 +1591,7 @@
      · 3D: carga bubbles.js + scenes.js (WebGL), la pantalla de carga y todos los efectos.
      · Esencial: el mismo contenido y estilo, sin carga, sin WebGL y sin animaciones.
      · Lite: la Esencial con las demos quietas y completas, sin desenfoques ni transiciones.
-     En planes.html no hay 3D: sin html.lowend lleva sus efectos (cursor, brillo de las tarjetas…). */
+     En paquetes.html no hay 3D: sin html.lowend lleva sus efectos (cursor, brillo de las tarjetas…). */
   function start(version) {
     if (version === 'esencial') {
       ['#loader', '#loader-g'].forEach((s) => { const el = $(s); if (el) el.remove(); });

@@ -1,0 +1,1558 @@
+<!doctype html>
+<html lang="es" class="snap">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Paquetes y precios — Gotiastudio</title>
+  <!-- Página privada: no sale en Google ni está enlazada desde la web.
+       Solo la ve quien recibe el enlace (por WhatsApp o Instagram). -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="description" content="Tres paquetes de página web con automatización, uno para empezar, y la mensualidad que la mantiene funcionando.">
+  <meta name="theme-color" content="#eaf3ff">
+  <meta name="color-scheme" content="light">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Paquetes y precios — Gotiastudio">
+  <meta property="og:description" content="Tres paquetes de página web con automatización, uno para empezar, y la mensualidad que la mantiene funcionando.">
+  <!-- Vista previa al compartir el enlace por WhatsApp (la misma imagen de index.html) -->
+  <meta property="og:url" content="https://gotiastudio.it.com/paquetes.html">
+  <meta property="og:site_name" content="Gotiastudio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:image" content="https://gotiastudio.it.com/og-imagen.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Página web para tu negocio, conectada a tu WhatsApp · Gotiastudio">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=91">
+  <link rel="stylesheet" href="planes.css?v=68">
+
+  <script>
+    document.documentElement.classList.add('js');
+    // versión Lite (html.lowend): con un equipo de gama media-baja, internet lento o ahorro de
+    // datos, todo quieto y sin desenfoques. Misma prueba que en index.html; si en la web principal
+    // se eligió el 3D (o se entró con ?version=lite), esa elección manda también aquí.
+    (function () {
+      var gotia = window.gotia = window.gotia || {};
+      function lowEnd() {
+        var n = navigator, c = n.connection || {};
+        var mq = function (q) { return matchMedia(q).matches; };
+        if (c.saveData || mq('(prefers-reduced-data: reduce)')) return 'ahorro de datos';
+        if (/2g|3g/.test(c.effectiveType || '')) return 'internet lento';
+        if (mq('(prefers-reduced-motion: reduce)')) return 'movimiento reducido';
+        if (n.deviceMemory && n.deviceMemory <= 4) return 'poca memoria';
+        var cores = n.hardwareConcurrency || 8;
+        if (!/Mac|iPhone|iPad|iPod/.test(n.platform || '') && cores <= (mq('(pointer: coarse)') ? 4 : 2)) return 'procesador';
+        try {
+          if (localStorage.getItem('gotia-gpu') === 'bajo') return 'gráficos';
+          if (Date.now() - Number(localStorage.getItem('gotia-lento')) < 2592e6) return 'iba lento';
+        } catch (e) {}
+        return '';
+      }
+      var v = null;
+      try { v = sessionStorage.getItem('gotia-version'); } catch (e) {}
+      if (v !== '3d' && v !== 'lite') v = null;
+      gotia.chosen = v;
+      gotia.low = v === '3d' ? '' : v === 'lite' ? 'enlace' : lowEnd();
+      if (gotia.low) document.documentElement.classList.add('lowend');
+    })();
+    // modo negro: el mismo que en la web principal (se recuerda entre las dos páginas)
+    try {
+      if (localStorage.getItem('gotia-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+        document.querySelector('meta[name="theme-color"]').content = '#000000';
+        document.querySelector('meta[name="color-scheme"]').content = 'dark';
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+<!-- ============ SVG sprite ============ -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="lg-fill" cx="34%" cy="28%" r="80%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".98"/>
+      <stop offset=".32" stop-color="#bfe0ff" stop-opacity=".55"/>
+      <stop offset=".7" stop-color="#4aa3ff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".32"/>
+    </radialGradient>
+    <linearGradient id="lg-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#4aa3ff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".7"/>
+    </linearGradient>
+  </defs>
+  <symbol id="logo" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="14.5" fill="url(#lg-fill)" stroke="url(#lg-rim)" stroke-width="1"/>
+    <ellipse cx="10.8" cy="9.6" rx="4.2" ry="2.2" transform="rotate(-38 10.8 9.6)" fill="#fff" opacity=".9"/>
+    <circle cx="22.5" cy="23" r="1.3" fill="#1f6fe5" opacity=".45"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 5.2v13.6a.8.8 0 0 0 1.2.7l10.6-6.8a.8.8 0 0 0 0-1.4L8.7 4.5a.8.8 0 0 0-1.2.7z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 6v12M15.5 6v12"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="5.5" cy="6" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 6h8.6M6.6 8l4.3 8M17.4 8l-4.3 8"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="5" width="3" height="12" rx="1"/><rect x="16" y="8.5" width="3" height="8.5" rx="1"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.2-4A8.3 8.3 0 1 1 8.3 19z"/><path d="M9.2 8.6c-.2 2.9 3.1 6.3 6.1 6.2l.9-1.6-1.9-1-1 .9c-1-.4-2-1.4-2.4-2.4l.9-1-1-1.9z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 15.5l-3.5-3.5C10 7.5 13.5 4 20 4c0 6.5-3.5 10-8 11.5z"/><path d="M8.5 12H5l2.5-3.5h4M12 15.5V19l3.5-2.5v-4"/><circle cx="15" cy="9" r="1.3"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5L7 7M17 17l1.5 1.5M5.5 18.5L7 17M17 7l1.5-1.5"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5z"/><path d="M14.5 6.5L17 4l3 3-2.5 2.5"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M4 9h16M4 14.5h16M10 9v11.5"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.3 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.3-3.5-8.5s1.1-6.1 3.5-8.5z"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H19l-3-3M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H5l3 3"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="17" height="4" rx="1"/><path d="M5 12.5v8h14v-8M12 8.5v12M12 8.5C11 5 6.5 4 6.5 7c0 1.5 2.5 1.5 5.5 1.5zM12 8.5c1-3.5 5.5-4.5 5.5-1.5 0 1.5-2.5 1.5-5.5 1.5z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.8l8.8 15.7H3.2z"/><path d="M12 10v4.4M12 17.1v.2"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21c-3.8 0-6.5-2.6-6.5-6.1 0-3.2 2.3-5.2 3.6-7.4.3 1.9 1.3 3 2.4 3.6-.1-3.1 1.2-5.9 3.5-8.1.2 3.2 1.6 5 2.7 6.8.8 1.3 1.3 2.7 1.3 4.2 0 4.4-3.1 7-7 7z"/></symbol>
+  <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 6.8-1.2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15.5 3.5H13A4.5 4.5 0 0 0 8.5 8v2.5H6v3.8h2.5v6.2h4v-6.2H15l.6-3.8h-3.1V8.4a1 1 0 0 1 1-1h2z"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M14 3.5v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3.5c.6 2.6 2.4 4.3 5.2 4.6"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.2v5.6l4.8-2.8z"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.35-5.66"/><path d="M20 12h-7.5"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4.5 10.5V20h15v-9.5"/><path d="M3 9.5l1.8-5h14.4l1.8 5a2.6 2.6 0 0 1-4.5 1.6 2.6 2.6 0 0 1-4.5 0 2.6 2.6 0 0 1-4.5 0A2.6 2.6 0 0 1 3 9.5z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.5L12 12.5 3.5 8z"/><path d="M3.5 12L12 16.5l8.5-4.5M3.5 16L12 20.5l8.5-4.5"/></symbol>
+  <symbol id="i-ads" viewBox="0 0 24 24"><path d="M4 10v4h3l7 4V6L7 10z"/><path d="M17.5 9a4 4 0 0 1 0 6M7 14l1 5h2.5l-1-4.5"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3 3"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3.2 8.2-7.5 9.5-4.3-1.3-7.5-5-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="cursor" aria-hidden="true"><span class="cursor-ring"></span></div>
+<div class="progress" aria-hidden="true"></div>
+
+
+<!-- ============ NAV: los 2 pasos ============ -->
+<header class="nav" id="nav">
+  <nav class="nav-inner glass" aria-label="Pasos">
+    <a href="index.html" class="brand" aria-label="Gotiastudio, ir a la web">
+      <img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async">
+      <span class="brand-word">Gotia<span>studio</span></span>
+    </a>
+    <ul class="nav-links">
+      <li data-solo="auto"><a href="#paquetes"><b>1</b>Tu paquete</a></li>
+      <li data-solo="auto"><a href="#mensualidad"><b>2</b>Tu mensualidad</a></li>
+      <li data-solo="vender"><a href="#marketing"><b>1</b>Los planes</a></li>
+      <li data-solo="datos"><a href="#datos"><b>1</b>Los paquetes</a></li>
+      <li data-solo="vender datos"><a href="#como-se-paga"><b>2</b>Cómo se paga</a></li>
+    </ul>
+    <button class="theme-toggle" type="button" aria-label="Modo negro" aria-pressed="false" title="Cambiar a negro">
+      <svg class="ico ico-moon"><use href="#i-moon"/></svg>
+      <svg class="ico ico-sun"><use href="#i-sun"/></svg>
+    </button>
+    <a href="#" class="btn btn-primary btn-sm nav-cta" data-wa="Hola Gotia Studio 👋 Vi los paquetes y tengo una pregunta">Escríbenos</a>
+    <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu glass" id="mobile-menu">
+    <a href="#paquetes" data-solo="auto"><b>1</b>Tu paquete</a>
+    <a href="#mensualidad" data-solo="auto"><b>2</b>Tu mensualidad</a>
+    <a href="#marketing" data-solo="vender"><b>1</b>Los planes</a>
+    <a href="#datos" data-solo="datos"><b>1</b>Los paquetes</a>
+    <a href="#como-se-paga" data-solo="vender datos"><b>2</b>Cómo se paga</a>
+    <a href="#top" data-solo="ambos">Cambiar de camino</a>
+    <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Vi los paquetes y tengo una pregunta">Escríbenos por WhatsApp</a>
+  </div>
+</header>
+
+<!-- Cada <section class="slide"> ocupa toda la pantalla; al hacer scroll, la página
+     se ajusta sola a la siguiente. data-title = nombre en los puntos de la derecha. -->
+<main id="main">
+
+  <!-- ============ PORTADA ============ -->
+  <section class="slide s-hero" id="top" data-title="Inicio">
+    <span class="bubble" style="--s:70px;left:10%;top:22%;--dur:11s" aria-hidden="true"></span>
+    <span class="bubble" style="--s:34px;right:12%;top:30%;--dur:8s" aria-hidden="true"></span>
+    <span class="bubble" style="--s:120px;right:4%;bottom:6%;--dur:13s" aria-hidden="true"></span>
+    <div class="container s-center">
+      <span class="hero-g-wrap" data-hero style="--i:0"><img class="hero-g" src="g-glass-alpha.webp?v=2" alt="" width="648" height="608" decoding="async"></span>
+      <h1 class="hero-title pl-title" data-split>¿Qué necesita <em>tu negocio?</em></h1>
+      <p class="hero-lead" data-hero style="--i:3">Elige un camino. Todo claro y sin letra pequeña.</p>
+      <!-- el aviso de la prueba gratis: pruebas.js lo llena solo si el enlace trae una prueba válida -->
+      <div class="prueba" id="prueba" data-hero style="--i:3.5" hidden></div>
+      <!-- la elección inicial (caminos.js): hasta elegir, solo se ve esta pantalla -->
+      <div class="caminos" data-hero style="--i:4">
+        <a class="camino glass spot" href="#casos" data-camino-go="auto"><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span><strong>Quiero automatizar</strong><span>Que mi web atienda, agende y me avise sola.</span></a>
+        <a class="camino glass spot" href="#casos" data-camino-go="vender"><span class="icon-bubble"><svg class="ico"><use href="#i-rocket"/></svg></span><strong>Quiero vender más</strong><span>Atraer más clientes, con presencia en redes sociales y en Google.</span></a>
+        <a class="camino glass spot" href="#casos" data-camino-go="datos"><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span><strong>Quiero ver mis datos</strong><span>Ver en un solo lugar lo que pasa en mi web, mis redes y con mis clientes.</span></a>
+      </div>
+      <p class="caminos-ayuda" data-hero style="--i:5">¿No sabes cuál? <a href="#" data-wa="Hola Gotia Studio 👋 Vi los paquetes y quiero que me ayuden a elegir">Te ayudamos por WhatsApp</a></p>
+    </div>
+  </section>
+
+  <!-- ============ AUTOMATIZAR: los 2 pasos ============ -->
+  <section class="slide" id="auto-inicio" data-title="Automatizar · 2 pasos" data-solo="auto">
+    <div class="container s-center">
+      <h2 class="h2 pl-title" data-reveal>Todo claro, <em>en 2 pasos.</em></h2>
+      <p class="lead" data-reveal>Eliges tu paquete y ves la mensualidad que lo mantiene funcionando.</p>
+      <ol class="roadmap roadmap-2" data-reveal>
+        <li><a class="glass spot" href="#paquetes"><span class="rm-num">01<svg class="ico"><use href="#i-down"/></svg></span><strong>Tu paquete</strong><span class="rm-desc">Pago único: página + instalación</span></a></li>
+        <li><a class="glass spot" href="#mensualidad"><span class="rm-num">02<svg class="ico"><use href="#i-down"/></svg></span><strong>Tu mensualidad</strong><span class="rm-desc">Mes a mes, para que siga funcionando</span></a></li>
+      </ol>
+      <a class="s-hint" href="#casos">Desliza para empezar <svg class="ico"><use href="#i-down"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ============ CASOS DE ÉXITO: antes de los precios ============ -->
+  <!-- minimalista: una frase y dos botones. Los casos no se muestran aquí, se cuentan por WhatsApp
+       o por llamada (el número sale de contacto.js: data-wa, data-tel y data-tel-num) -->
+  <section class="slide" id="casos" data-title="Casos de éxito">
+    <div class="container s-center">
+      <div class="case glass" data-reveal>
+        <span class="chip case-chip"><span class="pulse"></span>Casos de éxito más recientes</span>
+        <h2 class="h2">Negocios reales, <em>resultados reales.</em></h2>
+        <p class="lead">Antes de ver precios, pregúntanos por los más recientes: te mostramos la página, lo que hicimos y cómo le va hoy a ese negocio.</p>
+        <p class="case-dato" data-solo="vender"><strong>7 millones de vistas de video</strong> en 3 semanas</p>
+        <div class="ask-actions">
+          <a href="#" class="btn btn-primary magnetic" data-wa="Hola Gotia Studio 👋 Quiero conocer sus casos de éxito más recientes"><svg class="ico ico-l"><use href="#i-wa"/></svg>Pregúntanos por WhatsApp</a>
+          <a href="#" class="btn btn-glass glass magnetic" data-tel><svg class="ico ico-l"><use href="#i-phone"/></svg><span>Llámanos · <span data-tel-num>302 780 9730</span></span></a>
+        </div>
+        <p class="case-note">Gratis y sin compromiso</p>
+      </div>
+      <a class="s-hint" href="#paquetes" data-solo="auto">Desliza para ver los paquetes <svg class="ico"><use href="#i-down"/></svg></a>
+      <a class="s-hint" href="#planes-marketing" data-solo="vender">Desliza para ver los planes <svg class="ico"><use href="#i-down"/></svg></a>
+      <a class="s-hint" href="#planes-datos" data-solo="datos">Desliza para ver los paquetes <svg class="ico"><use href="#i-down"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ==================== PASO 1 · TU PAQUETE ==================== -->
+  <div class="step-group" id="paquetes" data-solo="auto">
+
+    <section class="slide" id="paso-1" data-title="Paso 1 · Tu paquete">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <span class="step-num" aria-hidden="true" data-reveal>01</span>
+          <p class="eyebrow" data-reveal>Paso 1 de 2 · Pago único: página + instalación</p>
+          <h2 class="h2" data-reveal>Elige tu <em>paquete.</em></h2>
+        </header>
+        <!-- tres paquetes al mismo nivel, con Automático en el medio; Emprende va aparte, más pequeño.
+             data-paq: a qué paquete aplica la etiqueta "+N días gratis" de pruebas.js -->
+        <nav class="ov ov-packs" style="--n:3" aria-label="Los paquetes" data-stagger>
+          <a class="ov-item glass spot" href="#ejemplo-presencia"><span class="tint-orb" style="--tint:#2b2f3a"></span><span class="ov-txt"><b>Presencia</b><small>Tu negocio bien presentado en internet.</small></span><span class="ov-price"><strong>$1.390.000</strong><em>COP + IVA</em><small class="ov-month" data-paq="presencia">Cuidado opcional: $180.000/mes desde el mes 2</small></span></a>
+          <a class="ov-item glass spot is-hl" href="#ejemplo-automatico"><span class="ov-badge">Recomendado</span><span class="tint-orb" style="--tint:#ff5fae"></span><span class="ov-txt"><b>Automático</b><small>Tu web atiende, agenda y te avisa sola.</small></span><span class="ov-price"><strong>$1.790.000</strong><em>COP + IVA</em><small class="ov-month" data-paq="automatico">Luego $390.000/mes desde el mes 3</small></span></a>
+          <a class="ov-item glass spot" href="#ejemplo-negocio"><span class="tint-orb" style="--tint:#f2f4f8"></span><span class="ov-txt"><b>Negocio</b><small>Tu web vende, cobra y te muestra los números.</small></span><span class="ov-price"><strong>$3.490.000</strong><em>COP + IVA</em><small class="ov-month" data-paq="negocio">Luego $690.000/mes desde el mes 4</small></span></a>
+        </nav>
+        <a class="ov-item ov-entry glass spot" href="#ejemplo-emprende" data-reveal><span class="tint-orb" style="--tint:#4fb3ff"></span><span class="ov-txt"><strong class="ov-q">¿Apenas vas a empezar?</strong><small><b>Emprende</b> · Tu negocio en internet, para empezar.</small></span><span class="ov-price"><strong>$290.000</strong><em>COP + IVA</em><small class="ov-month" data-paq="emprende">Cuidado opcional: $180.000/mes</small></span></a>
+        <a class="s-hint" href="#ejemplo-presencia">Desliza para ver cada paquete <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <!-- Presencia: recorrido -->
+    <section class="slide s-example" id="ejemplo-presencia" data-title="Presencia · Recorrido">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Paso 1 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#2b2f3a"></span>Paquete <em>Presencia</em></h2>
+        </header>
+        <!-- tutorial de 6 pasos sobre la web misma (planes.js, [data-tour]): el menú lleva a cada sección
+             y la web baja sola hasta ella (data-tour-scroll="top"). 1 el menú con las 4 secciones →
+             2 Servicios → 3 Nosotros → 4 Google Maps, con el formulario y el WhatsApp al lado →
+             5 aparecer en Google (la ventana pasa a google.com) → 6 el mes de Cuidado incluido
+             (un aviso de un cambio ya hecho). -->
+        <figure class="mock mock-tour ts-tour" data-reveal data-tour data-tour-scroll="top">
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg><span class="ts-u1">estudionativo.co</span><span class="ts-u2">google.com</span></span></div>
+            <div class="mock-page ts-page" style="--m-ac:#2b2f3a" aria-hidden="true">
+              <div class="m-nav ts-nav">
+                <span class="m-brand"><i></i>Estudio Nativo</span>
+                <span class="ts-menu" data-tour-at="1"><i>Inicio</i><i>Nosotros</i><i>Servicios</i><i>Contacto</i></span>
+              </div>
+              <div class="m-body ts-body">
+                <div class="t-scroll ts-site">
+                  <div class="mi-hero ts-hero">
+                    <p class="m-h">Interiores que se<br>sienten hogar</p>
+                    <p class="m-p">Espacios cálidos, funcionales y hechos a tu medida.</p>
+                    <span class="m-btn">Agenda una visita</span>
+                    <span class="m-img p3"></span>
+                  </div>
+                  <div class="ts-sec ts-svc" data-tour-at="2">
+                    <b class="ts-h">Servicios</b>
+                    <div class="ts-cards">
+                      <span class="m-card"><span class="mi-ic"><svg class="ico"><use href="#i-pen"/></svg></span><span><b>Diseño</b><small>Planos y renders de tu espacio</small></span></span>
+                      <span class="m-card"><span class="mi-ic"><svg class="ico"><use href="#i-wrench"/></svg></span><span><b>Obra</b><small>Construcción y acabados</small></span></span>
+                      <span class="m-card"><span class="mi-ic"><svg class="ico"><use href="#i-chat"/></svg></span><span><b>Asesoría</b><small>Elige materiales con expertos</small></span></span>
+                    </div>
+                  </div>
+                  <div class="ts-sec ts-about" data-tour-at="3">
+                    <b class="ts-h">Nosotros</b>
+                    <div class="ts-about-in m-card">
+                      <span class="xs-team"><i class="p1"></i><i class="p2"></i><i class="p3"></i></span>
+                      <span class="ts-about-tx"><b>10 años creando hogares en Bogotá</b><small>Arquitectos y diseñadores que te acompañan de la idea a la obra.</small></span>
+                      <span class="ts-stats"><i><b>+120</b>proyectos</i><i><b>4,8 ★</b>en Google</i></span>
+                    </div>
+                  </div>
+                  <div class="ts-sec ts-contact">
+                    <b class="ts-h">Contacto</b>
+                    <div class="ts-loc">
+                      <div class="mx-map ts-map" data-tour-at="4">
+                        <span class="ts-pin"><svg class="ico"><use href="#i-pin"/></svg></span>
+                        <span class="ts-place"><b>Estudio Nativo</b><small>Cra. 11 #93-27</small><span class="ts-go">Cómo llegar</span></span>
+                      </div>
+                      <div class="ts-info m-card">
+                        <span class="ts-form"><span class="m-field">Tu nombre</span><span class="m-field">Tu celular</span><span class="m-btn">Enviar</span></span>
+                        <span class="m-btn t-wa"><svg class="ico"><use href="#i-wa"/></svg>Escríbenos</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 5 · la búsqueda en Google: se escribe sola y la web sale de primera, con sus secciones -->
+              <div class="ts-google">
+                <div class="ts-g-top"><span class="mx-glogo">Google</span><span class="ts-search"><svg class="ico"><use href="#i-search"/></svg><span class="ts-q">diseño de interiores bogotá</span></span></div>
+                <div class="ts-res m-card" data-tour-at="5">
+                  <small>estudionativo.co</small>
+                  <span class="ts-rt">Estudio Nativo — Diseño de interiores en Bogotá</span>
+                  <span class="ts-rd">Interiores que se sienten hogar. Diseño, obra y asesoría a tu medida.</span>
+                  <span class="ts-links"><i>Nosotros</i><i>Servicios</i><i>Contacto</i></span>
+                  <i class="t-tap"></i>
+                </div>
+                <div class="ts-other"><span class="m-ln" style="width:28%"></span><span class="m-ln" style="width:74%"></span><span class="m-ln" style="width:58%"></span></div>
+                <div class="ts-other"><span class="m-ln" style="width:24%"></span><span class="m-ln" style="width:66%"></span><span class="m-ln" style="width:50%"></span></div>
+              </div>
+              <!-- 6 · el mes de Cuidado: el aviso de un cambio que ya hicimos -->
+              <div class="ts-toast m-card" data-tour-at="6">
+                <span class="ts-toast-ic"><svg class="ico"><use href="#i-wrench"/></svg></span>
+                <span><b>Cambio listo ✓</b><small>Actualizamos tus horarios y tus fotos</small></span>
+              </div>
+            </div>
+            <div class="t-layer">
+              <span class="t-spot"></span>
+              <svg class="t-arrow" aria-hidden="true"><path class="t-line" pathLength="1"/><path class="t-head"/></svg>
+              <p class="t-tip" data-place="below left"><b>1</b><span><strong>Una web con 4 secciones</strong>Inicio, Nosotros, Servicios y Contacto, hecha a la medida de tu marca. El menú lleva a cada una.</span></p>
+              <p class="t-tip" data-place="below above"><b>2</b><span><strong>Tus servicios, uno por uno</strong>Cada servicio con su explicación, para que el cliente sepa todo lo que ofreces.</span></p>
+              <p class="t-tip" data-place="below above"><b>3</b><span><strong>Quiénes son</strong>Tu historia, tu equipo y tu experiencia generan confianza antes de que te escriban.</span></p>
+              <p class="t-tip" data-place="right below above"><b>4</b><span><strong>Tu ubicación en Google Maps</strong>Te encuentran en el mapa y llegan con un toque. Al lado, tu formulario y tu WhatsApp con el mensaje listo.</span></p>
+              <p class="t-tip" data-place="below above" data-ms="8000"><b>5</b><span><strong>Apareces en Google</strong>Preparamos tu web para que salga cuando buscan lo que haces en tu ciudad (SEO básico).</span></p>
+              <p class="t-tip" data-place="left above"><b>6</b><span><strong>1 mes de Cuidado, incluido</strong>El primer mes hacemos tus cambios: textos, fotos o precios. Tú solo nos escribes.</span></p>
+            </div>
+          </div>
+          <ol class="t-steps" aria-label="Lo que trae el paquete Presencia, en 6 pasos">
+            <li><button type="button" aria-pressed="true"><i class="t-bar"><i class="t-fill"></i></i><span><em>1</em>Secciones</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>2</em>Servicios</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>3</em>Nosotros</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>4</em>Mapa</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>5</em>Google</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>6</em>Cuidado</span></button></li>
+          </ol>
+          <figcaption class="sr">Ejemplo ilustrativo de una web hecha con el paquete Presencia: un menú con 4 secciones (Inicio, Nosotros, Servicios y Contacto), la ubicación en Google Maps, formulario de contacto, botón de WhatsApp, SEO básico para aparecer en Google y 1 mes de Cuidado incluido.</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$1.390.000</strong>COP + IVA · pago único</span>
+          <a class="s-hint" href="#plan-presencia">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Presencia: lo que incluye -->
+    <section class="slide" id="plan-presencia" data-title="Presencia · Qué incluye">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#2b2f3a" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small>Paquete · Pago único</small><h3>Presencia</h3></div></div>
+            <p class="plan-tag">Tu negocio bien presentado en internet.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$1.390.000</strong><small>COP + IVA</small></span>
+              <span class="pt-pay">Pagas 50% para empezar y 50% cuando esté lista.</span>
+              <span class="pt-month" data-paq="presencia">Cuidado opcional: $180.000/mes desde el mes 2</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal si</span>estás empezando o tu web actual no te trae clientes.</p>
+            <div class="plan-go">
+              <a href="#" class="btn btn-glass glass" data-paq="presencia" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Presencia ($1.390.000)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+              <p class="plan-time"><svg class="ico"><use href="#i-clock"/></svg><span>Lista en <b>3 a 5 días hábiles</b></span></p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list">
+              <li>Web hecha a la medida de tu marca, con 4 secciones: Inicio, Nosotros, Servicios y Contacto</li>
+              <li>Adaptada a celular, tablet y computador</li>
+              <li>Botón de WhatsApp con el mensaje listo y enlaces a tus redes</li>
+              <li>Formulario de contacto</li>
+              <li>Ubicación en Google Maps y SEO básico para aparecer en Google</li>
+              <li>Dominio, hosting y candado SSL por 1 año</li>
+              <li>1 ronda de ajustes antes de publicar</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>1 mes de Cuidado</strong> incluido</span></p>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-check"/></svg><span>Sin automatizaciones.</span></li>
+              <li><svg class="ico"><use href="#i-repeat"/></svg><span>Después: Cuidado, $180.000/mes (opcional).</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Automático: recorrido -->
+    <section class="slide s-example" id="ejemplo-automatico" data-title="Automático · Recorrido">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Paso 1 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#ff5fae"></span>Paquete <em>Automático</em></h2>
+        </header>
+        <!-- tutorial de 7 pasos (planes.js, [data-tour]). La web trabaja sola, y se cuenta como la historia
+             de una clienta, Laura: 1 el chat le responde a las 11:47 p. m. → 2 reserva su cita → 3 a ti te
+             llega el aviso y a ella el correo → 4 queda guardada en tu panel → 5 la cita entra a tu
+             calendario (hasta 3 conexiones) → 6 cambias tú mismo textos, fotos y precios → 7 los 2 meses
+             de Cuidado Automático. Los pasos 4 a 6 son vistas del panel (.tp-v4 a .tp-v6, según data-step).
+             data-tour-keep: ese paso no mueve la página. -->
+        <figure class="mock mock-tour tp-tour" data-reveal data-tour data-tour-scroll="top">
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg><span class="tp-u1">bloomspa.co</span><span class="tp-u2">bloomspa.co/panel</span></span></div>
+            <div class="mock-page tp-page" style="--m-ac:#e8559e" aria-hidden="true">
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Bloom Spa</span>
+                <span class="ts-menu"><i>Servicios</i><i>Reservar</i><i>Contacto</i></span>
+              </div>
+              <div class="m-body tp-body">
+                <div class="t-scroll tp-site">
+                  <div class="mi-hero tp-hero">
+                    <p class="m-h">Tu momento<br>de calma</p>
+                    <p class="m-p">Masajes, faciales y spa en Medellín.</p>
+                    <span class="m-btn">Reservar cita</span>
+                    <span class="m-img p1"></span>
+                  </div>
+                  <div class="ts-sec tp-booking" data-tour-at="2">
+                    <b class="ts-h">Reserva tu cita</b>
+                    <div class="tp-book m-card">
+                      <span class="md-title"><b>Octubre</b><small>Masaje relajante · 60 min</small></span>
+                      <span class="md-cal"><i class="off">L</i><i class="off">M</i><i class="off">M</i><i class="off">J</i><i class="off">V</i><i class="off">S</i><i class="off">D</i><i>13</i><i>14</i><i>15</i><i class="tp-d">16</i><i>17</i><i>18</i><i class="off">19</i></span>
+                      <span class="md-times"><i>9:00</i><i class="tp-t">10:30</i><i>12:00</i><i>15:30</i></span>
+                      <span class="m-btn tp-confirm"><span class="a">Confirmar reserva</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Reserva confirmada</span><i class="t-tap"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 1 · el chat: abierto en el paso 1; en los demás, cerrado en su burbuja -->
+              <span class="tp-bubble"><svg class="ico"><use href="#i-chat"/></svg></span>
+              <div class="tp-chat m-card" data-tour-at="1">
+                <span class="xp-top"><i class="xp-bot"><svg class="ico"><use href="#i-chat"/></svg></i><span><b>Asistente Bloom</b><small>En línea · 11:47 p. m.</small></span></span>
+                <span class="md-bub">¡Hola! ¿En qué te ayudo? 🌸</span>
+                <span class="md-bub me">¿Tienen cita el jueves?</span>
+                <span class="md-bub">¡Sí! Jueves 16 a las 10:30. ¿Te la reservo?</span>
+              </div>
+              <!-- 3 · los avisos: a ti el del cliente nuevo, a ella el correo -->
+              <div class="tp-notes" data-tour-at="3" data-tour-keep>
+                <span class="m-card tp-note"><span class="mt-ic"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Nuevo cliente · para ti</b>Laura M. reservó · jue 16, 10:30</span></span>
+                <span class="m-card tp-note"><span class="mt-ic tp-mail"><svg class="ico"><use href="#i-mail"/></svg></span><span><b>Correo enviado a Laura</b>“Tu cita está confirmada ✓”</span></span>
+              </div>
+              <!-- 7 · los meses de Cuidado Automático que trae el paquete -->
+              <div class="tp-help m-card" data-tour-at="7" data-tour-keep>
+                <span class="tp-help-ic"><svg class="ico"><use href="#i-repeat"/></svg></span>
+                <span><b>Cuidado Automático ✓</b><small>Este mes tu web atendió 86 clientes y agendó 41 citas</small></span>
+              </div>
+              <!-- 4 a 6 · tu panel (la ventana pasa a bloomspa.co/panel): una vista por paso -->
+              <div class="tp-panel">
+                <span class="tp-ptop"><b>Panel · Bloom Spa</b><span class="tp-ptabs"><i class="tp-p4">Clientes</i><i class="tp-p5">Calendarios</i><i class="tp-p6">Tu web</i></span><span class="tp-bell"><svg class="ico"><use href="#i-bell"/></svg></span></span>
+                <div class="tp-pmain">
+                  <div class="tp-v tp-v4 tp-clients m-card" data-tour-at="4">
+                    <span class="tp-ph"><b>Clientes</b><small>Se guardan solos: reservas, chat y hasta 3 formularios</small></span>
+                    <span class="tp-row tp-new"><i class="tp-av p2"></i><span><b>Laura Martínez</b><small>laura@correo.com · 300 123 4567</small></span><em>Nuevo</em></span>
+                    <span class="tp-row"><i class="tp-av p3"></i><span><b>Sofía Gómez</b><small>sofia@correo.com · 310 555 0192</small></span></span>
+                    <span class="tp-row"><i class="tp-av p1"></i><span><b>Camila Rojas</b><small>camila@correo.com · 301 222 4410</small></span></span>
+                  </div>
+                  <div class="tp-v tp-v5 tp-clients m-card" data-tour-at="5">
+                    <span class="tp-ph"><b>Tus calendarios</b><small>Conecta hasta 3, y cada cita llega sola</small></span>
+                    <span class="tp-row"><i class="tp-logo tp-lg"><svg class="ico"><use href="#i-cal"/></svg></i><span><b>Google Calendar</b><small>Laura Martínez · jue 16, 10:30</small></span><em>Conectado</em></span>
+                    <span class="tp-row"><i class="tp-logo tp-lb">B.</i><span><b>Booking</b><small>Lo reservado se cierra solo</small></span><em>Conectado</em></span>
+                    <span class="tp-row"><i class="tp-logo tp-la">a</i><span><b>Airbnb</b><small>Sin reservas dobles</small></span><em>Conectado</em></span>
+                  </div>
+                  <div class="tp-v tp-v6 tp-clients m-card" data-tour-at="6">
+                    <span class="tp-ph"><b>Tu web</b><small>Tú mismo, cuando quieras</small></span>
+                    <span class="tp-row"><i class="tp-logo tp-lt"><svg class="ico"><use href="#i-pen"/></svg></i><span><b>Texto de inicio</b><small>Tu momento de calma</small></span></span>
+                    <span class="tp-row"><i class="tp-av tp-sq p1"></i><span><b>Foto principal</b><small>Sala de masajes</small></span></span>
+                    <span class="tp-row tp-new"><i class="tp-logo tp-lt"><svg class="ico"><use href="#i-card"/></svg></i><span><b>Masaje relajante</b><small><s>$120.000</s> <b class="tp-newp">$130.000</b></small></span><em>Guardado</em></span>
+                    <span class="tp-ok"><svg class="ico"><use href="#i-check"/></svg>Publicado en tu web, sin pedirle nada a nadie</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="t-layer">
+              <span class="t-spot"></span>
+              <svg class="t-arrow" aria-hidden="true"><path class="t-line" pathLength="1"/><path class="t-head"/></svg>
+              <p class="t-tip" data-place="left above"><b>1</b><span><strong>Responde sola, las 24 horas</strong>Son las 11:47 p. m. y tu web atiende: responde hasta 20 preguntas frecuentes y ofrece una cita, aunque estés dormido.</span></p>
+              <p class="t-tip" data-place="below above right" data-ms="8000"><b>2</b><span><strong>Reservas y citas en línea</strong>El cliente elige día y hora, y la cita queda agendada sin llamadas ni mensajes.</span></p>
+              <p class="t-tip" data-place="left below"><b>3</b><span><strong>Te avisa al instante</strong>A ti te llega el aviso del cliente nuevo, y a él, un correo de confirmación automático.</span></p>
+              <p class="t-tip" data-place="below right"><b>4</b><span><strong>Cada cliente, guardado</strong>Cada persona que reserva o escribe queda en tu panel, con su correo y su celular.</span></p>
+              <p class="t-tip" data-place="right below"><b>5</b><span><strong>Conectada con tu calendario</strong>Cada cita entra sola a tu Google Calendar. Si usas Booking o Airbnb, también se conectan (hasta 3).</span></p>
+              <p class="t-tip" data-place="right below" data-ms="8000"><b>6</b><span><strong>Cambias tú mismo tu web</strong>Desde tu panel cambias textos, fotos y precios cuando quieras, sin pedirle nada a nadie.</span></p>
+              <p class="t-tip" data-place="right above"><b>7</b><span><strong>2 meses de Cuidado Automático</strong>Vienen incluidos: tus automatizaciones funcionando y un reporte corto de cuántos clientes atendió y agendó tu web.</span></p>
+            </div>
+          </div>
+          <ol class="t-steps" aria-label="Lo que trae el paquete Automático, en 7 pasos">
+            <li><button type="button" aria-pressed="true"><i class="t-bar"><i class="t-fill"></i></i><span><em>1</em>Responde</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>2</em>Reservas</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>3</em>Avisos</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>4</em>Clientes</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>5</em>Calendarios</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>6</em>Tus cambios</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>7</em>Cuidado</span></button></li>
+          </ol>
+          <figcaption class="sr">Ejemplo ilustrativo de una web hecha con el paquete Automático: respuestas automáticas las 24 horas, reservas y citas en línea conectadas con tu calendario, avisos y correos automáticos, clientes guardados en tu panel, un panel para cambiar tú mismo textos, fotos y precios, y 2 meses de Cuidado Automático incluidos, además de todo lo del paquete Presencia.</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$1.790.000</strong>COP + IVA · pago único</span>
+          <a class="s-hint" href="#plan-automatico">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automático: lo que incluye -->
+    <section class="slide" id="plan-automatico" data-title="Automático · Qué incluye">
+      <div class="container">
+        <article class="plan glass spot featured" style="--tint:#ff5fae" data-reveal>
+          <span class="pack-badge">Recomendado</span>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small data-badge="Recomendado">Paquete · Pago único</small><h3>Automático</h3></div></div>
+            <p class="plan-tag">Tu web atiende, agenda y te avisa sola.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$1.790.000</strong><small>COP + IVA</small></span>
+              <span class="pt-pay">Pagas 50% para empezar y 50% cuando esté lista.</span>
+              <span class="pt-month" data-paq="automatico">Luego $390.000/mes desde el mes 3</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal si</span>recibes muchas consultas y quieres dejar de responder lo mismo todo el día.</p>
+            <div class="plan-go">
+              <a href="#" class="btn btn-primary" data-paq="automatico" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Automático ($1.790.000)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+              <p class="plan-time"><svg class="ico"><use href="#i-clock"/></svg><span>Lista en <b>5 a 7 días hábiles</b></span></p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes"><b>Todo lo de Presencia</b>, más:</p>
+            <ul class="plan-list">
+              <li>Respuestas automáticas en tu web las 24 horas (hasta 20 preguntas frecuentes)</li>
+              <li>Reservas y citas en línea, conectadas con Google Calendar, Booking o Airbnb (hasta 3)</li>
+              <li>Correos automáticos de confirmación para tu cliente</li>
+              <li>Aviso inmediato para ti cuando llega un cliente interesado</li>
+              <li>Cada cliente queda guardado en tu panel (hasta 3 formularios)</li>
+              <li>Panel para que cambies tú mismo textos, fotos y precios</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>2 meses de Cuidado Automático</strong> incluidos</span></p>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-repeat"/></svg><span>Después: Cuidado Automático, $390.000/mes (necesario para que las automatizaciones sigan funcionando).</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Negocio: recorrido -->
+    <section class="slide s-example" id="ejemplo-negocio" data-title="Negocio · Recorrido">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Paso 1 · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#f2f4f8"></span>Paquete <em>Negocio</em></h2>
+        </header>
+        <!-- tutorial de 7 pasos (planes.js, [data-tour]). Una tienda en línea con sus datos: 1 la tienda con
+             su catálogo → 2 el pago en línea y la factura → 3 tu catálogo lo actualizas tú mismo (la
+             ventana pasa a nordika.co/admin) → 4 las ventas y facturas → 5 el recordatorio y la reseña,
+             por correo → 6 las estadísticas en tiempo real → 7 los 3 meses de Cuidado Negocio. El menú
+             del panel marca la vista de cada paso (.tb-v*, según data-step). -->
+        <figure class="mock mock-tour tb-tour" data-reveal data-tour>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg><span class="tb-u1">nordika.co</span><span class="tb-u2">nordika.co/admin</span></span></div>
+            <div class="mock-page tb-page" style="--m-ac:#1f6fe5" aria-hidden="true">
+              <div class="m-nav ts-nav">
+                <span class="m-brand"><i></i>Nórdika</span>
+                <span class="ts-menu"><i>Sala</i><i>Comedor</i><i>Deco</i></span>
+                <span class="tb-cart"><svg class="ico"><use href="#i-bag"/></svg><i>2</i></span>
+              </div>
+              <div class="m-body tb-body">
+                <div class="tb-banner"><b>Nueva colección otoño</b><span>Envío gratis desde $300.000</span></div>
+                <div class="tb-grid" data-tour-at="1">
+                  <span class="m-card tb-prod"><i class="tb-pic p3"></i><b>Sofá Fjord</b><small>$2.190.000</small><span class="tb-add">Agregar</span></span>
+                  <span class="m-card tb-prod"><i class="tb-pic p1"></i><b>Mesa Oslo</b><small>$870.000</small><span class="tb-add">Agregar</span></span>
+                  <span class="m-card tb-prod"><i class="tb-pic p2"></i><b>Lámpara Lys</b><small>$189.000</small><span class="tb-add on">En el carrito</span></span>
+                  <span class="m-card tb-prod"><i class="tb-pic p3"></i><b>Silla Nord</b><small>$320.000</small><span class="tb-add on">En el carrito</span></span>
+                </div>
+              </div>
+              <!-- 2 · el pago: el carrito se abre a un lado -->
+              <div class="tb-pay m-card" data-tour-at="2">
+                <b class="tb-pay-h">Tu carrito</b>
+                <span class="tb-line"><span>Lámpara Lys</span><b>$189.000</b></span>
+                <span class="tb-line"><span>Silla Nord</span><b>$320.000</b></span>
+                <span class="tb-line tb-total"><span>Total</span><b>$509.000</b></span>
+                <span class="tb-ways"><i class="on"><svg class="ico"><use href="#i-card"/></svg>Tarjeta</i><i>PSE</i><i>Nequi</i></span>
+                <span class="m-btn tb-paybtn"><span class="a"><svg class="ico"><use href="#i-lock"/></svg>Pagar $509.000</span><span class="b"><svg class="ico"><use href="#i-check"/></svg>Pago aprobado</span><i class="t-tap"></i></span>
+                <small class="tb-inv"><svg class="ico"><use href="#i-mail"/></svg>Factura enviada a laura@correo.com</small>
+              </div>
+              <!-- 3 a 7 · tu panel (nordika.co/admin): una vista por paso -->
+              <div class="tb-admin">
+                <span class="tb-atop"><b>Nórdika · Panel</b><small>Tú lo manejas</small></span>
+                <span class="tb-side"><i class="tb-s3"><svg class="ico"><use href="#i-box"/></svg>Catálogo</i><i class="tb-s4"><svg class="ico"><use href="#i-sheet"/></svg>Ventas</i><i class="tb-s5"><svg class="ico"><use href="#i-mail"/></svg>Correos</i><i class="tb-s6"><svg class="ico"><use href="#i-data"/></svg>Datos</i><i class="tb-s7"><svg class="ico"><use href="#i-wrench"/></svg>Cuidado</i></span>
+                <div class="tb-views">
+                  <div class="tb-v tb-v3 m-card" data-tour-at="3">
+                    <span class="tb-vh"><b>Tu catálogo</b><span class="m-btn tb-new">+ Nuevo producto</span></span>
+                    <span class="tb-row"><i class="tb-th p2"></i><span>Lámpara Lys</span><small>$189.000</small><i class="tb-sw on"></i></span>
+                    <span class="tb-row"><i class="tb-th p1"></i><span>Mesa Oslo</span><small>$870.000</small><i class="tb-sw on"></i></span>
+                    <span class="tb-row tb-added"><i class="tb-th p3"></i><span class="tb-type" style="--n:12">Jarrón Bergen</span><small class="tb-type" style="--n:7;--d:1.7s">$79.000</small><i class="tb-sw"></i></span>
+                    <span class="tb-ok"><svg class="ico"><use href="#i-check"/></svg>Publicado en tu tienda, sin pedirle nada a nadie</span>
+                  </div>
+                  <div class="tb-v tb-v4 m-card" data-tour-at="4">
+                    <span class="tb-vh"><b>Ventas de hoy</b><small>$1.379.000</small></span>
+                    <span class="tb-sale"><b>#1043</b><span>Laura M.</span><small>$509.000</small><em>Pagado</em><i><svg class="ico"><use href="#i-sheet"/></svg>Factura</i></span>
+                    <span class="tb-sale"><b>#1042</b><span>Andrés P.</span><small>$870.000</small><em>Pagado</em><i><svg class="ico"><use href="#i-sheet"/></svg>Factura</i></span>
+                    <span class="tb-autos"><i><svg class="ico"><use href="#i-mail"/></svg>Factura enviada sola</i></span>
+                  </div>
+                  <div class="tb-v tb-v5 m-card" data-tour-at="5">
+                    <span class="tb-vh"><b>Correos automáticos</b><small>Salen solos</small></span>
+                    <span class="tb-mail"><span class="tb-mail-ic"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Recordatorio · antes de la cita</b><small>“Laura, tu cita de asesoría es mañana a las 10:30”</small></span><em>Enviado</em></span>
+                    <span class="tb-mail"><span class="tb-mail-ic"><svg class="ico"><use href="#i-google"/></svg></span><span><b>Reseña · después de la compra</b><small>“¿Cómo te fue con tu lámpara? Cuéntalo en Google”</small></span><em>Enviado</em></span>
+                    <span class="tb-rev"><span>★★★★★</span>Nueva reseña en Google</span>
+                  </div>
+                  <div class="tb-v tb-v6">
+                    <div class="tb-data" data-tour-at="6">
+                      <span class="tb-kpis">
+                        <span class="m-card"><small>Visitas hoy</small><b><i class="tb-live"></i>2.430</b><em>↑ 12%</em></span>
+                        <span class="m-card"><small>Escriben o llaman</small><b>86</b><em>↑ 9%</em></span>
+                        <span class="m-card"><small>Compran</small><b>3,4%</b><em>↑ 0,6</em></span>
+                        <span class="m-card"><small>Ventas desde la web</small><b>$8,2 M</b><em>↑ 18%</em></span>
+                      </span>
+                      <span class="tb-src m-card"><small>De dónde llegan</small>
+                        <span><b>Google</b><i style="--w:.46"></i><em>46%</em></span>
+                        <span><b>Instagram</b><i style="--w:.31"></i><em>31%</em></span>
+                        <span><b>Referidos</b><i style="--w:.15"></i><em>15%</em></span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="tb-v tb-v7 m-card" data-tour-at="7">
+                    <span class="tb-vh"><b>Reporte de octubre</b><small>Cuidado Negocio</small></span>
+                    <span class="tb-tip"><svg class="ico"><use href="#i-check"/></svg>Las ventas subieron 18% gracias a Instagram</span>
+                    <span class="tb-tip"><svg class="ico"><use href="#i-spark"/></svg>Mapas de calor: la gente se queda en la colección otoño</span>
+                    <span class="tb-meet"><i class="tb-adv"></i><span><b>Reunión de estrategia</b><small>Jue 7 nov · 9:00 a. m. · con tu asesor de Gotia</small></span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="t-layer">
+              <span class="t-spot"></span>
+              <svg class="t-arrow" aria-hidden="true"><path class="t-line" pathLength="1"/><path class="t-head"/></svg>
+              <p class="t-tip" data-place="above below"><b>1</b><span><strong>Tu catálogo en línea</strong>Tus productos o servicios con fotos, precios y carrito. El cliente compra sin tener que escribirte.</span></p>
+              <p class="t-tip" data-place="left above below" data-ms="8000"><b>2</b><span><strong>Pagos en línea</strong>Paga desde tu web con tarjeta, PSE o Nequi, y la factura le llega sola al correo.</span></p>
+              <p class="t-tip" data-place="right below above" data-ms="8500"><b>3</b><span><strong>Tu catálogo, lo manejas tú</strong>Agregas productos o cambias precios y fotos cuando quieras, sin pedirle cambios a nadie.</span></p>
+              <p class="t-tip" data-place="right below above"><b>4</b><span><strong>Ventas y facturas en orden</strong>Cada venta queda en tu panel de ventas, con su factura. Sabes qué vendiste y a quién.</span></p>
+              <p class="t-tip" data-place="right below above" data-ms="8000"><b>5</b><span><strong>Recordatorios y reseñas</strong>Antes de cada cita sale un recordatorio por correo. Después de cada cita o compra, un correo pide la reseña en Google.</span></p>
+              <p class="t-tip" data-place="right below above" data-ms="8000"><b>6</b><span><strong>Tus números en tiempo real</strong>Visitas, de dónde llegan, cuántos escriben, llaman o compran, y las ventas desde tu web.</span></p>
+              <p class="t-tip" data-place="right below above"><b>7</b><span><strong>3 meses de Cuidado Negocio</strong>Vienen incluidos: reporte completo, mapas de calor, una reunión de estrategia y 1 mejora al mes.</span></p>
+            </div>
+          </div>
+          <ol class="t-steps" aria-label="Lo que trae el paquete Negocio, en 7 pasos">
+            <li><button type="button" aria-pressed="true"><i class="t-bar"><i class="t-fill"></i></i><span><em>1</em>Tienda</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>2</em>Pagos</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>3</em>Catálogo</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>4</em>Ventas</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>5</em>Correos</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>6</em>Datos</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>7</em>Cuidado</span></button></li>
+          </ol>
+          <figcaption class="sr">Ejemplo ilustrativo de una web hecha con el paquete Negocio: catálogo en línea que actualizas tú mismo, pagos en línea con factura automática, panel de ventas y facturas, recordatorios y reseñas por correo, estadísticas en tiempo real y 3 meses de Cuidado Negocio, además de todo lo del paquete Automático.</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$3.490.000</strong>COP + IVA · pago único</span>
+          <a class="s-hint" href="#plan-negocio">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Negocio: lo que incluye -->
+    <section class="slide" id="plan-negocio" data-title="Negocio · Qué incluye">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#f2f4f8" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small>Paquete · Pago único</small><h3>Negocio</h3></div></div>
+            <p class="plan-tag">Tu web vende, cobra y te muestra los números.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$3.490.000</strong><small>COP + IVA</small></span>
+              <span class="pt-pay">Pagas 50% para empezar y 50% cuando esté lista.</span>
+              <span class="pt-month" data-paq="negocio">Luego $690.000/mes desde el mes 4</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal si</span>tu negocio ya tiene movimiento y quieres vender y cobrar desde tu web.</p>
+            <div class="plan-go">
+              <a href="#" class="btn btn-glass glass" data-paq="negocio" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Negocio ($3.490.000)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+              <p class="plan-time"><svg class="ico"><use href="#i-clock"/></svg><span>Lista en <b>7 a 10 días hábiles</b></span></p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes"><b>Todo lo de Automático</b>, más:</p>
+            <ul class="plan-list">
+              <li>Catálogo de productos o servicios con panel de ventas y facturas</li>
+              <li>Pagos en línea desde tu web</li>
+              <li>Recordatorios automáticos por correo antes de cada cita</li>
+              <li>Correo automático pidiendo reseña en Google después de cada cita o compra</li>
+              <li class="wide">Panel de estadísticas en tiempo real: visitas, de dónde llegan, cuántos escriben, llaman o compran, y ventas desde la web</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses de Cuidado Negocio</strong> incluidos</span></p>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-repeat"/></svg><span>Después: Cuidado Negocio, $690.000/mes (necesario para que las automatizaciones sigan funcionando).</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Emprende: recorrido -->
+    <section class="slide s-example" id="ejemplo-emprende" data-title="Emprende · Recorrido">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Paquete de entrada · Así se vería tu página</p>
+          <h2 class="h2" data-reveal><span class="tint-orb" style="--tint:#4fb3ff"></span>Paquete <em>Emprende</em></h2>
+        </header>
+        <!-- tutorial de 4 pasos sobre la página misma (planes.js, [data-tour]): una luz se posa en cada
+             parte, con una flecha y una nota que la explica. Pasa solo, como las historias; tocar un
+             paso lo muestra. 1 la dirección con candado → 2 el negocio →
+             3 el botón de WhatsApp → 4 las redes. Sin JS se ve solo la página. -->
+        <figure class="mock mock-tour" data-reveal data-tour>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url" data-tour-at="1"><svg class="ico"><use href="#i-lock"/></svg>dulcehogar.co</span></div>
+            <div class="mock-page t-page" style="--m-ac:#e0763a" aria-hidden="true">
+              <div class="m-nav">
+                <span class="m-brand"><i></i>Dulce Hogar</span>
+                <span class="xl-soc t-socs" data-tour-at="4"><i style="--c:#e1306c"><svg class="ico"><use href="#i-ig"/></svg></i><i style="--c:#0866ff"><svg class="ico"><use href="#i-fb"/></svg></i><i style="--c:#ee1d52"><svg class="ico"><use href="#i-tt"/></svg></i></span>
+              </div>
+              <div class="m-body t-body">
+                <div class="t-copy">
+                  <div class="t-intro" data-tour-at="2">
+                    <span class="m-chip">Hecho en casa · Medellín</span>
+                    <p class="m-h">Tortas y postres por encargo</p>
+                    <p class="m-p">Para cumpleaños, aniversarios o porque sí. Pide la tuya y te la llevamos.</p>
+                    <span class="xa-info"><i>Lun a sáb · 9 a. m. – 6 p. m.</i><i>Domicilios</i></span>
+                  </div>
+                  <span class="m-btn t-wa" data-tour-at="3"><svg class="ico"><use href="#i-wa"/></svg>Pedir por WhatsApp<i class="t-tap"></i></span>
+                </div>
+                <span class="t-photo"><i class="t-cake"></i></span>
+              </div>
+            </div>
+            <!-- la luz, la flecha y la nota de cada paso (data-place: dónde va la nota, en orden de preferencia) -->
+            <div class="t-layer">
+              <span class="t-spot"></span>
+              <svg class="t-arrow" aria-hidden="true"><path class="t-line" pathLength="1"/><path class="t-head"/></svg>
+              <p class="t-tip" data-place="below"><b>1</b><span><strong>Tu propia dirección</strong>La gente te encuentra en dulcehogar.co, con candado SSL. Dominio y hosting por 1 año.</span></p>
+              <p class="t-tip" data-place="right below above"><b>2</b><span><strong>Tu negocio, bien presentado</strong>Una sola sección con tu logo, tus colores y tus fotos. Se ve bien en celular, tablet y computador.</span></p>
+              <p class="t-tip" data-place="right below above"><b>3</b><span><strong>Te escriben con un toque</strong>Este botón lleva al cliente a tu WhatsApp, con el mensaje listo.</span></p>
+              <p class="t-tip" data-place="below left"><b>4</b><span><strong>Tus redes, a un clic</strong>Enlaces a tu Instagram, Facebook y TikTok para que te sigan.</span></p>
+            </div>
+          </div>
+          <ol class="t-steps" aria-label="Lo que trae el paquete Emprende, en 4 pasos">
+            <li><button type="button" aria-pressed="true"><i class="t-bar"><i class="t-fill"></i></i><span><em>1</em>Tu dirección</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>2</em>Tu negocio</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>3</em>WhatsApp</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>4</em>Tus redes</span></button></li>
+          </ol>
+          <figcaption class="sr">Ejemplo ilustrativo de una página hecha con el paquete Emprende: tu propia dirección con candado de seguridad, tu negocio en una sola página, un botón directo a tu WhatsApp y enlaces a tus redes sociales.</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <span class="ex-price glass"><strong>$290.000</strong>COP + IVA · pago único</span>
+          <a class="s-hint" href="#plan-emprende">Desliza para ver qué incluye <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emprende: lo que incluye -->
+    <section class="slide" id="plan-emprende" data-title="Emprende · Qué incluye">
+      <div class="container">
+        <article class="plan glass spot" style="--tint:#4fb3ff" data-reveal>
+          <div class="plan-side">
+            <div class="plan-head"><span class="tint-orb"></span><div><small>Paquete de entrada · Pago único</small><h3>Emprende</h3></div></div>
+            <p class="plan-tag">Tu negocio en internet, para empezar.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$290.000</strong><small>COP + IVA</small></span>
+              <span class="pt-month" data-paq="emprende">Cuidado opcional: $180.000/mes</span>
+            </div>
+            <p class="plan-ideal"><span>Ideal si</span>estás arrancando tu emprendimiento y quieres que te encuentren y te escriban.</p>
+            <div class="plan-go">
+              <a href="#" class="btn btn-glass glass" data-paq="emprende" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Emprende ($290.000)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+              <p class="plan-time"><svg class="ico"><use href="#i-clock"/></svg><span>Lista en <b>1 a 2 días hábiles</b></span></p>
+            </div>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list">
+              <li>Página de una sola sección con tu logo, tus colores y tus fotos</li>
+              <li>Adaptada a celular, tablet y computador</li>
+              <li>Botón de WhatsApp con el mensaje listo</li>
+              <li>Enlaces a tus redes sociales</li>
+              <li>Dominio, hosting y candado SSL por 1 año</li>
+            </ul>
+            <ul class="plan-notes">
+              <li><svg class="ico"><use href="#i-check"/></svg><span>Sin automatizaciones.</span></li>
+              <li><svg class="ico"><use href="#i-repeat"/></svg><span>Después, si quieres: Cuidado, $180.000/mes.</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- tabla: los 4 paquetes lado a lado -->
+    <section class="slide" id="comparar" data-title="Comparar los paquetes">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Paso 1 · Resumen</p>
+          <h2 class="h2" data-reveal>Los 4 paquetes, <em>lado a lado.</em></h2>
+        </header>
+        <!-- minimalista y todo centrado. En el celular no se desliza: la etiqueta de cada fila va arriba y
+             las 4 columnas debajo. "Lista en": si cambias un tiempo, cámbialo también en su ficha (.plan-time) -->
+        <div class="compare glass hl-4 cmp cmp-plans cmp-four" data-reveal>
+          <div class="table-wrap">
+            <table class="t-four">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="sr">Lo que incluye</span></th>
+                  <th scope="col"><b>Emprende</b></th>
+                  <th scope="col"><b>Presencia</b></th>
+                  <th scope="col"><span class="cmp-tag">Recomendado</span><b>Automático</b></th>
+                  <th scope="col"><b>Negocio</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cmp-price"><th scope="row">Precio <small>COP + IVA · pago único</small></th><td>$290.000</td><td>$1.390.000</td><td>$1.790.000</td><td>$3.490.000</td></tr>
+                <tr><th scope="row">Mensualidad después <small>COP + IVA</small></th><td><b>$180.000</b><small>Opcional</small></td><td><b>$180.000</b><small>Opcional</small></td><td><b>$390.000</b></td><td><b>$690.000</b></td></tr>
+                <tr class="cmp-time"><th scope="row">Lista en</th><td>1 a 2 días</td><td>3 a 5 días</td><td>5 a 7 días</td><td>7 a 10 días</td></tr>
+                <tr><th scope="row">Secciones</th><td>1</td><td>4</td><td>4</td><td>4 + catálogo</td></tr>
+                <tr><th scope="row">Google Maps y SEO</th><td class="n">—</td><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Automatizaciones</th><td>No</td><td>No</td><td>Atiende y agenda</td><td>Atiende, agenda, cobra y mide</td></tr>
+                <tr><th scope="row">Panel para tus cambios</th><td class="n">—</td><td class="n">—</td><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Pagos en línea y estadísticas</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y"><span class="sr">Sí</span></td></tr>
+                <tr><th scope="row">Meses incluidos</th><td class="n">—</td><td><b>1 mes</b><small>Cuidado</small></td><td><b>2 meses</b><small>Cuidado Automático</small></td><td><b>3 meses</b><small>Cuidado Negocio</small></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="cmp-foot" data-reveal><svg class="ico"><use href="#i-check"/></svg><span>Todos incluyen versión para celular, botón de WhatsApp, candado SSL, y dominio y hosting por 1 año. Tiempos en días hábiles.</span></p>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ==================== PASO 2 · TU MENSUALIDAD ==================== -->
+  <div class="step-group" id="mensualidad" data-solo="auto">
+
+    <section class="slide" id="paso-2" data-title="Paso 2 · Tu mensualidad">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <span class="step-num" aria-hidden="true" data-reveal>02</span>
+          <p class="eyebrow" data-reveal>Paso 2 de 2 · Mes a mes</p>
+          <h2 class="h2" data-reveal>Tu página <em>sigue trabajando.</em></h2>
+          <p class="lead" data-reveal>Cada paquete continúa en una mensualidad.</p>
+        </header>
+        <!-- en qué mensualidad continúa cada paquete (el color es el de cada mensualidad, como sus puntos) -->
+        <ul class="map" data-stagger>
+          <li class="map-row m-tint" style="--mt:#16a34a"><span class="map-from"><span class="tint-orb" style="--tint:#4fb3ff"></span><span class="tint-orb" style="--tint:#2b2f3a"></span><b>Emprende y Presencia</b></span><svg class="ico map-arrow"><use href="#i-arrow"/></svg><a class="map-to glass spot" href="#cuidado"><span class="icon-bubble sm"><svg class="ico"><use href="#i-wrench"/></svg></span><span class="map-name"><b>Cuidado</b><small>Opcional</small></span><span class="map-price"><strong>$180.000/mes</strong><em>COP + IVA</em></span></a></li>
+          <li class="map-row m-tint" style="--mt:#2563eb"><span class="map-from"><span class="tint-orb" style="--tint:#ff5fae"></span><b>Automático</b></span><svg class="ico map-arrow"><use href="#i-arrow"/></svg><a class="map-to glass spot" href="#cuidado-automatico"><span class="icon-bubble sm"><svg class="ico"><use href="#i-auto"/></svg></span><span class="map-name"><b>Cuidado Automático</b></span><span class="map-price"><strong>$390.000/mes</strong><em>COP + IVA</em></span></a></li>
+          <li class="map-row m-tint" style="--mt:#7c3aed"><span class="map-from"><span class="tint-orb" style="--tint:#f2f4f8"></span><b>Negocio</b></span><svg class="ico map-arrow"><use href="#i-arrow"/></svg><a class="map-to glass spot" href="#cuidado-negocio"><span class="icon-bubble sm"><svg class="ico"><use href="#i-data"/></svg></span><span class="map-name"><b>Cuidado Negocio</b></span><span class="map-price"><strong>$690.000/mes</strong><em>COP + IVA</em></span></a></li>
+        </ul>
+        <a class="s-hint" href="#cuidado">Desliza para ver cada mensualidad <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <section class="slide" id="cuidado" data-title="Cuidado" data-tint="#16a34a" style="--mt:#16a34a">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-wrench"/></svg></span><div><small>Para Emprende y Presencia</small><h3>Cuidado</h3></div></div>
+            <p class="plan-tag">Tu página siempre al día y segura. Es opcional.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$180.000</strong><small>/mes · COP + IVA</small></span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-paq="emprende presencia" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa Cuidado ($180.000/mes)">Quiero esta mensualidad <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li>Hosting, dominio y SSL renovados a tiempo</li>
+              <li>Copias de seguridad cada semana</li>
+              <li>Seguridad al día y monitoreo</li>
+              <li>Hasta 5 cambios al mes: textos, fotos o precios</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="cuidado-automatico" data-title="Cuidado Automático" data-tint="#2563eb" style="--mt:#2563eb">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span><div><small>Para Automático</small><h3>Cuidado Automático</h3></div></div>
+            <p class="plan-tag">Tu web sigue atendiendo y agendando sola.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$390.000</strong><small>/mes · COP + IVA</small></span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-paq="automatico" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa Cuidado Automático ($390.000/mes)">Quiero esta mensualidad <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li><strong>Todo lo de Cuidado</strong></li>
+              <li>Tus automatizaciones funcionando: servidor, envío de correos, reservas y respuestas</li>
+              <li>Monitoreo de las automatizaciones y 2 ajustes al mes</li>
+              <li>Reporte mensual corto: cuántos clientes atendió y agendó tu web</li>
+            </ul>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-repeat"/></svg><span>Necesaria para que las automatizaciones sigan funcionando.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="cuidado-negocio" data-title="Cuidado Negocio" data-tint="#7c3aed" style="--mt:#7c3aed">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span><div><small>Para Negocio</small><h3>Cuidado Negocio</h3></div></div>
+            <p class="plan-tag">Tu web sigue vendiendo, y sabes qué mejorar.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$690.000</strong><small>/mes · COP + IVA</small></span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-paq="negocio" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa Cuidado Negocio ($690.000/mes)">Quiero esta mensualidad <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li><strong>Todo lo de Cuidado Automático</strong></li>
+              <li>Reporte mensual completo el día 5: visitas, de dónde llegan, cuántos escriben o compran</li>
+              <li>Mapas de calor en 3 páginas</li>
+              <li>1 reunión de estrategia y 1 mejora al mes según los datos</li>
+            </ul>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-repeat"/></svg><span>Necesaria para que las automatizaciones sigan funcionando.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- las reglas de las mensualidades y, al final, Crecimiento: una sola línea con su botón, no una tarjeta -->
+    <section class="slide" id="reglas" data-title="Reglas y Crecimiento">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Paso 2 · Las reglas</p>
+          <h2 class="h2" data-reveal>Claro y <em>sin letra pequeña.</em></h2>
+        </header>
+        <ul class="rules" data-stagger>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-shield"/></svg></span><span>Tu página y tu dominio son tuyos. La mensualidad mantiene funcionando tus automatizaciones.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-unlock"/></svg></span><span>Si cancelas, las automatizaciones se apagan, pero tu página sigue siendo tuya.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-gift"/></svg></span><span>Pago anual: 2 meses gratis.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-repeat"/></svg></span><span>Sin permanencia, salvo Crecimiento (mínimo 3 meses).</span></li>
+        </ul>
+        <div class="grow" id="crecimiento" data-reveal>
+          <p>¿Quieres que además te traigamos clientes? <strong>Crecimiento:</strong> 4 redes con YouTube, 12 publicaciones al mes, 1 campaña en Google o Meta y Google Business activo. <strong>$1.890.000/mes</strong> <small>COP + IVA</small>, mínimo 3 meses. La pauta va aparte, desde $1.000.000/mes.</p>
+          <a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa Crecimiento ($1.890.000/mes)"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ==================== VENDER MÁS: los 3 planes de marketing ==================== -->
+  <div class="step-group" id="marketing" data-solo="vender">
+
+    <section class="slide" id="planes-marketing" data-title="Vender más · Los planes">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Vender más · Mes a mes</p>
+          <h2 class="h2" data-reveal>Más clientes, <em>en redes y en Google.</em></h2>
+          <p class="lead" data-reveal>Tres planes, según lo que necesites hoy.</p>
+        </header>
+        <nav class="ov ov-packs" style="--n:3" aria-label="Los planes de marketing" data-stagger>
+          <a class="ov-item glass spot" href="#plan-visible"><span class="tint-orb" style="--tint:#1a73e8"></span><span class="ov-txt"><b>Visible</b><small>Que te encuentren en Google y en Maps.</small></span><span class="ov-price"><strong>$750.000</strong><em>COP + IVA · al mes</em></span></a>
+          <a class="ov-item glass spot" href="#plan-redes"><span class="tint-orb" style="--tint:#e1306c"></span><span class="ov-txt"><b>Redes</b><small>Que te vean, te sigan y te escriban.</small></span><span class="ov-price"><strong>$1.190.000</strong><em>COP + IVA · al mes</em></span></a>
+          <a class="ov-item glass spot is-hl" href="#plan-crecimiento"><span class="ov-badge">Más completo</span><span class="tint-orb" style="--tint:#ea580c"></span><span class="ov-txt"><b>Crecimiento</b><small>Varias redes, YouTube y anuncios.</small></span><span class="ov-price"><strong>$1.890.000</strong><em>COP + IVA · al mes</em></span></a>
+        </nav>
+        <a class="mk-caso glass spot" href="#" data-reveal data-wa="Hola Gotia Studio 👋 Quiero conocer el caso de los 7 millones de vistas"><svg class="ico"><use href="#i-spark"/></svg><span><strong>Caso real: 7 millones de vistas de video en 3 semanas, en un solo perfil.</strong> Pregúntanos cómo lo hicimos.</span></a>
+        <a class="s-hint" href="#recorrido-marketing">Desliza para ver cómo funciona <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <section class="slide s-example" id="recorrido-marketing" data-title="Vender más · Recorrido">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Vender más · Así se vería tu marca</p>
+          <h2 class="h2" data-reveal>Así te <em>encuentran.</em></h2>
+        </header>
+        <!-- tutorial de 6 pasos (planes.js, [data-tour]), en el orden de los planes: 1 y 2 Visible (Google
+             y Maps), 3 y 4 Redes, 5 y 6 Crecimiento (anuncios y resultados). Cada paso es una pantalla
+             (.tm-v*, según data-step) y la barra de direcciones cambia con ella. -->
+        <figure class="mock mock-tour tm-tour" data-reveal data-tour>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg><span class="tm-u tm-ug">google.com</span><span class="tm-u tm-um">google.com/maps</span><span class="tm-u tm-ui">instagram.com/aureajoyeria</span><span class="tm-u tm-ua">aureajoyeria.co/panel</span></span></div>
+            <div class="mock-page tm-page" style="--m-ac:#b8860b" aria-hidden="true">
+              <!-- 1 y 5 · Google: primero sin pagar (el blog y la web) y luego el anuncio, que aparece arriba -->
+              <div class="tm-v tm-vg">
+                <div class="ts-g-top"><span class="mx-glogo">Google</span><span class="ts-search"><svg class="ico"><use href="#i-search"/></svg><span class="ts-q tm-q">joyería en bogotá</span></span></div>
+                <div class="tm-ad m-card" data-tour-at="5">
+                  <small><b>Patrocinado</b> · aureajoyeria.co</small>
+                  <span class="ts-rt">Áurea Joyería — Joyas de oro hechas a mano</span>
+                  <span class="ts-rd">Anillos, collares y aretes de oro de 18k. Envío gratis en Bogotá.</span>
+                  <i class="t-tap"></i>
+                </div>
+                <div class="tm-org" data-tour-at="1">
+                  <div class="tm-res"><small>aureajoyeria.co › blog</small><span class="ts-rt">Cómo elegir tu anillo de compromiso: guía 2026</span><span class="ts-rd">Cortes, metales y precios para acertar a la primera.</span></div>
+                  <div class="tm-res"><small>aureajoyeria.co</small><span class="ts-rt">Áurea Joyería · Joyería en Bogotá</span><span class="ts-links"><i>Anillos</i><i>Collares</i><i>Blog</i></span></div>
+                </div>
+              </div>
+              <!-- 2 · Google Maps: el perfil de empresa -->
+              <div class="tm-v tm-vm">
+                <div class="mx-map tm-map"><span class="ts-pin"><svg class="ico"><use href="#i-pin"/></svg></span><span class="tm-mlabel">Áurea Joyería</span></div>
+                <div class="tm-biz m-card" data-tour-at="2">
+                  <span class="tm-photos"><i class="mx-j1"></i><i class="mx-j2"></i><i class="mx-j3"></i></span>
+                  <b>Áurea Joyería</b>
+                  <span class="tm-stars"><span>★★★★★</span> 4,9 <small>(312 reseñas)</small></span>
+                  <small class="tm-open">Abierto · Cierra a las 7 p. m.</small>
+                  <span class="tm-acts"><i class="go">Cómo llegar</i><i>Llamar</i><i>Sitio web</i></span>
+                </div>
+              </div>
+              <!-- 3 · las redes, con la misma imagen -->
+              <div class="tm-v tm-vs">
+                <div class="tm-prof m-card" data-tour-at="3">
+                  <span class="tm-ptop"><i class="me-av"></i><span><b>aureajoyeria</b><small>Joyería hecha a mano · Bogotá ✨</small></span><span class="tm-pnum"><b>18,4 mil</b>seguidores</span></span>
+                  <span class="tm-nets"><i style="--c:#e1306c"><svg class="ico"><use href="#i-ig"/></svg>Instagram</i><i style="--c:#0866ff"><svg class="ico"><use href="#i-fb"/></svg>Facebook</i><i style="--c:#ee1d52"><svg class="ico"><use href="#i-tt"/></svg>TikTok</i><i style="--c:#ff0000"><svg class="ico"><use href="#i-yt"/></svg>YouTube</i></span>
+                </div>
+                <div class="tm-grid"><i class="mx-j1"></i><i class="mx-j2"></i><i class="mx-j3"></i><i class="mx-j3"></i><i class="mx-j1"></i><i class="mx-j2"></i></div>
+              </div>
+              <!-- 4 · el contenido de cada mes -->
+              <div class="tm-v tm-vc">
+                <div class="tm-cal m-card" data-tour-at="4">
+                  <span class="tb-vh"><b>Tu contenido de noviembre</b><small>Lo hacemos nosotros</small></span>
+                  <span class="tm-week">
+                    <span><small>Lun 4</small><i style="--c:#e1306c"><svg class="ico"><use href="#i-ig"/></svg>Post</i></span>
+                    <span><small>Mié 6</small><i style="--c:#ee1d52"><svg class="ico"><use href="#i-tt"/></svg>Video</i></span>
+                    <span><small>Vie 8</small><i style="--c:#e1306c"><svg class="ico"><use href="#i-ig"/></svg>Reel</i></span>
+                    <span><small>Sáb 9</small><i style="--c:#ff0000"><svg class="ico"><use href="#i-yt"/></svg>Short</i></span>
+                  </span>
+                  <span class="tm-gift"><svg class="ico"><use href="#i-check"/></svg>Lo apruebas antes de publicar</span>
+                </div>
+              </div>
+              <!-- 6 · los resultados de todos los canales -->
+              <div class="tm-v tm-vd">
+                <div class="tm-dash m-card" data-tour-at="6">
+                  <span class="tb-vh"><b>Tus resultados · octubre</b><small>Todos los canales</small></span>
+                  <span class="tm-kpi"><span><small>Clientes nuevos</small><b>146</b><em>↑ 32%</em></span><span><small>Ventas</small><b>$46 M</b><em>↑ 21%</em></span><span><small>Costo por cliente</small><b>$9.800</b><em>↓ 14%</em></span></span>
+                  <span class="tb-src"><small>De dónde llegan tus clientes</small>
+                    <span><b>Google Ads</b><i style="--w:.38"></i><em>38%</em></span>
+                    <span><b>Instagram</b><i style="--w:.27"></i><em>27%</em></span>
+                    <span><b>YouTube</b><i style="--w:.19"></i><em>19%</em></span>
+                    <span><b>TikTok</b><i style="--w:.11"></i><em>11%</em></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="t-layer">
+              <span class="t-spot"></span>
+              <svg class="t-arrow" aria-hidden="true"><path class="t-line" pathLength="1"/><path class="t-head"/></svg>
+              <p class="t-tip" data-place="right below above" data-ms="8000"><b>1</b><span><strong>Visible · Te encuentran en Google</strong>Con SEO local y un artículo al mes, tu web sube cuando buscan lo que vendes en tu ciudad, sin pagar por cada clic.</span></p>
+              <p class="t-tip" data-place="left below above"><b>2</b><span><strong>Visible · Y en Google Maps</strong>Tu perfil al día: fotos, horario, publicaciones y respuesta a tus reseñas.</span></p>
+              <p class="t-tip" data-place="below above"><b>3</b><span><strong>Redes · Tu marca, en tus redes</strong>Manejamos tus redes con la misma imagen: Instagram, Facebook, TikTok o YouTube.</span></p>
+              <p class="t-tip" data-place="below right above" data-ms="8000"><b>4</b><span><strong>Redes · Contenido cada mes</strong>12 publicaciones, con 4 videos o reels hechos con IA. Apruebas el calendario antes de publicar.</span></p>
+              <p class="t-tip" data-place="below right"><b>5</b><span><strong>Crecimiento · Anuncios que traen clientes</strong>Una campaña activa en Google o Meta: la creamos, la medimos y la ajustamos. La pauta va aparte.</span></p>
+              <p class="t-tip" data-place="right below above"><b>6</b><span><strong>Crecimiento · Sabes qué funciona</strong>Cada mes ves cuántos clientes trae cada canal, también YouTube, y sabes dónde conviene seguir.</span></p>
+            </div>
+          </div>
+          <ol class="t-steps" aria-label="Lo que hacemos por tu marca, en 6 pasos">
+            <li><button type="button" aria-pressed="true"><i class="t-bar"><i class="t-fill"></i></i><span><em>1</em>Google</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>2</em>Maps</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>3</em>Redes</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>4</em>Contenido</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>5</em>Anuncios</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>6</em>Resultados</span></button></li>
+          </ol>
+          <figcaption class="sr">Ejemplo ilustrativo de lo que incluyen los planes: aparecer en Google y en Google Maps, tus redes con la misma imagen, contenido cada mes, una campaña en Google o Meta y un reporte de resultados por canal.</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <a class="s-hint" href="#plan-visible">Desliza para ver cada plan <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="plan-visible" data-title="Visible" data-tint="#1a73e8" style="--mt:#1a73e8">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-google"/></svg></span><div><small>Google y Google Maps</small><h3>Visible</h3></div></div>
+            <p class="plan-tag">Que te encuentren cuando te buscan.</p>
+            <div class="price-tag"><span class="pt-now"><strong>$750.000</strong><small>/mes · COP + IVA</small></span></div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el plan Visible ($750.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li>Perfil de Google Business al día: fotos, horario y servicios</li>
+              <li>4 publicaciones al mes en tu perfil de Google</li>
+              <li>Respuesta a tus reseñas</li>
+              <li>SEO local: tu web lista para las búsquedas de tu ciudad</li>
+              <li>1 artículo de blog al mes</li>
+              <li>Reporte mensual corto: cuántos te encontraron y qué hicieron</li>
+            </ul>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-alert"/></svg><span>Subir en Google toma meses. No prometemos el primer lugar.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="plan-redes" data-title="Redes" data-tint="#e1306c" style="--mt:#e1306c">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-ig"/></svg></span><div><small>Instagram, Facebook, TikTok o YouTube</small><h3>Redes</h3></div></div>
+            <p class="plan-tag">Que te vean, te sigan y te escriban.</p>
+            <div class="price-tag"><span class="pt-now"><strong>$1.190.000</strong><small>/mes · COP + IVA</small></span></div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el plan Redes ($1.190.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li>Manejo de 2 redes a elegir: Instagram, Facebook, TikTok o YouTube</li>
+              <li>12 publicaciones al mes, con 4 videos o reels</li>
+              <li>Fotos y videos con IA, con tu logo y tus colores</li>
+              <li>Calendario del mes, que apruebas antes de publicar</li>
+              <li>Cada publicación lleva a tu web o a tu WhatsApp</li>
+              <li>Reporte mensual corto: alcance, seguidores y mensajes</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-spark"/></svg><span><strong>Caso real:</strong> 7 millones de vistas de video en 3 semanas, en un solo perfil.</span></p>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-alert"/></svg><span>Los mensajes y comentarios los respondes tú.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="plan-crecimiento" data-title="Crecimiento" data-tint="#ea580c" style="--mt:#ea580c">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-rocket"/></svg></span><div><small>Varias redes, YouTube y anuncios</small><h3>Crecimiento</h3></div></div>
+            <p class="plan-tag">Te traemos clientes, con todo trabajando junto.</p>
+            <div class="price-tag"><span class="pt-now"><strong>$1.890.000</strong><small>/mes · COP + IVA</small></span></div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el plan Crecimiento ($1.890.000/mes)">Quiero este plan <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li>Manejo de 4 redes: Instagram, Facebook, TikTok y YouTube</li>
+              <li>12 publicaciones al mes, con 4 videos adaptados a cada red, también como Shorts de YouTube</li>
+              <li>Fotos y videos con IA, con tu logo y tus colores</li>
+              <li>1 campaña activa en Google o Meta: la creamos, la medimos y la ajustamos</li>
+              <li>Google Business activo: publicaciones y reseñas</li>
+              <li>Reporte mensual: de dónde llega cada cliente</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-spark"/></svg><span><strong>Caso real:</strong> 7 millones de vistas de video en 3 semanas, en un solo perfil.</span></p>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-alert"/></svg><span>La pauta va aparte, desde $1.000.000/mes, pagada directo a Google o Meta. Mínimo 3 meses.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="marketing-reglas" data-title="Vender más · Las reglas">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Vender más · Las reglas</p>
+          <h2 class="h2" data-reveal>Claro y <em>sin letra pequeña.</em></h2>
+        </header>
+        <ul class="rules" data-stagger>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-shield"/></svg></span><span>Tus redes, tu perfil de Google y tu web son tuyos.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-alert"/></svg></span><span>No prometemos que algo se vuelva viral ni el primer lugar en Google. Te mostramos los números cada mes.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-gift"/></svg></span><span>Pago anual: 2 meses gratis.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-repeat"/></svg></span><span>Sin permanencia, salvo Crecimiento (mínimo 3 meses).</span></li>
+        </ul>
+        <div class="grow" data-reveal>
+          <p>¿Aún no tienes página, o quieres que atienda sola? <strong>Mira los paquetes de página web y automatización.</strong></p>
+          <a href="#casos" class="btn btn-glass glass btn-sm" data-camino-go="auto">Ver paquetes</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ==================== DATOS: los 3 paquetes para entender el negocio ==================== -->
+  <div class="step-group" id="datos" data-solo="datos">
+
+    <section class="slide" id="planes-datos" data-title="Datos · Los paquetes">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Datos · Mes a mes</p>
+          <h2 class="h2" data-reveal>Decide con números, <em>en un solo lugar.</em></h2>
+          <p class="lead" data-reveal>Un panel con tu web, tus redes y tus clientes. En Une y Decide, con un analista de datos a tu lado.</p>
+        </header>
+        <nav class="ov ov-packs" style="--n:3" aria-label="Los paquetes de datos" data-stagger>
+          <a class="ov-item glass spot" href="#plan-mide"><span class="tint-orb" style="--tint:#0f9d8a"></span><span class="ov-txt"><b>Mide</b><small>El software en tu web. Tú ves tus números.</small></span><span class="ov-price"><strong>$390.000</strong><em>/mes · COP + IVA</em><small class="ov-month">Instalación: $490.000 · COP + IVA</small></span></a>
+          <a class="ov-item glass spot is-hl" href="#plan-une"><span class="ov-badge">Recomendado</span><span class="tint-orb" style="--tint:#2563eb"></span><span class="ov-txt"><b>Une</b><small>Tu web y tus redes, con un analista de datos.</small></span><span class="ov-price"><strong>$990.000</strong><em>/mes · COP + IVA</em><small class="ov-month">Instalación: $690.000 · COP + IVA</small></span></a>
+          <a class="ov-item glass spot" href="#plan-decide"><span class="tint-orb" style="--tint:#7c3aed"></span><span class="ov-txt"><b>Decide</b><small>Clientes y ventas, con analista y reunión.</small></span><span class="ov-price"><strong>$1.690.000</strong><em>/mes · COP + IVA</em><small class="ov-month">Instalación: $1.190.000 · COP + IVA</small></span></a>
+        </nav>
+        <a class="mk-caso glass spot" href="#" data-reveal data-wa="Hola Gotia Studio 👋 Quiero saber más de los 3 meses gratis de registro de datos"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses gratis de registro de datos en los 3 paquetes.</strong> Tu mensualidad empieza el mes 4.</span></a>
+        <a class="s-hint" href="#recorrido-datos">Desliza para ver cómo funciona <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <section class="slide s-example" id="recorrido-datos" data-title="Datos · Recorrido">
+      <div class="container s-center">
+        <header class="ex-head">
+          <p class="eyebrow" data-reveal>Datos · Así se vería tu panel</p>
+          <h2 class="h2" data-reveal>Todo, <em>en un solo lugar.</em></h2>
+        </header>
+        <!-- tutorial de 6 pasos (planes.js, [data-tour]), en el orden de los paquetes: 1 y 2 Mide, 3 y 4 Une,
+             5 y 6 Decide. Una vista del panel por paso (.td-v*, según data-step) y sus pestañas arriba. -->
+        <figure class="mock mock-tour td-tour" data-reveal data-tour>
+          <div class="mock-win glass">
+            <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span><span class="mock-url"><svg class="ico"><use href="#i-lock"/></svg>bloomspa.co/panel</span></div>
+            <div class="mock-page tb-page tp-page td-page" style="--m-ac:#2563eb" aria-hidden="true">
+              <span class="tp-ptop"><b>Panel · Bloom Spa</b><span class="tp-ptabs"><i class="td-p1">Tu web</i><i class="td-p2">Redes</i><i class="td-p3">Clientes</i></span></span>
+              <div class="td-views">
+                <!-- 1 · la web en números -->
+                <div class="td-v td-v1">
+                  <div class="tb-data" data-tour-at="1">
+                      <span class="tb-kpis">
+                        <span class="m-card"><small>Visitas hoy</small><b><i class="tb-live"></i>1.284</b><em>↑ 12%</em></span>
+                        <span class="m-card"><small>Escriben o llaman</small><b>62</b><em>↑ 9%</em></span>
+                        <span class="m-card"><small>Reservan</small><b>3,1%</b><em>↑ 0,4</em></span>
+                        <span class="m-card"><small>Ventas desde la web</small><b>$6,4 M</b><em>↑ 15%</em></span>
+                      </span>
+                      <span class="tb-src m-card"><small>De dónde llegan</small>
+                        <span><b>Google</b><i style="--w:.46"></i><em>46%</em></span>
+                        <span><b>Instagram</b><i style="--w:.31"></i><em>31%</em></span>
+                        <span><b>Directo</b><i style="--w:.15"></i><em>15%</em></span>
+                      </span>
+                  </div>
+                </div>
+                <!-- 2 · dónde se van -->
+                <div class="td-v td-v2">
+                  <div class="td-split" data-tour-at="2">
+                    <span class="tb-heat m-card"><small>Dónde se quedan</small><i class="tb-heat-pg"><s></s><s></s><s></s></i></span>
+                    <span class="td-tips">
+                      <span class="tb-tip"><svg class="ico"><use href="#i-alert"/></svg>El 62% se va antes de ver tus precios</span>
+                      <span class="tb-tip"><svg class="ico"><use href="#i-data"/></svg>Solo el 38% llega al botón de reservar</span>
+                    </span>
+                  </div>
+                </div>
+                <!-- 3 · las redes, juntas -->
+                <div class="td-v td-v3">
+                  <div class="tp-clients m-card" data-tour-at="3">
+                    <span class="tp-ph"><b>Tus redes</b><small>Este mes, en un solo lugar</small></span>
+                    <span class="tp-row"><i class="tp-logo" style="background:#e1306c"><svg class="ico"><use href="#i-ig"/></svg></i><span><b>Instagram</b><small>18,4 mil seguidores · 96 mil de alcance</small></span><em>↑ 8%</em></span>
+                    <span class="tp-row"><i class="tp-logo" style="background:#ee1d52"><svg class="ico"><use href="#i-tt"/></svg></i><span><b>TikTok</b><small>412 mil vistas · mejor video: 86 mil</small></span><em>↑ 21%</em></span>
+                    <span class="tp-row"><i class="tp-logo" style="background:#ff0000"><svg class="ico"><use href="#i-yt"/></svg></i><span><b>YouTube</b><small>74 mil vistas · 320 suscriptores nuevos</small></span><em>↑ 14%</em></span>
+                    <span class="tp-row"><i class="tp-logo" style="background:#0866ff"><svg class="ico"><use href="#i-fb"/></svg></i><span><b>Facebook</b><small>31 mil de alcance · 210 interacciones</small></span><em>↑ 3%</em></span>
+                  </div>
+                </div>
+                <!-- 4 · qué red trae clientes -->
+                <div class="td-v td-v4">
+                  <div class="tm-dash m-card" data-tour-at="4">
+                    <span class="tb-vh"><b>Qué te trae clientes · octubre</b><small>Todos los canales</small></span>
+                    <span class="tm-kpi"><span><small>Clientes nuevos</small><b>146</b><em>↑ 32%</em></span><span><small>Ventas</small><b>$18 M</b><em>↑ 21%</em></span><span><small>Mejor canal</small><b>TikTok</b><em>38%</em></span></span>
+                    <span class="tb-src"><small>De dónde llegan tus clientes</small>
+                      <span><b>TikTok</b><i style="--w:.38"></i><em>38%</em></span>
+                      <span><b>Instagram</b><i style="--w:.27"></i><em>27%</em></span>
+                      <span><b>Google</b><i style="--w:.19"></i><em>19%</em></span>
+                      <span><b>YouTube</b><i style="--w:.11"></i><em>11%</em></span>
+                    </span>
+                    <span class="tb-tip"><svg class="ico"><use href="#i-spark"/></svg>Tu analista: refuerza TikTok, es lo que más rinde</span>
+                  </div>
+                </div>
+                <!-- 5 · cada cliente -->
+                <div class="td-v td-v5">
+                  <div class="tm-pipe m-card" data-tour-at="5">
+                    <span class="tb-vh"><b>Tus clientes</b><small>Nadie se queda sin seguimiento</small></span>
+                    <span class="tm-cols">
+                      <span><small>Nuevos</small><i>Valentina R.<em>TikTok</em></i><i>Daniel C.<em>Google</em></i></span>
+                      <span><small>En contacto</small><i class="tm-hot">Laura M.<em>Instagram</em></i></span>
+                      <span><small>Compraron</small><i>Sara P.<em>$240 mil</em></i><i>Camilo T.<em>$120 mil</em></i></span>
+                    </span>
+                    <span class="tb-tip"><svg class="ico"><use href="#i-bell"/></svg>Para hoy: escríbele a Laura, lleva 3 días sin respuesta</span>
+                  </div>
+                </div>
+                <!-- 6 · qué hacer ahora -->
+                <div class="td-v td-v6">
+                  <div class="td-acts m-card" data-tour-at="6">
+                    <span class="tb-vh"><b>Qué hacer ahora</b><small>De tu analista de datos</small></span>
+                    <span class="tb-tip"><svg class="ico"><use href="#i-check"/></svg>Refuerza TikTok: trae más clientes que Instagram</span>
+                    <span class="tb-tip"><svg class="ico"><use href="#i-spark"/></svg>Deja los anuncios de los lunes: cuestan más y casi no traen reservas</span>
+                    <span class="tb-meet"><i class="tb-adv"></i><span><b>Reunión de estrategia</b><small>Jue 7 nov · 9:00 a. m. · con tu analista de Gotia</small></span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="t-layer">
+              <span class="t-spot"></span>
+              <svg class="t-arrow" aria-hidden="true"><path class="t-line" pathLength="1"/><path class="t-head"/></svg>
+              <p class="t-tip" data-place="right below above"><b>1</b><span><strong>Mide · Tu web en números</strong>Visitas, de dónde llegan y cuántos escriben, llaman o compran, en vivo.</span></p>
+              <p class="t-tip" data-place="right below above"><b>2</b><span><strong>Mide · Dónde se te van</strong>El mapa de calor te muestra dónde se quedan y en qué punto se van.</span></p>
+              <p class="t-tip" data-place="right below above"><b>3</b><span><strong>Une · Tus redes, juntas</strong>Instagram, Facebook, TikTok y YouTube en el mismo panel, sin entrar a cada una.</span></p>
+              <p class="t-tip" data-place="right below above"><b>4</b><span><strong>Une · Qué red te trae clientes</strong>Comparas cada red. Tu analista de datos te muestra dónde vale la pena seguir.</span></p>
+              <p class="t-tip" data-place="below above"><b>5</b><span><strong>Decide · Cada cliente, en un solo lugar</strong>De dónde llegó, en qué va y cuánto ha comprado. Y a quién escribirle hoy.</span></p>
+              <p class="t-tip" data-place="right below above"><b>6</b><span><strong>Decide · Qué hacer ahora</strong>Tu analista te dice qué dejar y qué reforzar. Y se reúnen una vez al mes.</span></p>
+            </div>
+          </div>
+          <ol class="t-steps" aria-label="Lo que ves en tu panel, en 6 pasos">
+            <li><button type="button" aria-pressed="true"><i class="t-bar"><i class="t-fill"></i></i><span><em>1</em>Tu web</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>2</em>Se van</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>3</em>Redes</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>4</em>Comparar</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>5</em>Clientes</span></button></li>
+            <li><button type="button" aria-pressed="false"><i class="t-bar"><i class="t-fill"></i></i><span><em>6</em>Decidir</span></button></li>
+          </ol>
+          <figcaption class="sr">Ejemplo ilustrativo de un panel de datos: la web en números y dónde se va la gente, las redes juntas, qué canal trae clientes, cada cliente con su seguimiento y lo que recomienda tu analista de datos.</figcaption>
+        </figure>
+        <div class="ex-foot" data-reveal>
+          <a class="s-hint" href="#analista-datos">Desliza para conocer a tu analista <svg class="ico"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="analista-datos" data-title="Datos · Tu analista">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Datos · Tu analista</p>
+          <h2 class="h2" data-reveal>Menos suposiciones, <em>mejores decisiones.</em></h2>
+          <p class="lead" data-reveal>En Une y Decide, un analista de datos con experiencia revisa tus números para ayudarte a optimizar tu negocio.</p>
+        </header>
+        <ul class="pay-grid" data-stagger>
+          <li class="pay-card glass spot"><span class="icon-bubble"><svg class="ico"><use href="#i-search"/></svg></span><small>Identifica</small><strong>Lo que te frena</strong><p>Encuentra lo que más te quita tiempo, ingresos y dinero.</p></li>
+          <li class="pay-card glass spot"><span class="icon-bubble"><svg class="ico"><use href="#i-alert"/></svg></span><small>Descarta</small><strong>Lo que no rinde</strong><p>Te muestra qué conviene dejar de hacer, con números en la mano.</p></li>
+          <li class="pay-card glass spot"><span class="icon-bubble"><svg class="ico"><use href="#i-spark"/></svg></span><small>Enfoca</small><strong>Lo que sí da</strong><p>Te ayuda a poner tu tiempo y tu inversión donde hay mejor rendimiento.</p></li>
+        </ul>
+        <a class="s-hint" href="#plan-mide">Desliza para ver cada paquete <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </section>
+
+    <section class="slide" id="plan-mide" data-title="Mide" data-tint="#0f9d8a" style="--mt:#0f9d8a">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-search"/></svg></span><div><small>Tu página web</small><h3>Mide</h3></div></div>
+            <p class="plan-tag">Solo el software. Tú ves tus números.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$390.000</strong><small>/mes · COP + IVA</small></span>
+              <span class="pt-month">Instalación: $490.000 · COP + IVA</span>
+              <span class="pt-pay">Una sola vez: 50% al empezar, 50% al terminar.</span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Mide ($390.000/mes + $490.000 de instalación)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li><span><strong>Instalamos el software en tu página</strong> y queda midiendo desde el primer día</span></li>
+              <li>Visitas, de dónde llegan y qué páginas ven</li>
+              <li>Cuántos escriben, llaman, llenan el formulario o compran</li>
+              <li>Panel privado y en vivo, desde tu celular</li>
+              <li>Mapas de calor en 3 páginas: dónde se quedan y dónde se van</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses gratis de registro de datos.</strong> Tu mensualidad empieza el mes 4.</span></p>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-alert"/></svg><span>Funciona con tu página, aunque la haya hecho otro proveedor. Necesitamos acceso para instalar la medición.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="plan-une" data-title="Une" data-tint="#2563eb" style="--mt:#2563eb">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-layers"/></svg></span><div><small>Tu web y todas tus redes</small><h3>Une</h3></div></div>
+            <p class="plan-tag">Tu web y tus redes, con un analista de datos.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$990.000</strong><small>/mes · COP + IVA</small></span>
+              <span class="pt-month">Instalación: $690.000 · COP + IVA</span>
+              <span class="pt-pay">Una sola vez: 50% al empezar, 50% al terminar.</span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Une ($990.000/mes + $690.000 de instalación)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li><strong>Todo lo de Mide</strong></li>
+              <li>Instagram, Facebook, TikTok y YouTube en el mismo panel</li>
+              <li>Google: tu perfil de Maps, búsquedas y anuncios, si los tienes</li>
+              <li>Comparas qué red te trae más visitas y mensajes</li>
+              <li><span><strong>Un analista de datos con experiencia</strong> revisa tus números cada mes</span></li>
+              <li>Informe el día 5: qué te quita tiempo y dinero, y 3 recomendaciones</li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses gratis de registro de datos.</strong> Tu mensualidad y tu analista empiezan el mes 4.</span></p>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-alert"/></svg><span>Tus cuentas deben ser profesionales y darnos acceso. Cada red decide qué datos comparte.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="plan-decide" data-title="Decide" data-tint="#7c3aed" style="--mt:#7c3aed">
+      <div class="container">
+        <article class="plan month glass spot" data-reveal>
+          <i class="m-band" aria-hidden="true"></i>
+          <div class="plan-side">
+            <div class="plan-head"><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span><div><small>Tu web, tus redes y tus clientes</small><h3>Decide</h3></div></div>
+            <p class="plan-tag">Clientes, ventas y canales, con tu analista.</p>
+            <div class="price-tag">
+              <span class="pt-now"><strong>$1.690.000</strong><small>/mes · COP + IVA</small></span>
+              <span class="pt-month">Instalación: $1.190.000 · COP + IVA</span>
+              <span class="pt-pay">Una sola vez: 50% al empezar, 50% al terminar.</span>
+            </div>
+            <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Vi los paquetes y me interesa el paquete Decide ($1.690.000/mes + $1.190.000 de instalación)">Quiero este paquete <svg class="ico"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="plan-body">
+            <p class="plan-includes">Incluye</p>
+            <ul class="plan-list plan-list-one">
+              <li><strong>Todo lo de Une</strong></li>
+              <li>Tus clientes en un solo lugar: de dónde llegó cada uno, en qué va y cuánto ha comprado</li>
+              <li>Tu embudo de ventas: nuevos, en contacto y compraron</li>
+              <li>Lista "Para hoy": a quién escribirle</li>
+              <li>Metas del mes y qué hacer ahora, según tus datos</li>
+              <li><span><strong>Tu analista de datos te acompaña:</strong> 1 reunión de estrategia al mes para decidir qué dejar y en qué invertir</span></li>
+            </ul>
+            <p class="plan-gift"><svg class="ico"><use href="#i-gift"/></svg><span><strong>3 meses gratis de registro de datos.</strong> Tu mensualidad y tu analista empiezan el mes 4.</span></p>
+            <ul class="plan-notes"><li><svg class="ico"><use href="#i-alert"/></svg><span>Los chats de WhatsApp no se leen: cuentan los clics y los contactos que registras en tu panel.</span></li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="datos-reglas" data-title="Datos · Las reglas">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Datos · Las reglas</p>
+          <h2 class="h2" data-reveal>Claro y <em>sin letra pequeña.</em></h2>
+        </header>
+        <ul class="rules" data-stagger>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-shield"/></svg></span><span>Tus datos son tuyos. No los vendemos ni los compartimos.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-lock"/></svg></span><span>Solo guardamos clientes que autorizaron el uso de sus datos, como pide la ley.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-alert"/></svg></span><span>Cada red decide qué datos comparte. Si algún dato no se puede traer, te lo decimos antes de empezar.</span></li>
+          <li class="glass spot"><span class="icon-bubble sm"><svg class="ico"><use href="#i-repeat"/></svg></span><span>3 meses gratis de registro de datos. Desde el mes 4 pagas mes a mes, sin permanencia. Pago anual: 2 meses gratis.</span></li>
+        </ul>
+        <div class="grow" data-reveal>
+          <p>¿Tus números dicen que necesitas más clientes? <strong>Mira los planes para vender más.</strong></p>
+          <a href="#casos" class="btn btn-glass glass btn-sm" data-camino-go="vender">Ver planes</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ EXTRAS: una sola pantalla, una línea cada uno ============ -->
+  <section class="slide" id="extras" data-title="Extras">
+    <div class="container s-center">
+      <header class="s-head s-head-sm">
+        <p class="eyebrow" data-reveal>Extras</p>
+        <h2 class="h2" data-reveal>¿Tu caso es <em>otro?</em></h2>
+      </header>
+      <ul class="extras" data-stagger>
+        <li class="glass spot"><p><strong>¿Tu página la hizo otro proveedor?</strong> La automatizamos: instalación desde $490.000 + $190.000/mes.</p><a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Mi página la hizo otro proveedor y quiero automatizarla"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar</a></li>
+        <li class="glass spot"><p><strong>Proyecto a medida</strong> (web, redes y Google Ads): desde $8.900.000. Te enviamos una cotización.</p><a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Quiero una cotización de un proyecto a medida (web, redes y Google Ads)"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar</a></li>
+      </ul>
+      <p class="extras-foot" data-reveal>Precios en COP + IVA.</p>
+    </div>
+  </section>
+
+    <!-- cómo se paga y cómo empezamos: 50 % para empezar y 50 % al publicar. Los medios de pago son los
+         de landing/ -->
+  <section class="slide" id="como-se-paga" data-title="Cómo se paga">
+      <div class="container s-center">
+        <header class="s-head s-head-sm">
+          <p class="eyebrow" data-reveal>Antes de empezar</p>
+          <h2 class="h2" data-reveal>Así se paga, <em>sin complicaciones.</em></h2>
+        </header>
+        <ul class="pay-grid" data-stagger>
+          <li class="pay-card glass spot" data-solo="auto datos"><span class="icon-bubble"><svg class="ico"><use href="#i-shield"/></svg></span><small data-solo="auto">Paquetes e instalación de automatización</small><small data-solo="datos">Instalación de tu panel</small><strong>50% + 50%</strong><p data-solo="auto">La mitad para empezar y la otra mitad cuando esté lista y te guste, antes de publicarla.</p><p data-solo="datos">Se paga una sola vez: la mitad para empezar y la otra mitad cuando tu panel esté listo.</p></li>
+          <li class="pay-card glass spot"><span class="icon-bubble"><svg class="ico"><use href="#i-repeat"/></svg></span><small>Mensualidades</small><strong>Mes a mes</strong><p data-solo="auto vender">Sin permanencia (Crecimiento: mínimo 3 meses). Si pagas el año, 2 meses son gratis.</p><p data-solo="datos">3 meses gratis de registro de datos. Desde el mes 4, sin permanencia. Si pagas el año, 2 meses son gratis.</p></li>
+          <li class="pay-card glass spot"><span class="icon-bubble"><svg class="ico"><use href="#i-card"/></svg></span><small>Paga como prefieras</small><ul class="pay-ways"><li>Nequi</li><li>Llave Bre-B o QR</li><li>Transferencia</li><li>Tarjeta</li></ul></li>
+        </ul>
+        <ol class="pay-steps" data-reveal data-solo="auto">
+          <li><b>1</b><span>Nos escribes y te enviamos tu propuesta</span></li>
+          <li><b>2</b><span>Pagas el 50% y nos mandas tus fotos y textos</span></li>
+          <li><b>3</b><span>La hacemos en los días de tu paquete y la ajustamos contigo</span></li>
+          <li><b>4</b><span>Pagas el otro 50% y la publicamos</span></li>
+        </ol>
+        <ol class="pay-steps" data-reveal data-solo="vender">
+          <li><b>1</b><span>Nos escribes y revisamos tus redes y tu Google</span></li>
+          <li><b>2</b><span>Pagas el primer mes y nos das acceso a tus cuentas</span></li>
+          <li><b>3</b><span>Apruebas el plan del mes</span></li>
+          <li><b>4</b><span>Publicamos y cada mes te mostramos los números</span></li>
+        </ol>
+        <ol class="pay-steps" data-reveal data-solo="datos">
+          <li><b>1</b><span>Nos escribes y revisamos qué quieres medir</span></li>
+          <li><b>2</b><span>Pagas el 50% de la instalación y nos das acceso a tu web y tus redes</span></li>
+          <li><b>3</b><span>Conectamos todo, revisamos que los números cuadren y pagas el otro 50%</span></li>
+          <li><b>4</b><span>Registramos tus datos 3 meses gratis. Tu mensualidad empieza el mes 4</span></li>
+        </ol>
+      </div>
+  </section>
+
+  <!-- ============ FINAL: escríbenos ============ -->
+  <section class="slide s-final" id="contacto" data-title="Escríbenos">
+    <div class="container">
+      <div class="final glass" data-reveal>
+        <span class="bubble" style="--s:200px;right:-60px;top:-70px" aria-hidden="true"></span>
+        <span class="bubble" style="--s:70px;left:6%;bottom:-20px;--dur:10s" aria-hidden="true"></span>
+        <p class="eyebrow">Último paso</p>
+        <!-- minimalista: una pregunta, una frase, un botón; Instagram y el formulario quedan en una línea pequeña -->
+        <h2 class="h2">¿No sabes cuál elegir? <em>Te ayudamos.</em></h2>
+        <p class="lead">Escríbenos y te decimos cuál le sirve a tu negocio. Es gratis y sin compromiso.</p>
+        <div class="ask-actions">
+          <a href="#" class="btn btn-primary magnetic" data-wa="Hola Gotia Studio 👋 Vi los paquetes y quiero que me recomienden el ideal para mi negocio"><svg class="ico ico-l"><use href="#i-wa"/></svg>Escríbenos por WhatsApp</a>
+        </div>
+        <!-- el formulario de la web principal: guarda el contacto en "Contactados" (admin.html) -->
+        <p class="final-form">o por <a href="#" data-ig>Instagram</a> · <a href="index.html#contacto">déjanos tus datos y te escribimos</a></p>
+      </div>
+    </div>
+    <footer class="slide-foot">
+      <a href="index.html" class="brand"><img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+      <span>© <span id="year">2026</span> · Precios en pesos colombianos (COP) · <span class="footer-legal"><a href="politica-de-datos.html">Política de datos</a> · <a href="terminos.html">Términos</a></span></span>
+      <a href="index.html">Ver la web completa</a>
+    </footer>
+  </section>
+
+</main>
+
+<!-- la guía en audio (flotantes.js, el guion "paquetes"): pantalla por pantalla, y los recorridos nota por nota -->
+<div class="guia" id="guia" data-guia="paquetes">
+  <div class="guia-cap" hidden>
+    <p class="guia-say"></p>
+    <div class="guia-nav">
+      <button class="guia-prev" type="button"><svg class="ico"><use href="#i-arrow"/></svg>Anterior</button>
+      <button class="guia-next" type="button">Siguiente<svg class="ico"><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+  <div class="guia-row">
+    <button class="guia-btn" type="button" aria-label="Escuchar la guía: te explico cada opción (4 minutos)">
+      <span class="guia-play" aria-hidden="true">
+        <svg class="guia-ring" viewBox="0 0 58 58"><circle cx="29" cy="29" r="27.5" pathLength="1"/></svg>
+        <svg class="ico ico-play"><use href="#i-play"/></svg>
+        <svg class="ico ico-pause"><use href="#i-pause"/></svg>
+      </span>
+      <span class="guia-txt"><strong>Escucha la guía</strong><small>Te explico cada opción · 4 min</small></span>
+      <span class="guia-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </button>
+    <button class="guia-x" type="button" aria-label="Cerrar la guía" hidden><svg class="ico"><use href="#i-x"/></svg></button>
+  </div>
+</div>
+<a href="#" class="wa-float" data-wa="Hola Gotia Studio 👋 Vi los paquetes y tengo una pregunta" aria-label="Escríbenos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span>¿Dudas? Escríbenos</span></a>
+
+<!-- pruebas.js va antes de contacto.js: agrega la prueba gratis al mensaje de WhatsApp antes de que se arme cada botón -->
+<script src="pruebas.js?v=2" defer></script>
+<script src="caminos.js?v=2" defer></script>
+<script src="contacto.js?v=5" defer></script>
+<script src="supabase-config.js?v=1" defer></script>
+<script src="analytics.js?v=12" defer></script>
+<script src="main.js?v=35" defer></script>
+<script src="planes.js?v=14" defer></script>
+<script src="flotantes.js?v=12" defer></script>
+</body>
+</html>
