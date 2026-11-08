@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Gotiastudio: páginas públicas que Google debe conocer.
+     Fuera quedan las privadas o de prueba (paquetes, admin, landing, version-conversion, planes). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://gotiastudio.it.com/</loc>
+  </url>
+  <url>
+    <loc>https://gotiastudio.it.com/politica-de-datos.html</loc>
+  </url>
+  <url>
+    <loc>https://gotiastudio.it.com/terminos.html</loc>
+  </url>
+</urlset>

@@ -1,0 +1,7 @@
+# Gotiastudio: los buscadores pueden leer toda la web.
+# paquetes.html y admin.html no salen en Google por su etiqueta "noindex"
+# (no se listan aquí para no anunciar sus direcciones).
+User-agent: *
+Allow: /
+
+Sitemap: https://gotiastudio.it.com/sitemap.xml
