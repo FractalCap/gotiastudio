@@ -26,11 +26,10 @@
   <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=91">
-  <link rel="stylesheet" href="planes.css?v=68">
+  <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
+  <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=92">
+  <link rel="stylesheet" href="planes.css?v=69">
 
   <script>
     document.documentElement.classList.add('js');
@@ -148,7 +147,7 @@
 <header class="nav" id="nav">
   <nav class="nav-inner glass" aria-label="Pasos">
     <a href="index.html" class="brand" aria-label="Gotiastudio, ir a la web">
-      <img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async">
+      <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
       <span class="brand-word">Gotia<span>studio</span></span>
     </a>
     <ul class="nav-links">
@@ -186,7 +185,7 @@
     <span class="bubble" style="--s:34px;right:12%;top:30%;--dur:8s" aria-hidden="true"></span>
     <span class="bubble" style="--s:120px;right:4%;bottom:6%;--dur:13s" aria-hidden="true"></span>
     <div class="container s-center">
-      <span class="hero-g-wrap" data-hero style="--i:0"><img class="hero-g" src="g-glass-alpha.webp?v=2" alt="" width="648" height="608" decoding="async"></span>
+      <span class="hero-g-wrap" data-hero style="--i:0"><img class="hero-g" src="g-glass-alpha.webp?v=2" srcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" sizes="150px" alt="" width="648" height="608" loading="lazy" decoding="async"></span>
       <h1 class="hero-title pl-title" data-split>¿Qué necesita <em>tu negocio?</em></h1>
       <p class="hero-lead" data-hero style="--i:3">Elige un camino. Todo claro y sin letra pequeña.</p>
       <!-- el aviso de la prueba gratis: pruebas.js lo llena solo si el enlace trae una prueba válida -->
@@ -1513,7 +1512,7 @@
       </div>
     </div>
     <footer class="slide-foot">
-      <a href="index.html" class="brand"><img class="brand-mark" src="g-logo.webp?v=2" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+      <a href="index.html" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
       <span>© <span id="year">2026</span> · Precios en pesos colombianos (COP) · <span class="footer-legal"><a href="politica-de-datos.html">Política de datos</a> · <a href="terminos.html">Términos</a></span></span>
       <a href="index.html">Ver la web completa</a>
     </footer>
@@ -1531,19 +1530,19 @@
     </div>
   </div>
   <div class="guia-row">
-    <button class="guia-btn" type="button" aria-label="Escuchar la guía: te explico cada opción (4 minutos)">
+    <button class="guia-btn" type="button" aria-label="Escucha la guía: Te explico cada opción · 4 min">
       <span class="guia-play" aria-hidden="true">
         <svg class="guia-ring" viewBox="0 0 58 58"><circle cx="29" cy="29" r="27.5" pathLength="1"/></svg>
         <svg class="ico ico-play"><use href="#i-play"/></svg>
         <svg class="ico ico-pause"><use href="#i-pause"/></svg>
       </span>
-      <span class="guia-txt"><strong>Escucha la guía</strong><small>Te explico cada opción · 4 min</small></span>
+      <span class="guia-txt"><strong>Escucha la guía</strong> <small>Te explico cada opción · 4 min</small></span>
       <span class="guia-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     </button>
     <button class="guia-x" type="button" aria-label="Cerrar la guía" hidden><svg class="ico"><use href="#i-x"/></svg></button>
   </div>
 </div>
-<a href="#" class="wa-float" data-wa="Hola Gotia Studio 👋 Vi los paquetes y tengo una pregunta" aria-label="Escríbenos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span>¿Dudas? Escríbenos</span></a>
+<a href="#" class="wa-float" data-wa="Hola Gotia Studio 👋 Vi los paquetes y tengo una pregunta" aria-label="¿Dudas? Escríbenos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span>¿Dudas? Escríbenos</span></a>
 
 <!-- pruebas.js va antes de contacto.js: agrega la prueba gratis al mensaje de WhatsApp antes de que se arme cada botón -->
 <script src="pruebas.js?v=2" defer></script>
@@ -1551,7 +1550,7 @@
 <script src="contacto.js?v=5" defer></script>
 <script src="supabase-config.js?v=1" defer></script>
 <script src="analytics.js?v=12" defer></script>
-<script src="main.js?v=35" defer></script>
+<script src="main.js?v=36" defer></script>
 <script src="planes.js?v=14" defer></script>
 <script src="flotantes.js?v=12" defer></script>
 </body>

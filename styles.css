@@ -3,14 +3,21 @@
    Azul claro y blanco · cristal transparente · burbujas iridiscentes
    ========================================================= */
 
+/* Manrope, servida desde la web (antes venía de Google Fonts): una sola letra variable, 300 a 700 */
+@font-face {
+  font-family: "Manrope"; font-style: normal; font-weight: 300 700; font-display: swap;
+  src: url(manrope-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   --bg: #eaf3ff;                         /* azul claro de fondo */
   --fg: #0d2347;                         /* texto: azul marino profundo */
   /* textos secundarios en el mismo azul de los botones (--accent): 2 = párrafos, 3 = etiquetas
      y notas, 4 = detalles tenues (guiones, pistas), el mismo azul más claro */
-  --fg-2: #1f6fe5;
-  --fg-3: #1f6fe5;
+  --fg-2: #1968db;
+  --fg-3: #1968db;
   --fg-4: #6da1ee;
   --line: rgba(31, 84, 170, .12);
   --line-2: rgba(31, 84, 170, .2);
@@ -452,8 +459,13 @@ img.brand-mark { width: 28px; height: 28px; }
 .manifesto-text .m-hook { display: block; margin-bottom: .2em; color: var(--fg-3); }
 .manifesto-text em { color: var(--accent); }
 .js .manifesto-text .sw {
-  display: inline-block; opacity: calc(.1 + .9 * var(--k, 0));
+  display: inline-block; position: relative;
+  -webkit-text-fill-color: color-mix(in srgb, currentColor calc(var(--k, 0) * 100%), transparent);
   filter: blur(calc((1 - var(--k, 0)) * 8px)); transform: translate3d(0, calc((1 - var(--k, 0)) * .28em), 0);
+}
+.js .manifesto-text .sw::before {
+  content: attr(data-w); position: absolute; left: 0; top: 0; pointer-events: none;
+  -webkit-text-fill-color: currentColor; opacity: calc(.1 * (1 - var(--k, 0)));
 }
 .manifesto-bar { position: relative; height: 1px; margin-top: clamp(36px, 5vw, 56px); background: var(--line-2); overflow: hidden; }
 .manifesto-bar i { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); }
@@ -486,7 +498,7 @@ img.brand-mark { width: 28px; height: 28px; }
   position: relative; display: flex; flex-direction: column; gap: 18px;
   width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter);
 }
-.svc-card { --f: 1; transform: scale(calc(.95 + .05 * var(--f))); opacity: calc(.5 + .5 * var(--f)); }
+.svc-card { --f: 1; opacity: calc(.5 + .5 * var(--f)); }
 /* el dibujo de cada servicio, centrado en su caja */
 .svc-card .visual { display: flex; flex-direction: column; justify-content: safe center; }
 /* los dibujos de cada servicio (registro, mini panel, búsqueda, gráfico y redes),
@@ -973,7 +985,7 @@ img.brand-mark { width: 28px; height: 28px; }
 .svc-arrow:hover:not(:disabled) { color: var(--accent); background: var(--accent-soft); }
 .svc-arrow:disabled { opacity: .3; cursor: default; }
 .svc-dots { display: flex; align-items: center; padding-inline: 4px; }
-.svc-dot { width: 20px; height: 28px; display: grid; place-items: center; }
+.svc-dot { width: 24px; height: 28px; display: grid; place-items: center; }
 .svc-dot::before {
   content: ""; width: 6px; height: 6px; border-radius: 99px; background: var(--fg-4);
   transition: width .45s var(--ease), background .3s;
@@ -1634,7 +1646,7 @@ img.brand-mark { width: 28px; height: 28px; }
 .badge { margin-left: auto; font-style: normal; font-size: 11px; line-height: 18px; padding: 0 7px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; }
 .admin-main { display: flex; flex-direction: column; gap: 14px; padding: 22px; min-width: 0; }
 .admin-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.admin-head h4 { font-size: 19px; letter-spacing: -.02em; }
+.admin-head .admin-title { margin: 0; font-size: 19px; font-weight: 500; letter-spacing: -.02em; }
 .muted { font-size: 12.5px; color: var(--fg-3); }
 .hint-chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; font-size: 12px; color: var(--fg); background: rgba(255, 255, 255, .75); box-shadow: inset 0 0 0 1px var(--line-2); animation: nudge 3s var(--ease) infinite; }
 .hint-chip .ico { width: 13px; height: 13px; }
@@ -1715,7 +1727,7 @@ img.brand-mark { width: 28px; height: 28px; }
 .pv-card.is-off .pv-hidden { opacity: 1; }
 .pv-body { padding: 16px 18px 18px; display: grid; gap: 4px; }
 .pv-cat { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3); }
-.pv-name { font-size: 19px; letter-spacing: -.02em; line-height: 1.25; min-height: 1.25em; overflow-wrap: anywhere; }
+.pv-name { font-weight: 500; font-size: 19px; letter-spacing: -.02em; line-height: 1.25; min-height: 1.25em; overflow-wrap: anywhere; }
 .pv-price { font-size: 22px; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .pv-btn { display: grid; place-items: center; margin-top: 12px; height: 42px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 14px; font-weight: 500; }
 .pv-note { font-size: 12.5px; color: var(--fg-3); text-align: center; padding: 0 8px 4px; }
@@ -2141,7 +2153,7 @@ details[open] > summary .qa-icon::after { transform: rotate(0); background: #fff
 .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 32px; }
 @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
 .footer-brand p { margin-top: 16px; color: var(--fg-3); font-size: 14.5px; max-width: 34ch; line-height: 1.6; }
-.footer h5 { font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-4); margin-bottom: 16px; }
+.footer h3 { font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 16px; }
 .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .footer ul a { font-size: 14.5px; color: var(--fg-2); transition: color .3s; }
 .footer ul a:hover { color: var(--fg); }
@@ -2151,7 +2163,7 @@ details[open] > summary .qa-icon::after { transform: rotate(0); background: #fff
   background: linear-gradient(180deg, rgba(31, 111, 229, .28), rgba(31, 111, 229, 0) 88%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.footer-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--fg-4); }
+.footer-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--fg-3); }
 
 /* ---------- Titulares (Manrope) ----------
    Grandes en peso 300 y con el espaciado apretado: finos, sobrios y formales. Los acentos
@@ -2559,7 +2571,8 @@ html.lowend [data-reveal], html.lowend [data-hero], html.lowend .hero-title .w {
 html.lowend .nav-inner, html.lowend .nav.scrolled .nav-inner { background: rgba(255, 255, 255, .95); }
 html.lowend[data-theme="dark"] .nav-inner, html.lowend[data-theme="dark"] .nav.scrolled .nav-inner { background: rgba(14, 14, 16, .94); }
 /* Manifiesto: el texto entero y nítido desde el principio */
-html.lowend .manifesto-text .sw { opacity: 1; filter: none; transform: none; }
+html.lowend .manifesto-text .sw { opacity: 1; filter: none; transform: none; -webkit-text-fill-color: currentColor; }
+html.lowend .manifesto-text .sw::before { content: none; }
 html.lowend .manifesto-foot { opacity: 1; transform: none; }
 /* Recorridos de cuadros: cada tarjeta entera, sin escalar ni atenuarse al pasar */
 html.lowend .svc-card, html.lowend .svc.is-pinned .svc-card { transform: none; opacity: 1; }
@@ -2823,7 +2836,7 @@ html.lowend .svc-card, html.lowend .svc.is-pinned .svc-card { transform: none; o
 :where(html[data-theme="dark"]) .footer {
   background: radial-gradient(min(620px, 80vw) min(280px, 36vw) at 50% calc(100% - 200px), rgba(122, 43, 255, .24), rgba(255, 47, 198, .07) 55%, rgba(0, 0, 0, 0) 100%);
 }
-:where(html[data-theme="dark"]) .footer h5 { color: var(--fg-3); }
+:where(html[data-theme="dark"]) .footer h3 { color: var(--fg-3); }
 :where(html[data-theme="dark"]) .footer-bottom { color: var(--fg-3); text-shadow: 0 0 14px #000, 0 0 4px #000; }
 :where(html[data-theme="dark"]) .ver-switch a { background: rgba(0, 0, 0, .55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 :where(html[data-theme="dark"]) .toast { background: linear-gradient(180deg, rgba(40, 40, 42, .8), rgba(18, 18, 20, .78)); color: inherit; }
@@ -2904,7 +2917,7 @@ html[data-theme="dark"].js .loader-g { mix-blend-mode: screen; }
 .legal-fill { padding: 1px 6px; border-radius: 6px; color: #6b4300; background: #ffe58a; }
 .legal-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-bottom: 32px; font-size: 13px; color: var(--fg-3); }
 .legal-foot a { color: var(--fg-2); }
-.legal-foot a[aria-current] { color: var(--accent); }
+.legal-foot a[aria-current] { color: var(--fg-2); }
 /* los enlaces a las páginas legales en el pie de index.html y planes.html */
 .footer-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .footer-legal a:hover { color: var(--accent); }
