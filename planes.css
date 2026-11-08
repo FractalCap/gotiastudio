@@ -7,8 +7,9 @@
    Se apoya en styles.css (cristal, botones, tablas, modo negro…).
    ========================================================= */
 :root { --nav-h: 80px; --sy: clamp(10px, 2.6vh, 34px); }
-/* el scroll se ajusta a cada pantalla */
-html.snap { scroll-snap-type: y mandatory; scroll-padding-top: 0; }
+/* scroll libre: la página ya no se ajusta sola a cada pantalla (a pedido: que cada quien baje a
+   su ritmo). Los saltos (puntos, menú, guía) llegan al borde de arriba de cada pantalla */
+html { scroll-padding-top: 0; }
 /* ---------- Pantallas ---------- */
 .slide {
   position: relative; display: flex; flex-direction: column; justify-content: center;

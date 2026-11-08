@@ -450,11 +450,12 @@ img.brand-mark { width: 28px; height: 28px; }
 @keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ---------- Manifesto ----------
-   Fijo mientras se lee (las dos versiones): cada palabra pasa de tenue y borrosa a nítida
-   según --k (main.js); el lema va en un tono más claro y las tres acciones en azul.
+   Una pantalla, sin quedarse fija (la página nunca se bloquea): cada palabra pasa de tenue y
+   borrosa a nítida según --k (main.js) mientras el texto sube; el lema va en un tono más claro
+   y las tres acciones en azul.
    Una raya fina marca el avance y al final aparecen la nota y la firma. */
-.manifesto { position: relative; height: 210vh; }
-.manifesto-sticky { position: sticky; top: 0; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.manifesto { position: relative; }
+.manifesto-sticky { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
 .manifesto-text { max-width: 980px; }
 .manifesto-text .m-hook { display: block; margin-bottom: .2em; color: var(--fg-3); }
 .manifesto-text em { color: var(--accent); }

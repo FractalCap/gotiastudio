@@ -211,8 +211,9 @@
   });
 
   /* ---------- Manifiesto (las dos versiones) ----------
-     La sección se queda fija y, al bajar, cada palabra pasa de borrosa y tenue a nítida;
-     una raya fina marca el avance y al final aparecen la nota y la firma. */
+     Al bajar, cada palabra pasa de borrosa y tenue a nítida mientras el texto sube por la pantalla
+     (la sección ya no se queda fija: la página nunca se bloquea); una raya fina marca el avance y
+     al final aparecen la nota y la firma. */
   const scrubEl = $('[data-scrub]');
   if (scrubEl) {
     const words = splitWords(scrubEl, 'sw');
@@ -226,9 +227,9 @@
       ticking = false;
       const r = section.getBoundingClientRect(), vh = innerHeight;
       if (r.bottom < -100 || r.top > vh + 100) return;
-      // empieza cuando la sección va por la mitad de la pantalla y acaba justo antes de soltarse
-      const start = vh * 0.55, end = vh * 0.1 - (r.height - vh);
-      const p = clamp((start - r.top) / (start - end), 0, 1);
+      // empieza cuando el texto asoma abajo y acaba cuando su centro pasa un poco arriba de la mitad
+      const t = scrubEl.getBoundingClientRect(), c = t.top + t.height / 2;
+      const p = clamp((vh * 0.92 - c) / (vh * 0.52), 0, 1);
       const n = p * (words.length + 1);
       words.forEach((w, i) => {
         const k = clamp(n - i, 0, 1).toFixed(3);
@@ -517,8 +518,6 @@
       }
       return n - 1 + (y - ends[n - 1]) / (starts[n - 1] - ends[n - 2]);
     }
-    // el punto más cercano en el que la tarjeta i se ve bien
-    const stopFor = (i, y) => clamp(y, starts[i], ends[i]);
 
     function setActive(i) {
       if (i === active) return;
@@ -560,113 +559,28 @@
     }
     const queue = () => { if (!raf) raf = requestAnimationFrame(render); };
 
-    // modo: fija si el texto de todas las tarjetas cabe en la pantalla
+    // modo: siempre una debajo de otra, en celular y en computador. La versión fija (la sección
+    // quieta y las tarjetas pasando de lado) quedó apagada a pedido: mucha gente prefiere bajar a
+    // su ritmo sin que la página se bloquee. Las tarjetas siguen encendiéndose al pasar (--f)
     function measure() {
       lastW = innerWidth;
       lastH = innerHeight;
-      // celulares y tablets en vertical (hasta 760 px): las tarjetas nunca caben fijas (probado
-      // hasta 768 px), así que van una debajo de otra sin probar la versión fija, que obliga a
-      // recalcular toda la sección y frena la carga en el celular
-      if (innerWidth <= 760) {
-        svc.classList.add('is-on');
-        svc.classList.remove('is-pinned');
-        if (pinned) track.style.transform = shownX = '';
-        pinned = false;
-        if (active < 0) setActive(0);
-        render();
-        return;
-      }
-      svc.classList.add('is-on', 'is-pinned');
-      pinned = cards.every((c) => c.scrollHeight <= c.clientHeight + 1);
-      if (!pinned) {
-        svc.classList.remove('is-pinned');
-        track.style.transform = shownX = '';
-      }
-      centers = cards.map((c) => c.offsetLeft + c.offsetWidth / 2);
+      svc.classList.add('is-on');
+      svc.classList.remove('is-pinned');
+      if (pinned) track.style.transform = shownX = '';
+      pinned = false;
       if (active < 0) setActive(0);
       render();
     }
 
-    // going = destino de un salto (flechas, puntos, barra del hero): mientras viaja, nada lo corrige
-    let going = null, lastPoll = -1;
+    // las flechas, los puntos y la barra del hero llevan a cada tarjeta; al soltar el scroll la
+    // página se queda donde la dejó quien visita (ya no se acomoda sola en la siguiente tarjeta)
     function goTo(i) {
       i = clamp(i, 0, n - 1);
       measureStops();
-      going = Math.round(starts[i]);
-      lastPoll = -1;
-      scrollTo({ top: going, behavior: 'smooth' });
+      scrollTo({ top: Math.round(starts[i]), behavior: 'smooth' });
     }
-    // si quien visita mueve la página, el salto deja de mandar
-    const takeOver = () => { going = null; };
-    addEventListener('wheel', takeOver, { passive: true });
-    addEventListener('keydown', takeOver);
-
-    // al soltar el scroll: la siguiente tarjeta en la dirección en que ibas, centrada
-    // rest = dónde estaba quieta la página; from = esa posición en tarjetas, al empezar a moverse
-    let idle = 0, from = null, rest = scrollY, touching = false;
-    function settle() {
-      if (going !== null) {
-        const y = scrollY;
-        // sigue viajando: esperar; llegó (o el navegador lo detuvo): queda quieta ahí
-        if (Math.abs(y - going) > 2 && y !== lastPoll) {
-          lastPoll = y;
-          idle = setTimeout(settle, 150);
-          return;
-        }
-        going = null;
-        from = null;
-        rest = y;
-        return;
-      }
-      if (touching || from === null) return;
-      measureStops();
-      const y = scrollY, f = indexAt(y), start = from, moved = f - start;
-      from = null;
-      rest = y;
-      if (Math.abs(moved) < 0.01 || f === Math.round(f)) return;   // quieto, o leyendo una tarjeta alta
-      const down = moved > 0;
-      let t;
-      if (f < 0) {
-        if (!down || f < -0.35) return;           // entrando desde arriba: a la primera
-        t = 0;
-      } else if (f > n - 1) {
-        if (down || f > n - 1 + 0.35) return;     // saliendo por abajo, libre; volviendo: a la última
-        t = n - 1;
-      } else {
-        t = down ? Math.ceil(f - 0.12) : Math.floor(f + 0.12);
-        // paso a paso: un gesto corto (rueda, Av Pág, espacio) avanza solo una tarjeta
-        // (entrando desde arriba, la primera; desde abajo, la última)
-        if (Math.abs(moved) < 1.6) {
-          const base = start < -0.05 ? -1 : start > n - 0.95 ? n : Math.round(start);
-          t = down ? Math.min(t, base + 1) : Math.max(t, base - 1);
-        }
-      }
-      const to = Math.round(stopFor(clamp(t, 0, n - 1), y));
-      if (Math.abs(to - y) > 2) {
-        rest = to;
-        scrollTo({ top: to, behavior: 'smooth' });
-      }
-    }
-    addEventListener('scroll', () => {
-      queue();
-      const r = svc.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > innerHeight) { rest = scrollY; from = null; return; }
-      if (from === null) {
-        measureStops();
-        from = indexAt(rest);
-      }
-      clearTimeout(idle);
-      idle = setTimeout(settle, 150);
-    }, { passive: true });
-    addEventListener('touchstart', () => { touching = true; going = null; }, { passive: true });
-    const untouch = (e) => {
-      if (e.touches.length) return;
-      touching = false;
-      clearTimeout(idle);
-      idle = setTimeout(settle, 150);
-    };
-    addEventListener('touchend', untouch, { passive: true });
-    addEventListener('touchcancel', untouch, { passive: true });
+    addEventListener('scroll', queue, { passive: true });
 
     prev.addEventListener('click', () => goTo(active - 1));
     next.addEventListener('click', () => goTo(active + 1));
@@ -1464,12 +1378,12 @@
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
 
-  /* ---------- Sorteo de Lanzamiento: un pop-up al entrar que se va solo a los 5 s ----------
-     En todas las versiones y una vez por visita. Sale cuando la web ya está a la vista: al
-     terminar de cargar (o a los 3,5 s si la carga se alarga) y, en la 3D, después de la pantalla
-     de carga. La línea de abajo marca los 5 s y se detiene mientras el ratón está encima o el
+  /* ---------- Sorteo de Lanzamiento: un pop-up que se va solo a los 5 s ----------
+     En todas las versiones y una vez por visita. Sale cuando la persona empieza a bajar por la
+     página (no al cargar: así la portada se ve limpia), siempre con la web ya a la vista: después
+     de la carga (o de 3,5 s si se alarga) y, en la 3D, después de la pantalla de carga. La línea de abajo marca los 5 s y se detiene mientras el ratón está encima o el
      teclado dentro. Se cierra también con la X, con Esc, tocando fuera o al ir a Instagram.
-     promoDone avisa cuando se cierra (true si llegó a salir): la invitación al 3D espera. */
+     promoDone avisa cuando se cierra (true si llegó a salir): si está a la vista, la invitación al 3D espera. */
   const promo = $('#sorteo');
   let promoDone = Promise.resolve(false);
   if (promo) {
@@ -1525,7 +1439,13 @@
       const revealed = root.classList.contains('is-loading')
         ? Promise.race([new Promise((r) => document.addEventListener('gotia:reveal', r, { once: true })), wait(7000)]).then(() => wait(700))
         : Promise.resolve();
-      Promise.all([Promise.race([loaded, wait(3500)]), revealed]).then(() => wait(600)).then(show);
+      // empieza a bajar: pasó un cuarto de pantalla (también si llega con un enlace a otra sección)
+      const scrolled = () => new Promise((r) => {
+        const check = () => { if (scrollY > innerHeight * 0.25) { removeEventListener('scroll', check); r(); } };
+        addEventListener('scroll', check, { passive: true });
+        check();
+      });
+      Promise.all([Promise.race([loaded, wait(3500)]), revealed]).then(scrolled).then(() => wait(400)).then(show);
       $('.promo-close', promo).addEventListener('click', hide);
       $('[data-ig-perfil]', promo).addEventListener('click', hide);
       promo.addEventListener('click', (e) => { if (e.target === promo) hide(); });
@@ -1535,7 +1455,7 @@
   /* ---------- Invitación a los efectos: sale del botón "3D" y se va sola a los 20 s ----------
      Solo en Esencial (ni en la 3D, que ya los tiene, ni en Lite, que es para equipos que no
      pueden con ellos), una vez por visita y no con movimiento reducido.
-     Aparece a los 4 s de entrar (o tras el pop-up del sorteo), justo debajo del botón "3D" del menú, señalándolo (el botón se
+     Aparece a los 4 s de entrar (si el pop-up del sorteo está a la vista, cuando se cierra), justo debajo del botón "3D" del menú, señalándolo (el botón se
      marca mientras tanto). La línea de abajo marca los 20 s y se detiene mientras el ratón está
      encima o el teclado dentro. Se va también al abrir el menú del celular. */
   const invite = $('#fx-invite');
@@ -1578,8 +1498,9 @@
         left = Math.max(0, left - (Date.now() - since));
         if (line) line.pause();
       };
-      // a los 4 s de entrar; si salió el sorteo, 2,5 s después de que se cierre
-      promoDone.then((shown) => setTimeout(() => {
+      // a los 4 s de entrar; si en ese momento está el sorteo a la vista, 2,5 s después de que se cierre
+      const later = (ms) => new Promise((r) => setTimeout(r, ms));
+      later(4000).then(() => (promo && promo.classList.contains('show') ? promoDone.then(() => later(2500)) : null)).then(() => {
         if (gone || isLow()) return;
         try { sessionStorage.setItem('gotia-fx-invite', '1'); } catch (e) {}
         invite.hidden = false;
@@ -1593,7 +1514,7 @@
         invite.addEventListener('pointerleave', run);
         invite.addEventListener('focusin', hold);
         invite.addEventListener('focusout', () => setTimeout(() => { if (!invite.matches(':focus-within')) run(); }));
-      }, shown ? 2500 : 4000));
+      });
       $('.fxi-close', invite).addEventListener('click', hide);
       if (burger) burger.addEventListener('click', hide);
     }
