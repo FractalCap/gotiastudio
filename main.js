@@ -216,6 +216,8 @@
   const scrubEl = $('[data-scrub]');
   if (scrubEl) {
     const words = splitWords(scrubEl, 'sw');
+    // el "fantasma" tenue de cada palabra lo dibuja el CSS (::before) con este texto
+    words.forEach((w) => { w.dataset.w = w.textContent; });
     const section = scrubEl.closest('.manifesto');
     const bar = $('.manifesto-bar i', section);
     const cache = [];
@@ -562,6 +564,18 @@
     function measure() {
       lastW = innerWidth;
       lastH = innerHeight;
+      // celulares y tablets en vertical (hasta 760 px): las tarjetas nunca caben fijas (probado
+      // hasta 768 px), así que van una debajo de otra sin probar la versión fija, que obliga a
+      // recalcular toda la sección y frena la carga en el celular
+      if (innerWidth <= 760) {
+        svc.classList.add('is-on');
+        svc.classList.remove('is-pinned');
+        if (pinned) track.style.transform = shownX = '';
+        pinned = false;
+        if (active < 0) setActive(0);
+        render();
+        return;
+      }
       svc.classList.add('is-on', 'is-pinned');
       pinned = cards.every((c) => c.scrollHeight <= c.clientHeight + 1);
       if (!pinned) {
@@ -684,7 +698,8 @@
       clearTimeout(rt);
       rt = setTimeout(measure, 120);
     });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    // se mide otra vez cuando llega la letra, solo si todavía no había llegado
+    if (document.fonts && document.fonts.ready && document.fonts.status !== 'loaded') document.fonts.ready.then(measure);
     measure();
   });
 
