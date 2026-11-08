@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=64">
-  <link rel="stylesheet" href="admin.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=91">
+  <link rel="stylesheet" href="admin.css?v=6">
   <script>
     // el mismo modo claro / negro que eligió en la web
     try {
@@ -58,7 +58,8 @@
       <button type="button" role="tab" data-tab="resumen" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v9H4zM14 4h6v4h-6zM14 12h6v8h-6zM4 17h6v3H4z"/></svg><span>Resumen</span></button>
       <button type="button" role="tab" data-tab="rendimiento"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Rendimiento</span></button>
       <button type="button" role="tab" data-tab="web"><svg viewBox="0 0 24 24"><path d="M3 5h18v11H3zM8 20h8M12 16v4"/></svg><span>Web principal</span></button>
-      <button type="button" role="tab" data-tab="planes"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8zM7.5 7.5h.01"/></svg><span>Planes y precios</span></button>
+      <button type="button" role="tab" data-tab="planes"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8zM7.5 7.5h.01"/></svg><span>Paquetes y precios</span></button>
+      <button type="button" role="tab" data-tab="guia"><svg viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3M4 15a2 2 0 0 1 2-2h1v7H6a2 2 0 0 1-2-2zM20 15a2 2 0 0 0-2-2h-1v7h1a2 2 0 0 0 2-2z"/></svg><span>Guía en audio</span></button>
       <button type="button" role="tab" data-tab="origen"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg><span>Origen</span></button>
       <button type="button" role="tab" data-tab="audiencia"><svg viewBox="0 0 24 24"><path d="M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M9.5 10.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM21 19v-1a4 4 0 0 0-3-3.9M15.5 3.6a3.5 3.5 0 0 1 0 6.8"/></svg><span>Audiencia</span></button>
       <p class="adm-nav-label">Seguimiento</p>
@@ -88,6 +89,7 @@
           <button type="button" data-days="180" aria-pressed="false">180 días</button>
         </div>
         <label class="adm-switch" title="Mostrar el periodo anterior en las gráficas"><input type="checkbox" id="adm-compare" checked><i></i>Comparar</label>
+        <label class="adm-switch" title="Mostrar también las tarjetas y los números de detalle"><input type="checkbox" id="adm-full"><i></i>Ver todo</label>
         <button class="adm-ico-btn" type="button" id="adm-csv" aria-label="Descargar las visitas (Excel / CSV)" title="Descargar las visitas (Excel / CSV)"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg></button>
         <button class="adm-ico-btn" type="button" id="adm-refresh" aria-label="Actualizar" title="Actualizar"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></button>
       </div>
@@ -138,15 +140,16 @@
           <ul class="adm-feed-list" id="adm-feed"></ul>
         </section>
       </div>
-      <div class="adm-row adm-row-even">
+      <div class="adm-row adm-row-even" data-extra>
         <section class="adm-card glass"><header class="adm-card-head"><h2>Camino al contacto</h2><small>web principal · % de visitas</small></header><ol class="adm-funnel" id="adm-funnel-home"></ol></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Camino en planes y precios</h2><small>% de quienes la abren</small></header><ol class="adm-funnel" id="adm-funnel-planes"></ol></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Camino en paquetes y precios</h2><small>% de quienes la abren</small></header><ol class="adm-funnel" id="adm-funnel-planes"></ol></section>
       </div>
-      <div class="adm-grid">
+      <div class="adm-grid" data-extra>
         <section class="adm-card glass"><header class="adm-card-head"><h2>De dónde llegan</h2><small>visitas</small></header><ul class="adm-bars" id="adm-sum-sources"></ul></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Lo que más interesa</h2><small>planes y servicios vistos</small></header><ul class="adm-bars" id="adm-sum-offers"></ul></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Lo que más interesa</h2><small>paquetes y servicios vistos</small></header><ul class="adm-bars" id="adm-sum-offers"></ul></section>
         <section class="adm-card glass"><header class="adm-card-head"><h2>Cómo te escriben</h2><small>visitas que te contactan</small></header><ul class="adm-bars" id="adm-sum-contacts"></ul></section>
       </div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== RENDIMIENTO ===== -->
@@ -165,6 +168,7 @@
         <div class="adm-lc" id="adm-hist-chart"></div>
       </section>
       <div class="adm-charts" id="adm-perf"></div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== CONTACTADOS: el formulario de contacto de la web ===== -->
@@ -193,7 +197,7 @@
     <section class="adm-pane" data-pane="contactos" hidden>
       <div class="adm-kpis adm-kpis-6" id="adm-ld-kpis"></div>
       <div class="adm-row">
-        <section class="adm-card glass">
+        <section class="adm-card glass" data-extra>
           <header class="adm-card-head"><div class="adm-card-title"><h2>Contactos y ventas</h2><small id="adm-ld-chart-sub"></small></div></header>
           <div class="adm-lc" id="adm-ld-chart"></div>
         </section>
@@ -214,7 +218,7 @@
         <form class="adm-ld-form" id="adm-ld-form" hidden>
           <label class="adm-field"><span>Nombre</span><input name="name" maxlength="120" autocomplete="off"></label>
           <label class="adm-field"><span>Teléfono, @ o correo</span><input name="contact" maxlength="160" autocomplete="off"></label>
-          <label class="adm-field"><span>Llegó por</span><select name="channel"><option>WhatsApp</option><option>Instagram</option><option>Correo</option><option>Llamada</option><option>Referido</option><option>Otro</option></select></label>
+          <label class="adm-field"><span>Llegó por</span><select name="channel"><option>WhatsApp</option><option>Llamada</option><option>Instagram</option><option>Correo</option><option>Referido</option><option>Otro</option></select></label>
           <label class="adm-field"><span>Le interesa</span><select name="plan" id="adm-ld-form-plan"></select></label>
           <div class="adm-goal-actions"><button class="btn btn-primary btn-sm" type="submit">Guardar contacto</button><button class="btn btn-glass glass btn-sm" type="button" id="adm-ld-cancel">Cancelar</button></div>
         </form>
@@ -227,10 +231,11 @@
         <div class="adm-leads" id="adm-leads"></div>
         <div class="adm-more"><button class="btn btn-glass glass btn-sm" type="button" id="adm-ld-more" hidden>Ver más contactos</button></div>
       </section>
-      <div class="adm-row adm-row-even">
+      <div class="adm-row adm-row-even" data-extra>
         <section class="adm-card glass"><header class="adm-card-head"><h2>Ventas por plan</h2><small>ventas cerradas en el periodo</small></header><ul class="adm-bars" id="adm-ld-plans"></ul></section>
         <section class="adm-card glass"><header class="adm-card-head"><h2>Contactos por origen</h2><small>y cuántos terminan en venta</small></header><ul class="adm-bars" id="adm-ld-sources"></ul></section>
       </div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== WEB PRINCIPAL ===== -->
@@ -241,58 +246,88 @@
         <div class="adm-table-wrap"><table class="adm-table adm-t-sec"><thead><tr><th>Sección</th><th>Llegan</th><th>Tiempo promedio</th><th>Se van aquí</th></tr></thead><tbody id="adm-web-sections"></tbody></table></div>
       </section>
       <div class="adm-grid">
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Preguntas más abiertas</h2><small>de quienes llegan a Preguntas</small></header><ul class="adm-bars" id="adm-web-faq"></ul></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Lo que más tocan</h2><small>visitas</small></header><ul class="adm-bars" id="adm-web-touch"></ul></section>
         <section class="adm-card glass"><header class="adm-card-head"><h2>Botones de contacto</h2><small>clics</small></header><ul class="adm-bars" id="adm-web-clicks"></ul></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Versión 3D</h2><small>frente a la Esencial</small></header><div id="adm-web-3d"></div></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Hasta dónde bajan</h2><small>% de la página</small></header><ul class="adm-bars" id="adm-web-scroll"></ul></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Dónde se van</h2><small>última sección que vieron</small></header><ul class="adm-bars" id="adm-web-exits"></ul></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Preguntas más abiertas</h2><small>de quienes llegan a Preguntas</small></header><ul class="adm-bars" id="adm-web-faq"></ul></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Lo que más tocan</h2><small>visitas</small></header><ul class="adm-bars" id="adm-web-touch"></ul></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Versión 3D</h2><small>frente a la Esencial</small></header><div id="adm-web-3d"></div></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Hasta dónde bajan</h2><small>% de la página</small></header><ul class="adm-bars" id="adm-web-scroll"></ul></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Dónde se van</h2><small>última sección que vieron</small></header><ul class="adm-bars" id="adm-web-exits"></ul></section>
       </div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== PLANES Y PRECIOS ===== -->
     <section class="adm-pane" data-pane="planes" hidden>
       <div class="adm-kpis adm-kpis-6" id="adm-pl-kpis"></div>
       <section class="adm-card glass">
+        <header class="adm-card-head"><h2>Interés por plan</h2><small>quién lo mira, cuánto tiempo y quién pide información</small></header>
+        <div class="adm-table-wrap"><table class="adm-table adm-t-offers"><thead><tr><th>Plan</th><th>Lo ven</th><th>Tiempo</th><th>Tocan la demo</th><th>Piden info</th><th>Conversión</th></tr></thead><tbody id="adm-pl-offers"></tbody></table></div>
+        <p class="adm-hint">“Tocan la demo”: tocan alguna nota del ejemplo animado. “Piden info” cuenta los botones de WhatsApp de ese plan en paquetes y precios y en la web principal. “Conversión” es el % de quienes lo vieron que luego pidieron información.</p>
+      </section>
+      <div class="adm-row adm-row-even">
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Casos de éxito</h2><small>la pantalla antes de los precios</small></header><div id="adm-pl-casos"></div></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Botones de contacto</h2><small>WhatsApp y llamadas en paquetes y precios</small></header><ul class="adm-bars" id="adm-pl-clicks"></ul></section>
+      </div>
+      <section class="adm-card glass" data-extra>
         <header class="adm-card-head">
           <div class="adm-card-title"><h2>Interés por plan en el tiempo</h2><small id="adm-pl-trend-sub">visitas que vieron cada plan</small></div>
-          <div class="adm-seg" id="adm-pl-group" role="group" aria-label="Qué planes ver">
-            <button type="button" data-group="Páginas web" aria-pressed="true">Páginas web</button>
-            <button type="button" data-group="Automatización" aria-pressed="false">Automatización</button>
-            <button type="button" data-group="Planes mensuales" aria-pressed="false">Mensuales</button>
+          <div class="adm-seg" id="adm-pl-group" role="group" aria-label="Qué paquetes ver">
+            <button type="button" data-group="Paquetes" aria-pressed="true">Paquetes</button>
+            <button type="button" data-group="Mensualidades" aria-pressed="false">Mensualidades</button>
+            <button type="button" data-group="Marketing" aria-pressed="false">Marketing</button>
+            <button type="button" data-group="Datos" aria-pressed="false">Datos</button>
+            <button type="button" data-group="Extras" aria-pressed="false">Extras</button>
           </div>
         </header>
         <div class="adm-lc" id="adm-pl-trend"></div>
       </section>
-      <section class="adm-card glass">
-        <header class="adm-card-head"><h2>Interés por plan</h2><small>quién lo mira, cuánto tiempo y quién pide información</small></header>
-        <div class="adm-table-wrap"><table class="adm-table adm-t-offers"><thead><tr><th>Plan</th><th>Lo ven</th><th>Tiempo</th><th>Tocan la demo</th><th>Piden info</th><th>Conversión</th></tr></thead><tbody id="adm-pl-offers"></tbody></table></div>
-        <p class="adm-hint">“Piden info” cuenta los botones de WhatsApp de ese plan en planes y precios y en la web principal. “Conversión” es el % de quienes lo vieron que luego pidieron información.</p>
-      </section>
-      <div class="adm-row">
+      <div class="adm-row" data-extra>
         <section class="adm-card glass">
           <header class="adm-card-head"><h2>Pantalla por pantalla</h2><small>en el orden de la página</small></header>
           <div class="adm-table-wrap"><table class="adm-table adm-t-sec"><thead><tr><th>Pantalla</th><th>Llegan</th><th>Tiempo promedio</th><th>Se van aquí</th></tr></thead><tbody id="adm-pl-slides"></tbody></table></div>
         </section>
         <div class="adm-stack">
-          <section class="adm-card glass"><header class="adm-card-head"><h2>Botones de WhatsApp</h2><small>en planes y precios</small></header><ul class="adm-bars" id="adm-pl-clicks"></ul></section>
           <section class="adm-card glass"><header class="adm-card-head"><h2>Cómo navegan</h2><small>visitas</small></header><ul class="adm-bars" id="adm-pl-nav"></ul></section>
-          <section class="adm-card glass adm-tip"><h2>¿Quién abre tu enlace?</h2><p>Cuando mandes planes y precios por WhatsApp, usa un enlace con campaña (sección <b>Origen</b>): así sabrás qué mensaje o qué grupo de clientes responde mejor.</p><button class="btn btn-glass glass btn-sm" type="button" data-go-tab="origen">Crear enlace</button></section>
+          <section class="adm-card glass adm-tip"><h2>¿Quién abre tu enlace?</h2><p>Cuando mandes paquetes y precios por WhatsApp, usa un enlace con campaña (sección <b>Origen</b>): así sabrás qué mensaje o qué grupo de clientes responde mejor.</p><button class="btn btn-glass glass btn-sm" type="button" data-go-tab="origen">Crear enlace</button></section>
         </div>
       </div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
+    </section>
+
+    <!-- ===== GUÍA EN AUDIO (el botón de la izquierda en index.html y paquetes.html) ===== -->
+    <section class="adm-pane" data-pane="guia" hidden>
+      <div class="adm-kpis" id="adm-gu-kpis"></div>
+      <div class="adm-row">
+        <section class="adm-card glass">
+          <header class="adm-card-head">
+            <div class="adm-card-title"><h2>Hasta dónde la escuchan</h2><small id="adm-gu-funnel-sub">% de quienes la empiezan</small></div>
+            <div class="adm-seg" id="adm-gu-page" role="group" aria-label="Qué guía ver">
+              <button type="button" data-gpage="h" aria-pressed="true">Web principal</button>
+              <button type="button" data-gpage="p" aria-pressed="false">Paquetes y precios</button>
+            </div>
+          </header>
+          <ol class="adm-funnel" id="adm-gu-funnel"></ol>
+        </section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>¿Ayuda a vender?</h2><small>quienes la escuchan frente a quienes no</small></header><div id="adm-gu-compare"></div></section>
+      </div>
+      <div class="adm-row" data-extra>
+        <section class="adm-card glass"><header class="adm-card-head"><div class="adm-card-title"><h2>Visitas que la escuchan</h2><small id="adm-gu-trend-sub"></small></div></header><div class="adm-lc" id="adm-gu-trend"></div></section>
+        <section class="adm-card glass"><header class="adm-card-head"><h2>Cómo la usan</h2><small>% de quienes la escuchan</small></header><ul class="adm-bars" id="adm-gu-controls"></ul></section>
+      </div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== ORIGEN ===== -->
     <section class="adm-pane" data-pane="origen" hidden>
       <section class="adm-card glass">
+        <header class="adm-card-head"><h2>Calidad de cada origen</h2><small>no solo cuántos llegan: cuántos se quedan y te escriben</small></header>
+        <div class="adm-table-wrap"><table class="adm-table adm-t-src"><thead><tr><th>Origen</th><th>Visitas</th><th>Nuevas</th><th>Tiempo</th><th>Se van enseguida</th><th>Ven los paquetes</th><th>Te escriben</th></tr></thead><tbody id="adm-src-table"></tbody></table></div>
+      </section>
+      <section class="adm-card glass" data-extra>
         <header class="adm-card-head"><div class="adm-card-title"><h2>Visitas por origen en el tiempo</h2><small id="adm-src-trend-sub">tus 4 orígenes principales</small></div></header>
         <div class="adm-lc" id="adm-src-trend"></div>
       </section>
-      <section class="adm-card glass">
-        <header class="adm-card-head"><h2>Calidad de cada origen</h2><small>no solo cuántos llegan: cuántos se quedan y te escriben</small></header>
-        <div class="adm-table-wrap"><table class="adm-table adm-t-src"><thead><tr><th>Origen</th><th>Visitas</th><th>Nuevas</th><th>Tiempo</th><th>Se van enseguida</th><th>Ven los planes</th><th>Te escriben</th></tr></thead><tbody id="adm-src-table"></tbody></table></div>
-      </section>
-      <div class="adm-row adm-row-even">
+      <div class="adm-row adm-row-even" data-extra>
         <section class="adm-card glass">
           <header class="adm-card-head"><h2>Campañas</h2><small>enlaces con utm_campaign</small></header>
           <div class="adm-table-wrap"><table class="adm-table adm-t-camp"><thead><tr><th>Campaña</th><th>Origen</th><th>Visitas</th><th>Te escriben</th></tr></thead><tbody id="adm-src-campaigns"></tbody></table></div>
@@ -302,12 +337,13 @@
       <section class="adm-card glass adm-builder" id="adm-builder">
         <header class="adm-card-head"><h2>Crea un enlace con campaña</h2><small>para saber qué publicación o mensaje trae cada visita</small></header>
         <div class="adm-builder-grid">
-          <label class="adm-field"><span>Página</span><select id="lb-page"><option value="">Web principal</option><option value="planes.html">Planes y precios</option></select></label>
+          <label class="adm-field"><span>Página</span><select id="lb-page"><option value="">Web principal</option><option value="paquetes.html">Paquetes y precios</option></select></label>
           <label class="adm-field"><span>Dónde lo vas a compartir</span><select id="lb-source"><option>whatsapp</option><option>instagram</option><option>facebook</option><option>tiktok</option><option>google</option><option>correo</option><option>qr</option></select></label>
           <label class="adm-field"><span>Nombre de la campaña</span><input id="lb-campaign" type="text" maxlength="60" placeholder="ej. promo-octubre"></label>
         </div>
         <div class="adm-builder-out"><input id="lb-url" type="text" readonly aria-label="Enlace con campaña"><button class="btn btn-primary btn-sm" type="button" id="lb-copy">Copiar</button></div>
       </section>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== AUDIENCIA ===== -->
@@ -318,12 +354,13 @@
       </section>
       <div class="adm-grid">
         <section class="adm-card glass"><header class="adm-card-head"><h2>Dispositivos</h2><small>visitas</small></header><div id="adm-au-devices"></div></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Nuevas y recurrentes</h2><small>visitas</small></header><div id="adm-au-new"></div></section>
         <section class="adm-card glass"><header class="adm-card-head"><h2>Velocidad de carga</h2><small>tiempo típico (mediana)</small></header><div id="adm-au-speed"></div></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Países</h2><small>según la zona horaria</small></header><ul class="adm-bars" id="adm-au-geo"></ul></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Idiomas</h2><small>del navegador</small></header><ul class="adm-bars" id="adm-au-lang"></ul></section>
-        <section class="adm-card glass"><header class="adm-card-head"><h2>Días de la semana</h2><small>visitas</small></header><ul class="adm-bars" id="adm-au-week"></ul></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Nuevas y recurrentes</h2><small>visitas</small></header><div id="adm-au-new"></div></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Países</h2><small>según la zona horaria</small></header><ul class="adm-bars" id="adm-au-geo"></ul></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Idiomas</h2><small>del navegador</small></header><ul class="adm-bars" id="adm-au-lang"></ul></section>
+        <section class="adm-card glass" data-extra><header class="adm-card-head"><h2>Días de la semana</h2><small>visitas</small></header><ul class="adm-bars" id="adm-au-week"></ul></section>
       </div>
+      <div class="adm-extra-more"><button class="btn btn-glass glass btn-sm" type="button" data-extra-toggle aria-expanded="false">Ver más detalle</button></div>
     </section>
 
     <!-- ===== VISITAS ===== -->
@@ -331,11 +368,12 @@
       <section class="adm-card glass">
         <header class="adm-card-head"><h2>Cada visita</h2><small id="adm-vi-count"></small></header>
         <div class="adm-filters">
-          <label class="adm-field"><span>Página</span><select id="vf-page"><option value="">Todas</option><option value="home">Web principal</option><option value="planes">Planes y precios</option></select></label>
+          <label class="adm-field"><span>Página</span><select id="vf-page"><option value="">Todas</option><option value="home">Web principal</option><option value="planes">Paquetes y precios</option></select></label>
           <label class="adm-field"><span>Origen</span><select id="vf-source"><option value="">Todos</option></select></label>
           <label class="adm-field"><span>Dispositivo</span><select id="vf-device"><option value="">Todos</option><option>móvil</option><option>computador</option><option>tablet</option></select></label>
           <label class="adm-check"><input type="checkbox" id="vf-contact"> Solo las que te escribieron</label>
           <label class="adm-check"><input type="checkbox" id="vf-back"> Solo personas que vuelven</label>
+          <label class="adm-check"><input type="checkbox" id="vf-guide"> Solo las que escucharon la guía</label>
         </div>
         <div class="adm-table-wrap">
           <table class="adm-table adm-t-visits">
@@ -355,6 +393,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" defer></script>
 <script src="supabase-config.js?v=1" defer></script>
-<script src="admin.js?v=6" defer></script>
+<script src="admin.js?v=17" defer></script>
 </body>
 </html>

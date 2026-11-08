@@ -1,19 +1,23 @@
 /* =========================================================
    Gotiastudio — Datos de contacto
-   Un solo lugar para las dos páginas (index.html y planes.html):
+   Un solo lugar para las dos páginas (index.html y paquetes.html):
    cambia aquí tu WhatsApp y tu Instagram y todos los botones se actualizan.
      · data-wa="mensaje"  → abre WhatsApp con ese mensaje ya escrito
      · data-ig            → abre un mensaje directo en Instagram
      · data-ig-perfil     → abre el perfil de Instagram (para seguirlo: el sorteo)
      · data-ig-user       → escribe el @ de Instagram en el texto
+     · data-tel           → llama al teléfono (en el celular abre la llamada)
+     · data-tel-num       → escribe el teléfono en el texto: 302 780 9730
    ========================================================= */
 (() => {
   const CONTACTO = {
     whatsapp: '573027809730',  // con indicativo, sin "+" ni espacios
+    telefono: '',              // para llamadas, con indicativo; vacío = el mismo del WhatsApp
     instagram: 'gotiastudio'   // sin "@"
   };
 
   const num = CONTACTO.whatsapp.replace(/\D/g, '');
+  const tel = (CONTACTO.telefono || CONTACTO.whatsapp).replace(/\D/g, '');
   const ig = CONTACTO.instagram.replace(/^@/, '').trim();
   // el formulario de contacto (main.js) los usa para abrir WhatsApp con el mensaje
   window.gotiaContacto = { whatsapp: num, instagram: ig };
@@ -42,6 +46,14 @@
   });
 
   if (ig) document.querySelectorAll('[data-ig-user]').forEach((el) => { el.textContent = '@' + ig; });
+
+  document.querySelectorAll('[data-tel]').forEach((a) => {
+    if (!tel) { a.setAttribute('data-todo', 'telefono'); return; }
+    a.href = 'tel:+' + tel;
+  });
+  // a la vista, sin el indicativo de Colombia: 573027809730 → 302 780 9730
+  const telVisto = tel.replace(/^57(?=\d{10}$)/, '').replace(/^(\d{3})(\d{3})(\d{4})$/, '$1 $2 $3');
+  if (tel) document.querySelectorAll('[data-tel-num]').forEach((el) => { el.textContent = telVisto; });
 
   if (!num) console.warn('Gotiastudio: falta el número de WhatsApp en contacto.js');
 })();

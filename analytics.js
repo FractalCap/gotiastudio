@@ -5,8 +5,8 @@
      · pageview  al abrir la página: de dónde llega (y la campaña), dispositivo,
                  versión, zona horaria y si es su 1.ª, 2.ª… visita
      · section   cada sección (o pantalla de planes) que llega a ver, una vez
-     · click     WhatsApp (con el plan que pide), Instagram, correo, formulario, "3D"
-     · interact  lo que toca: preguntas, burbujas, demos de los planes, menú…
+     · click     WhatsApp (con el plan que pide), llamada, Instagram, correo, formulario, "3D"
+     · interact  lo que toca: preguntas, burbujas, demos de los planes, menú, la guía en audio…
      · leave     al salir o cambiar de pestaña: tiempo activo, hasta dónde bajó,
                  cuánto tardó en cargar y cuántos segundos pasó en cada sección
    Se apaga sola si supabase-config.js está vacío o el navegador pide
@@ -41,7 +41,7 @@
     put(localStorage, 'gotia-vn', String(visitNo));
   }
 
-  const isPlanes = /planes(\.html)?$/.test(location.pathname);
+  const isPlanes = /(planes|paquetes)(\.html)?$/.test(location.pathname);
   const base = {
     page: cut(location.pathname.replace(/index\.html$/, '') || '/', 80),
     visitor,
@@ -76,7 +76,7 @@
     visit_no: visitNo || null
   });
 
-  // las secciones que llega a ver (en planes.html, cada pantalla)
+  // las secciones que llega a ver (en paquetes.html, cada pantalla)
   const sections = [...document.querySelectorAll('main section[id], body > section[id], .slide[id]')];
   const seen = new Set();
   const io = new IntersectionObserver((entries) => entries.forEach((e) => {
@@ -102,14 +102,19 @@
   const why = (window.gotia || {}).low;
   if (why) interact('Versión Lite · ' + why);
   document.addEventListener('gotia:lowend', (e) => interact('Versión Lite · ' + e.detail + ' (pasó sola)'));
+  // la guía en audio (flotantes.js, en las dos páginas): si la empiezan, hasta qué parte llegan
+  // y si la terminan. Cómo la usan (pausa, saltos, cerrarla) sale de los clics, más abajo
+  document.addEventListener('gotia:guia', (e) => interact('Guía en audio · ' + e.detail));
 
   // los botones que importan
   document.addEventListener('click', (e) => {
+    if (!e.isTrusted) return;   // los toques que hace la guía en audio (flotantes.js) no cuentan
     const a = e.target.closest('a, button, summary');
     if (!a) return;
     let label = '';
     if (a.matches('[data-wa]')) label = 'WhatsApp · ' + (a.dataset.wa || '').replace(/^Hola Gotia Studio\s*👋?\s*/i, '');
     else if (a.matches('[data-ig]')) label = 'Instagram';
+    else if (a.matches('[data-tel]')) label = 'Llamada · ' + slideOf(a);
     else if (a.matches('a[href^="mailto:"]')) label = 'Correo';
     else if (a.matches('.ver-to-3d')) label = 'Activó la versión 3D';
     else if (a.matches('.fxi-go')) label = 'Activó la versión 3D (desde el aviso)';
@@ -119,7 +124,11 @@
     const text = cut(a.textContent, 60);
     if (a.matches('summary')) { if (!a.parentElement.open) interact('Pregunta · ' + text); }
     else if (a.matches('.orbit-item')) interact('Ecosistema · ' + (a.dataset.title || text));
-    else if (a.matches('.mx-tabs button')) interact('Demo · ' + slideOf(a) + ' · ' + text);
+    else if (a.matches('.mx-tabs button, .t-steps button')) interact('Demo · ' + slideOf(a) + ' · ' + text.replace(/^\d+\s*/, ''));
+    else if (a.matches('.guia-btn') && a.closest('.guia.is-playing')) interact('Guía en audio · la pausó');
+    else if (a.matches('.guia-next')) interact('Guía en audio · usó Siguiente');
+    else if (a.matches('.guia-prev')) interact('Guía en audio · usó Anterior');
+    else if (a.matches('.guia-x')) interact('Guía en audio · la cerró');
     else if (a.matches('.ov-item')) interact('Resumen · ' + cut((a.querySelector('b') || a).textContent, 40));
     else if (a.matches('.dots a')) interact('Puntos · ' + (a.getAttribute('href') || '').slice(1));
     else if (a.matches('[data-svc-go]')) interact('Carrusel · ' + slideOf(a));
@@ -129,6 +138,7 @@
       const title = cut(((card && card.querySelector('h3')) || {}).textContent, 50);
       interact('Tutorial · ' + (title || slideOf(a)) + ' · ' + text.replace(/^\d+\s*/, ''));
     }
+    else if (a.matches('[data-camino-go]')) interact('Camino · ' + ({ auto: 'Quiero automatizar', vender: 'Quiero vender más', datos: 'Quiero ver mis datos' }[a.dataset.caminoGo] || a.dataset.caminoGo));
     else if (a.matches('[data-plan-go]')) interact('Planes · ir a ' + text);
     else if (a.matches('.fxi-close')) interact('Aviso 3D · lo cerró');
     else if (a.matches('.ver-to-lite')) interact('Volvió a la versión Esencial');

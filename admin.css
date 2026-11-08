@@ -69,6 +69,14 @@
 .adm-main.is-loading .adm-pane { opacity: .6; }   /* al recargar se queda lo anterior, más tenue: sin saltos */
 .adm-pane { display: flex; flex-direction: column; gap: 16px; }
 
+/* lo esencial primero: lo marcado con data-extra (tarjetas y números de detalle) aparece con
+   "Ver todo" o con "Ver más detalle" (admin.js pone .is-full). Lo que queda se reparte el ancho */
+.adm:not(.is-full) [data-extra] { display: none !important; }
+.adm:not(.is-full) .adm-kpis { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.adm:not(.is-full) .adm-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.adm:not(.is-full) .adm-row:has(> [data-extra]) { grid-template-columns: minmax(0, 1fr); }
+.adm-extra-more { display: flex; justify-content: center; padding-top: 2px; }
+
 /* encabezado: título de la sección + periodo */
 .adm-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; padding: 8px 2px 0; }
 .adm-head { flex: 1 1 300px; min-width: 0; }

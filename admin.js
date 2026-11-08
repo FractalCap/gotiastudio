@@ -10,6 +10,8 @@
      datos de ejemplo, sin pedir contraseña.
    Todo se calcula en el navegador a partir de las visitas del periodo
    elegido (y del periodo anterior, para comparar).
+   Cada sección muestra primero lo esencial; lo marcado con data-extra (tarjetas y números
+   de detalle) aparece con "Ver todo" o con "Ver más detalle", al final de cada sección.
    ========================================================= */
 (() => {
   const $ = (s) => document.querySelector(s);
@@ -21,48 +23,56 @@
   let W = null, B = null, compare = true, tab = 'resumen';
   let mainMetric = 'visits', histMetric = 'visits', goalMetric = 'contacts', plGroup = 'Páginas web';
   let daily = null, dailyAt = 0, dailyOk = null, leads = [], leadsOk = null, goals = {}, goalsOk = null;
-  let ldShown = 30, rt = null, rtOn = false, leadBySession = new Map();
+  let ldShown = 30, rt = null, rtOn = false, leadBySession = new Map(), guPage = 'h', full = false;
   const openLeads = new Set(), live = new Map(), feed = [];
   try { compare = localStorage.getItem('gotia-adm-compare') !== '0'; } catch (e) {}
+  try { full = localStorage.getItem('gotia-adm-full') === '1'; } catch (e) {}
 
   // ---------- nombres para mostrar ----------
   const SECTIONS = [
     ['top', 'Portada'], ['estudio', 'Manifiesto'], ['servicios', 'Servicios'], ['automatizacion', 'Automatización'],
     ['ecosistema', 'Ecosistema'], ['panel', 'Panel'], ['datos', 'Datos'], ['proceso', 'Proceso'],
-    ['packs', 'Planes'], ['faq', 'Preguntas'], ['equipo', 'Equipo'], ['contacto', 'Contacto']
+    ['packs', 'Paquetes'], ['faq', 'Preguntas'], ['equipo', 'Equipo'], ['contacto', 'Contacto']
   ];
   const SLIDES = [
-    ['top', 'Portada'], ['paso-1', 'Paso 1 · Página web'],
-    ['ejemplo-lite', 'Lite · ejemplo'], ['plan-lite', 'Lite · precio'], ['ejemplo-start', 'Start · ejemplo'], ['plan-start', 'Start · precio'],
-    ['ejemplo-pro', 'Pro · ejemplo'], ['plan-pro', 'Pro · precio'], ['ejemplo-business', 'Business · ejemplo'], ['plan-business', 'Business · precio'],
-    ['ejemplo-max', 'Max · ejemplo'], ['plan-max', 'Max · precio'], ['comparar', 'Comparar los 5 planes'],
-    ['paso-2', 'Paso 2 · Automatización'], ['ejemplo-auto-web', 'Auto. Web · ejemplo'], ['auto-web', 'Auto. Web · precio'],
-    ['ejemplo-auto-completa', 'Auto. Completa · ejemplo'], ['auto-completa', 'Auto. Completa · precio'],
-    ['ejemplo-auto-avanzada', 'Auto. Avanzada · ejemplo'], ['auto-avanzada', 'Auto. Avanzada · precio'], ['diferencia', 'La diferencia'],
-    ['paso-3', 'Paso 3 · Mensuales'], ['mantenimiento', 'Mantenimiento Web'], ['datos', 'Datos y Asesoría'], ['datos-360', 'Datos 360'],
-    ['crecimiento', 'Crecimiento'], ['paso-4', 'Paso 4 · Beneficios'], ['contacto', 'Escríbenos']
+    ['top', 'Portada'], ['auto-inicio', 'Automatizar · 2 pasos'], ['casos', 'Casos de éxito'], ['paso-1', 'Paso 1 · Tu paquete'],
+    ['ejemplo-presencia', 'Presencia · recorrido'], ['plan-presencia', 'Presencia · qué incluye'],
+    ['ejemplo-automatico', 'Automático · recorrido'], ['plan-automatico', 'Automático · qué incluye'],
+    ['ejemplo-negocio', 'Negocio · recorrido'], ['plan-negocio', 'Negocio · qué incluye'],
+    ['ejemplo-emprende', 'Emprende · recorrido'], ['plan-emprende', 'Emprende · qué incluye'], ['comparar', 'Comparar los paquetes'],
+    ['paso-2', 'Paso 2 · Tu mensualidad'], ['cuidado', 'Cuidado'], ['cuidado-automatico', 'Cuidado Automático'], ['cuidado-negocio', 'Cuidado Negocio'],
+    ['reglas', 'Reglas y Crecimiento'], ['planes-marketing', 'Vender más · planes'], ['recorrido-marketing', 'Vender más · recorrido'], ['plan-visible', 'Visible'], ['plan-redes', 'Redes'], ['plan-crecimiento', 'Crecimiento'], ['marketing-reglas', 'Vender más · reglas'], ['planes-datos', 'Datos · paquetes'], ['recorrido-datos', 'Datos · recorrido'], ['analista-datos', 'Datos · tu analista'], ['plan-mide', 'Mide'], ['plan-une', 'Une'], ['plan-decide', 'Decide'], ['datos-reglas', 'Datos · reglas'], ['extras', 'Extras'], ['como-se-paga', 'Cómo se paga'], ['contacto', 'Escríbenos']
   ];
-  // price: el precio de planes.html, para sugerir el valor de cada venta
+  // la guía en audio (flotantes.js): las partes que se cuentan en cada página, en orden ("Inicio" es la primera)
+  const GUIDE = {
+    h: ['Inicio', 'Manifiesto', 'Servicios', 'Automatización', 'Ecosistema', 'Panel de administrador', 'Datos verificables', 'Proceso', 'Paquetes', 'Preguntas frecuentes', 'Equipo', 'Contacto'],
+    p: ['Inicio', 'Casos de éxito', 'Paso 1 · Tu paquete', 'Compara los paquetes', 'Paso 2 · Tu mensualidad', 'Vender más · Los planes', 'Datos · Los paquetes', 'Escríbenos']
+  };
+  const GUIDE_RE = /^([hp]):Guía en audio · (.+)$/;
+  // price: el precio de paquetes.html, para sugerir el valor de cada venta
   const OFFERS = [
-    { name: 'Plan Lite', group: 'Páginas web', price: 350000, ids: ['ejemplo-lite', 'plan-lite'], re: /\bPlan Lite\b/i },
-    { name: 'Plan Start', group: 'Páginas web', price: 580000, ids: ['ejemplo-start', 'plan-start'], re: /\bPlan Start\b/i },
-    { name: 'Plan Pro', group: 'Páginas web', price: 920000, ids: ['ejemplo-pro', 'plan-pro'], re: /\bPlan Pro\b/i },
-    { name: 'Plan Business', group: 'Páginas web', price: 1890000, ids: ['ejemplo-business', 'plan-business'], re: /\bPlan Business\b/i },
-    { name: 'Plan Max', group: 'Páginas web', price: 5900000, ids: ['ejemplo-max', 'plan-max'], re: /\bPlan Max\b/i },
-    { name: 'Automatización Web', group: 'Automatización', price: 390000, ids: ['ejemplo-auto-web', 'auto-web'], re: /Automatizaci[oó]n Web/i },
-    { name: 'Automatización Completa', group: 'Automatización', price: 1190000, ids: ['ejemplo-auto-completa', 'auto-completa'], re: /Automatizaci[oó]n Completa/i },
-    { name: 'Automatización Avanzada', group: 'Automatización', price: 2900000, ids: ['ejemplo-auto-avanzada', 'auto-avanzada'], re: /Automatizaci[oó]n Avanzada/i },
-    { name: 'Mantenimiento Web', group: 'Planes mensuales', price: 180000, ids: ['mantenimiento'], re: /Mantenimiento/i },
-    { name: 'Datos y Asesoría', group: 'Planes mensuales', price: 650000, ids: ['datos'], re: /Datos y Asesor/i },
-    { name: 'Datos 360', group: 'Planes mensuales', price: 1390000, ids: ['datos-360'], re: /Datos 360/i },
-    { name: 'Crecimiento', group: 'Planes mensuales', price: 1900000, ids: ['crecimiento'], re: /Crecimiento/i },
-    // se piden desde los botones de WhatsApp de la web principal (no tienen pantalla en planes y precios)
+    { name: 'Presencia', group: 'Paquetes', price: 1390000, ids: ['ejemplo-presencia', 'plan-presencia'], re: /\bpaquete Presencia\b/i },
+    { name: 'Automático', group: 'Paquetes', price: 1790000, ids: ['ejemplo-automatico', 'plan-automatico'], re: /\bpaquete Autom[aá]tico\b/i },
+    { name: 'Negocio', group: 'Paquetes', price: 3490000, ids: ['ejemplo-negocio', 'plan-negocio'], re: /\bpaquete Negocio\b/i },
+    { name: 'Emprende', group: 'Paquetes', price: 290000, ids: ['ejemplo-emprende', 'plan-emprende'], re: /\bpaquete Emprende\b/i },
+    { name: 'Cuidado', group: 'Mensualidades', price: 180000, ids: ['cuidado'], re: /\bCuidado \(/ },
+    { name: 'Cuidado Automático', group: 'Mensualidades', price: 390000, ids: ['cuidado-automatico'], re: /Cuidado Autom[aá]tico/i },
+    { name: 'Cuidado Negocio', group: 'Mensualidades', price: 690000, ids: ['cuidado-negocio'], re: /Cuidado Negocio/i },
+    { name: 'Visible', group: 'Marketing', price: 750000, ids: ['plan-visible'], re: /\bplan Visible\b/i },
+    { name: 'Redes', group: 'Marketing', price: 1190000, ids: ['plan-redes'], re: /\bplan Redes\b/i },
+    { name: 'Crecimiento', group: 'Marketing', price: 1890000, ids: ['plan-crecimiento'], re: /Crecimiento/i },
+    { name: 'Mide', group: 'Datos', price: 390000, ids: ['plan-mide'], re: /\bpaquete Mide\b/i },
+    { name: 'Une', group: 'Datos', price: 990000, ids: ['plan-une'], re: /\bpaquete Une\b/i },
+    { name: 'Decide', group: 'Datos', price: 1690000, ids: ['plan-decide'], re: /\bpaquete Decide\b/i },
+    { name: 'Automatizar otra página', group: 'Extras', price: 490000, ids: ['extras'], re: /otro proveedor/i },
+    { name: 'Proyecto a medida', group: 'Extras', price: 8900000, ids: ['extras'], re: /proyecto a medida/i },
+    // se piden desde los botones de WhatsApp de la web principal (no tienen pantalla en paquetes y precios)
     { name: 'Panel de administrador', group: 'Servicios de la web principal', price: 0, ids: [], re: /panel de administrador/i },
     { name: 'Datos verificables', group: 'Servicios de la web principal', price: 0, ids: [], re: /datos verificables/i }
   ];
   const WEB_PLANS = [0, 1, 2, 3, 4];
   const NAMES = new Map([...SECTIONS.map(([id, t]) => ['h:' + id, t]), ...SLIDES.map(([id, t]) => ['p:' + id, t])]);
-  const CONTACT = /^(WhatsApp|Instagram|Correo|Formulario)/;
+  const CONTACT = /^(WhatsApp|Instagram|Correo|Formulario|Llamada)/;
   const WEEK = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   const WEEK_PL = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábados', 'domingos'];
   const STATUS = [['nuevo', 'Nuevo'], ['contactado', 'Contactado'], ['cotizado', 'Cotizado'], ['ganado', 'Venta cerrada'], ['perdido', 'Perdido']];
@@ -75,7 +85,8 @@
     contactados: ['Contactados', 'Las personas que llenaron el formulario de contacto de tu web.'],
     contactos: ['Contactos', 'Quién te escribió desde la web y en qué va cada venta.'],
     web: ['Web principal', 'Sección por sección: qué ven, cuánto se quedan y dónde se van.'],
-    planes: ['Planes y precios', 'Qué planes miran, cuánto tiempo y cuáles piden.'],
+    planes: ['Paquetes y precios', 'Qué paquetes miran, cuánto tiempo y cuáles piden.'],
+    guia: ['Guía en audio', 'Quién escucha la guía de cada página, hasta dónde llega y si después te escribe.'],
     origen: ['Origen', 'De dónde llegan tus visitas y cuáles terminan escribiéndote.'],
     audiencia: ['Audiencia', 'Cuándo te visitan, desde qué dispositivo y desde dónde.'],
     visitas: ['Visitas', 'Cada visita, con su recorrido completo.']
@@ -89,7 +100,7 @@
     down: '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
   };
 
-  const isPlanes = (page) => /planes/.test(page || '');
+  const isPlanes = (page) => /planes|paquetes/.test(page || '');   // paquetes.html (antes planes.html)
   const strip = (x) => String(x || '').replace(/^[hp]:/, '');
   const SRC = [
     [/google|gclid/, 'Google'], [/instagram|\big\b/, 'Instagram'], [/facebook|\bfb\b|fb\.com|fbclid|\bmeta\b/, 'Facebook'],
@@ -224,7 +235,7 @@
     conv: { name: 'Conversión', kind: 'pct', fmt: pf, fn: (l) => (l.length ? contactsOf(l) / l.length * 100 : null) },
     time: { name: 'Tiempo activo', kind: 'time', fmt: dur, fn: (l) => { const d = l.map((s) => s.dur).filter((x) => x > 0); return d.length ? mean(d) : null; } },
     bounce: { name: 'Se van enseguida', kind: 'pct', fmt: pf, fn: (l) => (l.length ? l.filter((s) => s.bounce).length / l.length * 100 : null) },
-    plans: { name: 'Ven los planes', kind: 'pct', fmt: pf, fn: (l) => (l.length ? l.filter((s) => s.seesPlans).length / l.length * 100 : null) },
+    plans: { name: 'Ven los paquetes', kind: 'pct', fmt: pf, fn: (l) => (l.length ? l.filter((s) => s.seesPlans).length / l.length * 100 : null) },
     newp: { name: 'Visitas nuevas', kind: 'pct', fmt: pf, fn: (l) => (l.length ? l.filter((s) => !s.back).length / l.length * 100 : null) }
   };
   const AXIS = {
@@ -465,42 +476,48 @@
     const LANG = [['es-CO', 72], ['es-419', 12], ['es', 8], ['en-US', 5], ['es-MX', 3]];
     const HOME_STAY = { top: 7, estudio: 6, servicios: 16, automatizacion: 14, ecosistema: 11, panel: 18, datos: 14, proceso: 9, packs: 24, faq: 12, equipo: 7, contacto: 10 };
     const HOME_DROP = { ecosistema: 0.1, datos: 0.05, proceso: 0.06, equipo: 0.04 };
-    const PL_STAY = (id) => (id.startsWith('ejemplo-') ? (id === 'ejemplo-max' ? 34 : 22) : /^(plan|auto)-/.test(id) ? 15 : /mantenimiento|datos|crecimiento/.test(id) ? 12 : 6);
+    const PL_STAY = (id) => (id.startsWith('ejemplo-') ? 22 : /^plan-/.test(id) ? 15 : /^cuidado/.test(id) ? 12 : 6);
     const TABS_DEMO = {
-      'ejemplo-lite': ['Tu página', 'Celular', 'WhatsApp', 'Formulario'], 'ejemplo-start': ['Secciones', 'Servicios', 'Ubicación', 'Google'],
-      'ejemplo-pro': ['Chat 24/7', 'Reservas', 'Correos', 'Panel'], 'ejemplo-business': ['Tienda', 'Pago', 'Estadísticas', 'Ventas'],
-      'ejemplo-max': ['Google', 'Maps', 'Redes', 'Tu web'], 'ejemplo-auto-web': ['Formulario', 'Respuestas', 'Reservas', 'Avisos'],
-      'ejemplo-auto-completa': ['WhatsApp', 'Calendar', 'CRM', 'Pagos'], 'ejemplo-auto-avanzada': ['Asistente IA', 'Reglas', 'Sistemas', 'Panel']
+      'ejemplo-presencia': ['Secciones', 'Servicios', 'Nosotros', 'Mapa'],
+      'ejemplo-automatico': ['Responde', 'Reservas', 'Avisos', 'Clientes'],
+      'ejemplo-negocio': ['Tienda', 'Pagos', 'Catálogo', 'Ventas'],
+      'ejemplo-emprende': ['Tu dirección', 'Tu negocio', 'WhatsApp', 'Tus redes']
     };
     const FAQ = [['¿Cuánto cuesta mi página?', 55], ['¿Cuánto tarda?', 25], ['¿Hay pagos mensuales?', 20]];
     const TUTOS = [
       ['servicios', 'Una web que trabaja por ti', ['Te escriben', 'Responde', 'Te avisa']],
       ['servicios', 'Aparece en Google', ['Te buscan', 'En el mapa', 'Te escriben']],
-      ['automatizacion', 'Automatización Completa', ['Te escriben', 'Agenda', 'Recuerda', 'Confirma']],
+      ['automatizacion', 'Tu web atiende y te avisa', ['Te escriben', 'Responde', 'Te avisa']],
       ['panel', 'Tenlo en tu web', ['Lo armamos', 'Lo usas', 'Mejoras']],
       ['datos', 'Cuánta gente llega y cuántos compran', ['Llegan', 'Compran', 'Cada semana']]
     ];
     const ECO = [['Google', 30], ['Instagram', 26], ['TikTok', 14], ['Facebook', 8], ['Automatizaciones', 10], ['Panel de administrador', 6], ['Datos verificables', 4], ['Contenido con IA', 6]];
     const HOME_CONTACT = [
-      ['WhatsApp · Quiero conocer los planes y precios', 30], ['WhatsApp · Quiero el precio y la información del Plan Pro', 14],
-      ['WhatsApp · Quiero el precio y la información del Plan Start', 8], ['WhatsApp · Quiero el precio y la información del Plan Business', 7],
-      ['WhatsApp · Quiero el precio y la información del Plan Lite', 6], ['WhatsApp · Quiero el precio y la información del Plan Max', 2],
-      ['WhatsApp · Quiero saber qué automatización me conviene y su precio', 8], ['WhatsApp · Quiero información y precio de la Automatización Completa (WhatsApp, Google Calendar…)', 4],
-      ['WhatsApp · Quiero saber qué plan le conviene a mi negocio', 6], ['WhatsApp · Quiero el panel de administrador para mi web', 3],
+      ['WhatsApp · Quiero conocer los paquetes y precios', 30], ['WhatsApp · Quiero el precio y la información del paquete Automático', 14],
+      ['WhatsApp · Quiero el precio y la información del paquete Presencia', 10], ['WhatsApp · Quiero el precio y la información del paquete Negocio', 7],
+      ['WhatsApp · Quiero el precio y la información del paquete Emprende', 6],
+      ['WhatsApp · Quiero saber qué paquete me conviene y su precio', 8], ['WhatsApp · Quiero información y precio del paquete Automático', 4],
+      ['WhatsApp · Quiero saber qué paquete le conviene a mi negocio', 6], ['WhatsApp · Quiero el panel de administrador para mi web', 3],
       ['WhatsApp · Quiero datos verificables en mi negocio', 2], ['Instagram', 12], ['Formulario enviado', 6], ['Correo', 3]
     ];
     const PL_WA = {
-      'Plan Lite': 'Vi los planes y me interesa el Plan Lite ($350.000)', 'Plan Start': 'Vi los planes y me interesa el Plan Start ($580.000)',
-      'Plan Pro': 'Vi los planes y me interesa el Plan Pro ($920.000)', 'Plan Business': 'Vi los planes y me interesa el Plan Business ($1.890.000)',
-      'Plan Max': 'Vi los planes y me interesa el Plan Max ($5.900.000)', 'Automatización Web': 'Vi los planes y me interesa la Automatización Web',
-      'Automatización Completa': 'Vi los planes y me interesa la Automatización Completa',
-      'Automatización Avanzada': 'Vi los planes y me interesa una Automatización Avanzada a medida para mi empresa',
-      'Mantenimiento Web': 'Vi los planes y me interesa el plan mensual de Mantenimiento Web ($180.000/mes)',
-      'Datos y Asesoría': 'Vi los planes y me interesa el plan mensual de Datos y Asesoría ($650.000/mes)',
-      'Datos 360': 'Vi los planes y me interesa el plan mensual Datos 360 ($1.390.000/mes)',
-      'Crecimiento': 'Vi los planes y me interesa el plan mensual de Crecimiento ($1.900.000/mes)'
+      'Presencia': 'Vi los paquetes y me interesa el paquete Presencia ($1.390.000)',
+      'Automático': 'Vi los paquetes y me interesa el paquete Automático ($1.790.000)',
+      'Negocio': 'Vi los paquetes y me interesa el paquete Negocio ($3.490.000)',
+      'Emprende': 'Vi los paquetes y me interesa el paquete Emprende ($290.000)',
+      'Cuidado': 'Vi los paquetes y me interesa Cuidado ($180.000/mes)',
+      'Cuidado Automático': 'Vi los paquetes y me interesa Cuidado Automático ($390.000/mes)',
+      'Cuidado Negocio': 'Vi los paquetes y me interesa Cuidado Negocio ($690.000/mes)',
+      'Visible': 'Vi los paquetes y me interesa el plan Visible ($750.000/mes)',
+      'Redes': 'Vi los paquetes y me interesa el plan Redes ($1.190.000/mes)',
+      'Crecimiento': 'Vi los paquetes y me interesa el plan Crecimiento ($1.890.000/mes)',
+      'Mide': 'Vi los paquetes y me interesa el paquete Mide ($390.000/mes + $490.000 de instalación)',
+      'Une': 'Vi los paquetes y me interesa el paquete Une ($990.000/mes + $690.000 de instalación)',
+      'Decide': 'Vi los paquetes y me interesa el paquete Decide ($1.690.000/mes + $1.190.000 de instalación)',
+      'Automatizar otra página': 'Mi página la hizo otro proveedor y quiero automatizarla',
+      'Proyecto a medida': 'Quiero una cotización de un proyecto a medida (web, redes y Google Ads)'
     };
-    const PL_INTENT = { 'Plan Lite': 1, 'Plan Start': 1.3, 'Plan Pro': 1.9, 'Plan Business': 1.1, 'Plan Max': 0.15, 'Automatización Web': 0.8, 'Automatización Completa': 1, 'Automatización Avanzada': 0.5, 'Mantenimiento Web': 0.7, 'Datos y Asesoría': 0.6, 'Datos 360': 0.5, 'Crecimiento': 0.4 };
+    const PL_INTENT = { 'Presencia': 1.3, 'Automático': 1.9, 'Negocio': 1.1, 'Emprende': 1.2, 'Cuidado': 0.7, 'Cuidado Automático': 0.6, 'Cuidado Negocio': 0.5, 'Visible': 0.6, 'Redes': 0.7, 'Crecimiento': 0.4, 'Mide': 0.5, 'Une': 0.6, 'Decide': 0.3, 'Automatizar otra página': 0.5, 'Proyecto a medida': 0.15 };
 
     const out = [], visitors = [], visits = new Map(), now = Date.now(), today = startOf(new Date());
     const make = (t, opts) => {
@@ -512,7 +529,8 @@
       const vn = (visits.get(visitor) || 0) + 1;
       visits.set(visitor, vn);
       const act3d = !planes && rnd() < 0.16, direct3d = !planes && !act3d && rnd() < 0.03;
-      const q = ref.q * dev.q * (back ? 1.25 : 1) * (act3d || direct3d ? 1.2 : 1) * (0.75 + rnd() * 0.5);
+      const guide = !opts.live && rnd() < (planes ? 0.1 : 0.13);
+      const q = ref.q * dev.q * (back ? 1.25 : 1) * (act3d || direct3d ? 1.2 : 1) * (guide ? 1.2 : 1) * (0.75 + rnd() * 0.5);
       const pre = planes ? 'p:' : 'h:';
       const ids = planes ? SLIDES.map((s) => s[0]) : SECTIONS.map((s) => s[0]);
       const path = [], dwell = {}, clicks = [], interacts = [];
@@ -540,12 +558,12 @@
           const upto = 1 + Math.floor(rnd() * steps.length);
           for (let k = steps.length - upto; k < steps.length; k++) interacts.push('h:Tutorial · ' + title + ' · ' + steps[k]);
         }
-        if (has('packs') && rnd() < 0.25) interacts.push('h:Planes · ir a ' + pick([['Pro', 4], ['Start', 2.5], ['Business', 2], ['Lite', 1.5], ['Max', 1]]));
+        if (has('packs') && rnd() < 0.25) interacts.push('h:Planes · ir a ' + pick([['Automático', 4], ['Presencia', 2.5], ['Negocio', 2], ['Emprende', 1.5]]));
         if (has('ecosistema') && rnd() < 0.35) interacts.push('h:Ecosistema · ' + pick(ECO));
         if (has('panel') && rnd() < 0.14) interacts.push('h:Probó el panel de ejemplo');
         if (has('faq') && rnd() < 0.5) interacts.push('h:Pregunta · ' + pick(FAQ));
         if (has('faq') && rnd() < 0.15) interacts.push('h:Pregunta · ' + pick(FAQ));
-        if (rnd() < 0.08) interacts.push('h:Menú · Planes');
+        if (rnd() < 0.08) interacts.push('h:Menú · Paquetes');
         if (rnd() < 0.05) interacts.push('h:Cambió a modo negro');
         if (!act3d && !direct3d && rnd() < 0.12) interacts.push('h:Aviso 3D · lo cerró');
         if (act3d) clicks.push(rnd() < 0.4 ? 'h:Activó la versión 3D (desde el aviso)' : 'h:Activó la versión 3D');
@@ -553,17 +571,31 @@
         if (path.length > 1 && rnd() < pc) clicks.push('h:' + pick(HOME_CONTACT));
       } else {
         for (const id in TABS_DEMO) if (has(id) && rnd() < 0.32 * q) interacts.push('p:Demo · ' + id + ' · ' + TABS_DEMO[id][1 + Math.floor(rnd() * 3)]);
-        if (rnd() < 0.22) interacts.push('p:Resumen · ' + pick([['Pro', 4], ['Business', 2], ['Start', 2], ['Max', 1.4], ['Lite', 1]]));
-        if (rnd() < 0.12) interacts.push('p:Menú · ' + pick([['Automatización', 3], ['Mensuales', 2], ['Beneficios', 1]]));
+        if (rnd() < 0.22) interacts.push('p:Resumen · ' + pick([['Automático', 4], ['Negocio', 2], ['Presencia', 2], ['Emprende', 1.4]]));
+        if (rnd() < 0.12) interacts.push('p:Menú · ' + pick([['Tu paquete', 3], ['Tu mensualidad', 2]]));
         if (rnd() < 0.1) interacts.push('p:Puntos · comparar');
+        if (has('casos') && rnd() < 0.035 * q) clicks.push(rnd() < 0.75 ? 'p:WhatsApp · Quiero conocer sus casos de éxito más recientes' : 'p:Llamada · casos');
         const seen = OFFERS.filter((o) => o.ids.some(has));
         if (seen.length && rnd() < (0.06 + seen.length * 0.012) * q * q) {
           const o = pick(seen.map((x) => [x, PL_INTENT[x.name] * (1 + x.ids.filter(has).length)]));
           clicks.push('p:WhatsApp · ' + PL_WA[o.name]);
-        } else if (path.length > 1 && rnd() < 0.015 * q) clicks.push('p:WhatsApp · Vi los planes y tengo una pregunta');
+        } else if (path.length > 1 && rnd() < 0.015 * q) clicks.push('p:WhatsApp · Vi los paquetes y tengo una pregunta');
+      }
+      // la guía en audio: la empiezan, llegan hasta alguna parte y algunos la terminan
+      if (guide) {
+        const g = pre + 'Guía en audio · ', parts = GUIDE[planes ? 'p' : 'h'];
+        interacts.push(g + 'Empezó');
+        let k = 0;
+        while (k < parts.length && (k < 2 || rnd() < 0.86)) interacts.push(g + parts[k++]);
+        const done = k === parts.length && rnd() < 0.85;
+        if (done) interacts.push(g + 'Terminó');
+        if (rnd() < 0.22) interacts.push(g + 'la pausó');
+        if (rnd() < 0.3) interacts.push(g + 'usó Siguiente');
+        if (rnd() < 0.08) interacts.push(g + 'usó Anterior');
+        if (!done && rnd() < 0.45) interacts.push(g + 'la cerró');
       }
       const duration = stay + Math.round(rnd() * 8);
-      const page = planes ? '/planes.html' : '/';
+      const page = planes ? '/paquetes.html' : '/';
       return {
         session: 's' + Math.floor(rnd() * 1e12).toString(36) + out.length, visitor,
         started_at: new Date(t).toISOString(), last_at: new Date(Math.min(now, t + duration * 1e3)).toISOString(),
@@ -782,6 +814,10 @@
       s.bounce = !s.contact && path.length <= 1 && s.dur < 20;
       s.is3d = s.version === '3d' || clicks.some((c) => /Activó la versión 3D/.test(c));
       s.seesPlans = s.sec.has('h:packs') || s.planes;
+      // la guía en audio de cada página: lo que pasó (Empezó, cada parte, Terminó, la pausó…)
+      s.guide = { h: new Set(), p: new Set() };
+      interacts.forEach((x) => { const m = x.match(GUIDE_RE); if (m) s.guide[m[1]].add(m[2]); });
+      s.heard = s.guide.h.has('Empezó') || s.guide.p.has('Empezó');
       return s;
     });
     // ¿ya había venido? (visit_no lo dice; si falta, se busca en las visitas cargadas)
@@ -841,11 +877,12 @@
     if (!d) return '<em class="adm-d">=</em>';
     return `<em class="adm-d ${(d > 0) !== !!invert ? 'up' : 'down'}">${d > 0 ? '↑' : '↓'} ${Math.abs(d).toLocaleString('es-CO')} pts</em>`;
   };
-  const K = (k, v, d, s, sp, metric) => ({ k, v, d, s, sp, metric });
+  // extra: un número de detalle (se ve con "Ver todo")
+  const K = (k, v, d, s, sp, metric, extra) => ({ k, v, d, s, sp, metric, extra });
   const kpis = (el, items) => {
-    el.innerHTML = items.map(({ k, v, d, s, sp, metric }) => {
+    el.innerHTML = items.map(({ k, v, d, s, sp, metric, extra }) => {
       const tag = metric ? 'button' : 'article';
-      const attr = metric ? ` type="button" data-metric="${metric}" aria-pressed="${metric === mainMetric}" title="Ver en la gráfica"` : '';
+      const attr = (metric ? ` type="button" data-metric="${metric}" aria-pressed="${metric === mainMetric}" title="Ver en la gráfica"` : '') + (extra ? ' data-extra' : '');
       return `<${tag} class="adm-kpi glass"${attr}><small>${k}</small><span class="adm-kpi-val"><strong>${v}</strong>${d || ''}</span><span class="adm-kpi-sub">${s}</span>${sp ? spark(sp) : ''}</${tag}>`;
     }).join('');
   };
@@ -910,13 +947,13 @@
     const sp = (m) => curSeries(METRICS[m].fn);
     kpis($('#adm-kpis'), [
       K('Visitas', n(a.n), delta(a.n, b.n), days === 1 ? 'hoy' : '≈ ' + n(a.n / days) + ' por día', sp('visits'), 'visits'),
-      K('Personas', n(a.people), delta(a.people, b.people), 'navegadores distintos', sp('people'), 'people'),
-      K('Te escriben', n(a.contact), delta(a.contact, b.contact), 'visitas con un contacto', sp('contacts'), 'contacts'),
+      K('Te escriben', n(a.contact), delta(a.contact, b.contact), 'visitas que te escriben o te llaman', sp('contacts'), 'contacts'),
       K('Conversión', p1(rate(a.contact, a.n)), pdelta(rate(a.contact, a.n), rate(b.contact, b.n), hp), 'de las visitas te escribe', sp('conv'), 'conv'),
-      K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp('time'), 'time'),
-      K('Se van enseguida', pct(a.bounce, a.n) + '%', pdelta(rate(a.bounce, a.n), rate(b.bounce, b.n), hp, true), 'sin pasar de la portada', sp('bounce'), 'bounce'),
-      K('Ven los planes', pct(a.seesPlans, a.n) + '%', pdelta(rate(a.seesPlans, a.n), rate(b.seesPlans, b.n), hp), 'en la web o en planes y precios', sp('plans'), 'plans'),
-      K('Nuevas', pct(a.n - a.back, a.n) + '%', pdelta(rate(a.n - a.back, a.n), rate(b.n - b.back, b.n), hp), n(a.back) + ' visitas de personas que vuelven', sp('newp'), 'newp')
+      K('Ven los paquetes', pct(a.seesPlans, a.n) + '%', pdelta(rate(a.seesPlans, a.n), rate(b.seesPlans, b.n), hp), 'en la web o en paquetes y precios', sp('plans'), 'plans'),
+      K('Personas', n(a.people), delta(a.people, b.people), 'navegadores distintos', sp('people'), 'people', true),
+      K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp('time'), 'time', true),
+      K('Se van enseguida', pct(a.bounce, a.n) + '%', pdelta(rate(a.bounce, a.n), rate(b.bounce, b.n), hp, true), 'sin pasar de la portada', sp('bounce'), 'bounce', true),
+      K('Nuevas', pct(a.n - a.back, a.n) + '%', pdelta(rate(a.n - a.back, a.n), rate(b.n - b.back, b.n), hp), n(a.back) + ' visitas de personas que vuelven', sp('newp'), 'newp', true)
     ]);
     renderMain();
     renderInsights();
@@ -927,7 +964,7 @@
     const hs = (id) => H.filter((s) => s.sec.has('h:' + id)).length;
     funnel($('#adm-funnel-home'), [
       ['Abren la web', H.length], ['Pasan de la portada', H.filter((s) => s.path.filter((x) => x.startsWith('h:')).length > 1).length],
-      ['Ven los servicios', hs('servicios')], ['Llegan a los planes', hs('packs')], ['Llegan a contacto', hs('contacto')],
+      ['Ven los servicios', hs('servicios')], ['Llegan a los paquetes', hs('packs')], ['Llegan a contacto', hs('contacto')],
       ['Te escriben', H.filter((s) => s.contactH).length]
     ]);
     funnel($('#adm-funnel-planes'), planesSteps(P));
@@ -938,17 +975,19 @@
     const contacted = cur.filter((s) => s.contact);
     $('#adm-sum-contacts').innerHTML = bars([
       ...countBy(contacted, (s) => s.channel).map(([k, v]) => [k, v]),
-      ...(contacted.length ? [['Desde planes y precios', contacted.filter((s) => s.contactP).length], ['Desde la web principal', contacted.filter((s) => s.contactH).length]] : [])
+      ...(contacted.length ? [['Desde paquetes y precios', contacted.filter((s) => s.contactP).length], ['Desde la web principal', contacted.filter((s) => s.contactH).length]] : [])
     ], contacted.length);
   }
   function planesSteps(P) {
     const has = (id) => (s) => s.sec.has('p:' + id);
     return [
-      ['Abren planes y precios', P.length],
+      ['Abren paquetes y precios', P.length],
       ['Ven un plan de página web', P.filter((s) => WEB_PLANS.some((i) => s.seen.has(i))).length],
       ['Ven un ejemplo animado', P.filter((s) => s.path.some((x) => x.startsWith('p:ejemplo-'))).length],
-      ['Comparan los planes', P.filter(has('comparar')).length],
-      ['Ven automatización o mensuales', P.filter((s) => s.path.some((x) => /^p:(paso-2|paso-3|auto-|ejemplo-auto-|mantenimiento|datos|crecimiento)/.test(x))).length],
+      ['Comparan los paquetes', P.filter(has('comparar')).length],
+      ['Ven las mensualidades', P.filter((s) => s.path.some((x) => /^p:(paso-2|cuidado|reglas)/.test(x))).length],
+      ['Ven los paquetes de datos', P.filter((s) => s.path.some((x) => /^p:(planes-datos|recorrido-datos|analista-datos|plan-mide|plan-une|plan-decide)/.test(x))).length],
+      ['Ven los planes de marketing', P.filter((s) => s.path.some((x) => /^p:(planes-marketing|recorrido-marketing|plan-visible|plan-redes|plan-crecimiento)/.test(x))).length],
       ['Llegan al final', P.filter(has('contacto')).length],
       ['Te escriben', P.filter((s) => s.contactP).length]
     ];
@@ -1035,9 +1074,9 @@
         const seenRows = rows.filter((r) => r.views >= 15);
         const avgConv = mean(seenRows.map((r) => r.conv / r.views));
         const cold = P.length < 25 ? null : seenRows.filter((r) => r.views >= P.length * 0.3 && r.conv / r.views < avgConv * 0.5).sort((x, y) => y.views * (y.time || 1) - x.views * (x.time || 1))[0];
-        if (cold) add('tip', `<b>${cold.o.name}</b> se mira mucho (${pct(cold.views, P.length)}% de quienes abren planes${cold.time ? `, ${dur(cold.time)} en promedio` : ''}) pero casi nadie pide información. Quizá le falta un ejemplo de resultados o una opción de pago por partes.`, 5);
+        if (cold) add('tip', `<b>${cold.o.name}</b> se mira mucho (${pct(cold.views, P.length)}% de quienes abren paquetes${cold.time ? `, ${dur(cold.time)} en promedio` : ''}) pero casi nadie pide información. Quizá le falta un ejemplo de resultados o una opción de pago por partes.`, 5);
         const direct = P.filter((s) => s.src === 'Directo').length;
-        if (direct / P.length > 0.5) add('tip', `El ${pct(direct, P.length)}% de quienes abren planes y precios llega sin origen. Cuando mandes la página por WhatsApp, usa un enlace con campaña.` + go('origen', 'Crear enlace'), 3);
+        if (direct / P.length > 0.5) add('tip', `El ${pct(direct, P.length)}% de quienes abren paquetes y precios llega sin origen. Cuando mandes la página por WhatsApp, usa un enlace con campaña.` + go('origen', 'Crear enlace'), 3);
       }
       if (L.length >= 30) {
         const t = bestTime(L);
@@ -1050,6 +1089,16 @@
       if (h3.length >= 10 && hl.length >= 10) {
         const x = mean(h3.map((s) => s.dur)), y = mean(hl.map((s) => s.dur));
         if (y && x > y * 1.15) add('good', `Quienes ven la versión 3D se quedan <b>${pct(x - y, y)}% más tiempo</b> (${dur(x)} frente a ${dur(y)}).`, 2);
+      }
+      // la guía en audio: si ayuda a vender, o si casi nadie la toca
+      const gh = L.filter((s) => s.heard), gn = L.filter((s) => !s.heard);
+      if (gh.length >= 10 && gn.length >= 20) {
+        const rg = rate(gh.filter((s) => s.contact).length, gh.length), rn = rate(gn.filter((s) => s.contact).length, gn.length);
+        if (rg > 0 && rg > rn * 1.3) add('good', `Quienes escuchan la <b>guía en audio</b> te escriben más: el <b>${p1(rg)}</b>, frente al ${p1(rn)} de quienes no la escuchan. Invita a escucharla en tus publicaciones.` + go('guia', 'Ver la guía'), 5);
+      }
+      if (H.length >= 40) {
+        const g = H.filter((s) => s.guide.h.has('Empezó')).length;
+        if (g / H.length < 0.04) add('tip', `Solo el <b>${pct(g, H.length)}%</b> de las visitas toca la guía en audio de la web principal. Menciónala en tus historias: «toca el botón de la guía y te muestro todo en 6 minutos».` + go('guia', 'Ver la guía'), 2);
       }
     }
     if (!out.length) add('tip', 'Todo en orden por ahora. Cuando lleguen más visitas, aquí verás qué mejorar primero: dónde se van, qué origen te trae más clientes y qué plan piden más.', 0);
@@ -1163,20 +1212,21 @@
   $('#adm-goals').addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-goal]')) { e.preventDefault(); e.target.click(); } });
 
   // ---------- ACTIVIDAD EN VIVO ----------
+  const reached = (channel) => (channel === 'Llamada' ? 'Te llamó' : 'Te escribió por ' + channel);
   function feedFromSession(s) {
-    const where = s.planes && !s.home ? ' a planes y precios' : '';
+    const where = s.planes && !s.home ? ' a paquetes y precios' : '';
     if (s.contact) {
       const o = [...s.intents].map((i) => OFFERS[i].name)[0];
-      return { t: s.last, icon: 'chat', ok: true, html: `<b>Te escribió por ${esc(s.channel)}</b>${o ? ' · ' + esc(o) : ''}`, sub: s.src + ' · ' + s.device };
+      return { t: s.last, icon: 'chat', ok: true, html: `<b>${esc(reached(s.channel))}</b>${o ? ' · ' + esc(o) : ''}`, sub: s.src + ' · ' + s.device };
     }
     return { t: s.last, icon: 'eye', html: `<b>Visita${where}</b> desde ${esc(s.src)}`, sub: [s.device, s.path.length ? s.path.length + (s.path.length === 1 ? ' sección' : ' secciones') : '', s.dur ? dur(s.dur) : ''].filter(Boolean).join(' · ') };
   }
   function feedFromEvent(e) {
     const t = new Date(e.created_at || Date.now()), pre = isPlanes(e.page) ? 'p:' : 'h:', dev = e.device || '';
-    if (e.type === 'pageview') return { t, icon: 'eye', html: `<b>Nueva visita${isPlanes(e.page) ? ' a planes y precios' : ''}</b> desde ${esc(source(e))}`, sub: dev };
+    if (e.type === 'pageview') return { t, icon: 'eye', html: `<b>Nueva visita${isPlanes(e.page) ? ' a paquetes y precios' : ''}</b> desde ${esc(source(e))}`, sub: dev };
     if (e.type === 'click' && CONTACT.test(e.label || '')) {
       const o = OFFERS.find((x) => x.re.test(e.label));
-      return { t, icon: 'chat', ok: true, html: `<b>Te escribió por ${esc(e.label.split(' ')[0])}</b>${o ? ' · ' + esc(o.name) : ''}`, sub: dev };
+      return { t, icon: 'chat', ok: true, html: `<b>${esc(reached(e.label.split(' ')[0]))}</b>${o ? ' · ' + esc(o.name) : ''}`, sub: dev };
     }
     if (e.type === 'section' && /^(packs|contacto|plan-|auto-|comparar)/.test(e.label || '')) return { t, icon: 'go', html: `Está viendo <b>${esc(NAMES.get(pre + e.label) || e.label)}</b>`, sub: dev };
     if (e.type === 'interact' && e.label) {
@@ -1186,6 +1236,9 @@
       const tu = e.label.match(/^Tutorial · (.+) · (.+)$/);
       if (tu) return { t, icon: 'tap', html: `Está viendo el tutorial <b>«${esc(tu[1])}»</b>`, sub: 'paso: ' + tu[2] + (dev ? ' · ' + dev : '') };
       if (e.label.startsWith('Planes · ir a ')) return { t, icon: 'go', html: `Fue al plan <b>${esc(e.label.slice(14))}</b>`, sub: dev };
+      const where = isPlanes(e.page) ? 'de paquetes y precios' : 'de la web principal';
+      if (e.label === 'Guía en audio · Empezó') return { t, icon: 'tap', html: `<b>Empezó a escuchar la guía</b> ${where}`, sub: dev };
+      if (e.label === 'Guía en audio · Terminó') return { t, icon: 'tap', ok: true, html: `<b>Escuchó toda la guía</b> ${where}`, sub: dev };
       if (/formulario|panel de ejemplo/i.test(e.label)) return { t, icon: 'tap', html: `<b>${esc(e.label)}</b>`, sub: dev };
       return null;
     }
@@ -1279,13 +1332,13 @@
       const refs = [{ referrer: 'l.instagram.com' }, { referrer: 'google.com' }, {}, { utm_source: 'tiktok' }, { utm_source: 'whatsapp', utm_campaign: 'propuesta-octubre' }];
       const now = new Date().toISOString();
       let e;
-      if (r < 0.32) e = { type: 'pageview', page: Math.random() < 0.2 ? '/planes.html' : '/', device: dev, ...refs[Math.floor(Math.random() * refs.length)] };
+      if (r < 0.32) e = { type: 'pageview', page: Math.random() < 0.2 ? '/paquetes.html' : '/', device: dev, ...refs[Math.floor(Math.random() * refs.length)] };
       else if (r < 0.55) e = { type: 'section', page: '/', label: ['packs', 'contacto'][Math.floor(Math.random() * 2)], device: dev };
-      else if (r < 0.72) e = { type: 'interact', page: '/', label: ['Demo · ejemplo-pro · Reservas', 'Demo · ejemplo-start · Google', 'Pregunta · ¿Cuánto cuesta mi página?', 'Tutorial · Una web que trabaja por ti · Responde', 'Planes · ir a Pro'][Math.floor(Math.random() * 5)], device: dev };
+      else if (r < 0.72) e = { type: 'interact', page: '/', label: ['Demo · ejemplo-automatico · Reservas', 'Demo · ejemplo-presencia · Mapa', 'Pregunta · ¿Cuánto cuesta mi página?', 'Tutorial · Una web que trabaja por ti · Responde', 'Planes · ir a Automático', 'Guía en audio · Empezó'][Math.floor(Math.random() * 6)], device: dev };
       else if (r < 0.93) e = { type: 'leave', page: '/', duration: Math.round(20 + Math.random() * 200), scroll: Math.round(30 + Math.random() * 70), device: dev };
       else {
         const o = OFFERS[[0, 1, 2, 2, 3, 6][Math.floor(Math.random() * 6)]], form = Math.random() < 0.4;
-        e = form ? { type: 'click', page: '/', label: 'Formulario enviado', device: dev } : { type: 'click', page: '/planes.html', label: 'WhatsApp · Vi los planes y me interesa el ' + o.name, device: dev };
+        e = form ? { type: 'click', page: '/', label: 'Formulario enviado', device: dev } : { type: 'click', page: '/paquetes.html', label: 'WhatsApp · Vi los paquetes y me interesa el ' + o.name, device: dev };
         const l = prepLead({
           id: Date.now(), created_at: now, updated_at: now, closed_at: null, session: 'demo-' + Date.now(), visitor: 'v-demo', channel: form ? 'Formulario' : 'WhatsApp', label: e.label, page: e.page,
           referrer: 'l.instagram.com', device: dev, status: 'nuevo', name: null, contact: null, value: null, next_at: null, notes: null,
@@ -1337,7 +1390,7 @@
     ['conv', 'Conversión', '% de visitas que te escribe'],
     ['time', 'Tiempo activo', 'promedio por visita'],
     ['bounce', 'Se van enseguida', 'sin pasar de la portada · mientras más baja, mejor'],
-    ['plans', 'Ven los planes', '% de visitas que llega a los planes'],
+    ['plans', 'Ven los paquetes', '% de visitas que llega a los paquetes'],
     ['speed', 'Velocidad de carga', 'tiempo típico en cargar · mientras más baja, mejor'],
     ['newback', 'Nuevas y recurrentes', 'visitas de personas nuevas y de quienes vuelven']
   ];
@@ -1345,7 +1398,8 @@
     renderHist();
     const box = $('#adm-perf');
     if (!box.children.length) {
-      box.innerHTML = PERF.map(([id, title, desc]) => `<section class="adm-card glass"><div class="adm-pc-head"><div><h2>${title}</h2><p>${desc}</p></div><div class="adm-pc-val" id="pv-${id}"></div></div><div class="adm-lc adm-lc-sm" id="pc-${id}"></div></section>`).join('');
+      // conversión y tiempo a la vista; las otras cuatro, con "Ver todo"
+      box.innerHTML = PERF.map(([id, title, desc], i) => `<section class="adm-card glass"${i > 1 ? ' data-extra' : ''}><div class="adm-pc-head"><div><h2>${title}</h2><p>${desc}</p></div><div class="adm-pc-val" id="pv-${id}"></div></div><div class="adm-lc adm-lc-sm" id="pc-${id}"></div></section>`).join('');
     }
     const a = summary(cur), b = summary(prev), hp = b.n > 0;
     const head = (id, v, d) => { $('#pv-' + id).innerHTML = `<strong>${v}</strong>${d || ''}`; };
@@ -1400,10 +1454,10 @@
     kpis($('#adm-ld-kpis'), [
       K('Contactos nuevos', n(C.length), delta(C.length, Cp.length), 'te escribieron en el periodo', spCreated),
       K('Sin responder', n(waiting), '', waiting ? 'esperan tu respuesta' : 'todo respondido'),
-      K('En cotización', moneyShort(sumValue(quoted)), '', n(quoted.length) + (quoted.length === 1 ? ' cotización abierta' : ' cotizaciones abiertas')),
       K('Ventas cerradas', n(wonC.length), delta(wonC.length, wonP.length), 'en el periodo', spWon),
       K('Ingresos', moneyShort(sumValue(wonC)), delta(sumValue(wonC), sumValue(wonP)), 'de las ventas cerradas', curSeries((l) => sumValue(l), leads.filter(won), (l) => l._closed)),
-      K('Tasa de cierre', p1(cr(closed)), pdelta(cr(closed), cr(closedP), closedP.length > 0), n(closed.length) + ' contactos cerrados (ganados o perdidos)')
+      K('En cotización', moneyShort(sumValue(quoted)), '', n(quoted.length) + (quoted.length === 1 ? ' cotización abierta' : ' cotizaciones abiertas'), null, null, true),
+      K('Tasa de cierre', p1(cr(closed)), pdelta(cr(closed), cr(closedP), closedP.length > 0), n(closed.length) + ' contactos cerrados (ganados o perdidos)', null, null, true)
     ]);
     $('#adm-ld-chart-sub').textContent = 'por ' + B.word + ' · contactos que llegan y ventas que cierras';
     lineChart($('#adm-ld-chart'), {
@@ -1468,7 +1522,7 @@
   }
   function leadMore(l) {
     const facts = [
-      ['Botón que tocó', l.label || '—'], ['Página', l.page ? (isPlanes(l.page) ? 'Planes y precios' : 'Web principal') : '—'],
+      ['Botón que tocó', l.label || '—'], ['Página', l.page ? (isPlanes(l.page) ? 'Paquetes y precios' : 'Web principal') : '—'],
       ['Llegó desde', l.referrer || l.utm_source || (l.session ? 'Directo' : 'Agregado a mano')], ['Campaña', [l.utm_campaign, l.utm_medium].filter(Boolean).join(' · ') || '—'],
       ['Dispositivo', l.device || '—'], ['Te escribió', l._created.toLocaleString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit' })],
       ['Cerrado', l._closed ? l._closed.toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' }) : '—']
@@ -1799,11 +1853,11 @@
     const sp = (fn) => curSeries(fn, H);
     kpis($('#adm-web-kpis'), [
       K('Visitas', n(a.n), delta(a.n, b.n), n(a.people) + ' personas', sp(METRICS.visits.fn)),
-      K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp(METRICS.time.fn)),
-      K('Se van enseguida', pct(a.bounce, a.n) + '%', pdelta(rate(a.bounce, a.n), rate(b.bounce, b.n), hp, true), 'sin pasar de la portada', sp(METRICS.bounce.fn)),
-      K('Llegan a los planes', pct(reach(H, 'packs'), a.n) + '%', pdelta(rate(reach(H, 'packs'), a.n), rate(reach(Hp, 'packs'), b.n), hp), 'ven la sección Planes', sp((l) => (l.length ? reach(l, 'packs') / l.length * 100 : null))),
-      K('Llegan al final', pct(reach(H, 'contacto'), a.n) + '%', pdelta(rate(reach(H, 'contacto'), a.n), rate(reach(Hp, 'contacto'), b.n), hp), 'ven Contacto', sp((l) => (l.length ? reach(l, 'contacto') / l.length * 100 : null))),
-      K('Te escriben', p1(rate(H.filter((s) => s.contactH).length, a.n)), pdelta(rate(H.filter((s) => s.contactH).length, a.n), rate(Hp.filter((s) => s.contactH).length, b.n), hp), n(H.filter((s) => s.contactH).length) + ' visitas', sp((l) => l.filter((s) => s.contactH).length))
+      K('Llegan a los paquetes', pct(reach(H, 'packs'), a.n) + '%', pdelta(rate(reach(H, 'packs'), a.n), rate(reach(Hp, 'packs'), b.n), hp), 'ven la sección Paquetes', sp((l) => (l.length ? reach(l, 'packs') / l.length * 100 : null))),
+      K('Te escriben', p1(rate(H.filter((s) => s.contactH).length, a.n)), pdelta(rate(H.filter((s) => s.contactH).length, a.n), rate(Hp.filter((s) => s.contactH).length, b.n), hp), n(H.filter((s) => s.contactH).length) + ' visitas', sp((l) => l.filter((s) => s.contactH).length)),
+      K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp(METRICS.time.fn), null, true),
+      K('Se van enseguida', pct(a.bounce, a.n) + '%', pdelta(rate(a.bounce, a.n), rate(b.bounce, b.n), hp, true), 'sin pasar de la portada', sp(METRICS.bounce.fn), null, true),
+      K('Llegan al final', pct(reach(H, 'contacto'), a.n) + '%', pdelta(rate(reach(H, 'contacto'), a.n), rate(reach(Hp, 'contacto'), b.n), hp), 'ven Contacto', sp((l) => (l.length ? reach(l, 'contacto') / l.length * 100 : null)), null, true)
     ]);
     sectionTable($('#adm-web-sections'), sectionRows(H, 'h:', SECTIONS, 'exitH'), H.length);
 
@@ -1819,8 +1873,9 @@
       per.forEach((steps, t) => { if (!tut.has(t)) tut.set(t, []); tut.get(t).push(steps.size); });
     });
     const tutRows = [...tut].map(([t, sizes]) => { const all = Math.max(...sizes); return ['Tutorial · ' + t, sizes.length, all > 1 ? pct(sizes.filter((k) => k === all).length, sizes.length) : null]; });
-    const touchLabel = (x) => x.replace(/^Planes · ir a (.+)$/, 'Fue al plan $1 (en Planes)');
-    const others = countBy(H.flatMap((s) => [...new Set(s.interacts.filter((x) => !/^h:(Pregunta|Tutorial) · /.test(x)).map((x) => touchLabel(strip(x))))]), (x) => x);
+    // la guía en audio cuenta aquí una sola vez (su detalle está en su propia sección)
+    const touchLabel = (x) => x.replace(/^Planes · ir a (.+)$/, 'Fue al plan $1 (en Paquetes)').replace(/^Guía en audio · Empezó$/, 'Escuchó la guía en audio');
+    const others = countBy(H.flatMap((s) => [...new Set(s.interacts.filter((x) => !/^h:(Pregunta|Tutorial) · /.test(x) && !/^h:Guía en audio · (?!Empezó$)/.test(x)).map((x) => touchLabel(strip(x))))]), (x) => x);
     const touch = [...tutRows, ...others.map(([k, v]) => [k, v, null])].sort((a, b) => b[1] - a[1]).slice(0, 10);
     $('#adm-web-touch').innerHTML = bars(touch, 0, (v, done) => `${n(v)} <small>${done == null ? pct(v, H.length) + '%' : done + '% ve todos los pasos'}</small>`);
     const homeClicks = countBy(H.flatMap((s) => s.contacts.filter((c) => c.startsWith('h:')).map(strip)), (x) => x.replace(/^WhatsApp · /, 'WhatsApp: ')).slice(0, 8);
@@ -1852,13 +1907,27 @@
     const ask = (l) => l.filter((s) => s.contactP).length;
     const sp = (fn) => curSeries(fn, P);
     kpis($('#adm-pl-kpis'), [
-      K('Visitas', n(a.n), delta(a.n, b.n), 'abrieron planes y precios', sp(METRICS.visits.fn)),
-      K('Personas', n(a.people), delta(a.people, b.people), n(a.back) + ' visitas de personas que vuelven', sp(METRICS.people.fn)),
-      K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp(METRICS.time.fn)),
+      K('Visitas', n(a.n), delta(a.n, b.n), 'abrieron paquetes y precios', sp(METRICS.visits.fn)),
       K('Ven un plan', pct(seePlan(P), a.n) + '%', pdelta(rate(seePlan(P), a.n), rate(seePlan(Pp), b.n), hp), 'al menos un plan de página web', sp((l) => (l.length ? seePlan(l) / l.length * 100 : null))),
-      K('Llegan al final', pct(end(P), a.n) + '%', pdelta(rate(end(P), a.n), rate(end(Pp), b.n), hp), 'ven toda la presentación', sp((l) => (l.length ? end(l) / l.length * 100 : null))),
-      K('Piden información', p1(rate(ask(P), a.n)), pdelta(rate(ask(P), a.n), rate(ask(Pp), b.n), hp), n(ask(P)) + ' visitas escribieron', sp(ask))
+      K('Piden información', p1(rate(ask(P), a.n)), pdelta(rate(ask(P), a.n), rate(ask(Pp), b.n), hp), n(ask(P)) + ' visitas escribieron o llamaron', sp(ask)),
+      K('Personas', n(a.people), delta(a.people, b.people), n(a.back) + ' visitas de personas que vuelven', sp(METRICS.people.fn), null, true),
+      K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp(METRICS.time.fn), null, true),
+      K('Llegan al final', pct(end(P), a.n) + '%', pdelta(rate(end(P), a.n), rate(end(Pp), b.n), hp), 'ven toda la presentación', sp((l) => (l.length ? end(l) / l.length * 100 : null)), null, true)
     ]);
+
+    // casos de éxito: la pantalla antes de los precios, con WhatsApp y llamada
+    const sawCasos = P.filter((s) => s.sec.has('p:casos'));
+    const casosWa = P.filter((s) => s.contacts.some((c) => /^p:WhatsApp · .*casos de éxito/i.test(c))).length;
+    const casosTel = P.filter((s) => s.contacts.some((c) => c === 'p:Llamada · casos')).length;
+    const onward = sawCasos.filter((s) => s.sec.has('p:paso-1')).length;
+    $('#adm-pl-casos').innerHTML = P.length
+      ? `<p class="adm-big"><b>${pct(sawCasos.length, P.length)}%</b> de quienes abren paquetes la ve</p>`
+        + mini(['', 'Visitas', 'De quienes la ven'], [
+          ['Piden casos por WhatsApp', n(casosWa), pct(casosWa, sawCasos.length) + '%'],
+          ['Te llaman', n(casosTel), pct(casosTel, sawCasos.length) + '%'],
+          ['Siguen a los precios', n(onward), pct(onward, sawCasos.length) + '%']
+        ])
+      : `<p class="adm-empty">${EMPTY}</p>`;
 
     // cada plan con su color fijo dentro de su grupo (el color no cambia al cambiar el periodo)
     $$('#adm-pl-group button').forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.group === plGroup)));
@@ -1867,7 +1936,7 @@
     lineChart($('#adm-pl-trend'), {
       labels: B.labels, tips: B.longs, col: cap(B.word), fmt: n, kind: 'int', h: 240, ends: true, label: 'Interés por plan',
       series: group.map(([o, i], k) => ({ name: o.name.replace(/^Plan |^Automatización /, ''), values: curSeries((l) => l.filter((s) => s.seen.has(i)).length, P), cls: 's' + (k + 1) })),
-      empty: 'Aún nadie abrió planes y precios en este periodo.'
+      empty: 'Aún nadie abrió paquetes y precios en este periodo.'
     });
 
     const rows = offerRows(cur);
@@ -1887,9 +1956,11 @@
     }
     sectionTable($('#adm-pl-slides'), sectionRows(P, 'p:', SLIDES, 'exitP'), P.length);
     $('#adm-pl-clicks').innerHTML = bars(countBy(P.flatMap((s) => s.contacts.filter((c) => c.startsWith('p:')).map(strip)),
-      (x) => x.replace(/^WhatsApp · /, '').replace(/^Vi los planes y (me interesa )?/, '').replace(/^\w/, (m) => m.toUpperCase())).slice(0, 8));
+      (x) => x.replace(/^Llamada · (.+)$/, (m, id) => 'Llamada (desde ' + (NAMES.get('p:' + id) || id) + ')')
+        .replace(/^WhatsApp · /, '').replace(/^Vi los (?:planes|paquetes) y (me interesa )?/, '').replace(/^\w/, (m) => m.toUpperCase())).slice(0, 8));
     const navLabel = (x) => {
       x = strip(x);
+      if (x.startsWith('Guía en audio · ')) return x === 'Guía en audio · Empezó' ? 'Escuchó la guía en audio' : '';
       const m = x.match(/^Demo · ([\w-]+) · /);
       if (m) { const o = OFFERS.find((of) => of.ids.includes(m[1])); return 'Tocó la demo de ' + (o ? o.name : m[1]); }
       if (x.startsWith('Resumen · ')) return 'Saltó desde el resumen a ' + x.slice(10);
@@ -1903,6 +1974,69 @@
     if (!b) return;
     plGroup = b.dataset.group;
     renderPlanes();
+  });
+
+  // ---------- GUÍA EN AUDIO (flotantes.js, en las dos páginas) ----------
+  const started = (l, k) => l.filter((s) => (k ? s.guide[k].has('Empezó') : s.heard));
+  const usedGuide = (s, label) => s.guide.h.has(label) || s.guide.p.has(label);
+  // cuánto de la guía escuchó una visita: hasta la parte más lejana a la que llegó (1 = completa)
+  function guideShare(s) {
+    const parts = ['h', 'p'].filter((k) => s.guide[k].has('Empezó')).map((k) => {
+      if (s.guide[k].has('Terminó')) return 1;
+      let far = 0;
+      GUIDE[k].forEach((t, i) => { if (s.guide[k].has(t)) far = i + 1; });
+      return far / GUIDE[k].length;
+    });
+    return parts.length ? Math.max(...parts) : 0;
+  }
+  function renderGuia() {
+    const G = started(cur), Gp = started(prev), N = cur.filter((s) => !s.heard);
+    const conv = (l) => rate(l.filter((s) => s.contact).length, l.length);
+    const done = G.filter((s) => usedGuide(s, 'Terminó'));
+    kpis($('#adm-gu-kpis'), [
+      K('La escuchan', n(G.length), delta(G.length, Gp.length), pct(G.length, cur.length) + '% de las visitas', curSeries((l) => started(l).length)),
+      K('La terminan', G.length ? pct(done.length, G.length) + '%' : '—', '', n(done.length) + (done.length === 1 ? ' visita la escuchó completa' : ' visitas la escucharon completa')),
+      K('Cuánto escuchan', G.length ? Math.round(mean(G.map(guideShare)) * 100) + '%' : '—', '', 'de la guía, en promedio'),
+      K('Te escriben', G.length ? p1(conv(G)) : '—', '', N.length ? 'sin la guía: ' + p1(conv(N)) : 'de quienes la escuchan')
+    ]);
+
+    // hasta dónde llegan, en la guía de la página elegida
+    const k = guPage, Gk = started(cur, k);
+    $$('#adm-gu-page button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.gpage === k)));
+    $('#adm-gu-funnel-sub').textContent = '% de quienes la empiezan en ' + (k === 'h' ? 'la web principal' : 'paquetes y precios');
+    funnel($('#adm-gu-funnel'), [
+      ['La empiezan', Gk.length],
+      ...GUIDE[k].slice(1).map((t) => ['Llegan a ' + t, Gk.filter((s) => s.guide[k].has(t)).length]),
+      ['La terminan', Gk.filter((s) => s.guide[k].has('Terminó')).length]
+    ]);
+
+    // quienes la escuchan frente a quienes no, en esa misma página
+    const onPage = cur.filter((s) => (k === 'h' ? s.home : s.planes));
+    const yes = onPage.filter((s) => s.guide[k].has('Empezó')), no = onPage.filter((s) => !s.guide[k].has('Empezó'));
+    const row = (name, l) => [name, n(l.length), dur(mean(l.map((s) => s.dur).filter(Boolean))), pct(l.filter((s) => s.seesPlans).length, l.length) + '%', p1(conv(l))];
+    $('#adm-gu-compare').innerHTML = onPage.length
+      ? `<p class="adm-big"><b>${yes.length ? p1(conv(yes)) : '—'}</b> de quienes la escuchan te escribe</p>`
+        + mini(['', 'Visitas', 'Tiempo', 'Ven los paquetes', 'Te escriben'], [row('Con la guía', yes), row('Sin la guía', no)])
+        + '<p class="adm-version">Quien escucha la guía suele venir con más interés: tómalo como una pista, no como una prueba.</p>'
+      : `<p class="adm-empty">${EMPTY}</p>`;
+
+    $('#adm-gu-trend-sub').textContent = 'visitas que empiezan la guía, por ' + B.word;
+    lineChart($('#adm-gu-trend'), {
+      labels: B.labels, tips: B.longs, col: cap(B.word), fmt: n, kind: 'int', h: 240, ends: true, label: 'Visitas que escuchan la guía',
+      series: [{ name: 'Web principal', values: curSeries((l) => started(l, 'h').length), cls: 's1' }, { name: 'Paquetes', values: curSeries((l) => started(l, 'p').length), cls: 's2' }],
+      empty: 'Aún nadie escuchó la guía en este periodo.'
+    });
+    const used = (label) => G.filter((s) => usedGuide(s, label)).length;
+    $('#adm-gu-controls').innerHTML = G.length ? bars([
+      ['La escuchan completa', done.length], ['La pausan', used('la pausó')], ['Saltan con «Siguiente»', used('usó Siguiente')],
+      ['Vuelven con «Anterior»', used('usó Anterior')], ['La cierran antes del final', used('la cerró')]
+    ], G.length) : bars([]);
+  }
+  $('#adm-gu-page').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-gpage]');
+    if (!b) return;
+    guPage = b.dataset.gpage;
+    renderGuia();
   });
 
   // ---------- ORIGEN ----------
@@ -1976,7 +2110,7 @@
     if (mins < 60) return `Hace ${mins} min`;
     return d.toLocaleString('es-CO', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
   };
-  const pageName = (s) => (s.home && s.planes ? 'Ambas' : s.planes ? 'Planes y precios' : 'Principal');
+  const pageName = (s) => (s.home && s.planes ? 'Ambas' : s.planes ? 'Paquetes y precios' : 'Principal');
   const result = (s) => {
     if (s.contact) {
       const o = [...s.intents].map((i) => OFFERS[i].name)[0], l = leadBySession.get(s.id);
@@ -1986,8 +2120,8 @@
   };
   function filtered() {
     const page = $('#vf-page').value, src = $('#vf-source').value, dev = $('#vf-device').value;
-    const onlyC = $('#vf-contact').checked, onlyB = $('#vf-back').checked;
-    return cur.filter((s) => (!page || (page === 'planes' ? s.planes : s.home)) && (!src || s.src === src) && (!dev || s.device === dev) && (!onlyC || s.contact) && (!onlyB || s.back));
+    const onlyC = $('#vf-contact').checked, onlyB = $('#vf-back').checked, onlyG = $('#vf-guide').checked;
+    return cur.filter((s) => (!page || (page === 'planes' ? s.planes : s.home)) && (!src || s.src === src) && (!dev || s.device === dev) && (!onlyC || s.contact) && (!onlyB || s.back) && (!onlyG || s.heard));
   }
   function renderVisitas() {
     const sel = $('#vf-source'), keep = sel.value;
@@ -2030,7 +2164,7 @@
     tr.classList.add('is-open');
   });
   $('#adm-visits').addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.vrow')) { e.preventDefault(); e.target.click(); } });
-  ['#vf-page', '#vf-source', '#vf-device', '#vf-contact', '#vf-back'].forEach((id) => $(id).addEventListener('change', () => { shown = 30; renderVisitas(); }));
+  ['#vf-page', '#vf-source', '#vf-device', '#vf-contact', '#vf-back', '#vf-guide'].forEach((id) => $(id).addEventListener('change', () => { shown = 30; renderVisitas(); }));
   $('#adm-vi-more').addEventListener('click', () => { shown += 30; renderVisitas(); });
 
   // descargar para Excel: en Contactos, los contactos; en las demás, las visitas (con los filtros de Visitas)
@@ -2066,12 +2200,12 @@
       return;
     }
     download(`gotia-visitas-${days === 1 ? 'hoy' : days + '-dias'}-${stamp}.csv`,
-      ['fecha', 'hora', 'pagina', 'origen', 'sitio', 'utm_source', 'utm_medium', 'utm_campaign', 'dispositivo', 'idioma', 'pais', 'version', 'visita_n', 'nueva', 'tiempo_activo_s', 'bajo_pct', 'carga_ms', 'secciones', 'clics', 'interacciones', 'te_escribio', 'plan_pedido'],
+      ['fecha', 'hora', 'pagina', 'origen', 'sitio', 'utm_source', 'utm_medium', 'utm_campaign', 'dispositivo', 'idioma', 'pais', 'version', 'visita_n', 'nueva', 'tiempo_activo_s', 'bajo_pct', 'carga_ms', 'secciones', 'clics', 'interacciones', 'guia_en_audio', 'te_escribio', 'plan_pedido'],
       filtered().map((s) => [
         s.start.toLocaleDateString('es-CO'), s.start.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' }), pageName(s), s.src, s.referrer,
         s.utm_source, s.utm_medium, s.utm_campaign, s.device, s.lang, country(s.tz), s.planes && !s.home ? '' : s.is3d ? '3D' : 'Esencial',
         s.visitNo || '', s.back ? 'no' : 'sí', s.dur, s.scroll, s.load || '', s.path.map((k) => NAMES.get(k) || strip(k)).join(' > '),
-        s.clicks.map(strip).join(' | '), s.interacts.map(strip).join(' | '), s.contact ? s.channel : '', [...s.intents].map((i) => OFFERS[i].name).join(' | ')
+        s.clicks.map(strip).join(' | '), s.interacts.map(strip).join(' | '), s.heard ? 'escuchó el ' + Math.round(guideShare(s) * 100) + '%' : '', s.contact ? s.channel : '', [...s.intents].map((i) => OFFERS[i].name).join(' | ')
       ]));
   });
 
@@ -2132,6 +2266,27 @@
   });
   setTab(location.hash.slice(1));
 
+  // lo esencial o todo: "Ver todo" arriba, o "Ver más detalle" al final de cada sección
+  function setFull(on, save) {
+    full = on;
+    $('#adm').classList.toggle('is-full', on);
+    $('#adm-full').checked = on;
+    $$('[data-extra-toggle]').forEach((b) => { b.textContent = on ? 'Ver menos detalle' : 'Ver más detalle'; b.setAttribute('aria-expanded', String(on)); });
+    if (save) try { localStorage.setItem('gotia-adm-full', on ? '1' : '0'); } catch (e) {}
+    // las gráficas que aparecen se dibujan ya, a su tamaño
+    $$(`[data-pane="${tab}"] .adm-lc`).forEach((el) => { const c = charts.get(el); if (c && c.w !== Math.round(el.clientWidth)) draw(el); });
+  }
+  $('#adm-full').addEventListener('change', (e) => setFull(e.target.checked, true));
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-extra-toggle]');
+    if (!b) return;
+    const pane = b.closest('.adm-pane'), top = pane && pane.getBoundingClientRect().top;
+    setFull(!full, true);
+    // al cerrar el detalle, que no quede perdido más abajo
+    if (!full && pane) scrollTo({ top: Math.max(0, scrollY + top - 90), behavior: 'smooth' });
+  });
+  setFull(full);
+
   // qué ver en las gráficas
   $('#adm-kpis').addEventListener('click', (e) => {
     const b = e.target.closest('[data-metric]');
@@ -2175,6 +2330,7 @@
     renderContactos();
     renderWeb();
     renderPlanes();
+    renderGuia();
     renderOrigen();
     renderAudiencia();
     renderVisitas();
