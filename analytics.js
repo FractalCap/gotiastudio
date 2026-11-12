@@ -18,12 +18,14 @@
   if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
 
   const endpoint = cfg.url.replace(/\/+$/, '') + '/rest/v1/events';
+  // la clave nueva de Supabase (sb_publishable_…) va solo en "apikey"; la antigua (eyJ…, deja de
+  // funcionar a fines de 2026) también va como Bearer
   const headers = {
     apikey: cfg.anonKey,
-    Authorization: 'Bearer ' + cfg.anonKey,
     'Content-Type': 'application/json',
     Prefer: 'return=minimal'
   };
+  if (/^eyJ/.test(cfg.anonKey)) headers.Authorization = 'Bearer ' + cfg.anonKey;
   const rid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 12));
   const cut = (s, n) => (s || '').toString().replace(/\s+/g, ' ').trim().slice(0, n);
   const get = (storage, key) => { try { return storage.getItem(key); } catch (e) { return null; } };

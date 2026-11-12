@@ -1331,10 +1331,12 @@
       p_link: d.enlace.trim() || null, p_message: d.mensaje.trim() || null,
       p_session: get(sessionStorage, 'gotia-sid'), p_visitor: get(localStorage, 'gotia-vid'), p_page: location.pathname
     };
+    // la clave nueva (sb_publishable_…) va solo en "apikey"; la antigua (eyJ…) también como Bearer
+    const headers = { apikey: cfg.anonKey, 'Content-Type': 'application/json' };
+    if (/^eyJ/.test(cfg.anonKey)) headers.Authorization = 'Bearer ' + cfg.anonKey;
     try {
       fetch(cfg.url.replace(/\/+$/, '') + '/rest/v1/rpc/submit_contact', {
-        method: 'POST', keepalive: true, body: JSON.stringify(body),
-        headers: { apikey: cfg.anonKey, Authorization: 'Bearer ' + cfg.anonKey, 'Content-Type': 'application/json' }
+        method: 'POST', keepalive: true, body: JSON.stringify(body), headers
       }).catch(() => {});
     } catch (e) {}
   };
