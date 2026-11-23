@@ -28,12 +28,20 @@
     a.removeAttribute('data-todo');
   };
 
-  document.querySelectorAll('[data-wa]').forEach((a) => {
-    const msg = a.dataset.wa || 'Hola Gotia Studio 👋 Quiero más información';
-    // sin número todavía: el botón no lleva a ningún sitio (main.js lo deja quieto)
-    if (!num) { a.setAttribute('data-todo', 'whatsapp'); return; }
-    open(a, `https://wa.me/${num}?text=${encodeURIComponent(msg)}`);
-  });
+  // data-wa-en: el mismo mensaje en inglés, cuando la web está en inglés (html.lang-en).
+  // Si el visitante cambia de idioma, idioma.js avisa con "gotia:lang" y los enlaces se rehacen.
+  const waLinks = [...document.querySelectorAll('[data-wa]')];
+  const paintWa = () => {
+    const en = document.documentElement.classList.contains('lang-en');
+    waLinks.forEach((a) => {
+      const msg = (en && a.dataset.waEn) || a.dataset.wa || 'Hola Gotia Studio 👋 Quiero más información';
+      // sin número todavía: el botón no lleva a ningún sitio (main.js lo deja quieto)
+      if (!num) { a.setAttribute('data-todo', 'whatsapp'); return; }
+      open(a, `https://wa.me/${num}?text=${encodeURIComponent(msg)}`);
+    });
+  };
+  paintWa();
+  document.addEventListener('gotia:lang', paintWa);
 
   document.querySelectorAll('[data-ig]').forEach((a) => {
     if (!ig) { a.setAttribute('data-todo', 'instagram'); return; }

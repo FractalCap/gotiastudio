@@ -21,7 +21,7 @@
   const root = document.documentElement;
   let sb = null, days = 7, timer = 0, busy = false, rpc = null, cur = [], prev = [], shown = 30;
   let W = null, B = null, compare = true, tab = 'resumen';
-  let mainMetric = 'visits', histMetric = 'visits', goalMetric = 'contacts', plGroup = 'Páginas web';
+  let mainMetric = 'visits', histMetric = 'visits', goalMetric = 'contacts', plGroup = 'Packs';
   let daily = null, dailyAt = 0, dailyOk = null, leads = [], leadsOk = null, goals = {}, goalsOk = null;
   let ldShown = 30, rt = null, rtOn = false, leadBySession = new Map(), guPage = 'h', full = false;
   const openLeads = new Set(), live = new Map(), feed = [];
@@ -29,19 +29,30 @@
   try { full = localStorage.getItem('gotia-adm-full') === '1'; } catch (e) {}
 
   // ---------- nombres para mostrar ----------
+  // las secciones de index.html y paquetes.html desde nov. 2026 (lanzamiento), en el orden de la página
   const SECTIONS = [
-    ['top', 'Portada'], ['estudio', 'Manifiesto'], ['servicios', 'Servicios'], ['automatizacion', 'Automatización'],
-    ['ecosistema', 'Ecosistema'], ['panel', 'Panel'], ['datos', 'Datos'], ['proceso', 'Proceso'],
-    ['packs', 'Paquetes'], ['faq', 'Preguntas'], ['equipo', 'Equipo'], ['contacto', 'Contacto']
+    ['top', 'Portada'], ['resultados', 'Resultados'], ['como-funciona', 'Cómo funciona'],
+    ['precios', 'Precio'], ['faq', 'Preguntas'], ['contacto', 'Contacto']
   ];
   const SLIDES = [
+    ['top', 'Portada'], ['planes', 'Los 4 planes'], ['plan-lanzamiento', 'Pack Lanzamiento'], ['plan-reservas', 'Pack con Reservas'],
+    ['plan-ya-tengo', 'Ya tengo página'], ['plan-aceleradora', 'Aceleradora'], ['plan-anual', 'Año completo'], ['reglas', 'Las reglas'], ['como-se-paga', 'Cómo se paga'],
+    ['contacto', 'Escríbenos']
+  ];
+  // las de antes (hasta nov. 2026): solo para nombrar las visitas viejas
+  const OLD_SECTIONS = [
+    ['estudio', 'Manifiesto'], ['servicios', 'Servicios'], ['automatizacion', 'Automatización'],
+    ['ecosistema', 'Ecosistema'], ['panel', 'Panel'], ['datos', 'Datos'], ['proceso', 'Proceso'],
+    ['packs', 'Paquetes'], ['equipo', 'Equipo']
+  ];
+  const OLD_SLIDES = [
     ['top', 'Portada'], ['auto-inicio', 'Automatizar · 2 pasos'], ['casos', 'Casos de éxito'], ['paso-1', 'Paso 1 · Tu paquete'],
     ['ejemplo-presencia', 'Presencia · recorrido'], ['plan-presencia', 'Presencia · qué incluye'],
     ['ejemplo-automatico', 'Automático · recorrido'], ['plan-automatico', 'Automático · qué incluye'],
     ['ejemplo-negocio', 'Negocio · recorrido'], ['plan-negocio', 'Negocio · qué incluye'],
     ['ejemplo-emprende', 'Emprende · recorrido'], ['plan-emprende', 'Emprende · qué incluye'], ['comparar', 'Comparar los paquetes'],
     ['paso-2', 'Paso 2 · Tu mensualidad'], ['cuidado', 'Cuidado'], ['cuidado-automatico', 'Cuidado Automático'], ['cuidado-negocio', 'Cuidado Negocio'],
-    ['reglas', 'Reglas y Crecimiento'], ['planes-marketing', 'Vender más · planes'], ['recorrido-marketing', 'Vender más · recorrido'], ['plan-visible', 'Visible'], ['plan-redes', 'Redes'], ['plan-crecimiento', 'Crecimiento'], ['marketing-reglas', 'Vender más · reglas'], ['planes-datos', 'Datos · paquetes'], ['recorrido-datos', 'Datos · recorrido'], ['analista-datos', 'Datos · tu analista'], ['plan-mide', 'Mide'], ['plan-une', 'Une'], ['plan-decide', 'Decide'], ['datos-reglas', 'Datos · reglas'], ['extras', 'Extras'], ['como-se-paga', 'Cómo se paga'], ['contacto', 'Escríbenos']
+    ['reglas', 'Reglas y Crecimiento'], ['planes-marketing', 'Vender más · planes'], ['recorrido-marketing', 'Vender más · recorrido'], ['plan-visible', 'Visible'], ['plan-redes', 'Redes'], ['plan-crecimiento', 'Crecimiento'], ['marketing-reglas', 'Vender más · reglas'], ['planes-datos', 'Datos · paquetes'], ['recorrido-datos', 'Datos · recorrido'], ['analista-datos', 'Datos · tu analista'], ['plan-mide', 'Mide'], ['plan-une', 'Une'], ['plan-decide', 'Decide'], ['datos-reglas', 'Datos · reglas'], ['extras', 'Extras']
   ];
   // la guía en audio (flotantes.js): las partes que se cuentan en cada página, en orden ("Inicio" es la primera)
   const GUIDE = {
@@ -51,6 +62,14 @@
   const GUIDE_RE = /^([hp]):Guía en audio · (.+)$/;
   // price: el precio de paquetes.html, para sugerir el valor de cada venta
   const OFFERS = [
+    { name: 'Pack Lanzamiento', group: 'Packs', price: 890000, ids: ['plan-lanzamiento'], re: /Pack Lanzamiento/i },
+    { name: 'Pack con Reservas', group: 'Packs', price: 1990000, ids: ['plan-reservas'], re: /Pack con Reservas/i },
+    { name: 'Ya tengo página', group: 'Packs', price: 300000, ids: ['plan-ya-tengo'], re: /ya tengo p[aá]gina|otro proveedor y quiero arrancar/i },
+    { name: 'Aceleradora', group: 'Packs', price: 3500000, ids: ['plan-aceleradora'], re: /Aceleradora/i },
+    // Año completo (nov. 2026): el Pack Lanzamiento + 12 meses en un pago. Tiene 3 precios según la mensualidad
+    // ($9.290.000, $11.090.000 o $15.290.000): aquí va el menor; en cada contacto se puede cambiar el valor
+    { name: 'Año completo', group: 'Packs', price: 9290000, ids: ['plan-anual'], re: /A[ñn]o completo/i },
+    // el catálogo de antes (hasta nov. 2026)
     { name: 'Presencia', group: 'Paquetes', price: 1390000, ids: ['ejemplo-presencia', 'plan-presencia'], re: /\bpaquete Presencia\b/i },
     { name: 'Automático', group: 'Paquetes', price: 1790000, ids: ['ejemplo-automatico', 'plan-automatico'], re: /\bpaquete Autom[aá]tico\b/i },
     { name: 'Negocio', group: 'Paquetes', price: 3490000, ids: ['ejemplo-negocio', 'plan-negocio'], re: /\bpaquete Negocio\b/i },
@@ -64,14 +83,16 @@
     { name: 'Mide', group: 'Datos', price: 390000, ids: ['plan-mide'], re: /\bpaquete Mide\b/i },
     { name: 'Une', group: 'Datos', price: 990000, ids: ['plan-une'], re: /\bpaquete Une\b/i },
     { name: 'Decide', group: 'Datos', price: 1690000, ids: ['plan-decide'], re: /\bpaquete Decide\b/i },
-    { name: 'Automatizar otra página', group: 'Extras', price: 490000, ids: ['extras'], re: /otro proveedor/i },
+    { name: 'Automatizar otra página', group: 'Extras', price: 490000, ids: ['extras'], re: /otro proveedor(?! y quiero arrancar)/i },
     { name: 'Proyecto a medida', group: 'Extras', price: 8900000, ids: ['extras'], re: /proyecto a medida/i },
     // se piden desde los botones de WhatsApp de la web principal (no tienen pantalla en paquetes y precios)
     { name: 'Panel de administrador', group: 'Servicios de la web principal', price: 0, ids: [], re: /panel de administrador/i },
     { name: 'Datos verificables', group: 'Servicios de la web principal', price: 0, ids: [], re: /datos verificables/i }
   ];
-  const WEB_PLANS = [0, 1, 2, 3, 4];
-  const NAMES = new Map([...SECTIONS.map(([id, t]) => ['h:' + id, t]), ...SLIDES.map(([id, t]) => ['p:' + id, t])]);
+  // "ven un plan": los 4 de hoy y los paquetes de página de antes
+  const WEB_PLANS = ['Pack Lanzamiento', 'Pack con Reservas', 'Ya tengo página', 'Aceleradora', 'Año completo', 'Presencia', 'Automático', 'Negocio', 'Emprende']
+    .map((name) => OFFERS.findIndex((o) => o.name === name));
+  const NAMES = new Map([...[...OLD_SECTIONS, ...SECTIONS].map(([id, t]) => ['h:' + id, t]), ...[...OLD_SLIDES, ...SLIDES].map(([id, t]) => ['p:' + id, t])]);
   const CONTACT = /^(WhatsApp|Instagram|Correo|Formulario|Llamada)/;
   const WEEK = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   const WEEK_PL = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábados', 'domingos'];
@@ -474,33 +495,26 @@
     const DEV = [[{ device: 'móvil', q: 0.9, load: [1500, 4400] }, 63], [{ device: 'computador', q: 1.15, load: [700, 2100] }, 31], [{ device: 'tablet', q: 1, load: [1100, 3000] }, 6]];
     const TZ = [['America/Bogota', 86], ['America/Mexico_City', 4], ['America/New_York', 3], ['America/Lima', 2], ['Europe/Madrid', 2], ['America/Panama', 1.5], ['America/Santiago', 1.5]];
     const LANG = [['es-CO', 72], ['es-419', 12], ['es', 8], ['en-US', 5], ['es-MX', 3]];
-    const HOME_STAY = { top: 7, estudio: 6, servicios: 16, automatizacion: 14, ecosistema: 11, panel: 18, datos: 14, proceso: 9, packs: 24, faq: 12, equipo: 7, contacto: 10 };
-    const HOME_DROP = { ecosistema: 0.1, datos: 0.05, proceso: 0.06, equipo: 0.04 };
-    const PL_STAY = (id) => (id.startsWith('ejemplo-') ? 22 : /^plan-/.test(id) ? 15 : /^cuidado/.test(id) ? 12 : 6);
-    const TABS_DEMO = {
-      'ejemplo-presencia': ['Secciones', 'Servicios', 'Nosotros', 'Mapa'],
-      'ejemplo-automatico': ['Responde', 'Reservas', 'Avisos', 'Clientes'],
-      'ejemplo-negocio': ['Tienda', 'Pagos', 'Catálogo', 'Ventas'],
-      'ejemplo-emprende': ['Tu dirección', 'Tu negocio', 'WhatsApp', 'Tus redes']
-    };
-    const FAQ = [['¿Cuánto cuesta mi página?', 55], ['¿Cuánto tarda?', 25], ['¿Hay pagos mensuales?', 20]];
-    const TUTOS = [
-      ['servicios', 'Una web que trabaja por ti', ['Te escriben', 'Responde', 'Te avisa']],
-      ['servicios', 'Aparece en Google', ['Te buscan', 'En el mapa', 'Te escriben']],
-      ['automatizacion', 'Tu web atiende y te avisa', ['Te escriben', 'Responde', 'Te avisa']],
-      ['panel', 'Tenlo en tu web', ['Lo armamos', 'Lo usas', 'Mejoras']],
-      ['datos', 'Cuánta gente llega y cuántos compran', ['Llegan', 'Compran', 'Cada semana']]
-    ];
+    const HOME_STAY = { top: 6, resultados: 10, 'como-funciona': 12, precios: 20, faq: 12, contacto: 8 };
+    const HOME_DROP = { 'como-funciona': 0.04, faq: 0.05 };
+    const PL_STAY = (id) => (/^plan-/.test(id) ? 16 : id === 'planes' ? 3 : 7);
+    const TABS_DEMO = {};   // paquetes.html ya no tiene ejemplos animados
+    const FAQ = [['¿Cuánto debo invertir en pauta?', 30], ['¿Y si ya tengo página?', 22], ['¿Qué pasa si no sigo después de los 14 días?', 20], ['¿Prometen que me vuelvo viral?', 16], ['¿Usan inteligencia artificial?', 12]];
+    const TUTOS = [];       // el inicio ya no tiene tutoriales
     const ECO = [['Google', 30], ['Instagram', 26], ['TikTok', 14], ['Facebook', 8], ['Automatizaciones', 10], ['Panel de administrador', 6], ['Datos verificables', 4], ['Contenido con IA', 6]];
     const HOME_CONTACT = [
-      ['WhatsApp · Quiero conocer los paquetes y precios', 30], ['WhatsApp · Quiero el precio y la información del paquete Automático', 14],
-      ['WhatsApp · Quiero el precio y la información del paquete Presencia', 10], ['WhatsApp · Quiero el precio y la información del paquete Negocio', 7],
-      ['WhatsApp · Quiero el precio y la información del paquete Emprende', 6],
-      ['WhatsApp · Quiero saber qué paquete me conviene y su precio', 8], ['WhatsApp · Quiero información y precio del paquete Automático', 4],
-      ['WhatsApp · Quiero saber qué paquete le conviene a mi negocio', 6], ['WhatsApp · Quiero el panel de administrador para mi web', 3],
-      ['WhatsApp · Quiero datos verificables en mi negocio', 2], ['Instagram', 12], ['Formulario enviado', 6], ['Correo', 3]
+      ['WhatsApp · Hola, quiero el Pack Lanzamiento', 40], ['WhatsApp · Hola, quiero saber cómo lograron sus resultados en video', 14],
+      ['WhatsApp · Hola, quiero lanzar mi negocio', 10], ['WhatsApp · Hola, tengo una pregunta sobre el Pack Lanzamiento', 8],
+      ['WhatsApp · Hola, vi la web y tengo una pregunta', 8], ['WhatsApp · Hola, mi página la hizo otro proveedor y quiero arrancar', 5],
+      ['WhatsApp · Hola, quiero el Año completo', 6],
+      ['Instagram', 10], ['Correo', 2]
     ];
     const PL_WA = {
+      'Pack Lanzamiento': 'Hola, quiero el Pack Lanzamiento',
+      'Pack con Reservas': 'Hola, quiero el Pack con Reservas',
+      'Ya tengo página': 'Hola, ya tengo página con Gotiastudio y quiero arrancar',
+      'Aceleradora': 'Hola, quiero el plan Aceleradora',
+      'Año completo': 'Hola, quiero el Año completo',
       'Presencia': 'Vi los paquetes y me interesa el paquete Presencia ($1.390.000)',
       'Automático': 'Vi los paquetes y me interesa el paquete Automático ($1.790.000)',
       'Negocio': 'Vi los paquetes y me interesa el paquete Negocio ($3.490.000)',
@@ -517,7 +531,7 @@
       'Automatizar otra página': 'Mi página la hizo otro proveedor y quiero automatizarla',
       'Proyecto a medida': 'Quiero una cotización de un proyecto a medida (web, redes y Google Ads)'
     };
-    const PL_INTENT = { 'Presencia': 1.3, 'Automático': 1.9, 'Negocio': 1.1, 'Emprende': 1.2, 'Cuidado': 0.7, 'Cuidado Automático': 0.6, 'Cuidado Negocio': 0.5, 'Visible': 0.6, 'Redes': 0.7, 'Crecimiento': 0.4, 'Mide': 0.5, 'Une': 0.6, 'Decide': 0.3, 'Automatizar otra página': 0.5, 'Proyecto a medida': 0.15 };
+    const PL_INTENT = { 'Pack Lanzamiento': 2.2, 'Pack con Reservas': 1.1, 'Ya tengo página': 0.6, 'Aceleradora': 0.4, 'Año completo': 0.5, 'Presencia': 1.3, 'Automático': 1.9, 'Negocio': 1.1, 'Emprende': 1.2, 'Cuidado': 0.7, 'Cuidado Automático': 0.6, 'Cuidado Negocio': 0.5, 'Visible': 0.6, 'Redes': 0.7, 'Crecimiento': 0.4, 'Mide': 0.5, 'Une': 0.6, 'Decide': 0.3, 'Automatizar otra página': 0.5, 'Proyecto a medida': 0.15 };
 
     const out = [], visitors = [], visits = new Map(), now = Date.now(), today = startOf(new Date());
     const make = (t, opts) => {
@@ -528,8 +542,8 @@
       if (!back) visitors.push(visitor);
       const vn = (visits.get(visitor) || 0) + 1;
       visits.set(visitor, vn);
-      const act3d = !planes && rnd() < 0.16, direct3d = !planes && !act3d && rnd() < 0.03;
-      const guide = !opts.live && rnd() < (planes ? 0.1 : 0.13);
+      const act3d = false, direct3d = false;   // desde nov. 2026 no hay versión 3D
+      const guide = false;   // desde nov. 2026 no hay guía en audio
       const q = ref.q * dev.q * (back ? 1.25 : 1) * (act3d || direct3d ? 1.2 : 1) * (guide ? 1.2 : 1) * (0.75 + rnd() * 0.5);
       const pre = planes ? 'p:' : 'h:';
       const ids = planes ? SLIDES.map((s) => s[0]) : SECTIONS.map((s) => s[0]);
@@ -563,23 +577,20 @@
         if (has('panel') && rnd() < 0.14) interacts.push('h:Probó el panel de ejemplo');
         if (has('faq') && rnd() < 0.5) interacts.push('h:Pregunta · ' + pick(FAQ));
         if (has('faq') && rnd() < 0.15) interacts.push('h:Pregunta · ' + pick(FAQ));
-        if (rnd() < 0.08) interacts.push('h:Menú · Paquetes');
+        if (rnd() < 0.08) interacts.push('h:Menú · Precio');
         if (rnd() < 0.05) interacts.push('h:Cambió a modo negro');
         if (!act3d && !direct3d && rnd() < 0.12) interacts.push('h:Aviso 3D · lo cerró');
         if (act3d) clicks.push(rnd() < 0.4 ? 'h:Activó la versión 3D (desde el aviso)' : 'h:Activó la versión 3D');
-        const pc = (0.012 + (has('packs') ? 0.035 : 0) + (has('contacto') ? 0.05 : 0) + (has('faq') ? 0.01 : 0)) * q * q * (dev.device === 'móvil' ? 0.7 : 1.25);
+        const pc = (0.012 + (has('precios') ? 0.035 : 0) + (has('contacto') ? 0.05 : 0) + (has('faq') ? 0.01 : 0)) * q * q * (dev.device === 'móvil' ? 0.7 : 1.25);
         if (path.length > 1 && rnd() < pc) clicks.push('h:' + pick(HOME_CONTACT));
       } else {
         for (const id in TABS_DEMO) if (has(id) && rnd() < 0.32 * q) interacts.push('p:Demo · ' + id + ' · ' + TABS_DEMO[id][1 + Math.floor(rnd() * 3)]);
-        if (rnd() < 0.22) interacts.push('p:Resumen · ' + pick([['Automático', 4], ['Negocio', 2], ['Presencia', 2], ['Emprende', 1.4]]));
-        if (rnd() < 0.12) interacts.push('p:Menú · ' + pick([['Tu paquete', 3], ['Tu mensualidad', 2]]));
-        if (rnd() < 0.1) interacts.push('p:Puntos · comparar');
-        if (has('casos') && rnd() < 0.035 * q) clicks.push(rnd() < 0.75 ? 'p:WhatsApp · Quiero conocer sus casos de éxito más recientes' : 'p:Llamada · casos');
+        if (rnd() < 0.12) interacts.push('p:Menú · ' + pick([['Planes', 3], ['Reglas', 2], ['Cómo se paga', 2]]));
         const seen = OFFERS.filter((o) => o.ids.some(has));
         if (seen.length && rnd() < (0.06 + seen.length * 0.012) * q * q) {
           const o = pick(seen.map((x) => [x, PL_INTENT[x.name] * (1 + x.ids.filter(has).length)]));
           clicks.push('p:WhatsApp · ' + PL_WA[o.name]);
-        } else if (path.length > 1 && rnd() < 0.015 * q) clicks.push('p:WhatsApp · Vi los paquetes y tengo una pregunta');
+        } else if (path.length > 1 && rnd() < 0.015 * q) clicks.push('p:WhatsApp · Hola, vi los planes y tengo una pregunta');
       }
       // la guía en audio: la empiezan, llegan hasta alguna parte y algunos la terminan
       if (guide) {
@@ -813,7 +824,7 @@
       s.channel = s.contact ? strip(contacts[0]).split(' ')[0] : '';
       s.bounce = !s.contact && path.length <= 1 && s.dur < 20;
       s.is3d = s.version === '3d' || clicks.some((c) => /Activó la versión 3D/.test(c));
-      s.seesPlans = s.sec.has('h:packs') || s.planes;
+      s.seesPlans = s.sec.has('h:packs') || s.sec.has('h:precios') || s.planes;
       // la guía en audio de cada página: lo que pasó (Empezó, cada parte, Terminó, la pausó…)
       s.guide = { h: new Set(), p: new Set() };
       interacts.forEach((x) => { const m = x.match(GUIDE_RE); if (m) s.guide[m[1]].add(m[2]); });
@@ -964,7 +975,7 @@
     const hs = (id) => H.filter((s) => s.sec.has('h:' + id)).length;
     funnel($('#adm-funnel-home'), [
       ['Abren la web', H.length], ['Pasan de la portada', H.filter((s) => s.path.filter((x) => x.startsWith('h:')).length > 1).length],
-      ['Ven los servicios', hs('servicios')], ['Llegan a los paquetes', hs('packs')], ['Llegan a contacto', hs('contacto')],
+      ['Ven los resultados', hs('resultados')], ['Ven cómo funciona', hs('como-funciona')], ['Llegan al precio', hs('precios')], ['Llegan al final', hs('contacto')],
       ['Te escriben', H.filter((s) => s.contactH).length]
     ]);
     funnel($('#adm-funnel-planes'), planesSteps(P));
@@ -981,13 +992,11 @@
   function planesSteps(P) {
     const has = (id) => (s) => s.sec.has('p:' + id);
     return [
-      ['Abren paquetes y precios', P.length],
-      ['Ven un plan de página web', P.filter((s) => WEB_PLANS.some((i) => s.seen.has(i))).length],
-      ['Ven un ejemplo animado', P.filter((s) => s.path.some((x) => x.startsWith('p:ejemplo-'))).length],
-      ['Comparan los paquetes', P.filter(has('comparar')).length],
-      ['Ven las mensualidades', P.filter((s) => s.path.some((x) => /^p:(paso-2|cuidado|reglas)/.test(x))).length],
-      ['Ven los paquetes de datos', P.filter((s) => s.path.some((x) => /^p:(planes-datos|recorrido-datos|analista-datos|plan-mide|plan-une|plan-decide)/.test(x))).length],
-      ['Ven los planes de marketing', P.filter((s) => s.path.some((x) => /^p:(planes-marketing|recorrido-marketing|plan-visible|plan-redes|plan-crecimiento)/.test(x))).length],
+      ['Abren los precios', P.length],
+      ['Ven el Pack Lanzamiento', P.filter(has('plan-lanzamiento')).length],
+      ['Ven los 4 planes', P.filter((s) => ['plan-lanzamiento', 'plan-reservas', 'plan-ya-tengo', 'plan-aceleradora'].every((id) => s.sec.has('p:' + id))).length],
+      ['Ven las reglas', P.filter(has('reglas')).length],
+      ['Ven cómo se paga', P.filter(has('como-se-paga')).length],
       ['Llegan al final', P.filter(has('contacto')).length],
       ['Te escriben', P.filter((s) => s.contactP).length]
     ];
@@ -1228,7 +1237,7 @@
       const o = OFFERS.find((x) => x.re.test(e.label));
       return { t, icon: 'chat', ok: true, html: `<b>${esc(reached(e.label.split(' ')[0]))}</b>${o ? ' · ' + esc(o.name) : ''}`, sub: dev };
     }
-    if (e.type === 'section' && /^(packs|contacto|plan-|auto-|comparar)/.test(e.label || '')) return { t, icon: 'go', html: `Está viendo <b>${esc(NAMES.get(pre + e.label) || e.label)}</b>`, sub: dev };
+    if (e.type === 'section' && /^(packs|precios|resultados|contacto|plan-|auto-|comparar)/.test(e.label || '')) return { t, icon: 'go', html: `Está viendo <b>${esc(NAMES.get(pre + e.label) || e.label)}</b>`, sub: dev };
     if (e.type === 'interact' && e.label) {
       const m = e.label.match(/^Demo · ([\w-]+) · /), o = m && OFFERS.find((x) => x.ids.includes(m[1]));
       if (o) return { t, icon: 'tap', html: `Tocó la demo de <b>${esc(o.name)}</b>`, sub: dev };
@@ -1333,12 +1342,12 @@
       const now = new Date().toISOString();
       let e;
       if (r < 0.32) e = { type: 'pageview', page: Math.random() < 0.2 ? '/paquetes.html' : '/', device: dev, ...refs[Math.floor(Math.random() * refs.length)] };
-      else if (r < 0.55) e = { type: 'section', page: '/', label: ['packs', 'contacto'][Math.floor(Math.random() * 2)], device: dev };
-      else if (r < 0.72) e = { type: 'interact', page: '/', label: ['Demo · ejemplo-automatico · Reservas', 'Demo · ejemplo-presencia · Mapa', 'Pregunta · ¿Cuánto cuesta mi página?', 'Tutorial · Una web que trabaja por ti · Responde', 'Planes · ir a Automático', 'Guía en audio · Empezó'][Math.floor(Math.random() * 6)], device: dev };
+      else if (r < 0.55) e = { type: 'section', page: '/', label: ['precios', 'resultados', 'contacto'][Math.floor(Math.random() * 3)], device: dev };
+      else if (r < 0.72) e = { type: 'interact', page: '/', label: ['Pregunta · ¿Cuánto debo invertir en pauta?', 'Pregunta · ¿Y si ya tengo página?', 'Menú · Precio', 'Cambió a modo negro'][Math.floor(Math.random() * 4)], device: dev };
       else if (r < 0.93) e = { type: 'leave', page: '/', duration: Math.round(20 + Math.random() * 200), scroll: Math.round(30 + Math.random() * 70), device: dev };
       else {
-        const o = OFFERS[[0, 1, 2, 2, 3, 6][Math.floor(Math.random() * 6)]], form = Math.random() < 0.4;
-        e = form ? { type: 'click', page: '/', label: 'Formulario enviado', device: dev } : { type: 'click', page: '/paquetes.html', label: 'WhatsApp · Vi los paquetes y me interesa el ' + o.name, device: dev };
+        const o = OFFERS[[0, 0, 0, 1, 2, 3, 4][Math.floor(Math.random() * 7)]], form = false;   // ya no hay formulario
+        e = form ? { type: 'click', page: '/', label: 'Formulario enviado', device: dev } : { type: 'click', page: '/paquetes.html', label: 'WhatsApp · Hola, quiero ' + ({ 'Ya tengo página': 'arrancar, ya tengo página', 'Aceleradora': 'el plan Aceleradora' }[o.name] || 'el ' + o.name), device: dev };
         const l = prepLead({
           id: Date.now(), created_at: now, updated_at: now, closed_at: null, session: 'demo-' + Date.now(), visitor: 'v-demo', channel: form ? 'Formulario' : 'WhatsApp', label: e.label, page: e.page,
           referrer: 'l.instagram.com', device: dev, status: 'nuevo', name: null, contact: null, value: null, next_at: null, notes: null,
@@ -1853,11 +1862,11 @@
     const sp = (fn) => curSeries(fn, H);
     kpis($('#adm-web-kpis'), [
       K('Visitas', n(a.n), delta(a.n, b.n), n(a.people) + ' personas', sp(METRICS.visits.fn)),
-      K('Llegan a los paquetes', pct(reach(H, 'packs'), a.n) + '%', pdelta(rate(reach(H, 'packs'), a.n), rate(reach(Hp, 'packs'), b.n), hp), 'ven la sección Paquetes', sp((l) => (l.length ? reach(l, 'packs') / l.length * 100 : null))),
+      K('Llegan al precio', pct(reach(H, 'precios'), a.n) + '%', pdelta(rate(reach(H, 'precios'), a.n), rate(reach(Hp, 'precios'), b.n), hp), 'ven la sección Precio', sp((l) => (l.length ? reach(l, 'precios') / l.length * 100 : null))),
       K('Te escriben', p1(rate(H.filter((s) => s.contactH).length, a.n)), pdelta(rate(H.filter((s) => s.contactH).length, a.n), rate(Hp.filter((s) => s.contactH).length, b.n), hp), n(H.filter((s) => s.contactH).length) + ' visitas', sp((l) => l.filter((s) => s.contactH).length)),
       K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp(METRICS.time.fn), null, true),
       K('Se van enseguida', pct(a.bounce, a.n) + '%', pdelta(rate(a.bounce, a.n), rate(b.bounce, b.n), hp, true), 'sin pasar de la portada', sp(METRICS.bounce.fn), null, true),
-      K('Llegan al final', pct(reach(H, 'contacto'), a.n) + '%', pdelta(rate(reach(H, 'contacto'), a.n), rate(reach(Hp, 'contacto'), b.n), hp), 'ven Contacto', sp((l) => (l.length ? reach(l, 'contacto') / l.length * 100 : null)), null, true)
+      K('Llegan al final', pct(reach(H, 'contacto'), a.n) + '%', pdelta(rate(reach(H, 'contacto'), a.n), rate(reach(Hp, 'contacto'), b.n), hp), 'ven el cierre', sp((l) => (l.length ? reach(l, 'contacto') / l.length * 100 : null)), null, true)
     ]);
     sectionTable($('#adm-web-sections'), sectionRows(H, 'h:', SECTIONS, 'exitH'), H.length);
 
@@ -1878,7 +1887,7 @@
     const others = countBy(H.flatMap((s) => [...new Set(s.interacts.filter((x) => !/^h:(Pregunta|Tutorial) · /.test(x) && !/^h:Guía en audio · (?!Empezó$)/.test(x)).map((x) => touchLabel(strip(x))))]), (x) => x);
     const touch = [...tutRows, ...others.map(([k, v]) => [k, v, null])].sort((a, b) => b[1] - a[1]).slice(0, 10);
     $('#adm-web-touch').innerHTML = bars(touch, 0, (v, done) => `${n(v)} <small>${done == null ? pct(v, H.length) + '%' : done + '% ve todos los pasos'}</small>`);
-    const homeClicks = countBy(H.flatMap((s) => s.contacts.filter((c) => c.startsWith('h:')).map(strip)), (x) => x.replace(/^WhatsApp · /, 'WhatsApp: ')).slice(0, 8);
+    const homeClicks = countBy(H.flatMap((s) => s.contacts.filter((c) => c.startsWith('h:')).map(strip)), (x) => x.replace(/^WhatsApp · (Hola,?\s*)?/, 'WhatsApp: ')).slice(0, 8);
     $('#adm-web-clicks').innerHTML = bars(homeClicks);
 
     const v3 = H.filter((s) => s.is3d), vl = H.filter((s) => !s.is3d);
@@ -1907,25 +1916,24 @@
     const ask = (l) => l.filter((s) => s.contactP).length;
     const sp = (fn) => curSeries(fn, P);
     kpis($('#adm-pl-kpis'), [
-      K('Visitas', n(a.n), delta(a.n, b.n), 'abrieron paquetes y precios', sp(METRICS.visits.fn)),
-      K('Ven un plan', pct(seePlan(P), a.n) + '%', pdelta(rate(seePlan(P), a.n), rate(seePlan(Pp), b.n), hp), 'al menos un plan de página web', sp((l) => (l.length ? seePlan(l) / l.length * 100 : null))),
+      K('Visitas', n(a.n), delta(a.n, b.n), 'abrieron los precios', sp(METRICS.visits.fn)),
+      K('Ven un plan', pct(seePlan(P), a.n) + '%', pdelta(rate(seePlan(P), a.n), rate(seePlan(Pp), b.n), hp), 'al menos uno de los planes', sp((l) => (l.length ? seePlan(l) / l.length * 100 : null))),
       K('Piden información', p1(rate(ask(P), a.n)), pdelta(rate(ask(P), a.n), rate(ask(Pp), b.n), hp), n(ask(P)) + ' visitas escribieron o llamaron', sp(ask)),
       K('Personas', n(a.people), delta(a.people, b.people), n(a.back) + ' visitas de personas que vuelven', sp(METRICS.people.fn), null, true),
       K('Tiempo activo', dur(a.avg), delta(a.avg, b.avg), 'promedio por visita', sp(METRICS.time.fn), null, true),
-      K('Llegan al final', pct(end(P), a.n) + '%', pdelta(rate(end(P), a.n), rate(end(Pp), b.n), hp), 'ven toda la presentación', sp((l) => (l.length ? end(l) / l.length * 100 : null)), null, true)
+      K('Llegan al final', pct(end(P), a.n) + '%', pdelta(rate(end(P), a.n), rate(end(Pp), b.n), hp), 'llegan a la última línea', sp((l) => (l.length ? end(l) / l.length * 100 : null)), null, true)
     ]);
 
-    // casos de éxito: la pantalla antes de los precios, con WhatsApp y llamada
-    const sawCasos = P.filter((s) => s.sec.has('p:casos'));
-    const casosWa = P.filter((s) => s.contacts.some((c) => /^p:WhatsApp · .*casos de éxito/i.test(c))).length;
-    const casosTel = P.filter((s) => s.contacts.some((c) => c === 'p:Llamada · casos')).length;
-    const onward = sawCasos.filter((s) => s.sec.has('p:paso-1')).length;
-    $('#adm-pl-casos').innerHTML = P.length
-      ? `<p class="adm-big"><b>${pct(sawCasos.length, P.length)}%</b> de quienes abren paquetes la ve</p>`
-        + mini(['', 'Visitas', 'De quienes la ven'], [
-          ['Piden casos por WhatsApp', n(casosWa), pct(casosWa, sawCasos.length) + '%'],
-          ['Te llaman', n(casosTel), pct(casosTel, sawCasos.length) + '%'],
-          ['Siguen a los precios', n(onward), pct(onward, sawCasos.length) + '%']
+    // resultados: los casos reales del inicio (index.html #resultados) y su botón "Pregúntanos cómo lo hicimos"
+    const Hr = cur.filter((s) => s.home);
+    const sawRes = Hr.filter((s) => s.sec.has('h:resultados'));
+    const resWa = Hr.filter((s) => s.contacts.some((c) => /^h:WhatsApp · .*c[oó]mo lograron/i.test(c))).length;
+    const onward = sawRes.filter((s) => s.sec.has('h:precios')).length;
+    $('#adm-pl-casos').innerHTML = Hr.length
+      ? `<p class="adm-big"><b>${pct(sawRes.length, Hr.length)}%</b> de quienes abren la web los ve</p>`
+        + mini(['', 'Visitas', 'De quienes los ven'], [
+          ['Preguntan cómo lo hicieron', n(resWa), pct(resWa, sawRes.length) + '%'],
+          ['Siguen hasta el precio', n(onward), pct(onward, sawRes.length) + '%']
         ])
       : `<p class="adm-empty">${EMPTY}</p>`;
 
@@ -1957,7 +1965,7 @@
     sectionTable($('#adm-pl-slides'), sectionRows(P, 'p:', SLIDES, 'exitP'), P.length);
     $('#adm-pl-clicks').innerHTML = bars(countBy(P.flatMap((s) => s.contacts.filter((c) => c.startsWith('p:')).map(strip)),
       (x) => x.replace(/^Llamada · (.+)$/, (m, id) => 'Llamada (desde ' + (NAMES.get('p:' + id) || id) + ')')
-        .replace(/^WhatsApp · /, '').replace(/^Vi los (?:planes|paquetes) y (me interesa )?/, '').replace(/^\w/, (m) => m.toUpperCase())).slice(0, 8));
+        .replace(/^WhatsApp · /, '').replace(/^Hola,?\s*/i, '').replace(/^Vi los (?:planes|paquetes) y (me interesa )?/, '').replace(/^\w/, (m) => m.toUpperCase())).slice(0, 8));
     const navLabel = (x) => {
       x = strip(x);
       if (x.startsWith('Guía en audio · ')) return x === 'Guía en audio · Empezó' ? 'Escuchó la guía en audio' : '';

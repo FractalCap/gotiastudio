@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-en-title="Gotiastudio — Your website + 10 days of intensive marketing">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Gotiastudio — Más visitas para tu negocio, con datos reales</title>
-  <meta name="description" content="Gotiastudio es un estudio digital premium: páginas web con automatizaciones, catálogos con panel de administrador, posicionamiento en Google y redes sociales, datos verificables semanales y contenido de estudio con IA.">
+  <title>Gotiastudio — Tu página + 10 días de marketing intensivo</title>
+  <meta name="description" content="Te hacemos tu página y en 10 días de marketing la llenamos de visitas y mensajes con videos diarios, en una cuenta de prueba que compartimos contigo. Pack Lanzamiento desde $890.000 + IVA.">
   <meta name="theme-color" content="#eaf3ff">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Gotiastudio — Más visitas para tu negocio, con datos reales">
-  <meta property="og:description" content="Webs con automatizaciones, panel de administrador, Google, redes sociales, datos semanales y contenido de estudio con IA. Todo conectado.">
+  <meta property="og:title" content="Pagas tu página y la lanzamos con 10 días de marketing intensivo">
+  <meta property="og:description" content="Tu página lista en pocos días y 10 días de videos diarios que llevan a tu WhatsApp. Ves los resultados en una cuenta de prueba compartida contigo. Desde $890.000 + IVA.">
   <!-- Vista previa al compartir por WhatsApp. La imagen es og-imagen.jpg,
        que en la carpeta de GitHub queda en la raíz: por eso la ruta completa es /og-imagen.jpg -->
   <link rel="canonical" href="https://gotiastudio.it.com/">
@@ -28,28 +28,34 @@
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
   <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="g-glass-alpha-480.webp" as="image" type="image/webp" fetchpriority="high"
-        imagesrcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" imagesizes="(max-width: 860px) 260px, 30vw">
-  <link rel="stylesheet" href="styles.css?v=93">
+        imagesrcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" imagesizes="(max-width: 860px) 160px, 30vw">
+  <link rel="stylesheet" href="styles.css?v=95">
+  <link rel="stylesheet" href="lanzamiento.css?v=11">
 
   <script>
+    // idioma: español (precios en COP) o inglés (USD). Se aplica antes de pintar, sin destello;
+    // la primera vez se pregunta (html.lang-ask, idioma.js). ?lang=en|es en el enlace lo fija.
+    (function () {
+      var r = document.documentElement, q = null, l = null;
+      r.dataset.esTitle = document.title;
+      try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+      if (q !== 'es' && q !== 'en') q = null;
+      try {
+        if (q) localStorage.setItem('gotia-lang', q);
+        l = q || localStorage.getItem('gotia-lang');
+        if (!l) r.classList.add('lang-ask');
+      } catch (e) { l = q; }
+      if (l === 'en') { r.classList.add('lang-en'); r.lang = 'en'; document.title = r.dataset.enTitle; }
+    })();
+  </script>
+  <script>
+    // Desde nov. 2026 la web tiene una sola versión: la simple y rápida (html.lite), sin pantalla
+    // de carga ni 3D. Con un equipo de gama media-baja, internet lento o ahorro de datos, además
+    // todo quieto y sin desenfoques (html.lowend). La misma prueba está en paquetes.html.
     (function () {
       var root = document.documentElement;
-      root.classList.add('js');
-      // tres versiones de la web:
-      //   · "esencial" (simple y rápida): la que se ve al entrar con un buen equipo (html.lite)
-      //   · "lite": la Esencial con todo quieto y sin desenfoques, para equipos de gama media-baja,
-      //     internet lento o ahorro de datos (html.lite.lowend). La web la elige sola (lowEnd, abajo)
-      //   · "3d" (efectos y movimiento): solo si quien visita la activa con el botón "3D" del menú
-      // La elección dura toda la visita (sessionStorage). Un enlace con ?version=3d o ?version=lite
-      // entra directo a esa versión; ?version=esencial sale del 3D y deja que la web vuelva a elegir.
+      root.classList.add('js', 'lite');
       var gotia = window.gotia = window.gotia || {};
-      // scripts de la versión 3D: solo se descargan si se elige el 3D (main.js los carga)
-      gotia.fx = ['bubbles.js?v=13', 'scenes.js?v=4'];
-
-      // ¿equipo o conexión de gama media-baja? Devuelve el motivo, o '' si va bien con Esencial.
-      // Aquí solo lo que el navegador cuenta al instante: la prueba del chip gráfico y la de
-      // fluidez van después, sin frenar la carga (main.js), y se recuerdan para la próxima vez.
-      // (La misma prueba está en paquetes.html)
       function lowEnd() {
         var n = navigator, c = n.connection || {};
         var mq = function (q) { return matchMedia(q).matches; };
@@ -57,7 +63,7 @@
         if (/2g|3g/.test(c.effectiveType || '')) return 'internet lento';
         if (mq('(prefers-reduced-motion: reduce)')) return 'movimiento reducido';
         if (n.deviceMemory && n.deviceMemory <= 4) return 'poca memoria';
-        // los equipos de Apple no dicen sus núcleos reales: ahí decide la prueba de fluidez
+        // los equipos de Apple no dicen sus núcleos reales: ahí decide la prueba de fluidez (main.js)
         var cores = n.hardwareConcurrency || 8;
         if (!/Mac|iPhone|iPad|iPod/.test(n.platform || '') && cores <= (mq('(pointer: coarse)') ? 4 : 2)) return 'procesador';
         try {
@@ -66,33 +72,18 @@
         } catch (e) {}
         return '';
       }
-
-      var v = null;
+      gotia.low = lowEnd();
+      if (gotia.low) root.classList.add('lowend');
+      // los enlaces viejos con ?version=3d|lite|esencial ya no cambian nada: se limpia la dirección
       try {
-        var params = new URLSearchParams(location.search), q = params.get('version');
-        if (q === '3d' || q === 'lite' || q === 'esencial') {
-          if (q === 'esencial') sessionStorage.removeItem('gotia-version');
-          else sessionStorage.setItem('gotia-version', q);
+        sessionStorage.removeItem('gotia-version');
+        var params = new URLSearchParams(location.search);
+        if (params.has('version')) {
           params.delete('version');
           var rest = params.toString();
           history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
         }
-        v = sessionStorage.getItem('gotia-version');
       } catch (e) {}
-      if (v !== '3d' && v !== 'lite') v = null;
-      gotia.chosen = v;   // lo que eligió quien visita (null: decide la web)
-      if (v === '3d') {
-        root.classList.add('is-loading');
-        gotia.fx.forEach(function (src) {
-          var l = document.createElement('link');
-          l.rel = 'preload'; l.as = 'script'; l.href = src;
-          document.head.appendChild(l);
-        });
-      } else {
-        root.classList.add('lite');
-        gotia.low = v === 'lite' ? 'enlace' : lowEnd();   // por qué está en Lite ('' = Esencial)
-        if (gotia.low) root.classList.add('lowend');
-      }
     })();
     // modo negro: si el visitante lo eligió antes, se aplica antes de pintar nada (sin destello claro)
     try {
@@ -102,13 +93,6 @@
         document.querySelector('meta[name="color-scheme"]').content = 'dark';
       }
     } catch (e) {}
-    // red de seguridad: si el JS no llega, la pantalla de carga nunca deja la página bloqueada
-    setTimeout(function () {
-      if (window.gotia.loaderRunning) return;
-      document.documentElement.classList.remove('is-loading');
-      document.body.classList.add('is-ready');
-      document.dispatchEvent(new Event('gotia:reveal'));
-    }, 6000);
   </script>
 
   <script type="application/ld+json">
@@ -118,213 +102,91 @@
     "name": "Gotiastudio",
     "url": "https://gotiastudio.it.com/",
     "image": "https://gotiastudio.it.com/og-imagen.jpg",
-    "description": "Estudio digital premium: páginas web con automatizaciones, catálogos con panel de administrador, posicionamiento en Google y redes sociales, datos verificables y contenido de estudio con IA.",
+    "description": "Te hacemos tu página y la lanzamos con 10 días de marketing intensivo: videos diarios que llevan a tu WhatsApp, en una cuenta de prueba compartida contigo.",
     "email": "gotiastudiocontacto@gmail.com",
     "makesOffer": [
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Páginas web: paquetes Emprende, Presencia, Automático y Negocio"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automatizaciones dentro de tu página web, conectadas con Google Calendar, Booking y Airbnb"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Mensualidades: Cuidado, Cuidado Automático, Cuidado Negocio y Crecimiento"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Catálogo con panel de administrador"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Posicionamiento en el ecosistema de Google"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Datos verificables y reporte semanal"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Posicionamiento en Instagram, TikTok y Facebook"}},
-      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Contenido de estudio con IA avanzada"}}
+      {"@type": "Offer", "name": "Pack Lanzamiento", "price": "890000", "priceCurrency": "COP", "description": "Página de una sección y 10 días de marketing intensivo. En 2 pagos (50 % y 50 %), más IVA."},
+      {"@type": "Offer", "name": "Pack con Reservas", "price": "1990000", "priceCurrency": "COP", "description": "Todo lo del Pack Lanzamiento, con reservas, respuestas automáticas y panel. Pago único, más IVA."},
+      {"@type": "Offer", "name": "Ya tengo página", "price": "300000", "priceCurrency": "COP", "description": "Para clientes de Gotiastudio: medición, WhatsApp y 10 días de marketing intensivo. Más IVA."},
+      {"@type": "Offer", "name": "Aceleradora", "price": "3500000", "priceCurrency": "COP", "description": "60 a 90 videos al mes en 4 redes, pauta, SEO y reporte semanal. Al mes, sin permanencia, más IVA."}
     ]
   }
   </script>
 </head>
 <body>
 
-<!-- ============ PANTALLA DE CARGA ============ -->
-<div class="loader" id="loader" role="status" aria-label="Cargando Gotiastudio">
-  <div class="loader-bubbles" aria-hidden="true">
-    <span class="lb far" style="--s:22vmin;left:-2%;top:3%;--d:10s;--dy:-24px"></span>
-    <span class="lb far" style="--s:13vmin;left:13%;top:22%;--d:7s;--dl:.05s;--dy:-30px"></span>
-    <span class="lb" style="--s:7vmin;left:84%;top:16%;--d:8s;--dl:.15s;--dy:-22px;--dx:8px"></span>
-    <span class="lb far" style="--s:16vmin;left:88%;top:70%;--d:9s;--dl:.1s;--dy:-34px"></span>
-    <span class="lb" style="--s:8vmin;left:9%;top:77%;--d:7.5s;--dl:.2s;--dy:-24px;--dx:-6px"></span>
-    <span class="lb" style="--s:4vmin;left:27%;top:89%;--d:6s;--dl:.3s;--dy:-18px"></span>
-    <span class="lb" style="--s:5.5vmin;left:71%;top:90%;--d:6.5s;--dl:.25s;--dy:-20px"></span>
-    <span class="lb" style="--s:3vmin;left:31%;top:10%;--d:5.5s;--dl:.35s;--dy:-14px"></span>
-    <span class="lb" style="--s:2.6vmin;left:65%;top:8%;--d:6s;--dl:.4s;--dy:-16px"></span>
-    <span class="lb" style="--s:3.4vmin;left:95%;top:43%;--d:5s;--dl:.3s;--dy:-12px"></span>
-    <span class="lb" style="--s:2.4vmin;left:4%;top:47%;--d:5.5s;--dl:.45s;--dy:-14px"></span>
-    <span class="lb" style="--s:2vmin;left:43%;top:93%;--d:5s;--dl:.5s;--dy:-12px"></span>
-    <span class="lb" style="--s:1.6vmin;left:57%;top:14%;--d:4.5s;--dl:.5s;--dy:-10px"></span>
-    <span class="lb" style="--s:2.2vmin;left:79%;top:36%;--d:5s;--dl:.55s;--dy:-12px"></span>
-    <span class="lb" style="--s:2.8vmin;left:19%;top:58%;--d:6s;--dl:.4s;--dy:-16px"></span>
-    <span class="lb far" style="--s:20vmin;left:101%;top:101%;--d:11s;--dl:.1s;--dy:-28px"></span>
-  </div>
-
-  <div class="loader-core" aria-hidden="true">
-    <div class="loader-halo"><i></i></div>
-    <svg class="loader-ring" viewBox="0 0 220 220">
-      <defs>
-        <linearGradient id="ld-irid" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#4cc0ff"/>
-          <stop offset=".22" stop-color="#1f47ff"/>
-          <stop offset=".42" stop-color="#7a2bff"/>
-          <stop offset=".62" stop-color="#ff2fc6"/>
-          <stop offset=".82" stop-color="#ff7314"/>
-          <stop offset="1" stop-color="#ffcc59"/>
-        </linearGradient>
-      </defs>
-      <circle class="lr-track" cx="110" cy="110" r="104"/>
-      <circle class="lr-ticks" cx="110" cy="110" r="97" pathLength="120"/>
-      <circle class="lr-arc" cx="110" cy="110" r="104" pathLength="100"/>
-    </svg>
-    <div class="loader-head"></div>
-    <div class="loader-orbit" style="--in:13%;--t:5s;--o:-1.2s"><span class="lb" style="--s:9px;--dl:.6s"></span></div>
-    <div class="loader-orbit rev" style="--in:-5%;--t:7.5s;--o:-3s"><span class="lb" style="--s:20px;--dl:.5s"></span></div>
-    <div class="loader-orbit" style="--in:-11%;--t:10s;--o:-6s"><span class="lb" style="--s:13px;--dl:.7s"></span></div>
-  </div>
-
-  <div class="loader-meta" aria-hidden="true">
-    <span class="loader-word">Gotia<span>studio</span></span>
-    <i class="loader-sep"></i>
-    <span class="loader-count" id="loader-pct">000</span>
+<!-- ============ SELECTOR DE IDIOMA: solo en la primera visita (html.lang-ask, ver el <head>) ============
+     Los textos en inglés van junto a los de español (data-l="en"). Precios en USD a 4.000 COP por dólar,
+     redondeados a 5 y sin IVA. Si cambias un precio en COP, cambia también el de USD. -->
+<div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
+  <div class="lang-pick-box glass">
+    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
+    <div class="lang-pick-btns">
+      <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
+      <button type="button" class="btn btn-glass glass" data-lang-set="en" lang="en">English <small>Prices in US dollars (USD)</small></button>
+    </div>
   </div>
 </div>
-<div class="loader-g" id="loader-g" aria-hidden="true"><img src="g-glass-alpha.webp?v=2" srcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 260px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high"></div>
 
 <!-- ============ SVG sprite ============ -->
 <svg class="sprite" aria-hidden="true" focusable="false">
-  <defs>
-    <radialGradient id="lg-fill" cx="34%" cy="28%" r="80%">
-      <stop offset="0" stop-color="#fff" stop-opacity=".98"/>
-      <stop offset=".32" stop-color="#bfe0ff" stop-opacity=".55"/>
-      <stop offset=".7" stop-color="#4aa3ff" stop-opacity=".18"/>
-      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".32"/>
-    </radialGradient>
-    <linearGradient id="lg-rim" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
-      <stop offset=".5" stop-color="#4aa3ff" stop-opacity=".45"/>
-      <stop offset="1" stop-color="#1f6fe5" stop-opacity=".7"/>
-    </linearGradient>
-  </defs>
-  <!-- retrato de ejemplo (ilustrado) de la clienta del tutorial de la tarjeta 01 -->
-  <symbol id="av-laura" viewBox="0 0 40 40">
-    <clipPath id="av-laura-c"><circle cx="20" cy="20" r="20"/></clipPath>
-    <g clip-path="url(#av-laura-c)">
-      <rect width="40" height="40" fill="#d6e6fb"/>
-      <path d="M9 31c0-9 3-22 11-22s11 13 11 22z" fill="#4a2f25"/>
-      <path d="M5 42c1.5-8 7.5-12 15-12s13.5 4 15 12z" fill="#1f6fe5"/>
-      <path d="M16.5 25h7v6c-1 1.6-2.2 2.4-3.5 2.4s-2.5-.8-3.5-2.4z" fill="#e0a982"/>
-      <ellipse cx="20" cy="19" rx="7" ry="8" fill="#f1c39f"/>
-      <path d="M12.6 18.5c-.4-6 3-9.8 7.6-9.8 4.8 0 8 3.6 7.3 9.6-1.8-3.4-4.6-5.2-8.4-5.6-2.4 1.6-4.4 3.6-6.5 5.8z" fill="#4a2f25"/>
-      <circle cx="17.3" cy="19.6" r=".95" fill="#3a2620"/>
-      <circle cx="22.7" cy="19.6" r=".95" fill="#3a2620"/>
-      <path d="M17.8 23c1.3 1.1 3.1 1.1 4.4 0" fill="none" stroke="#b8664f" stroke-width=".9" stroke-linecap="round"/>
-      <circle cx="15.6" cy="22" r="1.3" fill="#f08f86" opacity=".35"/>
-      <circle cx="24.4" cy="22" r="1.3" fill="#f08f86" opacity=".35"/>
-    </g>
-  </symbol>
-  <symbol id="logo" viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="14.5" fill="url(#lg-fill)" stroke="url(#lg-rim)" stroke-width="1"/>
-    <ellipse cx="10.8" cy="9.6" rx="4.2" ry="2.2" transform="rotate(-38 10.8 9.6)" fill="#fff" opacity=".9"/>
-    <circle cx="22.5" cy="23" r="1.3" fill="#1f6fe5" opacity=".45"/>
-  </symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
-  <symbol id="i-auto" viewBox="0 0 24 24"><circle cx="5.5" cy="6" r="2.2"/><circle cx="18.5" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.7 6h8.6M6.6 8l4.3 8M17.4 8l-4.3 8"/></symbol>
-  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M12.5 9H18M12.5 12.5H18M12.5 16h3"/></symbol>
-  <symbol id="i-google" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.35-5.66"/><path d="M20 12h-7.5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
   <symbol id="i-data" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="5" y="11" width="3" height="6" rx="1"/><rect x="10.5" y="5" width="3" height="12" rx="1"/><rect x="16" y="8.5" width="3" height="8.5" rx="1"/></symbol>
-  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l8.5 4.5L12 12.5 3.5 8z"/><path d="M3.5 12L12 16.5l8.5-4.5M3.5 16L12 20.5l8.5-4.5"/></symbol>
-  <symbol id="i-social" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/></symbol>
   <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10.5l5-3v9l-5-3"/></symbol>
-  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M14 3.5v11.2a3.8 3.8 0 1 1-3.8-3.8"/><path d="M14 3.5c.6 2.6 2.4 4.3 5.2 4.6"/></symbol>
-  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M15.5 3.5H13A4.5 4.5 0 0 0 8.5 8v2.5H6v3.8h2.5v6.2h4v-6.2H15l.6-3.8h-3.1V8.4a1 1 0 0 1 1-1h2z"/></symbol>
-  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/></symbol>
-  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
-  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
-  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
-  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
-  <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6h14M5 11h14M5 16h9"/></symbol>
-  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M20.5 15.5l-5-5-9 9"/></symbol>
-  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></symbol>
-  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.2-4A8.3 8.3 0 1 1 8.3 19z"/><path d="M9.2 8.6c-.2 2.9 3.1 6.3 6.1 6.2l.9-1.6-1.9-1-1 .9c-1-.4-2-1.4-2.4-2.4l.9-1-1-1.9z"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3.2 8.2-7.5 9.5-4.3-1.3-7.5-5-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
-  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
-  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3 3"/></symbol>
-  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
-  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 15.5l-3.5-3.5C10 7.5 13.5 4 20 4c0 6.5-3.5 10-8 11.5z"/><path d="M8.5 12H5l2.5-3.5h4M12 15.5V19l3.5-2.5v-4"/><circle cx="15" cy="9" r="1.3"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5L7 7M17 17l1.5 1.5M5.5 18.5L7 17M17 7l1.5-1.5"/></symbol>
-  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5z"/><path d="M14.5 6.5L17 4l3 3-2.5 2.5"/></symbol>
-  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M4 9h16M4 14.5h16M10 9v11.5"/></symbol>
-  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.3 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.3-3.5-8.5s1.1-6.1 3.5-8.5z"/></symbol>
-  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></symbol>
-  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H19l-3-3M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H5l3 3"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 5.2v13.6a.8.8 0 0 0 1.2.7l10.6-6.8a.8.8 0 0 0 0-1.4L8.7 4.5a.8.8 0 0 0-1.2.7z"/></symbol>
-  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 6v12M15.5 6v12"/></symbol>
 </svg>
 
-<a class="skip" href="#main">Saltar al contenido</a>
+<a class="skip" href="#main"><span data-l="es">Saltar al contenido</span><span data-l="en">Skip to content</span></a>
 
 <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
-<!-- Escenario fijo: la "G" de cristal y sus burbujas acompañan el scroll y cambian en cada sección -->
-<div class="stage" aria-hidden="true">
-  <canvas class="stage-canvas" id="bubbles"></canvas>
-  <div class="stage-bubbles"></div>
-</div>
-<div class="cursor" aria-hidden="true"><span class="cursor-ring"></span></div>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <nav class="nav-inner glass" aria-label="Principal">
-    <a href="#top" class="brand" aria-label="Gotiastudio, inicio">
+    <a href="#top" class="brand" aria-label="Gotiastudio, inicio" data-aria-en="Gotiastudio, home">
       <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
       <span class="brand-word">Gotia<span>studio</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#automatizacion">Automatización</a></li>
-      <li><a href="#panel">Panel</a></li>
-      <li><a href="#datos">Datos</a></li>
-      <li><a href="#packs">Paquetes</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#resultados"><span data-l="es">Resultados</span><span data-l="en">Results</span></a></li>
+      <li><a href="#como-funciona"><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></a></li>
+      <li><a href="#precios"><span data-l="es">Precio</span><span data-l="en">Pricing</span></a></li>
+      <li><a href="#faq"><span data-l="es">Preguntas</span><span data-l="en">FAQ</span></a></li>
     </ul>
-    <!-- botón 3D: en el diseño normal carga la versión con efectos; en el 3D se ve encendido y vuelve al normal -->
-    <a href="?version=3d" class="fx-toggle ver-to-3d" aria-label="Ver la versión 3D con efectos" title="Ver la versión 3D con efectos"><svg class="ico"><use href="#i-spark"/></svg>3D</a>
-    <a href="?version=esencial" class="fx-toggle ver-to-lite" aria-label="Volver al diseño normal" title="Volver al diseño normal"><svg class="ico"><use href="#i-spark"/></svg>3D</a>
-    <button class="theme-toggle" type="button" aria-label="Modo negro" aria-pressed="false" title="Cambiar a negro">
+    <button class="lang-toggle" type="button" data-lang-toggle aria-label="Cambiar a inglés" data-aria-en="Switch to Spanish" title="Español / English"><span data-l="es">EN</span><span data-l="en">ES</span></button>
+    <button class="theme-toggle" type="button" aria-label="Modo negro" data-aria-en="Dark mode" aria-pressed="false" title="Cambiar a negro">
       <svg class="ico ico-moon"><use href="#i-moon"/></svg>
       <svg class="ico ico-sun"><use href="#i-sun"/></svg>
     </button>
-    <a href="#contacto" class="btn btn-primary btn-sm nav-cta">Agendar llamada</a>
+    <a href="#" class="btn btn-primary btn-sm nav-cta" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
     <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
   </nav>
   <div class="mobile-menu glass" id="mobile-menu">
-    <a href="#servicios">Servicios</a>
-    <a href="#automatizacion">Automatización</a>
-    <a href="#ecosistema">Ecosistema</a>
-    <a href="#panel">Panel de administrador</a>
-    <a href="#datos">Datos verificables</a>
-    <a href="#packs">Paquetes</a>
-    <a href="#faq">Preguntas frecuentes</a>
-    <a href="#contacto" class="btn btn-primary">Agendar llamada</a>
-    <a href="?version=esencial" class="ver-link ver-to-lite">Cambiar a la versión Esencial · simple y rápida</a>
-    <a href="?version=3d" class="ver-link ver-to-3d">Cambiar a la versión 3D · efectos y movimiento</a>
+    <a href="#resultados"><span data-l="es">Resultados</span><span data-l="en">Results</span></a>
+    <a href="#como-funciona"><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></a>
+    <a href="#precios"><span data-l="es">Precio</span><span data-l="en">Pricing</span></a>
+    <a href="paquetes.html"><span data-l="es">Los 4 planes</span><span data-l="en">All 4 plans</span></a>
+    <a href="#faq"><span data-l="es">Preguntas</span><span data-l="en">FAQ</span></a>
+    <a href="#" class="btn btn-primary" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="top">
-    <!-- versión Esencial: la "G" de cristal como imagen fija (en 3D la dibuja bubbles.js en WebGL) -->
+  <!-- ============ 1. HERO ============ -->
+  <section class="hero lz-hero" id="top">
+    <!-- la "G" de cristal de la marca, como imagen fija -->
     <div class="hero-g" aria-hidden="true">
       <i class="hero-g-halo"></i>
-      <img src="g-glass-alpha.webp?v=2" srcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 260px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high">
+      <img src="g-glass-alpha.webp?v=2" srcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 160px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high">
       <span class="lb" style="--s:13cqw;left:92%;top:4%"></span>
       <span class="lb far" style="--s:8cqw;left:6%;top:90%"></span>
       <span class="lb" style="--s:4cqw;left:24%;top:2%"></span>
@@ -332,1529 +194,222 @@
     </div>
 
     <div class="container hero-content">
-      <h1 class="hero-title" data-split>Más <em>visitas</em> para tu negocio. Con datos <em>reales.</em></h1>
-      <p class="hero-lead" data-hero style="--i:3">Creamos tu página web y la ponemos a trabajar por ti.</p>
+      <h1 class="hero-title" data-split><span data-l="es">Pagas tu página y la lanzamos con <em>10 días de marketing intensivo.</em></span><span data-l="en">Get your website, launched with <em>10 days of intensive marketing.</em></span></h1>
+      <p class="hero-lead" data-hero style="--i:3"><span data-l="es">Te hacemos tu página y en 10 días de marketing la llenamos de visitas y mensajes con videos diarios, en una cuenta de prueba que compartimos contigo. Si te gusta lo que ves, seguimos.</span><span data-l="en">We build your website and, in 10 days of marketing, fill it with visits and messages through daily videos on a test account we share with you. If you like what you see, we keep going.</span></p>
       <div class="hero-actions" data-hero style="--i:4">
-        <a href="#packs" class="btn btn-primary magnetic">Ver paquetes <svg class="ico"><use href="#i-arrow"/></svg></a>
-        <a href="#contacto" class="btn btn-glass glass magnetic">Agendar llamada</a>
+        <a href="#" class="btn btn-primary" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
+        <a href="paquetes.html" class="btn btn-glass glass"><span data-l="es">Ver precios</span><span data-l="en">See pricing</span> <svg class="ico"><use href="#i-arrow"/></svg></a>
       </div>
-    </div>
-
-    <div class="container hero-bottom" data-hero style="--i:5">
-      <!-- icono + nombre: los seis de #servicios (cada uno abre su tarjeta) y los dos de #automatizacion -->
-      <ul class="hero-services" aria-label="Nuestros servicios">
-        <li><a href="#servicios" data-svc-go="0"><span class="hs-ico"><svg class="ico"><use href="#i-code"/></svg></span>Tu página web</a></li>
-        <li><a href="#servicios" data-svc-go="1"><span class="hs-ico"><svg class="ico"><use href="#i-panel"/></svg></span>Edita tu web tú mismo</a></li>
-        <li><a href="#servicios" data-svc-go="2"><span class="hs-ico"><svg class="ico"><use href="#i-google"/></svg></span>Aparece en Google</a></li>
-        <li><a href="#servicios" data-svc-go="3"><span class="hs-ico"><svg class="ico"><use href="#i-data"/></svg></span>Mide tus visitas</a></li>
-        <li><a href="#servicios" data-svc-go="4"><span class="hs-ico"><svg class="ico"><use href="#i-social"/></svg></span>Crece en redes sociales</a></li>
-        <li><a href="#servicios" data-svc-go="5"><span class="hs-ico"><svg class="ico"><use href="#i-video"/></svg></span>Fotos y videos con IA</a></li>
-        <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="0"><span class="hs-ico"><svg class="ico"><use href="#i-globe"/></svg></span>Tu web responde sola</a></li>
-        <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="1"><span class="hs-ico"><svg class="ico"><use href="#i-auto"/></svg></span>Mensajes y citas automáticos</a></li>
-      </ul>
+      <p class="lz-hero-note" data-hero style="--i:5"><span class="pulse" aria-hidden="true"></span><span data-l="es">Desde <strong>$890.000 + IVA</strong> · Solo 2 lanzamientos por mes</span><span data-l="en">From <strong>US$225</strong> · Only 2 launches per month</span></p>
     </div>
   </section>
 
-  <!-- ============ MARQUEE ============ -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span class="mq">Automatizaciones</span><span class="mq-dot"></span>
-        <span class="mq"><em>Panel de administrador</em></span><span class="mq-dot"></span>
-        <span class="mq">Google Search</span><span class="mq-dot"></span>
-        <span class="mq">Google Maps</span><span class="mq-dot"></span>
-        <span class="mq"><em>Datos verificables</em></span><span class="mq-dot"></span>
-        <span class="mq">Instagram</span><span class="mq-dot"></span>
-        <span class="mq">TikTok</span><span class="mq-dot"></span>
-        <span class="mq">Facebook</span><span class="mq-dot"></span>
-        <span class="mq"><em>Contenido de estudio con IA</em></span><span class="mq-dot"></span>
-      </div>
-      <div class="marquee-group">
-        <span class="mq">Automatizaciones</span><span class="mq-dot"></span>
-        <span class="mq"><em>Panel de administrador</em></span><span class="mq-dot"></span>
-        <span class="mq">Google Search</span><span class="mq-dot"></span>
-        <span class="mq">Google Maps</span><span class="mq-dot"></span>
-        <span class="mq"><em>Datos verificables</em></span><span class="mq-dot"></span>
-        <span class="mq">Instagram</span><span class="mq-dot"></span>
-        <span class="mq">TikTok</span><span class="mq-dot"></span>
-        <span class="mq">Facebook</span><span class="mq-dot"></span>
-        <span class="mq"><em>Contenido de estudio con IA</em></span><span class="mq-dot"></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ MANIFIESTO ============ -->
-  <section class="manifesto" id="estudio" aria-label="Manifiesto">
-    <div class="manifesto-sticky container">
-      <p class="eyebrow">Manifiesto</p>
-      <p class="manifesto-text" data-scrub><span class="m-hook">Tu negocio merece ser encontrado.</span> Hacemos que más clientes <em>te vean</em> y <em>te escriban</em>.</p>
-      <div class="manifesto-bar" aria-hidden="true"><i></i></div>
-      <div class="manifesto-foot">
-        <p class="manifesto-note">Tu web trabaja sola, y cada semana ves cómo te va.</p>
-        <div class="manifesto-sign">
-          <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
-          <span>Gotiastudio — Estudio digital</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SERVICIOS ============
-       Un servicio a la vez: la sección se queda fija y, al bajar, cada tarjeta pasa al centro
-       y se ajusta sola (main.js). Si alguna tarjeta no cabe en la pantalla (celulares), van una
-       debajo de otra y la página se ajusta para dejar centrada cada una. -->
-  <section class="section svc" id="servicios" style="--n:7">
-    <div class="svc-scroll">
-     <div class="svc-stage">
-      <div class="svc-view" data-reveal>
-      <div class="svc-track">
-
-        <!-- Presentación: el primer cuadro del recorrido, con el índice de los seis -->
-        <article class="card glass svc-card svc-intro">
-          <p class="eyebrow">Servicios</p>
-          <h2 class="h2">Seis servicios.<br><em>Un solo sistema.</em></h2>
-          <p class="si-lead">Cada pieza se conecta con la otra.</p>
-          <ol class="si-list">
-            <li><button type="button" data-svc-go="0"><span>01</span>Tu página web</button></li>
-            <li><button type="button" data-svc-go="1"><span>02</span>Edita tu web tú mismo</button></li>
-            <li><button type="button" data-svc-go="2"><span>03</span>Aparece en Google</button></li>
-            <li><button type="button" data-svc-go="3"><span>04</span>Mide tus visitas</button></li>
-            <li><button type="button" data-svc-go="4"><span>05</span>Crece en redes sociales</button></li>
-            <li><button type="button" data-svc-go="5"><span>06</span>Fotos y videos con IA</button></li>
-          </ol>
-          <p class="si-hint">Baja para ver cada uno <svg class="ico"><use href="#i-arrow"/></svg></p>
-        </article>
-
-        <!-- 01 Tu página web: un tutorial corto de 3 pasos (te escriben de noche, tu web responde
-             y en la mañana te avisa). main.js lo pasa solo, como las historias, y cada paso se
-             puede tocar. Sin JS, los tres pasos se ven uno debajo de otro. 01 a 03 (.svc-tuto): el texto arriba y el tutorial abajo -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="card-num">01</span><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Te escriben</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Responde</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Te avisa</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: te escriben">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com</span><b><svg class="ico"><use href="#i-moon"/></svg>11:48 p. m.</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg in tuto-pop" style="--d:0"><svg class="tuto-face" role="img" aria-label="Laura"><use href="#av-laura"/></svg>Hola, ¿tienen cita para mañana?</p>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Una clienta te escribe</b> desde tu web. Es de noche y tú estás durmiendo.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: tu web responde">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com</span><b><svg class="ico"><use href="#i-moon"/></svg>11:48 p. m.</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg in"><svg class="tuto-face" role="img" aria-label="Laura"><use href="#av-laura"/></svg>Hola, ¿tienen cita para mañana?</p>
-                      <p class="tuto-msg out tuto-pop" style="--d:1">¡Hola, Laura! Sí. Te aparté mañana a las 10:00 a. m. ✓</p>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Tu web le contesta al instante</b> y le aparta la cita. Tú no haces nada.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: te avisa y queda en tu agenda">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu agenda</span><b><svg class="ico"><use href="#i-sun"/></svg>7:00 a. m.</b></div>
-                    <!-- la agenda conectada (Google Calendar o la app de citas que uses): la cita nueva
-                         entra en un hueco libre, entre las que ya tenías -->
-                    <div class="tuto-body">
-                      <div class="tuto-agenda">
-                        <div class="tuto-slot"><time>9:00</time><span>Ana · Uñas</span></div>
-                        <div class="tuto-slot is-new tuto-pop" style="--d:0"><time>10:00</time><b>Laura · Nueva cita</b><svg class="ico"><use href="#i-bell"/></svg></div>
-                        <div class="tuto-slot"><time>11:00</time><span>Diego · Corte</span></div>
-                      </div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-cal"/></svg>Conectado a Google Calendar o tu app de citas</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Al despertar, ves el aviso:</b> la cita ya está en tu agenda, sin cruzarse con otras.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Una web que trabaja por ti</h3>
-          <p>Cuando un cliente te escribe, tu web le responde, le aparta la cita y te avisa. Tú no tienes que hacer nada. <a class="more" href="#automatizacion">Ver más ejemplos</a></p>
-          <ul class="ticks">
-            <li>Atiende de día y de noche</li>
-            <li>Aparta citas y recibe pedidos</li>
-            <li>Te avisa de cada cliente nuevo</li>
-          </ul>
-        </article>
-
-        <!-- 02 Edita tu web (panel) -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="card-num">02</span><span class="icon-bubble"><svg class="ico"><use href="#i-panel"/></svg></span></div>
-          <div class="visual">
-            <!-- el mismo tutorial de 3 pasos que la 01: entras a tu panel, cambias un precio y ya
-                 se ve en tu web (main.js) -->
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Entras</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Cambias</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>¡Listo!</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: entras a tu panel">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu panel</span><b>Tus productos</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-row"><span class="tuto-thumb" aria-hidden="true">🍪</span><span><b>Galletas de avena</b><small>$12.000</small></span></div>
-                      <div class="tuto-row is-pick"><span class="tuto-thumb" aria-hidden="true">🎂</span><span><b>Torta de chocolate</b><small>$45.000</small></span><span class="tuto-btn tuto-pop" style="--d:0"><svg class="ico"><use href="#i-pen"/></svg>Cambiar</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Entras a tu panel</b> con tu clave, desde el celular o el computador.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: cambias algo">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu panel</span><b>Torta de chocolate</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-field"><small>Precio</small><span><s>$45.000</s><b class="tuto-pop" style="--d:0">$39.000</b></span></div>
-                      <span class="tuto-btn is-main tuto-pop" style="--d:1"><svg class="ico"><use href="#i-check"/></svg>Guardar</span>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Cambias lo que quieras:</b> un precio, una foto o un texto. Y tocas Guardar.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: ya está en tu web">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com</span><b>Tienda</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-thumb" aria-hidden="true">🎂</span><span><b>Torta de chocolate</b><small><s>$45.000</s> $39.000</small></span><span class="tuto-tag">Nuevo precio</span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-check"/></svg>Se ve al instante</span><span><svg class="ico"><use href="#i-check"/></svg>Sin llamar a nadie</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Listo: tus clientes ya lo ven</b> en tu web. Sin esperar a nadie.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Edita tu web tú mismo</h3>
-          <p>Cambia precios, fotos y textos desde tu celular, y se ve en tu web al momento. No tienes que saber nada de computadores.</p>
-          <ul class="ticks">
-            <li>Precios, fotos y textos</li>
-            <li>Tus citas y pedidos en un solo lugar</li>
-            <li>Fácil, desde el celular</li>
-          </ul>
-        </article>
-
-        <!-- 03 Google -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="card-num">03</span><span class="icon-bubble"><svg class="ico"><use href="#i-google"/></svg></span></div>
-          <div class="visual">
-            <!-- el mismo tutorial de 3 pasos: alguien te busca, apareces arriba y llega a tu
-                 tienda (main.js) -->
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Te buscan</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>En el mapa</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>En tu web</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: te buscan">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>google.com</span><b><svg class="ico"><use href="#i-phone"/></svg>Un cliente</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-search tuto-pop" style="--d:0"><svg class="ico"><use href="#i-search"/></svg>pastelería cerca de mí<i class="caret"></i></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Alguien busca en Google</b> lo que tú vendes, cerca de donde está.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: apareces en el mapa">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Google Maps</span><b>Cerca de ti</b></div>
-                    <!-- el mapa: calles, otros sitios en gris y tu pin en azul, con tu ficha debajo -->
-                    <div class="tuto-body tuto-map">
-                      <span class="tuto-pin is-other" style="--x:18%;--y:22%" aria-hidden="true"></span>
-                      <span class="tuto-pin is-other" style="--x:78%;--y:16%" aria-hidden="true"></span>
-                      <span class="tuto-pin tuto-pop" style="--d:0;--x:52%;--y:30%" aria-hidden="true"></span>
-                      <div class="tuto-note tuto-pop" style="--d:1"><span class="tuto-rank">1</span><span><b>Tu Negocio · Pastelería</b><span class="stars">★★★★★ <em>4,9 · Abierto ahora</em></span></span><span class="tuto-btn"><svg class="ico"><use href="#i-globe"/></svg>Sitio web</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Sales en el mapa, arriba,</b> con tus estrellas, tu horario y tu web.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: entran a tu web">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com</span><b><svg class="ico"><use href="#i-google"/></svg>Desde Google Maps</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-page tuto-pop" style="--d:0"><strong>Tu Negocio · Pastelería</strong><small>Tortas por encargo · Abierto hasta las 8 p. m.</small></div>
-                      <div class="tuto-row is-pick tuto-pop" style="--d:1"><span class="tuto-thumb" aria-hidden="true">🎂</span><span><b>Torta de chocolate</b><small>$39.000</small></span><span class="tuto-btn is-main"><svg class="ico"><use href="#i-wa"/></svg>Pedir</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Entran a tu web desde el mapa</b> y te hacen su pedido.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Aparece en Google</h3>
-          <p>Cuando alguien busca lo que vendes, te encuentra en Google Maps y llega a tu web. Así te llegan más clientes.</p>
-          <ul class="ticks">
-            <li>En Google Maps, cerca de tus clientes</li>
-            <li>Con tus fotos, horario y estrellas</li>
-            <li>Un toque y llegan a tu web</li>
-          </ul>
-        </article>
-
-        <!-- 04 Mide tus visitas: el mismo tutorial de 3 pasos (te llega el reporte, lo lees y
-             sabes qué mejorar). El reporte animado de antes (.dash) sigue en version-conversion -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="card-num">04</span><span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Te llega</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Lo lees</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Mejoras</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: te llega el reporte">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tus mensajes</span><b><svg class="ico"><use href="#i-sun"/></svg>Lunes, 8:00 a. m.</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-chat"/></svg></span><span><b>Tu reporte de la semana</b><small>De Gotiastudio · se lee en 1 minuto</small></span><span class="tuto-tag">Nuevo</span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-chat"/></svg>Por mensaje</span><span><svg class="ico"><use href="#i-phone"/></svg>O en una llamada contigo</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Cada semana te llega un reporte</b> por mensaje, o lo vemos juntos en una llamada.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: lo lees">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu reporte</span><b>Semana del 21 al 27 sep</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-stat tuto-pop" style="--d:0"><strong>1.240</strong><span>personas entraron a tu web<em>↑ 23% más que la semana pasada</em></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-google"/></svg>Google 61%</span><span><svg class="ico"><use href="#i-ig"/></svg>Instagram 24%</span><span>Otros 15%</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Ves cuánta gente entró</b> y de dónde vino, con números grandes y claros.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: mejoras">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu reporte</span><b>Consejo</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-bulb"/></svg></span><span><b>Consejo de la semana</b><small>Pon el precio de tus tortas a la vista: así menos gente se va sin comprar.</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-check"/></svg>Más ventas</span><span><svg class="ico"><use href="#i-check"/></svg>Sin adivinar</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Te decimos qué mejorar</b> para que más personas te compren.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Mide tus visitas, cada semana</h3>
-          <p>Cada semana te contamos por mensaje, o en una reunión por llamada, cuánta gente entró a tu web, de dónde vino y qué mejorar.</p>
-          <ul class="ticks">
-            <li>Por mensaje o en una llamada</li>
-            <li>Cuánta gente entró y de dónde</li>
-            <li>Un consejo para vender más</li>
-          </ul>
-        </article>
-
-        <!-- 05 Crece en redes: el mismo tutorial de 3 pasos (publicamos, a la gente le gusta y
-             llegan a tu web). Los puntos de luz de antes (.social-flow) siguen en version-conversion -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="card-num">05</span><span class="icon-bubble"><svg class="ico"><use href="#i-social"/></svg></span></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Publicamos</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Les gusta</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Te escriben</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: publicamos">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Instagram</span><b><svg class="ico"><use href="#i-ig"/></svg>@tunegocio</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-post tuto-pop" style="--d:0"><span class="tuto-photo is-pro" aria-hidden="true"><span>🎂</span></span><span><b>Torta de chocolate, recién hecha</b><small>Pídela hoy · $39.000</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><b class="tuto-heart">♥</b>248 me gusta</span><span><svg class="ico"><use href="#i-chat"/></svg>32 comentarios</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Publicamos en tus redes,</b> o te creamos una nueva, con fotos y videos que llaman la atención.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: les gusta">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Instagram</span><b>Comentarios</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg in tuto-pop" style="--d:0"><span class="tuto-av">A</span>¡Qué rica! ¿Hacen domicilio?</p>
-                      <p class="tuto-msg in tuto-pop" style="--d:1"><span class="tuto-av">M</span>¿Dónde los encuentro?</p>
-                      <span class="tuto-btn tuto-pop" style="--d:2"><svg class="ico"><use href="#i-globe"/></svg>Enlace en la bio: tunegocio.com</span>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>A la gente le gusta y pregunta.</b> Con un toque llegan a tu web.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: te escriben">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com</span><b><svg class="ico"><use href="#i-ig"/></svg>Desde Instagram</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-stat tuto-pop" style="--d:0"><strong>+128</strong><span>personas nuevas llegaron a tu web<em>↑ esta semana, desde tus redes</em></span></div>
-                      <span class="tuto-btn is-main tuto-pop" style="--d:1"><svg class="ico"><use href="#i-wa"/></svg>Te escriben por WhatsApp</span>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Llegan a tu web y te escriben.</b> Así ganas clientes nuevos.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Crece en redes sociales</h3>
-          <p>Publicamos en tus redes (o te creamos una nueva) y llevamos esa gente a tu web, donde te escriben.</p>
-          <ul class="ticks">
-            <li>En tus cuentas o en una nueva</li>
-            <li>Instagram, TikTok y Facebook</li>
-            <li>Todo lleva a tu web y a tu WhatsApp</li>
-          </ul>
-        </article>
-
-        <!-- 06 Contenido viral: tutorial de 4 pasos (nos mandas una foto, la convertimos en un video
-             3D con tu marca, lo hacemos viral y llega gente a tu web). El visor 3D del paso 2 es el
-             de antes: main.js corre el timecode y sus tres tomas mientras ese paso está a la vista -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="card-num">06</span><span class="icon-bubble"><svg class="ico"><use href="#i-video"/></svg></span></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps is-4" role="tablist" aria-label="Cómo funciona, en 4 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Tu foto</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>En 3D</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Viral</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>4</em>Tu web</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: nos mandas una foto">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>WhatsApp</span><b><svg class="ico"><use href="#i-wa"/></svg>Gotiastudio</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-sent tuto-pop" style="--d:0"><span class="tuto-photo is-raw" aria-hidden="true"><span>🎂</span><small>Foto con el celular</small></span><small>10:02 a. m. ✓✓</small></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Nos mandas una foto</b> de tu producto, tomada con tu celular.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: la convertimos en un video 3D con tu marca">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Gotiastudio</span><b><svg class="ico"><use href="#i-spark"/></svg>Video 3D con tu marca</b></div>
-                    <div class="tuto-body tuto-vf">
-                      <div class="viewfinder">
-                        <div class="vf-scene">
-                          <span class="vf-light"></span>
-                          <span class="vf-floor"></span>
-                          <span class="vf-shadow"></span>
-                          <span class="vf-orb"></span>
-                        </div>
-                        <div class="vf-title"><small>Tu marca</small><strong>Torta de chocolate</strong></div>
-                        <div class="vf-end"><small>Tu marca</small><strong>Pídela hoy</strong><i>tunegocio.com</i></div>
-                        <span class="vf-cut"></span>
-                        <span class="vf-grid"></span>
-                        <span class="vf-corner tl"></span><span class="vf-corner tr"></span><span class="vf-corner bl"></span><span class="vf-corner br"></span>
-                        <span class="vf-hud tl"><i class="rec"></i>REC</span>
-                        <span class="vf-hud tr">4K · 24 fps</span>
-                        <span class="vf-hud bl" id="timecode">00:00:12:04</span>
-                        <span class="vf-hud br" data-k="shot">Toma 1/3 · Primer plano</span>
-                        <span class="vf-bar"><i></i></span>
-                        <span class="vf-cross"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>La convertimos en un video 3D</b> de estudio, con tu logo, tus colores y tu estilo.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: lo hacemos viral">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tus redes</span><b>Instagram · TikTok · Facebook</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-post tuto-pop" style="--d:0"><span class="tuto-photo is-pro" aria-hidden="true"><span>🎂</span><i class="tuto-play"></i></span><span><b>El truco de la torta más pedida</b><small>#tendencia · Reel de 15 s</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-video"/></svg>120 mil vistas</span><span><b class="tuto-heart">♥</b>8.400</span><span>Educativo y divertido</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Lo hacemos viral</b> con las tendencias del momento, para que lo vea muchísima gente.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 4: llegan a tu web">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com</span><b><svg class="ico"><use href="#i-social"/></svg>Desde tus redes</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-stat tuto-pop" style="--d:0"><strong>+3.200</strong><span>visitas a tu web esta semana<em>↑ gracias al video viral</em></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-ig"/></svg>Instagram 54%</span><span><svg class="ico"><use href="#i-tt"/></svg>TikTok 38%</span><span>Otros 8%</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Y esa gente llega a tu web:</b> tráfico masivo, no solo videos bonitos.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Contenido viral para tus redes</h3>
-          <p>Creamos fotos y videos con IA adaptados a tu marca, y los hacemos virales con las tendencias del momento para atraer tráfico masivo a tu web.</p>
-          <ul class="ticks">
-            <li>Adaptado a tu marca: logo y colores</li>
-            <li>Con las tendencias virales del momento</li>
-            <li>Para atraer tráfico masivo a tu web</li>
-          </ul>
-        </article>
-
-      </div>
-      </div>
-
-      <!-- controles: aparecen cuando main.js arma el recorrido -->
-      <div class="svc-ui glass">
-        <button class="svc-arrow svc-prev" type="button" aria-label="Servicio anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
-        <div class="svc-dots">
-          <button class="svc-dot" type="button" aria-label="Presentación de los servicios"></button>
-          <button class="svc-dot" type="button" aria-label="01 · Páginas web con automatizaciones"></button>
-          <button class="svc-dot" type="button" aria-label="02 · Catálogo con panel de administrador"></button>
-          <button class="svc-dot" type="button" aria-label="03 · Posicionamiento en todo Google"></button>
-          <button class="svc-dot" type="button" aria-label="04 · Datos verificables, cada semana"></button>
-          <button class="svc-dot" type="button" aria-label="05 · Posicionamiento en redes sociales"></button>
-          <button class="svc-dot" type="button" aria-label="06 · Contenido profesional de estudio con IA"></button>
-        </div>
-        <span class="svc-count" aria-hidden="true"><b>00</b> / 06</span>
-        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente servicio"><svg class="ico"><use href="#i-arrow"/></svg></button>
-      </div>
-     </div>
-    </div>
-  </section>
-
-  <!-- ============ AUTOMATIZACIÓN: la que vive dentro de tu web ============
-       El mismo recorrido de cuadros que Servicios (main.js): presentación, lo que hace tu web,
-       cómo trabaja paso a paso y dos ejemplos con tutorial de 3 pasos. -->
-  <section class="section svc" id="automatizacion" style="--n:5">
-    <div class="svc-scroll">
-     <div class="svc-stage">
-      <div class="svc-view" data-reveal>
-      <div class="svc-track">
-
-        <!-- Presentación -->
-        <article class="card glass svc-card svc-intro">
-          <p class="eyebrow">Automatización · Dentro de tu web</p>
-          <h2 class="h2">Tu web atiende, agenda<br><em>y te avisa sola.</em></h2>
-          <p class="si-lead">Viene en los paquetes Automático y Negocio. Y si tu página la hizo otro proveedor, también la automatizamos.</p>
-          <ol class="si-list wrap">
-            <li><button type="button" data-svc-go="0"><span>01</span>Atiende y avisa</button></li>
-            <li><button type="button" data-svc-go="1"><span>02</span>Cómo funciona</button></li>
-            <li><button type="button" data-svc-go="2"><span>03</span>Recordatorios</button></li>
-            <li><button type="button" data-svc-go="3"><span>04</span>Reseñas</button></li>
-          </ol>
-          <p class="si-hint">Baja para ver cada uno <svg class="ico"><use href="#i-arrow"/></svg></p>
-        </article>
-
-        <!-- con el mismo tutorial de Servicios: el texto arriba, el ejemplo paso a paso abajo y el
-             botón de WhatsApp arriba a la derecha (main.js). Las demos de antes (.aw, .ac, .av) siguen en
-             version-conversion -->
-        <!-- Lo que hace tu web -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Desde el paquete Automático</span><a href="#" class="btn btn-primary btn-sm" data-wa="Hola Gotia Studio 👋 Quiero información y precio del paquete Automático"><svg class="ico ico-l"><use href="#i-wa"/></svg>Preguntar</a></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Te escriben</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Responde</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Te avisa</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: llenan el formulario de tu web">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>tunegocio.com/contacto</span><b>Formulario</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-form tuto-pop" style="--d:0">
-                        <span><small>Nombre</small><b>Laura Martínez</b></span>
-                        <span><small>WhatsApp</small><b>300 123 4567</b></span>
-                        <span class="wide"><small>Mensaje</small><b>Quiero reservar una cita</b></span>
-                      </div>
-                      <span class="tuto-btn is-main tuto-pop" style="--d:1">Enviar</span>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Alguien llena el formulario</b> de tu web para pedir una cita.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: tu web responde">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Correo de Laura</span><b>Al instante</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-mail"/></svg></span><span><b>¡Gracias, Laura!</b><small>Tu cita quedó para el jueves a las 10:30.</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-sheet"/></svg>Guardada en tus clientes</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Tu web le responde al instante</b> y guarda sus datos.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: te avisa">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu celular</span><b><svg class="ico"><use href="#i-bell"/></svg>Aviso</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-bell"/></svg></span><span><b>Nuevo cliente: Laura</b><small>Quiere una cita · jueves, 10:30</small></span><span class="tuto-tag">Nuevo</span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-cal"/></svg>Cita en tu agenda</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>A ti te llega el aviso</b> con todo listo. Tú solo atiendes.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Tu web atiende y te avisa</h3>
-          <p>Tu web responde, agenda y guarda a cada cliente, conectada con Google Calendar, Booking o Airbnb. Incluida desde el paquete Automático.</p>
-          <ul class="ticks">
-            <li>Responde y agenda desde tu web</li>
-            <li>Conectada con Google Calendar, Booking o Airbnb</li>
-            <li>Guarda cada cliente y te avisa</li>
-          </ul>
-        </article>
-
-        <!-- Así trabaja tu web, paso a paso -->
-        <article class="card glass svc-card svc-block svc-flow" data-flow data-marcas=".flow li">
-          <div class="card-top"><span class="auto-kicker">Paso a paso</span><span class="icon-bubble"><svg class="ico"><use href="#i-auto"/></svg></span></div>
-          <header class="flow-head">
-            <h3>Así trabaja <em>tu web</em></h3>
-            <p>Mientras tú atiendes tu negocio, o duermes.</p>
-          </header>
-          <!-- la línea se llena paso a paso y cada paso se enciende al llegar (main.js) -->
-          <div class="flow-box">
-            <span class="flow-fill" aria-hidden="true"></span>
-            <ol class="flow">
-              <li><span class="flow-dot"><svg class="ico"><use href="#i-chat"/></svg></span><div><small>01</small><strong>Te escriben</strong><span>Desde tu web, a cualquier hora</span></div></li>
-              <li><span class="flow-dot"><svg class="ico"><use href="#i-auto"/></svg></span><div><small>02</small><strong>Responde al instante</strong><span>Hasta 20 preguntas frecuentes</span></div></li>
-              <li><span class="flow-dot"><svg class="ico"><use href="#i-cal"/></svg></span><div><small>03</small><strong>Agenda sola</strong><span>Directo a tu calendario</span></div></li>
-              <li><span class="flow-dot"><svg class="ico"><use href="#i-bell"/></svg></span><div><small>04</small><strong>Confirma sola</strong><span>Con un correo automático</span></div></li>
-              <li><span class="flow-dot"><svg class="ico"><use href="#i-sheet"/></svg></span><div><small>05</small><strong>Todo registrado</strong><span>En tu panel, con aviso para ti</span></div></li>
-            </ol>
-          </div>
-          <p class="auto-note">¿Cuál paquete te conviene? <a href="#" data-wa="Hola Gotia Studio 👋 Quiero saber qué paquete me conviene y su precio">Escríbenos por WhatsApp</a></p>
-        </article>
-
-        <!-- 03 y 04 · ejemplos de la vida real, con el mismo tutorial de 3 pasos de Servicios:
-             recordar citas y pedir reseñas, por correo (main.js) -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Paquete Negocio · Citas</span><span class="icon-bubble"><svg class="ico"><use href="#i-bell"/></svg></span></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Hay cita</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Recuerda</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Llega</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: hay una cita">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu agenda</span><b>Mañana</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-agenda">
-                        <div class="tuto-slot"><time>9:00</time><span>Ana · Uñas</span></div>
-                        <div class="tuto-slot is-new tuto-pop" style="--d:0"><time>10:00</time><b>Laura · Corte</b><svg class="ico"><use href="#i-cal"/></svg></div>
-                        <div class="tuto-slot"><time>11:00</time><span>Diego · Barba</span></div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Laura tiene cita mañana</b> a las 10:00.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: le llega un recordatorio">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Correo de Laura</span><b>Recordatorio automático</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg out tuto-pop" style="--d:0">Hola Laura 👋 Te esperamos mañana a las 10:00.</p>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-mail"/></svg>Enviado solo</span><span><svg class="ico"><use href="#i-cal"/></svg>Mañana, 10:00</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Antes de la cita le llega un recordatorio</b> por correo, sin que tú escribas.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: llega a su cita">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu agenda</span><b>Hoy</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg in tuto-pop" style="--d:0"><svg class="tuto-face" role="img" aria-label="Laura"><use href="#av-laura"/></svg>¡Ya llegué a mi cita! 👍</p>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-check"/></svg>Cita cumplida en tu agenda</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Laura llega a tiempo</b> y tú no tuviste que escribir nada. Menos citas perdidas.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Recordatorios para que nadie falte</h3>
-          <p>Antes de cada cita, tus clientes reciben un recordatorio automático por correo.</p>
-          <ul class="ticks">
-            <li>Por correo, sin que tú escribas</li>
-            <li>Antes de cada cita</li>
-            <li>Menos citas perdidas</li>
-          </ul>
-        </article>
-
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Paquete Negocio · Reseñas</span><span class="icon-bubble"><svg class="ico"><use href="#i-repeat"/></svg></span></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Compra</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Opina</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Te eligen</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: compra">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tus pedidos</span><b>Sábado</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-av">C</span><span><b>Pedido entregado</b><small>Carlos · 2 tortas de chocolate</small></span><span class="tuto-tag">Entregado</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Un cliente compra</b> y recibe su pedido.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: deja su opinión">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Correo de Carlos</span><b>Después de la compra</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg out tuto-pop" style="--d:0">¿Qué tal estuvieron tus tortas, Carlos? Déjanos tu opinión 🙏</p>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><b class="tuto-gold">★★★★★</b>Reseña en Google</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Un correo le pide su opinión</b> y deja 5 estrellas en Google.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: más clientes te eligen">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu negocio en Google</span><b>Reseñas</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg out tuto-pop" style="--d:0">“Las mejores tortas de la ciudad.” · Carlos</p>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><b class="tuto-gold">★★★★★</b>Más reseñas, más clientes</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Con más reseñas, más clientes te eligen,</b> sin que tú lo pidas.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Reseñas que te traen clientes</h3>
-          <p>Después de cada cita o compra, un correo automático le pide al cliente su reseña en Google.</p>
-          <ul class="ticks">
-            <li>Correo automático, sin que tú escribas</li>
-            <li>Más reseñas en Google</li>
-            <li>Más clientes que te eligen</li>
-          </ul>
-        </article>
-
-      </div>
-      </div>
-
-      <div class="svc-ui glass">
-        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
-        <div class="svc-dots">
-          <button class="svc-dot" type="button" aria-label="Presentación de las automatizaciones"></button>
-          <button class="svc-dot" type="button" aria-label="01 · Tu web atiende y te avisa"></button>
-          <button class="svc-dot" type="button" aria-label="02 · Así trabaja tu web"></button>
-          <button class="svc-dot" type="button" aria-label="03 · Recordatorios para que nadie falte"></button>
-          <button class="svc-dot" type="button" aria-label="04 · Reseñas que te traen clientes"></button>
-        </div>
-        <span class="svc-count" aria-hidden="true"><b>00</b> / 04</span>
-        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
-      </div>
-     </div>
-    </div>
-  </section>
-
-  <!-- ============ ECOSISTEMA ============ -->
-  <section class="section section-tight" id="ecosistema">
-    <div class="container eco">
-      <div class="eco-copy">
-        <p class="eyebrow" data-reveal>Ecosistema</p>
-        <h2 class="h2" data-reveal>Tu web en el centro.<br><em>Todo gira a su alrededor.</em></h2>
-        <p class="lead" data-reveal>Dentro, lo que hace por ti. Fuera, los canales que te traen visitas. Toca una burbuja para verlo.</p>
-
-        <div class="eco-panel glass" id="eco-panel" data-reveal>
-          <div class="eco-swap">
-            <span class="kicker" id="eco-kicker">El núcleo</span>
-            <h3><span class="icon-bubble" id="eco-icon"><svg class="ico"><use href="#logo"/></svg></span><span id="eco-title">Tu web</span></h3>
-            <p id="eco-desc">Diseño a medida, rápida y perfecta en móvil. Es el lugar donde todo se conecta y donde tus visitantes se convierten en clientes.</p>
-          </div>
-        </div>
-
-        <div class="eco-legend" data-reveal>
-          <span><i class="lg-in"></i>Anillo interior: lo que hace tu web</span>
-          <span><i class="lg-out"></i>Anillo exterior: de dónde llegan tus clientes</span>
-        </div>
-      </div>
-
-      <div class="eco-visual" data-reveal>
-        <div class="orbit" id="orbit">
-          <div class="orbit-ring ring-out"></div>
-          <div class="orbit-ring ring-in"></div>
-
-          <div class="orbit-spin spin-out">
-            <span class="orbit-line" style="--a:45deg;--dl:0s"></span>
-            <span class="orbit-line" style="--a:135deg;--dl:.8s"></span>
-            <span class="orbit-line" style="--a:225deg;--dl:1.6s"></span>
-            <span class="orbit-line" style="--a:315deg;--dl:2.4s"></span>
-            <button class="orbit-item" type="button" style="--a:45deg" data-group="De dónde llegan tus clientes" data-title="Google" data-desc="Search, Maps, Perfil de Empresa y Shopping optimizados para que te encuentren justo cuando te están buscando."><span class="oi-inner"><svg class="ico"><use href="#i-google"/></svg><span class="oi-label">Google</span></span></button>
-            <button class="orbit-item" type="button" style="--a:135deg" data-group="De dónde llegan tus clientes" data-title="Instagram" data-desc="Tu catálogo y tu web conectados a tu perfil para convertir seguidores en compradores, con el camino más corto a la compra."><span class="oi-inner"><svg class="ico"><use href="#i-ig"/></svg><span class="oi-label">Instagram</span></span></button>
-            <button class="orbit-item" type="button" style="--a:225deg" data-group="De dónde llegan tus clientes" data-title="TikTok" data-desc="Contenido que atrae a nuevas audiencias y un recorrido directo desde el video hasta tu web y la compra."><span class="oi-inner"><svg class="ico"><use href="#i-tt"/></svg><span class="oi-label">TikTok</span></span></button>
-            <button class="orbit-item" type="button" style="--a:315deg" data-group="De dónde llegan tus clientes" data-title="Facebook" data-desc="Audiencias, catálogo y píxel configurados para volver a impactar a quien ya visitó tu web y no compró."><span class="oi-inner"><svg class="ico"><use href="#i-fb"/></svg><span class="oi-label">Facebook</span></span></button>
-          </div>
-
-          <div class="orbit-spin spin-in">
-            <span class="orbit-line" style="--a:0deg;--dl:.4s"></span>
-            <span class="orbit-line" style="--a:90deg;--dl:1.2s"></span>
-            <span class="orbit-line" style="--a:180deg;--dl:2s"></span>
-            <span class="orbit-line" style="--a:270deg;--dl:2.8s"></span>
-            <button class="orbit-item" type="button" style="--a:0deg" data-group="Lo que hace tu web" data-title="Automatizaciones" data-desc="Respuestas, reservas, correos y avisos funcionando solos dentro de tu web, las 24 horas, sin que tengas que intervenir."><span class="oi-inner"><svg class="ico"><use href="#i-auto"/></svg><span class="oi-label">Automatización</span></span></button>
-            <button class="orbit-item" type="button" style="--a:90deg" data-group="Lo que hace tu web" data-title="Panel de administrador" data-desc="Actualiza precios, nombres, fotos y textos de toda tu página desde un solo lugar. Sin programar, desde el ordenador o el móvil."><span class="oi-inner"><svg class="ico"><use href="#i-panel"/></svg><span class="oi-label">Panel</span></span></button>
-            <button class="orbit-item" type="button" style="--a:180deg" data-group="Lo que hace tu web" data-title="Datos verificables" data-desc="Cuántos llegan, en qué sección se quedan y en qué punto dudan de comprar. Un reporte claro cada semana, solo si lo deseas."><span class="oi-inner"><svg class="ico"><use href="#i-data"/></svg><span class="oi-label">Datos</span></span></button>
-            <button class="orbit-item" type="button" style="--a:270deg" data-group="Lo que hace tu web" data-title="Contenido con IA" data-desc="Videos y fotos de nivel estudio con IA avanzada y dirección de arte humana. Realistas, sobrios y listos para vender."><span class="oi-inner"><svg class="ico"><use href="#i-spark"/></svg><span class="oi-label">Contenido IA</span></span></button>
-          </div>
-
-          <div class="orbit-core">
-            <svg class="core-mark"><use href="#logo"/></svg>
-            <strong>Tu web</strong>
-            <small>El centro de todo</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PANEL DEMO ============
-       El mismo recorrido de cuadros que Servicios (main.js): presentación, la demo para
-       probar el panel y lo que puedes hacer con él. -->
-  <section class="section svc" id="panel" style="--n:4">
-    <div class="svc-scroll">
-     <div class="svc-stage">
-      <div class="svc-view" data-reveal>
-      <div class="svc-track">
-
-        <!-- Presentación -->
-        <article class="card glass svc-card svc-intro">
-          <p class="eyebrow">Panel de administrador</p>
-          <h2 class="h2">Tu página, en tus manos.<br><em>Sin depender de nadie.</em></h2>
-          <p class="si-lead">Desde el paquete Automático, tu web incluye un panel privado. Pruébalo aquí mismo y mira cómo funcionaría con tu negocio.</p>
-          <ol class="si-list wrap">
-            <li><button type="button" data-svc-go="0"><span>01</span>Pruébalo aquí</button></li>
-            <li><button type="button" data-svc-go="1"><span>02</span>Qué puedes hacer</button></li>
-            <li><button type="button" data-svc-go="2"><span>03</span>Tenlo en tu web</button></li>
-          </ol>
-          <p class="si-hint">Baja para probarlo <svg class="ico"><use href="#i-arrow"/></svg></p>
-        </article>
-
-        <!-- 01 · La demo: cambia un campo del panel y mira el resultado al lado -->
-        <article class="card glass svc-card svc-block panel-try">
-          <p class="try-note"><strong>Pruébalo aquí mismo:</strong> cambia un nombre o un precio y mira cómo se ve en tu web, en vivo. Así funcionaría con tu negocio.</p>
-          <div class="demo">
-            <div class="window glass">
-              <div class="window-bar">
-                <span class="dots"><i></i><i></i><i></i></span>
-                <span class="window-url"><svg class="ico"><use href="#i-lock"/></svg>admin.tunegocio.com</span>
-                <span class="live"><i></i>En línea</span>
-              </div>
-              <div class="window-body">
-                <aside class="admin-side" aria-hidden="true">
-                  <span class="as-brand"><svg class="brand-mark"><use href="#logo"/></svg>Tu Negocio</span>
-                  <span class="on"><svg class="ico"><use href="#i-box"/></svg>Productos</span>
-                  <span><svg class="ico"><use href="#i-bag"/></svg>Pedidos <em class="badge">3</em></span>
-                  <span><svg class="ico"><use href="#i-text"/></svg>Páginas y textos</span>
-                  <span><svg class="ico"><use href="#i-image"/></svg>Imágenes</span>
-                  <span><svg class="ico"><use href="#i-data"/></svg>Estadísticas</span>
-                  <span><svg class="ico"><use href="#i-gear"/></svg>Ajustes</span>
-                </aside>
-                <div class="admin-main">
-                  <div class="admin-head">
-                    <div><p class="admin-title">Productos</p><span class="muted">3 ejemplos · negocios distintos</span></div>
-                    <span class="hint-chip"><svg class="ico"><use href="#i-pen"/></svg>Edita cualquier campo</span>
-                  </div>
-                  <div class="a-table" id="a-table">
-                    <div class="a-row head" aria-hidden="true"><span></span><span>Nombre</span><span>Precio</span><span>Visible</span></div>
-                    <div class="a-row sel" data-i="0" data-cat="Tortas">
-                      <span class="a-thumb is-food" aria-hidden="true">🎂</span>
-                      <label class="field f-name"><span class="sr">Nombre del producto 1</span><input type="text" value="Torta de chocolate" data-k="name" maxlength="36" autocomplete="off"></label>
-                      <label class="field f-price"><span class="cur">$</span><span class="sr">Precio del producto 1</span><input type="number" value="39000" min="0" step="1" data-k="price" inputmode="decimal"></label>
-                      <label class="switch"><input type="checkbox" checked data-k="visible"><span class="sw"></span><span class="sr">Visible en la tienda</span></label>
-                    </div>
-                    <div class="a-row" data-i="1" data-cat="Calzado">
-                      <span class="a-thumb is-food" aria-hidden="true">👟</span>
-                      <label class="field f-name"><span class="sr">Nombre del producto 2</span><input type="text" value="Zapatos talla 38" data-k="name" maxlength="36" autocomplete="off"></label>
-                      <label class="field f-price"><span class="cur">$</span><span class="sr">Precio del producto 2</span><input type="number" value="189000" min="0" step="1" data-k="price" inputmode="decimal"></label>
-                      <label class="switch"><input type="checkbox" checked data-k="visible"><span class="sw"></span><span class="sr">Visible en la tienda</span></label>
-                    </div>
-                    <div class="a-row" data-i="2" data-cat="Hospedaje">
-                      <span class="a-thumb is-food" aria-hidden="true">🏕️</span>
-                      <label class="field f-name"><span class="sr">Nombre del producto 3</span><input type="text" value="Noche en glamping para 2" data-k="name" maxlength="36" autocomplete="off"></label>
-                      <label class="field f-price"><span class="cur">$</span><span class="sr">Precio del producto 3</span><input type="number" value="320000" min="0" step="1" data-k="price" inputmode="decimal"></label>
-                      <label class="switch"><input type="checkbox" checked data-k="visible"><span class="sw"></span><span class="sr">Visible en la tienda</span></label>
-                    </div>
-                  </div>
-                  <div class="admin-foot">
-                    <span class="save-state" id="save-state"><i></i><span>Todo publicado</span></span>
-                    <button class="btn btn-primary btn-sm" id="publish" type="button">Publicar cambios</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-            <div class="preview glass">
-              <div class="pv-top"><span>Así se ve en tu web</span><span class="live"><i></i>En vivo</span></div>
-              <div class="pv-card" id="pv-card">
-                <div class="pv-img"><span class="pv-obj is-food" id="pv-obj" aria-hidden="true">🎂</span><span class="pv-hidden">Oculto en la tienda</span></div>
-                <div class="pv-body">
-                  <span class="pv-cat" id="pv-cat">Tortas</span>
-                  <p class="pv-name" id="pv-name">Torta de chocolate</p>
-                  <div class="pv-price" id="pv-price">$39.000</div>
-                  <span class="pv-btn">Añadir al carrito</span>
-                </div>
-              </div>
-              <p class="pv-note">Cada cambio del panel se refleja en tu web al instante.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- 02 · Lo que puedes hacer desde el panel -->
-        <article class="card glass svc-card svc-block svc-feats">
-          <h3>Todo, <em>en un solo lugar.</em></h3>
-          <ul class="feature-row">
-            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-pen"/></svg></span><div><strong>Precios y nombres</strong><span>Cámbialos en segundos, uno o todos a la vez.</span></div></li>
-            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-image"/></svg></span><div><strong>Fotos y textos</strong><span>Edita cualquier sección de tu página sin código.</span></div></li>
-            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-bag"/></svg></span><div><strong>Pedidos y stock</strong><span>Todo tu negocio visible en un solo lugar.</span></div></li>
-            <li><span class="icon-bubble sm"><svg class="ico"><use href="#i-phone"/></svg></span><div><strong>Desde tu móvil</strong><span>Gestiona tu web desde donde estés.</span></div></li>
-          </ul>
-        </article>
-
-        <!-- 03 · Cómo lo tienes: el mismo tutorial de 3 pasos de Servicios, con el botón para pedirlo
-             arriba a la derecha (en el lugar del icono, para no quitarle alto al tutorial) -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Tu panel</span><a href="#" class="btn btn-primary btn-sm" data-wa="Hola Gotia Studio 👋 Quiero el panel de administrador para mi web"><svg class="ico ico-l"><use href="#i-wa"/></svg>Quiero mi panel</a></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo lo tienes, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Nos escribes</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Lo armamos</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Lo usas</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: nos escribes">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>WhatsApp</span><b><svg class="ico"><use href="#i-wa"/></svg>Gotiastudio</b></div>
-                    <div class="tuto-body">
-                      <p class="tuto-msg out tuto-pop" style="--d:0">Hola, quiero el panel para mi pastelería 🎂</p>
-                      <p class="tuto-msg in tuto-pop" style="--d:1"><span class="tuto-av">G</span>¡Con gusto! Cuéntanos qué vendes y lo armamos.</p>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Nos escribes</b> y nos cuentas qué vendes.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: lo armamos">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu panel</span><b>Tus productos</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-row tuto-pop" style="--d:0"><span class="tuto-thumb" aria-hidden="true">🎂</span><span><b>Torta de chocolate</b><small>$39.000</small></span></div>
-                      <div class="tuto-row tuto-pop" style="--d:1"><span class="tuto-thumb" aria-hidden="true">🍪</span><span><b>Galletas de avena</b><small>$12.000</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:2"><span><svg class="ico"><use href="#i-check"/></svg>Conectado a tu web</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Lo armamos con tus productos</b> y lo conectamos a tu web.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: lo usas">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu celular</span><b><svg class="ico"><use href="#i-lock"/></svg>admin.tunegocio.com</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-phone"/></svg></span><span><b>Tu panel, en tu celular</b><small>Entras con tu clave, cuando quieras</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-pen"/></svg>Cambias precios</span><span><svg class="ico"><use href="#i-bag"/></svg>Ves tus pedidos</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Lo usas desde tu celular,</b> cuando quieras. Sin depender de nadie.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Tenlo en tu web</h3>
-          <p>Te lo entregamos listo, con tus productos cargados, y te enseñamos a usarlo.</p>
-          <ul class="ticks">
-            <li>Incluido desde el paquete Automático</li>
-            <li>Con tus productos ya cargados</li>
-            <li>Te enseñamos a usarlo</li>
-          </ul>
-        </article>
-
-      </div>
-      </div>
-
-      <div class="svc-ui glass">
-        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
-        <div class="svc-dots">
-          <button class="svc-dot" type="button" aria-label="Presentación del panel"></button>
-          <button class="svc-dot" type="button" aria-label="01 · Pruébalo"></button>
-          <button class="svc-dot" type="button" aria-label="02 · Qué puedes hacer"></button>
-          <button class="svc-dot" type="button" aria-label="03 · Tenlo en tu web"></button>
-        </div>
-        <span class="svc-count" aria-hidden="true"><b>00</b> / 03</span>
-        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
-      </div>
-     </div>
-    </div>
-  </section>
-
-  <!-- ============ DATOS ============
-       El mismo recorrido de cuadros que Servicios (main.js): presentación y tres ventanas con el
-       tutorial de 3 pasos (cuánta gente llega y compra, dónde dudan, y que es opcional y privado). -->
-  <section class="section svc" id="datos" style="--n:4">
-    <div class="svc-scroll">
-     <div class="svc-stage">
-      <div class="svc-view" data-reveal>
-      <div class="svc-track">
-
-        <!-- Presentación -->
-        <article class="card glass svc-card svc-intro">
-          <p class="eyebrow">Datos verificables · Opcional</p>
-          <h2 class="h2">Decide con datos,<br><em>no con intuición.</em></h2>
-          <p class="si-lead">Si quieres, medimos tu web. Cada semana sabes cuánta gente llegó, dónde dudó y cuántos compraron.</p>
-          <ol class="si-list wrap">
-            <li><button type="button" data-svc-go="0"><span>01</span>Llegan y compran</button></li>
-            <li><button type="button" data-svc-go="1"><span>02</span>Dónde dudan</button></li>
-            <li><button type="button" data-svc-go="2"><span>03</span>Tú decides</button></li>
-          </ol>
-          <a href="#" class="btn btn-primary btn-sm si-cta" data-wa="Hola Gotia Studio 👋 Quiero datos verificables en mi negocio"><svg class="ico ico-l"><use href="#i-wa"/></svg>Quiero datos en mi negocio</a>
-          <p class="si-hint">Baja para ver cómo funciona <svg class="ico"><use href="#i-arrow"/></svg></p>
-        </article>
-
-        <!-- 01 a 03 · el mismo tutorial de 3 pasos de Servicios: el texto arriba, el ejemplo abajo y
-             el botón "Quiero datos en mi negocio" arriba a la derecha (main.js). El reporte con
-             pestañas de semana de antes (#report) sigue en version-conversion -->
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Reporte semanal</span><a href="#" class="btn btn-primary btn-sm" data-wa="Hola Gotia Studio 👋 Quiero datos verificables en mi negocio"><svg class="ico ico-l"><use href="#i-wa"/></svg>Quiero datos en mi negocio</a></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Llegan</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Compran</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Mejoras</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: cuánta gente llega">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu reporte</span><b>Semana del 21 al 27 sep</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-stat tuto-pop" style="--d:0"><strong>4.812</strong><span>personas llegaron a tu web<em>↑ 23% más que la semana pasada</em></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-google"/></svg>Google 61%</span><span><svg class="ico"><use href="#i-ig"/></svg>Instagram 24%</span><span>Otros 15%</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Ves cuánta gente llegó</b> a tu web y de dónde vino.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: cuántos compran">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu reporte</span><b>Ventas</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-stat tuto-pop" style="--d:0"><strong>168</strong><span>personas compraron<em>↑ 28% más que la semana pasada</em></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-bag"/></svg>544 dejaron el carrito sin pagar</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Ves cuántos compraron</b> y cuántos se quedaron a medio camino.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: mejoras">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu reporte</span><b>Consejo de la semana</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-bulb"/></svg></span><span><b>Pon reseñas en «Precios»</b><small>Ahí es donde más gente duda antes de comprar.</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-check"/></svg>Más ventas</span><span><svg class="ico"><use href="#i-check"/></svg>Sin adivinar</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Te decimos qué cambiar</b> para que más personas compren.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Cuánta gente llega y cuántos compran</h3>
-          <p>Cada semana, un reporte con números grandes y claros: quién llegó, quién compró y qué mejorar.</p>
-          <ul class="ticks">
-            <li>Visitas y de dónde vienen</li>
-            <li>Compras y carritos sin pagar</li>
-            <li>Un consejo cada semana</li>
-          </ul>
-        </article>
-
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Mapa de atención</span><a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Quiero datos verificables en mi negocio"><svg class="ico ico-l"><use href="#i-wa"/></svg>Quiero datos en mi negocio</a></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Entran</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Dudan</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Mejora</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: hasta dónde llega la gente">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Mapa de atención</span><b>Esta semana</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-bars tuto-pop" style="--d:0">
-                        <span>Portada<i style="--w:1"></i><b>100%</b></span>
-                        <span>Catálogo<i style="--w:.72"></i><b>72%</b></span>
-                        <span>Precios<i style="--w:.52"></i><b>52%</b></span>
-                        <span>Pago<i style="--w:.17"></i><b>17%</b></span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Vemos hasta dónde llega la gente</b> en tu página.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: dónde dudan">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Mapa de atención</span><b>Dónde se van</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-bars">
-                        <span>Catálogo<i style="--w:.72"></i><b>72%</b></span>
-                        <span class="is-hot tuto-pop" style="--d:0">Precios<i style="--w:.52"></i><b>52%</b></span>
-                      </div>
-                      <div class="tuto-note tuto-pop" style="--d:1"><span class="tuto-ico"><svg class="ico"><use href="#i-search"/></svg></span><span><b>En «Precios» se va casi la mitad</b><small>Ahí dudan y no siguen</small></span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Encontramos dónde dudan</b> y se van sin comprar.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: lo arreglamos">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>La semana siguiente</span><b>Resultado</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-stat tuto-pop" style="--d:0"><strong>+28%</strong><span>más compras<em>↑ después de poner reseñas en «Precios»</em></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-check"/></svg>Medido, no adivinado</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Lo arreglamos juntos</b> y medimos el resultado.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Dónde dudan tus clientes</h3>
-          <p>Vemos hasta qué parte de tu web llega la gente y dónde se va, para arreglar justo eso.</p>
-          <ul class="ticks">
-            <li>Hasta dónde llegan</li>
-            <li>Dónde dudan y se van</li>
-            <li>Qué cambiar para que compren</li>
-          </ul>
-        </article>
-
-        <article class="card glass spot svc-card svc-mid svc-tuto">
-          <div class="card-top"><span class="auto-kicker">Opcional y verificable</span><a href="#" class="btn btn-glass glass btn-sm" data-wa="Hola Gotia Studio 👋 Quiero datos verificables en mi negocio"><svg class="ico ico-l"><use href="#i-wa"/></svg>Quiero datos en mi negocio</a></div>
-          <div class="visual">
-            <div class="tuto" data-tuto>
-              <ol class="tuto-steps" role="tablist" aria-label="Cómo funciona, en 3 pasos">
-                <li role="presentation"><button type="button" role="tab" aria-selected="true"><i></i><span><em>1</em>Lo activas</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>2</em>Privado</span></button></li>
-                <li role="presentation"><button type="button" role="tab" aria-selected="false"><i></i><span><em>3</em>Cada semana</span></button></li>
-              </ol>
-              <div class="tuto-screen">
-                <div class="tuto-scene is-on" role="tabpanel" aria-label="Paso 1: tú decides si lo activas">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Tu panel</span><b>Ajustes</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-data"/></svg></span><span><b>Medir mi web</b><small>Solo si tú quieres</small></span><span class="tuto-switch" aria-hidden="true"></span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Tú decides si quieres medir</b> tu web. Es opcional.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 2: es privado">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Privacidad</span><b><svg class="ico"><use href="#i-lock"/></svg>Protegido</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-shield"/></svg></span><span><b>Datos anónimos</b><small>Sin nombres ni datos personales, según la ley</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-check"/></svg>Anónimo</span><span><svg class="ico"><use href="#i-check"/></svg>Verificable</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Es privado:</b> contamos visitas, no personas con nombre.</p>
-                </div>
-                <div class="tuto-scene" role="tabpanel" aria-label="Paso 3: lo revisamos contigo cada semana">
-                  <div class="tuto-win">
-                    <div class="tuto-bar"><i></i><i></i><i></i><span>Cada lunes</span><b><svg class="ico"><use href="#i-cal"/></svg>Tu reporte</b></div>
-                    <div class="tuto-body">
-                      <div class="tuto-note tuto-pop" style="--d:0"><span class="tuto-ico"><svg class="ico"><use href="#i-chat"/></svg></span><span><b>Tu reporte de la semana</b><small>Te lo explicamos con palabras simples</small></span></div>
-                      <div class="tuto-ok tuto-pop" style="--d:1"><span><svg class="ico"><use href="#i-chat"/></svg>Por mensaje</span><span><svg class="ico"><use href="#i-phone"/></svg>O en una llamada</span></div>
-                    </div>
-                  </div>
-                  <p class="tuto-cap"><b>Cada semana lo revisamos contigo,</b> por mensaje o en una llamada.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h3>Tú decides, y es privado</h3>
-          <p>La medición es opcional, anónima y verificable. La activas solo si quieres.</p>
-          <ul class="ticks">
-            <li>Opcional</li>
-            <li>Anónima y según la ley</li>
-            <li>Revisada contigo cada semana</li>
-          </ul>
-        </article>
-
-      </div>
-      </div>
-
-      <div class="svc-ui glass">
-        <button class="svc-arrow svc-prev" type="button" aria-label="Anterior"><svg class="ico"><use href="#i-arrow"/></svg></button>
-        <div class="svc-dots">
-          <button class="svc-dot" type="button" aria-label="Presentación de los datos"></button>
-          <button class="svc-dot" type="button" aria-label="01 · Cuánta gente llega y cuántos compran"></button>
-          <button class="svc-dot" type="button" aria-label="02 · Dónde dudan tus clientes"></button>
-          <button class="svc-dot" type="button" aria-label="03 · Tú decides, y es privado"></button>
-        </div>
-        <span class="svc-count" aria-hidden="true"><b>00</b> / 03</span>
-        <button class="svc-arrow svc-next" type="button" aria-label="Siguiente"><svg class="ico"><use href="#i-arrow"/></svg></button>
-      </div>
-     </div>
-    </div>
-  </section>
-
-  <!-- ============ PROCESO ============ -->
-  <section class="section" id="proceso">
+  <!-- ============ 2. RESULTADOS: solo casos reales ============ -->
+  <section class="section lz-sec" id="resultados">
     <div class="container">
-      <header class="section-head center">
-        <p class="eyebrow" data-reveal>Proceso</p>
-        <h2 class="h2" data-reveal>Cuatro pasos.<br><em>Cero improvisación.</em></h2>
-        <p class="lead" data-reveal>Sabes siempre qué hacemos, cuándo lo entregamos y qué sigue.</p>
+      <header class="lz-head">
+        <p class="eyebrow"><span data-l="es">Casos reales</span><span data-l="en">Real cases</span></p>
+        <h2 class="h2"><span data-l="es">Lo que ya <em>logramos.</em></span><span data-l="en">What we've <em>achieved.</em></span></h2>
+        <!-- el total es la suma de los dos casos de abajo, en los mismos 30 días (21 oct. – 19 nov. 2026):
+             528.270 + 17.362.668. Las cifras salen de las capturas (assets/img/caso-*-vistas.webp) -->
+        <p class="lz-total" data-l="es"><strong>17.890.938</strong> vistas de video en 30 días, en nuestros casos reales</p>
+        <p class="lz-total" data-l="en"><strong>17,890,938</strong> video views in 30 days across our real cases</p>
       </header>
 
-      <!-- los círculos se encienden uno tras otro, en bucle mientras se ven (main.js, las dos versiones) -->
-      <div class="steps" id="steps" data-marcas=".step">
+      <div class="casos">
+        <!-- CASO DE ÉXITO · HOTEL CABALEON. Cuando tengas más datos (solicitudes, reservas
+             o una cita del hotel), quita los comentarios de MÁS DATOS y cambia cada [N] -->
+        <article class="caso glass is-featured" id="caso-hotel">
+          <span class="lz-tag"><span data-l="es">Caso de éxito</span><span data-l="en">Success story</span></span>
+          <p class="caso-kicker">Hotel Cabaleon</p>
+          <p class="caso-num" data-l="es">528.270</p>
+          <p class="caso-num" data-l="en">528,270</p>
+          <!-- la captura muestra 30 días, pero la cuenta lleva solo 2 semanas desde que la empezamos (dato del cliente, 20 nov. 2026) -->
+          <p class="caso-txt" data-l="es">vistas de video y 905 seguidores más. <strong>La cuenta lleva solo 2 semanas</strong> desde que la empezamos, y ya tiene resultados.</p>
+          <p class="caso-txt" data-l="en">video views and 905 new followers. <strong>We started the account just 2 weeks ago</strong>, and it's already getting results.</p>
+          <img class="caso-foto" src="caso-cabaleon-vistas.webp" alt="Estadísticas del Hotel Cabaleon del 21 de octubre al 19 de noviembre: 528.270 visualizaciones y 905 seguidores netos" width="720" height="450" loading="lazy" decoding="async">
+          <!-- MÁS DATOS:
+          <ul class="caso-datos">
+            <li><strong>[N]</strong> solicitudes de reserva</li>
+            <li><strong>[N]</strong> reservas confirmadas</li>
+          </ul>
+          <blockquote class="caso-cita">“[CITA DEL TESTIMONIO]”<cite>[NOMBRE], [CARGO] · Hotel Cabaleon</cite></blockquote> -->
+          <a class="btn btn-glass glass btn-sm caso-ig" href="https://www.instagram.com/cabaleonhoteltena/" target="_blank" rel="noopener"><svg class="ico ico-l"><use href="#i-ig"/></svg>@cabaleonhoteltena</a>
+          <p class="caso-nota"><span data-l="es">Escríbeles y pregúntales por Gotia Studio.</span><span data-l="en">Message them and ask about Gotia Studio.</span></p>
+        </article>
+
+        <article class="caso glass" id="caso-mantis">
+          <span class="icon-bubble"><svg class="ico"><use href="#i-video"/></svg></span>
+          <p class="caso-kicker">Mantis Pest Control</p>
+          <p class="caso-num" data-l="es">17.362.668</p>
+          <p class="caso-num" data-l="en">17,362,668</p>
+          <!-- +1.000 interesados: dato del cliente (20 nov. 2026) -->
+          <p class="caso-txt" data-l="es">vistas de video en 30 días, 3.676 seguidores más y <strong>+1.000 interesados</strong>.</p>
+          <p class="caso-txt" data-l="en">video views in 30 days, 3,676 new followers and <strong>1,000+ leads</strong>.</p>
+          <img class="caso-foto" src="caso-mantis-vistas.webp" alt="Estadísticas de Mantis Pest Control del 21 de octubre al 19 de noviembre: 17.362.668 visualizaciones y 3.676 seguidores netos" width="720" height="447" loading="lazy" decoding="async">
+          <a class="btn btn-glass glass btn-sm caso-ig" href="https://www.instagram.com/mantis_pestcontrol/" target="_blank" rel="noopener"><svg class="ico ico-l"><use href="#i-ig"/></svg>@mantis_pestcontrol</a>
+        </article>
+      </div>
+
+      <div class="lz-center">
+        <a href="#" class="btn btn-primary" data-wa="Hola, quiero saber cómo lograron sus resultados en video" data-wa-en="Hi, I'd like to know how you got those video results"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Pregúntanos cómo lo hicimos</span><span data-l="en">Ask us how we did it</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. CÓMO FUNCIONA: 3 pasos ============
+       los círculos se encienden uno tras otro mientras se ven (main.js, #steps) -->
+  <section class="section lz-sec" id="como-funciona">
+    <div class="container">
+      <header class="lz-head">
+        <p class="eyebrow"><span data-l="es">3 pasos</span><span data-l="en">3 steps</span></p>
+        <h2 class="h2"><span data-l="es">Cómo <em>funciona.</em></span><span data-l="en">How it <em>works.</em></span></h2>
+      </header>
+      <div class="steps steps-3" id="steps">
         <div class="steps-line" aria-hidden="true"></div>
         <article class="step">
-          <span class="step-dot"><svg class="ico"><use href="#i-compass"/></svg></span>
-          <small>01</small>
-          <h3>Descubrimiento</h3>
-          <p>Tu negocio, tu cliente y qué debe lograr tu web.</p>
-        </article>
-        <article class="step">
-          <span class="step-dot"><svg class="ico"><use href="#i-pen"/></svg></span>
-          <small>02</small>
-          <h3>Diseño</h3>
-          <p>A medida. Apruebas cada pantalla antes de construir.</p>
-        </article>
-        <article class="step">
           <span class="step-dot"><svg class="ico"><use href="#i-code"/></svg></span>
-          <small>03</small>
-          <h3>Desarrollo</h3>
-          <p>Web, automatizaciones, panel, Google y redes. Todo probado.</p>
+          <small>01</small>
+          <h3><span data-l="es">Pagas tu página</span><span data-l="en">You pay for your website</span></h3>
+          <p><span data-l="es">Lista en pocos días, con tu WhatsApp, tus servicios y Google Maps.</span><span data-l="en">Ready in a few days, with your WhatsApp, your services and Google Maps.</span></p>
         </article>
         <article class="step">
-          <span class="step-dot"><svg class="ico"><use href="#i-rocket"/></svg></span>
-          <small>04</small>
-          <h3>Lanzamiento</h3>
-          <p>Publicamos y mejoramos cada semana con datos reales.</p>
+          <span class="step-dot"><svg class="ico"><use href="#i-video"/></svg></span>
+          <small>02</small>
+          <h3><span data-l="es">10 días de marketing intensivo</span><span data-l="en">10 days of intensive marketing</span></h3>
+          <p><span data-l="es">1 a 2 videos diarios en una cuenta de prueba compartida contigo. Todos llevan a tu WhatsApp.</span><span data-l="en">1–2 daily videos on a test account shared with you. Every video leads to your WhatsApp.</span></p>
+        </article>
+        <article class="step">
+          <span class="step-dot"><svg class="ico"><use href="#i-data"/></svg></span>
+          <small>03</small>
+          <h3><span data-l="es">Te mostramos los números</span><span data-l="en">We show you the numbers</span></h3>
+          <p><span data-l="es">El día 8 vemos cuántos te escribieron. Si sigues, desde $700.000/mes + IVA.</span><span data-l="en">On day 8 we check how many people messaged you. If you continue, from US$175/month.</span></p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ PLANES (sin precios: se consultan por WhatsApp o Instagram) ============
-       Un efecto distinto al de las otras secciones: al bajar, cada plan sube y se apila sobre el
-       anterior, como un mazo de cartas (position: sticky). main.js lo enciende solo si cada plan
-       cabe en la pantalla (.is-on) y achica y apaga un poco los de atrás. Sin JS, o si no caben,
-       los planes van uno debajo de otro. Después, comparar, las mensualidades y extras, y escribir. -->
-  <section class="section plans" id="packs">
+  <!-- ============ 4. PRECIO: el Pack Lanzamiento y, al lado, el Año completo; debajo, la Aceleradora ============
+       Mismas tarjetas y mismos precios que en paquetes.html (#plan-lanzamiento y #plan-anual): si cambias uno, cambia el otro.
+       En inglés (data-l="en") los precios van en USD: 4.000 COP por dólar, redondeados a 5, sin IVA. -->
+  <section class="section lz-sec" id="precios">
     <div class="container">
-      <header class="plans-head">
-        <p class="eyebrow" data-reveal>Paquetes</p>
-        <h2 class="h2" data-reveal>Elige tu <em>burbuja.</em></h2>
-        <p class="lead" data-reveal>Tres paquetes de página web con automatización y uno para empezar. Elige el que le sirve a tu negocio.</p>
-        <nav class="plans-jump" aria-label="Ir a un paquete" data-reveal>
-          <a href="#plan-presencia" data-plan-go>Presencia</a><a href="#plan-automatico" data-plan-go class="is-hl">Automático</a><a href="#plan-negocio" data-plan-go>Negocio</a><a href="#plan-emprende" data-plan-go>Emprende</a><a href="#plan-compare">Comparar</a>
-        </nav>
+      <header class="lz-head">
+        <p class="eyebrow"><span data-l="es">Precio</span><span data-l="en">Pricing</span></p>
+        <h2 class="h2"><span data-l="es">Empieza con tu <em>lanzamiento.</em></span><span data-l="en">Start with your <em>launch.</em></span></h2>
       </header>
 
-      <div class="plans-stack" data-stack>
-
-        <article class="stack-plan glass" id="plan-presencia" style="--i:0;--tint:#5b6478">
-          <div class="plan-side">
-            <span class="plan-num">Paquete 01 <i>/ 04</i></span>
-            <span class="pack-orb" style="--o:92px;--tint:#5b6478" aria-hidden="true"></span>
-            <h3 class="plan-name">Presencia</h3>
-            <p class="plan-tag">Tu negocio bien presentado en internet.</p>
-            <p class="plan-meta"><span>Pago único</span><span>Lista en 3 a 5 días hábiles</span></p>
-          </div>
-          <div class="plan-body">
-            <ul class="pack-list">
-              <li>Web a la medida de tu marca: Inicio, Nosotros, Servicios y Contacto</li>
-              <li>Adaptada a celular, tablet y computador</li>
-              <li>Botón de WhatsApp con el mensaje listo y enlaces a tus redes</li>
-              <li>Formulario de contacto, Google Maps y SEO básico</li>
-              <li>Dominio, hosting y candado SSL por 1 año</li>
-              <li>1 mes de Cuidado incluido</li>
-            </ul>
-            <p class="pack-ideal"><span>Ideal si</span> estás empezando o tu web actual no te trae clientes.</p>
-            <div class="plan-cta">
-              <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
-              <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del paquete Presencia">Consultar precio</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="stack-plan glass is-featured" id="plan-automatico" style="--i:1;--tint:#ff5fae">
-          <span class="pack-badge">Recomendado</span>
-          <div class="plan-side">
-            <span class="plan-num">Paquete 02 <i>/ 04</i></span>
-            <span class="pack-orb" style="--o:104px;--tint:#ff5fae" aria-hidden="true"></span>
-            <h3 class="plan-name">Automático</h3>
-            <p class="plan-tag">Tu web atiende, agenda y te avisa sola.</p>
-            <p class="plan-meta"><span>Pago único</span><span>Lista en 5 a 7 días hábiles</span></p>
-          </div>
-          <div class="plan-body">
-            <ul class="pack-list">
-              <li class="plus">Todo lo de Presencia, más:</li>
-              <li>Respuestas automáticas en tu web las 24 horas</li>
-              <li>Reservas y citas en línea, con Google Calendar, Booking o Airbnb</li>
-              <li>Correos de confirmación y aviso inmediato para ti</li>
-              <li>Cada cliente guardado en tu panel</li>
-              <li>Panel para que cambies tú mismo textos, fotos y precios</li>
-              <li>2 meses de Cuidado Automático incluidos</li>
-            </ul>
-            <p class="pack-ideal"><span>Ideal si</span> recibes muchas consultas y quieres dejar de responder lo mismo todo el día.</p>
-            <div class="plan-cta">
-              <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
-              <a href="#" class="btn btn-primary" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del paquete Automático">Consultar precio <svg class="ico"><use href="#i-arrow"/></svg></a>
-            </div>
-          </div>
-        </article>
-
-        <article class="stack-plan glass" id="plan-negocio" style="--i:2;--tint:#8fb4e6">
-          <div class="plan-side">
-            <span class="plan-num">Paquete 03 <i>/ 04</i></span>
-            <span class="pack-orb" style="--o:116px;--tint:#8fb4e6" aria-hidden="true"></span>
-            <h3 class="plan-name">Negocio</h3>
-            <p class="plan-tag">Tu web vende, cobra y te muestra los números.</p>
-            <p class="plan-meta"><span>Pago único</span><span>Lista en 7 a 10 días hábiles</span></p>
-          </div>
-          <div class="plan-body">
-            <ul class="pack-list">
-              <li class="plus">Todo lo de Automático, más:</li>
-              <li>Catálogo de productos o servicios con panel de ventas y facturas</li>
-              <li>Pagos en línea desde tu web</li>
-              <li>Recordatorios por correo antes de cada cita</li>
-              <li>Correo pidiendo reseña en Google</li>
-              <li>Panel de estadísticas en tiempo real: visitas, de dónde llegan, quién escribe o compra y ventas</li>
-              <li>3 meses de Cuidado Negocio incluidos</li>
-            </ul>
-            <p class="pack-ideal"><span>Ideal si</span> tu negocio ya tiene movimiento y quieres vender y cobrar desde tu web.</p>
-            <div class="plan-cta">
-              <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
-              <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del paquete Negocio">Consultar precio</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="stack-plan glass" id="plan-emprende" style="--i:3;--tint:#4fb3ff">
-          <span class="pack-badge">Para empezar</span>
-          <div class="plan-side">
-            <span class="plan-num">Paquete 04 <i>/ 04</i></span>
-            <span class="pack-orb" style="--o:80px;--tint:#4fb3ff" aria-hidden="true"></span>
-            <h3 class="plan-name">Emprende</h3>
-            <p class="plan-tag">Tu negocio en internet, para empezar.</p>
-            <p class="plan-meta"><span>Pago único</span><span>Lista en 1 a 2 días hábiles</span></p>
-          </div>
-          <div class="plan-body">
-            <ul class="pack-list">
-              <li>Página de una sola sección con tu logo, colores y fotos</li>
-              <li>Adaptada a celular, tablet y computador</li>
-              <li>Botón de WhatsApp con el mensaje listo y enlaces a tus redes</li>
-              <li>Dominio, hosting y candado SSL por 1 año</li>
-            </ul>
-            <p class="pack-ideal"><span>Ideal si</span> estás arrancando tu emprendimiento y quieres que te encuentren y te escriban.</p>
-            <div class="plan-cta">
-              <p class="ask-price"><svg class="ico"><use href="#i-chat"/></svg>Precio por WhatsApp</p>
-              <a href="#" class="btn btn-glass glass" data-wa="Hola Gotia Studio 👋 Quiero el precio y la información del paquete Emprende">Consultar precio</a>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- comparar los 4 paquetes: lo esencial, punto por punto -->
-      <article class="card glass plan-compare" id="plan-compare">
-          <h3>Compara los <em>4 paquetes.</em></h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th scope="col"><span class="sr">Incluye</span></th><th scope="col">Emprende</th><th scope="col">Presencia</th><th scope="col" class="hl">Automático</th><th scope="col">Negocio</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">Lista en</th><td>1 a 2 días</td><td>3 a 5 días</td><td class="hl">5 a 7 días</td><td>7 a 10 días</td></tr>
-                <tr><th scope="row">Secciones</th><td>1</td><td>4</td><td class="hl">4</td><td>4 + catálogo</td></tr>
-                <tr><th scope="row">Web adaptable, WhatsApp, dominio y SSL</th><td class="y"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td><td class="y hl"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
-                <tr><th scope="row">Google Maps y SEO</th><td class="n"><span class="sr">No</span></td><td class="y"><span class="sr">Sí</span></td><td class="y hl"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
-                <tr><th scope="row">Automatizaciones</th><td>No</td><td>No</td><td class="hl">Atiende y agenda</td><td>Atiende, agenda, cobra y mide</td></tr>
-                <tr><th scope="row">Panel para tus cambios</th><td class="n"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="y hl"><span class="sr">Sí</span></td><td class="y"><span class="sr">Sí</span></td></tr>
-                <tr><th scope="row">Pagos en línea y estadísticas</th><td class="n"><span class="sr">No</span></td><td class="n"><span class="sr">No</span></td><td class="n hl"><span class="sr">No</span></td><td class="y"><span class="sr">Sí</span></td></tr>
-                <tr><th scope="row">Meses incluidos</th><td class="n"><span class="sr">Ninguno</span></td><td>1 mes<span class="pc-more"> de Cuidado</span></td><td class="hl">2 meses<span class="pc-more"> de Cuidado Automático</span></td><td>3 meses<span class="pc-more"> de Cuidado Negocio</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-
-    </div>
-
-    <div class="container packs-more">
-      <div class="addons-head">
-        <h3 data-reveal>Extras y mensualidades</h3>
-        <p data-reveal>Tu página sigue trabajando mes a mes, y si tu caso es otro, también te ayudamos.</p>
-      </div>
-      <div class="addons" data-stagger>
-        <a class="addon glass spot" href="#automatizacion" data-svc-for="automatizacion" data-svc-go="0">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-globe"/></svg></span><span class="addon-tag">Extra</span></div>
-          <h4>¿Tu página la hizo otro proveedor?</h4>
-          <p>La automatizamos: tu web responde, agenda y te avisa sola.</p>
-        </a>
-        <article class="addon glass spot">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-auto"/></svg></span><span class="addon-tag">Extra</span></div>
-          <h4>Proyecto a medida</h4>
-          <p>Web, redes y Google Ads. Te enviamos una cotización.</p>
-        </article>
-        <article class="addon glass spot">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-video"/></svg></span><span class="addon-tag">Por aparte</span></div>
-          <h4>Contenido viral con IA</h4>
-          <p>Fotos y videos para tus redes, hechos para traer visitas.</p>
-        </article>
-        <article class="addon glass spot is-month">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-wrench"/></svg></span><span class="addon-tag">Mensual</span></div>
-          <h4>Cuidado</h4>
-          <p>Para Emprende y Presencia. Tu web al día y segura, con hasta 5 cambios al mes.</p>
-        </article>
-        <article class="addon glass spot is-month">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-auto"/></svg></span><span class="addon-tag">Mensual</span></div>
-          <h4>Cuidado Automático</h4>
-          <p>Para Automático. Tus automatizaciones funcionando, con 2 ajustes y un reporte corto al mes.</p>
-        </article>
-        <article class="addon glass spot is-month">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-data"/></svg></span><span class="addon-tag">Mensual</span></div>
-          <h4>Cuidado Negocio</h4>
-          <p>Para Negocio. Reporte completo, mapas de calor, 1 reunión y 1 mejora al mes.</p>
-        </article>
-        <article class="addon glass spot is-month">
-          <div class="addon-top"><span class="icon-bubble sm"><svg class="ico"><use href="#i-rocket"/></svg></span><span class="addon-tag">Mensual</span></div>
-          <h4>Crecimiento</h4>
-          <p>4 redes con YouTube, 12 publicaciones al mes, 1 campaña en Google o Meta y Google Business activo.</p>
-        </article>
-      </div>
-
-      <div class="ask glass" data-reveal>
-        <span class="bubble" style="--s:150px;right:-40px;top:-60px" aria-hidden="true"></span>
-        <span class="bubble" style="--s:46px;left:46%;bottom:-18px;--dur:9s" aria-hidden="true"></span>
-        <div class="ask-copy">
-          <h3>¿Quieres conocer los <em>precios?</em></h3>
-          <p>Cuéntanos sobre tu negocio y juntos encontramos el servicio que necesitas. Te respondemos en persona, sin compromiso.</p>
-        </div>
-        <div class="ask-actions">
-          <a href="#" class="btn btn-primary magnetic" data-wa="Hola Gotia Studio 👋 Quiero conocer los paquetes y precios"><svg class="ico ico-l"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
-          <a href="#" class="btn btn-glass glass magnetic" data-ig><svg class="ico ico-l"><use href="#i-ig"/></svg>Escribir por Instagram</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ ============ -->
-  <section class="section" id="faq">
-    <div class="container faq">
-      <div class="faq-copy">
-        <p class="eyebrow" data-reveal>Preguntas frecuentes</p>
-        <h2 class="h2" data-reveal>Todo claro,<br><em>desde el inicio.</em></h2>
-        <p class="lead" data-reveal>¿Tienes otra duda? Escríbenos y te respondemos en persona, sin respuestas automáticas.</p>
-        <a href="#contacto" class="btn btn-primary magnetic" data-reveal>Hablar con el estudio <svg class="ico"><use href="#i-arrow"/></svg></a>
-      </div>
-      <div class="faq-list" data-stagger>
-        <details class="qa glass">
-          <summary>¿Qué paquete me conviene?<span class="qa-icon" aria-hidden="true"></span></summary>
-          <div class="qa-body">Depende de lo que quieras lograr. Cuéntanos sobre tu negocio por <a href="#" data-wa="Hola Gotia Studio 👋 Quiero saber qué paquete le conviene a mi negocio">WhatsApp</a> o <a href="#" data-ig>Instagram</a> y te recomendamos el plan justo, con su precio y una demostración.</div>
-        </details>
-        <details class="qa glass">
-          <summary>¿Cuánto tarda?<span class="qa-icon" aria-hidden="true"></span></summary>
-          <div class="qa-body">Emprende se entrega en 1 a 2 días hábiles, Presencia en 3 a 5, Automático en 5 a 7 y Negocio en 7 a 10. Desde el primer día tienes un calendario con cada entrega.</div>
-        </details>
-        <details class="qa glass">
-          <summary>¿Hay pagos mensuales?<span class="qa-icon" aria-hidden="true"></span></summary>
-          <div class="qa-body">Los paquetes son de pago único, y Presencia, Automático y Negocio traen meses de mensualidad incluidos. Después, Cuidado es opcional para Emprende y Presencia; en Automático y Negocio la mensualidad es necesaria para que las automatizaciones sigan funcionando. Tu página y tu dominio son tuyos: si cancelas, las automatizaciones se apagan, pero tu página sigue siendo tuya. Sin permanencia, salvo Crecimiento (mínimo 3 meses). Todos los precios son en pesos colombianos, más IVA.</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ EQUIPO ============
-       Los roles del equipo (freelancers con experiencia), sin nombres -->
-  <section class="section" id="equipo">
-    <div class="container">
-      <header class="section-head center">
-        <p class="eyebrow" data-reveal>Equipo</p>
-        <h2 class="h2" data-reveal>Nuestro equipo.<br><em>Cada uno enfocado en su especialidad.</em></h2>
-        <p class="lead" data-reveal>En nuestro equipo están freelancers con experiencia real en cada área. Cada parte de tu proyecto la lleva el especialista indicado.</p>
-      </header>
-      <ul class="team-grid" data-stagger>
-        <li class="team-card glass spot">
-          <span class="icon-bubble"><svg class="ico"><use href="#i-pen"/></svg></span>
-          <small class="team-kicker">Especialista</small>
-          <h3>Diseño gráfico moderno</h3>
-          <p>Identidad visual, piezas para redes y la imagen de tu web, con un estilo actual y coherente.</p>
-          <span class="team-tags"><i>Marca</i><i>Redes</i><i>Web</i></span>
-        </li>
-        <li class="team-card glass spot">
-          <span class="icon-bubble"><svg class="ico"><use href="#i-code"/></svg></span>
-          <small class="team-kicker">Especialista</small>
-          <h3>Desarrollo de software y webs</h3>
-          <p>Páginas y sistemas a medida: rápidos, seguros y perfectos en celular.</p>
-          <span class="team-tags"><i>Webs</i><i>Software</i><i>Paneles</i></span>
-        </li>
-        <li class="team-card glass spot">
-          <span class="icon-bubble"><svg class="ico"><use href="#i-spark"/></svg></span>
-          <small class="team-kicker">Especialista</small>
-          <h3>Automatización de tu web</h3>
-          <p>Automatizaciones dentro de tu página, que responden, agendan y te avisan solas.</p>
-          <span class="team-tags"><i>Respuestas</i><i>Reservas</i><i>Correos</i></span>
-        </li>
-        <li class="team-card glass spot">
-          <span class="icon-bubble"><svg class="ico"><use href="#i-data"/></svg></span>
-          <small class="team-kicker">Especialista</small>
-          <h3>Análisis de datos</h3>
-          <p>Mide lo que pasa en tu web y en tus redes para saber qué mejorar y optimizar tu negocio.</p>
-          <span class="team-tags"><i>Métricas</i><i>Reportes</i><i>Optimización</i></span>
-        </li>
-        <li class="team-card glass spot">
-          <span class="icon-bubble"><svg class="ico"><use href="#i-social"/></svg></span>
-          <small class="team-kicker">Especialista</small>
-          <h3>Mercadeo por tendencias</h3>
-          <p>Estrategias y contenido basados en lo que es tendencia, para llevar más visitas a tu web.</p>
-          <span class="team-tags"><i>Tendencias</i><i>Campañas</i><i>Contenido</i></span>
-        </li>
-        <li class="team-card glass spot">
-          <span class="icon-bubble"><svg class="ico"><use href="#i-gear"/></svg></span>
-          <small class="team-kicker">Especialista</small>
-          <h3>Sistemas integrados en tu web</h3>
-          <p>Conecta tu página con pagos, reservas y calendarios para que todo funcione solo.</p>
-          <span class="team-tags"><i>Pagos</i><i>Reservas</i><i>Calendarios</i></span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ CONTACTO ============ -->
-  <section class="section" id="contacto">
-    <div class="container">
-      <div class="contact glass" data-reveal>
-        <span class="bubble" style="--s:220px;right:-60px;top:-70px" aria-hidden="true"></span>
-        <span class="bubble" style="--s:90px;left:44%;bottom:-30px;--dur:10s" aria-hidden="true"></span>
-        <span class="bubble" style="--s:40px;left:8%;top:12%;--dur:8s" aria-hidden="true"></span>
-
-        <div class="contact-copy">
-          <p class="eyebrow">Contacto</p>
-          <h2 class="h2">Hagamos que tu web<br><em>trabaje por ti.</em></h2>
-          <p class="lead">Cuéntanos de tu negocio. Te respondemos en persona, sin compromiso.</p>
-          <ul class="contact-direct">
-            <li><a href="#" data-wa="Hola Gotia Studio 👋 Quiero conocer los paquetes y precios"><span class="icon-bubble sm"><svg class="ico"><use href="#i-wa"/></svg></span>WhatsApp · paquetes y precios</a></li>
-            <li><a href="#" data-ig><span class="icon-bubble sm"><svg class="ico"><use href="#i-ig"/></svg></span>@gotiastudio</a></li>
-            <li><a href="mailto:gotiastudiocontacto@gmail.com"><span class="icon-bubble sm"><svg class="ico"><use href="#i-mail"/></svg></span>gotiastudiocontacto@gmail.com</a></li>
+      <div class="lz-packs">
+        <article class="lz-pack glass is-featured">
+          <span class="lz-tag"><span data-l="es">Empieza aquí</span><span data-l="en">Start here</span></span>
+          <h3 class="lz-name"><span data-l="es">Pack Lanzamiento</span><span data-l="en">Launch Pack</span></h3>
+          <p class="lz-price"><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · en 2 pagos (50 % y 50 %)</span><span data-l="en">USD · in 2 payments (50% and 50%)</span></p>
+          <ul class="lz-inc">
+            <li><span data-l="es">Página de una sección: oferta, servicios, fotos, WhatsApp con mensaje listo, formulario y Google Maps</span><span data-l="en">One-section website: offer, services, photos, WhatsApp with a ready-made message, contact form and Google Maps</span></li>
+            <li><span data-l="es">Dominio, hosting y SSL por 1 año</span><span data-l="en">Domain, hosting and SSL for 1 year</span></li>
+            <li><span data-l="es">Medición de clics y mensajes</span><span data-l="en">Click and message tracking</span></li>
+            <li><span data-l="es">1 automatización a tu elección: respuesta automática en WhatsApp o aviso de cada cliente nuevo</span><span data-l="en">1 automation of your choice: WhatsApp auto-reply or an alert for every new lead</span></li>
+            <li><span data-l="es">10 días de marketing intensivo: 1 a 2 videos diarios en 2 redes</span><span data-l="en">10 days of intensive marketing: 1–2 daily videos on 2 social networks</span></li>
           </ul>
-        </div>
+          <div class="lz-after">
+            <p data-l="es"><b>Después, elige tu mensualidad</b> (+ IVA, sin permanencia):</p>
+            <p data-l="en"><b>Then choose your monthly plan</b> (no commitment):</p>
+            <ul class="lz-inc">
+              <li><span data-l="es"><b>$700.000/mes:</b> 1 video, 1 story y 1 post de texto al día</span><span data-l="en"><b>US$175/month:</b> 1 video, 1 story and 1 text post a day</span></li>
+              <li><span data-l="es"><b>$850.000/mes:</b> 2 videos, 2 stories y 2 posts al día</span><span data-l="en"><b>US$215/month:</b> 2 videos, 2 stories and 2 posts a day</span></li>
+              <li><span data-l="es"><b>$1.200.000/mes:</b> 3 videos, 3 stories y 3 flyers al día</span><span data-l="en"><b>US$300/month:</b> 3 videos, 3 stories and 3 flyers a day</span></li>
+            </ul>
+            <p data-l="es">Todas incluyen Google Business, cuidado de tu página y reporte mensual.</p>
+            <p data-l="en">All include Google Business, website care and a monthly report.</p>
+          </div>
+          <a href="#" class="btn btn-primary btn-block" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
+        </article>
 
-        <!-- al enviar, main.js guarda el contacto en Supabase (llega a "Contactados" en admin.html)
-             y abre WhatsApp con todo lo que escribió la persona. La casilla es la autorización que
-             pide la Ley 1581 de 2012 antes de usar sus datos -->
+        <!-- Año completo: el mismo cuadro (y los mismos precios) que en paquetes.html (#plan-anual) -->
+        <article class="lz-pack glass lz-year">
+          <div class="lz-main">
+            <span class="lz-tag"><span data-l="es">2 meses gratis</span><span data-l="en">2 months free</span></span>
+            <h3 class="lz-name"><span data-l="es">Año completo</span><span data-l="en">Full year</span></h3>
+            <p class="lz-for"><span data-l="es">El Pack Lanzamiento y 12 meses de tu mensualidad en un solo pago (COP + IVA). Recibes 14 meses.</span><span data-l="en">The Launch Pack plus 12 months of your monthly plan in a single payment (USD). You get 14 months.</span></p>
+            <ul class="lz-prices">
+              <li><strong data-l="es">$9.290.000</strong><strong data-l="en">US$2,325</strong><span data-l="es">con la de $700.000/mes · ahorras $1.400.000</span><span data-l="en">with the US$175/month plan · you save US$350</span></li>
+              <li><strong data-l="es">$11.090.000</strong><strong data-l="en">US$2,805</strong><span data-l="es">con la de $850.000/mes · ahorras $1.700.000</span><span data-l="en">with the US$215/month plan · you save US$430</span></li>
+              <li><strong data-l="es">$15.290.000</strong><strong data-l="en">US$3,825</strong><span data-l="es">con la de $1.200.000/mes · ahorras $2.400.000</span><span data-l="en">with the US$300/month plan · you save US$600</span></li>
+            </ul>
+          </div>
+          <ul class="lz-inc">
+            <li><span data-l="es">Todo lo del Pack Lanzamiento: tu página y 10 días de marketing intensivo</span><span data-l="en">Everything in the Launch Pack: your website and 10 days of intensive marketing</span></li>
+            <li><span data-l="es">14 meses de mensualidad por el precio de 12</span><span data-l="en">14 months of your monthly plan for the price of 12</span></li>
+            <li><span data-l="es">Marketing todo el año sin pagos adicionales, con Google Business y reporte mensual</span><span data-l="en">Marketing all year with no extra payments, including Google Business and a monthly report</span></li>
+            <li><span data-l="es">Tu página activa las 24 horas: dominio, hosting, mantenimiento y mejoras</span><span data-l="en">Your website live 24/7: domain, hosting, maintenance and improvements</span></li>
+            <li><span data-l="es">Funciones nuevas sencillas para tu página, incluidas</span><span data-l="en">Simple new features for your website, included</span></li>
+          </ul>
+          <p class="lz-small"><span data-l="es">La pauta es opcional (también trabajamos orgánico) y va aparte, directo a Meta o Google.</span><span data-l="en">Ads are optional (we also work organically) and are paid separately, directly to Meta or Google.</span></p>
+          <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, quiero el Año completo" data-wa-en="Hi, I want the Full year (Año completo)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero el año completo</span><span data-l="en">I want the full year</span></a>
+        </article>
 
-        <form class="form" id="contact-form" novalidate>
-          <div class="row2">
-            <div class="input"><label for="f-name">Nombre</label><input id="f-name" name="nombre" type="text" autocomplete="name" required placeholder="Tu nombre"></div>
-            <div class="input"><label for="f-contact">Email o WhatsApp</label><input id="f-contact" name="contacto" type="text" autocomplete="email" required placeholder="Cómo te contactamos"></div>
+        <!-- Aceleradora, debajo de los dos precios y a todo el ancho: los mismos precios y textos que en paquetes.html (#plan-aceleradora) -->
+        <article class="lz-pack glass lz-wide">
+          <div class="lz-main">
+            <h3 class="lz-name"><span data-l="es">Aceleradora</span><span data-l="en">Accelerator</span></h3>
+            <p class="lz-price"><strong data-l="es">$3.500.000</strong><strong data-l="en">US$875</strong><span data-l="es">COP + IVA · al mes, sin permanencia</span><span data-l="en">USD · per month, no commitment</span></p>
+            <p class="lz-for"><span data-l="es">Para quienes quieren crecer rápido, llegar a 10.000 seguidores y necesitan posicionamiento inmediato.</span><span data-l="en">For those who want to grow fast, reach 10,000 followers and need immediate visibility.</span></p>
           </div>
-          <div class="row2">
-            <div class="input"><label for="f-biz">Tipo de negocio</label><input id="f-biz" name="negocio" type="text" list="f-biz-list" required placeholder="Ej.: peluquería"></div>
-            <div class="input"><label for="f-link">Enlace <small>(opcional)</small></label><input id="f-link" name="enlace" type="text" inputmode="url" autocomplete="url" placeholder="Instagram o Google Maps"></div>
-          </div>
-          <datalist id="f-biz-list">
-            <option value="Peluquería o barbería"><option value="Spa o centro de estética"><option value="Restaurante o cafetería">
-            <option value="Pastelería o panadería"><option value="Tienda de ropa o calzado"><option value="Tienda en línea">
-            <option value="Consultorio o clínica"><option value="Hotel o glamping"><option value="Inmobiliaria"><option value="Servicios profesionales">
-          </datalist>
-          <div class="input"><label for="f-msg">¿Qué quieres lograr?</label><textarea id="f-msg" name="mensaje" rows="3" placeholder="Ej.: más clientes, vender por internet, agendar citas"></textarea></div>
-          <div class="input check"><label><input type="checkbox" name="autorizo" required><span>Autorizo el uso de mis datos para que me contacten, según la <a href="politica-de-datos.html" target="_blank" rel="noopener">Política de Tratamiento de Datos</a>.</span></label></div>
-          <button class="btn btn-primary btn-block" type="submit">Enviar por WhatsApp <svg class="ico"><use href="#i-arrow"/></svg></button>
-          <p class="form-note">Se abre WhatsApp con tu mensaje listo. Tus datos solo se usan para contactarte.</p>
-          <div class="form-success" role="status" aria-live="polite">
-            <span class="icon-bubble"><svg class="ico"><use href="#i-check"/></svg></span>
-            <strong>¡Listo!</strong>
-            <span>Te abrimos WhatsApp con tu mensaje. Solo toca enviar y te respondemos muy pronto.</span>
-          </div>
-        </form>
+          <ul class="lz-inc">
+            <li><span data-l="es">60 a 90 videos al mes, en 4 redes</span><span data-l="en">60 to 90 videos a month, on 4 social networks</span></li>
+            <li><span data-l="es">Manejo de pauta</span><span data-l="en">Ad management</span></li>
+            <li>SEO</li>
+            <li><span data-l="es">Reporte semanal</span><span data-l="en">Weekly report</span></li>
+          </ul>
+          <p class="lz-after"><span data-l="es"><b>Pago:</b> 50 % al iniciar y 50 % el próximo mes.</span><span data-l="en"><b>Payment:</b> 50% to start and 50% the following month.</span></p>
+          <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, quiero el plan Aceleradora" data-wa-en="Hi, I want the Accelerator plan (Aceleradora)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero acelerar</span><span data-l="en">I want to accelerate</span></a>
+        </article>
+      </div>
+
+      <div class="lz-center">
+        <a href="paquetes.html" class="btn btn-glass glass"><span data-l="es">Ver los 4 planes</span><span data-l="en">See all 4 plans</span> <svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. PREGUNTAS (máximo 5) ============ -->
+  <section class="section lz-sec" id="faq">
+    <div class="container faq lz-faq">
+      <div class="faq-copy">
+        <p class="eyebrow"><span data-l="es">Preguntas</span><span data-l="en">FAQ</span></p>
+        <h2 class="h2"><span data-l="es">Lo que más nos <em>preguntan.</em></span><span data-l="en">What people <em>ask us most.</em></span></h2>
+        <p class="lead"><span data-l="es">¿Otra duda?</span><span data-l="en">Another question?</span> <a href="#" data-wa="Hola, tengo una pregunta sobre el Pack Lanzamiento" data-wa-en="Hi, I have a question about the Launch Pack (Pack Lanzamiento)"><span data-l="es">Escríbenos por WhatsApp</span><span data-l="en">Message us on WhatsApp</span></a>.</p>
+      </div>
+      <div class="faq-list">
+        <details class="qa glass">
+          <summary><span data-l="es">¿Y si ya tengo página?</span><span data-l="en">What if I already have a website?</span><span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body"><span data-l="es">Si te la hicimos nosotros, arrancas con $300.000 + IVA. Si la hizo otro proveedor,</span><span data-l="en">If we built it, you start with US$75. If another provider built it,</span> <a href="#" data-wa="Hola, mi página la hizo otro proveedor y quiero arrancar" data-wa-en="Hi, another provider built my website and I want to get started"><span data-l="es">escríbenos</span><span data-l="en">message us</span></a>.</div>
+        </details>
+        <details class="qa glass">
+          <summary><span data-l="es">¿Qué pasa si no sigo después de los 10 días?</span><span data-l="en">What if I don't continue after the 10 days?</span><span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body"><span data-l="es">Tu página y tu dominio son tuyos, con hosting por 1 año.</span><span data-l="en">Your website and your domain are yours, with hosting for 1 year.</span></div>
+        </details>
+        <details class="qa glass">
+          <summary><span data-l="es">¿Me prometen resultados?</span><span data-l="en">Do you promise results?</span><span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body"><span data-l="es">Sí: te prometemos tráfico para tu negocio y te lo demostramos. Los videos salen en una cuenta de prueba que compartimos contigo, así ves los resultados tú mismo.</span><span data-l="en">Yes: we promise traffic for your business and we prove it. The videos go out on a test account we share with you, so you can see the results yourself.</span></div>
+        </details>
+        <details class="qa glass">
+          <summary><span data-l="es">¿Tengo que pagar pauta?</span><span data-l="en">Do I have to pay for ads?</span><span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body"><span data-l="es">No es obligatoria: también trabajamos con estrategias orgánicas. Si quieres pauta, va aparte y la pagas tú, directo a Meta o Google. Recomendamos $300.000–500.000 en los 10 días.</span><span data-l="en">No, ads are optional: we also work with organic strategies. If you want ads, they're paid separately, directly to Meta or Google. We recommend US$75–125 for the 10 days.</span></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. CIERRE ============ -->
+  <section class="section lz-sec" id="contacto">
+    <div class="container">
+      <div class="lz-final glass">
+        <span class="bubble" style="--s:160px;right:-70px;top:-80px" aria-hidden="true"></span>
+        <span class="bubble" style="--s:56px;left:-18px;bottom:-22px;--dur:10s" aria-hidden="true"></span>
+        <h2 class="h2"><span data-l="es">¿Listo para lanzar <em>tu negocio?</em></span><span data-l="en">Ready to launch <em>your business?</em></span></h2>
+        <a href="#" class="btn btn-primary" data-wa="Hola, quiero lanzar mi negocio" data-wa-en="Hi, I want to launch my business"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Escríbenos por WhatsApp</span><span data-l="en">Message us on WhatsApp</span></a>
+        <p class="lz-ig"><span data-l="es">o en Instagram:</span><span data-l="en">or on Instagram:</span> <a href="#" data-ig><span data-ig-user>@gotiastudio</span></a></p>
       </div>
     </div>
   </section>
@@ -1867,32 +422,30 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
-        <p>Más visitas para tu negocio. Digitalizamos y automatizamos tu marca con estrategias basadas en datos reales.</p>
+        <p><span data-l="es">Te hacemos tu página y la lanzamos con 10 días de marketing intensivo.</span><span data-l="en">We build your website and launch it with 10 days of intensive marketing.</span></p>
       </div>
       <div>
-        <h3>Servicios</h3>
+        <h3><span data-l="es">Inicio</span><span data-l="en">Home</span></h3>
         <ul>
-          <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="0">Automatización web</a></li>
-          <li><a href="#automatizacion" data-svc-for="automatizacion" data-svc-go="1">Automatización completa</a></li>
-          <li><a href="#panel">Panel de administrador</a></li>
-          <li><a href="#servicios">Google y redes</a></li>
-          <li><a href="#datos">Datos verificables</a></li>
-          <li><a href="#servicios">Contenido con IA</a></li>
+          <li><a href="#resultados"><span data-l="es">Resultados</span><span data-l="en">Results</span></a></li>
+          <li><a href="#como-funciona"><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></a></li>
+          <li><a href="#precios"><span data-l="es">Precio</span><span data-l="en">Pricing</span></a></li>
+          <li><a href="#faq"><span data-l="es">Preguntas</span><span data-l="en">FAQ</span></a></li>
         </ul>
       </div>
       <div>
-        <h3>Estudio</h3>
+        <h3><span data-l="es">Planes</span><span data-l="en">Plans</span></h3>
         <ul>
-          <li><a href="#estudio">Manifiesto</a></li>
-          <li><a href="#proceso">Proceso</a></li>
-          <li><a href="#packs">Paquetes</a></li>
-          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="paquetes.html#plan-lanzamiento"><span data-l="es">Pack Lanzamiento</span><span data-l="en">Launch Pack</span></a></li>
+          <li><a href="paquetes.html#plan-reservas"><span data-l="es">Pack con Reservas</span><span data-l="en">Bookings Pack</span></a></li>
+          <li><a href="paquetes.html#plan-ya-tengo"><span data-l="es">Ya tengo página</span><span data-l="en">I already have a website</span></a></li>
+          <li><a href="paquetes.html#plan-aceleradora"><span data-l="es">Aceleradora</span><span data-l="en">Accelerator</span></a></li>
         </ul>
       </div>
       <div>
-        <h3>Contacto</h3>
+        <h3><span data-l="es">Contacto</span><span data-l="en">Contact</span></h3>
         <ul>
-          <li><a href="#" data-wa="Hola Gotia Studio 👋 Quiero más información">WhatsApp</a></li>
+          <li><a href="#" data-wa="Hola, quiero más información" data-wa-en="Hi, I'd like more information">WhatsApp</a></li>
           <li><a href="#" data-ig>Instagram</a></li>
           <li><a href="mailto:gotiastudiocontacto@gmail.com">gotiastudiocontacto@gmail.com</a></li>
         </ul>
@@ -1900,81 +453,20 @@
     </div>
     <div class="wordmark" aria-hidden="true">Gotiastudio</div>
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> Gotiastudio. Todos los derechos reservados.</span>
-      <span class="footer-legal"><a href="politica-de-datos.html">Política de datos</a> · <a href="terminos.html">Términos y condiciones</a></span>
-      <span class="ver-switch">
-        <a href="?version=esencial" class="ver-to-lite"><svg class="ico"><use href="#i-phone"/></svg>Ver versión Esencial</a>
-        <a href="?version=3d" class="ver-to-3d"><svg class="ico"><use href="#i-spark"/></svg>Ver versión 3D</a>
-      </span>
-      <span>Diseñado con precisión.</span>
+      <span>© <span id="year">2026</span> Gotiastudio. <span data-l="es">Todos los derechos reservados.</span><span data-l="en">All rights reserved.</span></span>
+      <span class="footer-legal"><a href="politica-de-datos.html"><span data-l="es">Política de datos</span><span data-l="en">Privacy policy (in Spanish)</span></a> · <a href="terminos.html"><span data-l="es">Términos y condiciones</span><span data-l="en">Terms and conditions</span></a></span>
+      <span><span data-l="es">Precios en pesos colombianos (COP) + IVA.</span><span data-l="en">Prices in US dollars (USD).</span></span>
     </div>
   </div>
 </footer>
 
-<!-- Invitación a los efectos: una burbuja pequeña que sale del botón "3D" del menú y lo señala.
-     Se cierra con la X y se va sola a los 20 s. Solo en Esencial y una vez por visita (main.js) -->
-<aside class="fx-invite" id="fx-invite" aria-label="Activar los efectos" hidden>
-  <div class="fxi-in">
-    <a class="fxi-go" href="?version=3d">Activa los efectos 3D <svg class="ico"><use href="#i-arrow"/></svg></a>
-    <button class="fxi-close" type="button" aria-label="Cerrar"><svg class="ico"><use href="#i-x"/></svg></button>
-    <i class="fxi-bar" aria-hidden="true"></i>
-  </div>
-</aside>
+<a href="#" class="wa-float" data-wa="Hola, vi la web y tengo una pregunta" data-wa-en="Hi, I saw your website and I have a question" aria-label="¿Dudas? Escríbenos por WhatsApp" data-aria-en="Questions? Message us on WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span><span data-l="es">¿Dudas? Escríbenos</span><span data-l="en">Questions? Message us</span></span></a>
 
-<!-- Sorteo de Lanzamiento: un pop-up que sale cuando la web termina de cargar y se va solo a los 5 s
-     (la línea de abajo marca el tiempo). Una vez por visita, en todas las versiones (main.js).
-     El @ y el enlace al perfil salen de contacto.js. Cuando acabe el sorteo, borra este bloque. -->
-<div class="promo" id="sorteo" hidden>
-  <div class="promo-card" role="dialog" aria-labelledby="sorteo-title" aria-describedby="sorteo-lead">
-    <button class="promo-close" type="button" aria-label="Cerrar"><svg class="ico"><use href="#i-x"/></svg></button>
-    <span class="eyebrow">Gotiastudio · Instagram</span>
-    <h2 class="promo-title" id="sorteo-title">Sorteo de <em>Lanzamiento</em></h2>
-    <p class="promo-lead" id="sorteo-lead">Celebramos la llegada de Gotiastudio. Participa en Instagram en tres pasos:</p>
-    <ol class="promo-steps">
-      <li><small>01</small><span><strong>Sigue a <span data-ig-user>@gotiastudio</span></strong> en Instagram</span></li>
-      <li><small>02</small><span><strong>Dale me gusta</strong> a la publicación del sorteo</span></li>
-      <li><small>03</small><span><strong>Etiqueta a 2 amigos</strong> en los comentarios</span></li>
-    </ol>
-    <a href="#" class="btn btn-primary btn-block" data-ig-perfil><svg class="ico ico-l"><use href="#i-ig"/></svg>Participar en Instagram</a>
-    <p class="promo-note">Las bases y la fecha del sorteo están en la publicación.</p>
-    <i class="promo-bar" aria-hidden="true"></i>
-  </div>
-</div>
-
-<div class="toast glass" id="toast" role="status" aria-live="polite"><span class="icon-bubble sm"><svg class="ico"><use href="#i-check"/></svg></span><span id="toast-text">Cambios publicados en tu web</span></div>
-
-<!-- ============ Botones flotantes (flotantes.js) ============ -->
-<!-- izquierda: la guía en audio, más llamativa para que la escuchen (recorre la web de arriba
-     hacia abajo y explica cada parte; encima, el subtítulo y Anterior / Siguiente);
-     derecha: WhatsApp, el mismo botón de paquetes.html -->
-<div class="guia" id="guia" data-guia="inicio">
-  <div class="guia-cap" hidden>
-    <p class="guia-say"></p>
-    <div class="guia-nav">
-      <button class="guia-prev" type="button"><svg class="ico"><use href="#i-arrow"/></svg>Anterior</button>
-      <button class="guia-next" type="button">Siguiente<svg class="ico"><use href="#i-arrow"/></svg></button>
-    </div>
-  </div>
-  <div class="guia-row">
-    <button class="guia-btn" type="button" aria-label="Escucha la guía: Te muestro toda la web · 5 min">
-      <span class="guia-play" aria-hidden="true">
-        <svg class="guia-ring" viewBox="0 0 58 58"><circle cx="29" cy="29" r="27.5" pathLength="1"/></svg>
-        <svg class="ico ico-play"><use href="#i-play"/></svg>
-        <svg class="ico ico-pause"><use href="#i-pause"/></svg>
-      </span>
-      <span class="guia-txt"><strong>Escucha la guía</strong> <small>Te muestro toda la web · 5 min</small></span>
-      <span class="guia-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-    </button>
-    <button class="guia-x" type="button" aria-label="Cerrar la guía" hidden><svg class="ico"><use href="#i-x"/></svg></button>
-  </div>
-</div>
-<a href="#" class="wa-float" data-wa="Hola Gotia Studio 👋 Vi la web y tengo una pregunta" aria-label="¿Dudas? Escríbenos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span>¿Dudas? Escríbenos</span></a>
-
-<!-- bubbles.js y scenes.js (la versión 3D) los carga main.js solo si se elige el 3D: ver gotia.fx en el <head> -->
-<script src="contacto.js?v=5" defer></script>
+<script src="idioma.js?v=1" defer></script>
+<script src="contacto.js?v=6" defer></script>
 <script src="supabase-config.js?v=2" defer></script>
-<script src="analytics.js?v=13" defer></script>
+<script src="analytics.js?v=14" defer></script>
 <script src="main.js?v=38" defer></script>
-<script src="flotantes.js?v=12" defer></script>
+<script src="lanzamiento.js?v=1" defer></script>
 </body>
 </html>

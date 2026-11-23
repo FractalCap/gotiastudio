@@ -122,8 +122,12 @@
     else if (a.matches('.fxi-go')) label = 'Activó la versión 3D (desde el aviso)';
     if (label) { send('click', { label: cut(label, 120) }); return; }
 
-    // interacciones: ayudan a saber qué interesa
-    const text = cut(a.textContent, 60);
+    // interacciones: ayudan a saber qué interesa. Con la web en dos idiomas (idioma.js) el texto se
+    // toma siempre del español (data-l="es"), para que el admin agrupe igual las dos versiones
+    const es = a.querySelector('[data-l="es"]');
+    const text = cut((es || a).textContent, 60);
+    if (a.matches('[data-lang-set]')) { interact('Idioma · eligió ' + (a.dataset.langSet === 'en' ? 'inglés' : 'español')); return; }
+    if (a.matches('[data-lang-toggle]')) { interact('Idioma · cambió a ' + (document.documentElement.classList.contains('lang-en') ? 'inglés' : 'español')); return; }
     if (a.matches('summary')) { if (!a.parentElement.open) interact('Pregunta · ' + text); }
     else if (a.matches('.orbit-item')) interact('Ecosistema · ' + (a.dataset.title || text));
     else if (a.matches('.mx-tabs button, .t-steps button')) interact('Demo · ' + slideOf(a) + ' · ' + text.replace(/^\d+\s*/, ''));

@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-en-title="Terms and Conditions — Gotiastudio">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Términos y Condiciones — Gotiastudio</title>
-  <meta name="description" content="Las reglas para usar la web de Gotiastudio y contratar sus servicios: cotizaciones, pagos, retracto, paquetes mensuales, contenido con IA y más.">
+  <meta name="description" content="Las reglas para usar la web de Gotiastudio y contratar sus planes: lanzamiento, pagos, retracto, mensualidades, contenido con IA y más.">
   <meta name="theme-color" content="#eaf3ff">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
@@ -12,8 +12,21 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
   <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=92">
+  <link rel="stylesheet" href="styles.css?v=95">
   <script>
+    // idioma: el mismo de index.html (español o inglés), aplicado antes de pintar (idioma.js)
+    (function () {
+      var r = document.documentElement, q = null, l = null;
+      r.dataset.esTitle = document.title;
+      try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+      if (q !== 'es' && q !== 'en') q = null;
+      try {
+        if (q) localStorage.setItem('gotia-lang', q);
+        l = q || localStorage.getItem('gotia-lang');
+        if (!l) r.classList.add('lang-ask');
+      } catch (e) { l = q; }
+      if (l === 'en') { r.classList.add('lang-en'); r.lang = 'en'; document.title = r.dataset.enTitle; }
+    })();
     // el mismo modo claro / negro que eligió en la web
     try {
       if (localStorage.getItem('gotia-theme') === 'dark') {
@@ -25,26 +38,42 @@
   </script>
 </head>
 <body class="legal-body">
+<!-- selector de idioma de la primera visita (el mismo de index.html) -->
+<div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
+  <div class="lang-pick-box glass">
+    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
+    <div class="lang-pick-btns">
+      <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
+      <button type="button" class="btn btn-glass glass" data-lang-set="en" lang="en">English <small>Prices in US dollars (USD)</small></button>
+    </div>
+  </div>
+</div>
 <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 
-<!-- Página legal. Lo marcado en amarillo (.legal-fill) hay que completarlo antes de publicar -->
+<!-- Página legal. Lo marcado en amarillo (.legal-fill) hay que completarlo antes de publicar.
+     Los planes, precios y reglas (puntos 3, 4, 6, 8 y 12) son los mismos de paquetes.html: si cambias uno, cambia el otro.
+     Hay dos versiones: la española (data-l="es", la que vale) y la inglesa (data-l="en", con precios en USD
+     a 4.000 COP por dólar, redondeados a 5 y sin IVA). Si cambias una, cambia la otra. -->
 <header class="legal-top container">
   <a href="index.html" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
-  <a href="index.html" class="btn btn-glass glass btn-sm">Volver a la web</a>
+  <button class="lang-toggle" type="button" data-lang-toggle aria-label="Cambiar a inglés" data-aria-en="Switch to Spanish" title="Español / English"><span data-l="es">EN</span><span data-l="en">ES</span></button>
+  <a href="index.html" class="btn btn-glass glass btn-sm"><span data-l="es">Volver a la web</span><span data-l="en">Back to the website</span></a>
 </header>
 
 <main class="legal container">
-  <article class="legal-doc glass">
+  <!-- ============ VERSIÓN EN ESPAÑOL (la que vale) ============ -->
+  <article class="legal-doc glass" data-l="es">
     <p class="eyebrow">Legal</p>
     <h1>Términos y Condiciones</h1>
-    <p class="legal-meta">Vigentes desde el 23 de octubre de 2026 · Ley 1480 de 2011 (Estatuto del Consumidor) y Ley 527 de 1999</p>
+    <p class="legal-meta">Vigentes desde el 22 de noviembre de 2026 · Ley 1480 de 2011 (Estatuto del Consumidor) y Ley 527 de 1999</p>
 
     <p class="legal-lead">Estas son las reglas para usar nuestra web y contratar nuestros servicios. Las escribimos claras y cortas. Si algo no se entiende, <a href="#" data-wa="Hola Gotia Studio 👋 Tengo una pregunta sobre los términos y condiciones">escríbenos</a>.</p>
 
     <nav class="legal-toc" aria-label="En esta página">
       <a href="#quienes">1. Quiénes somos</a>
       <a href="#web">2. Uso de la web</a>
-      <a href="#servicios">3. Servicios y cotización</a>
+      <a href="#servicios">3. Planes y servicios</a>
       <a href="#pagos">4. Pagos</a>
       <a href="#retracto">5. Retracto y reversión</a>
       <a href="#mensuales">6. Mensualidades</a>
@@ -61,33 +90,49 @@
 
     <section id="quienes">
       <h2>1. Quiénes somos</h2>
-      <p>Gotiastudio es un estudio digital que crea páginas web, paneles de administración, automatizaciones, posicionamiento en Google y redes, análisis de datos y contenido para negocios.</p>
+      <p>Gotiastudio es un estudio digital para negocios: hacemos páginas web y las lanzamos con marketing en redes (videos, pauta, Google Business y SEO). También hacemos proyectos a medida, como paneles de datos.</p>
       <ul class="legal-facts">
-        <li><b>Nombre o razón social:</b> Kevin Gaspar</li>
-        <li><b>Cédula de ciudadanía:</b> 1.000.460.885</li>
+        <li><b>Marca:</b> Gotiastudio, servicio que presta una persona natural.</li>
         <li><b>Domicilio:</b> Bogotá D. C., Colombia.</li>
-        <li><b>Dirección de notificación:</b> Cra. 129 # 139-37</li>
         <li><b>Correo:</b> <a href="mailto:gotiastudiocontacto@gmail.com">gotiastudiocontacto@gmail.com</a> · <b>WhatsApp:</b> <a href="#" data-wa="Hola Gotia Studio 👋 Quiero más información">+57 302 780 9730</a></li>
       </ul>
+      <p>El nombre del titular, su documento de identidad y la dirección para notificaciones van por escrito en la propuesta que te enviamos antes de contratar. Si los necesitas antes (por ejemplo, para una queja o un trámite), pídelos al correo y te los enviamos.</p>
       <p>Al usar esta web o contratar nuestros servicios aceptas estos términos.</p>
     </section>
 
     <section id="web">
       <h2>2. Uso de la web</h2>
-      <p>La web es informativa. Los tutoriales, demos, cifras y ejemplos (como "4.812 visitas", "120 mil vistas", "+28% de compras" o los negocios de ejemplo) son <b>ilustrativos</b>: muestran cómo funcionan nuestros servicios, no resultados reales de un cliente ni una promesa de resultados.</p>
-      <p>No está permitido usar la web para fines ilegales, intentar dañarla o acceder sin permiso a sus partes privadas (como el panel de administración).</p>
+      <p>Esta web (gotiastudio.it.com) es una página informativa: muestra quiénes somos, nuestros planes y precios, y el contacto se hace por WhatsApp, Instagram o correo. No tiene cuentas de usuario ni áreas para clientes. Cómo medimos las visitas a esta web está en nuestra <a href="politica-de-datos.html">Política de Tratamiento de Datos</a>.</p>
+      <p>Los casos que mostramos son reales y dicen qué se midió (por ejemplo, vistas de video, que no son lo mismo que visitas o clientes). Son resultados de otros negocios: no quiere decir que el tuyo logre las mismas cifras. Lo que sí te prometemos está en el punto 8.</p>
+      <p>No está permitido usar la web para fines ilegales, intentar dañarla o acceder sin permiso a sus partes privadas.</p>
     </section>
 
     <section id="servicios">
-      <h2>3. Servicios y cotización</h2>
-      <p>Las descripciones de los paquetes y servicios en la web son generales. El <b>alcance, el precio, los tiempos y lo que se entrega</b> en tu proyecto se definen en una propuesta o cotización que te enviamos por escrito (WhatsApp o correo). El contrato existe cuando aceptas esa propuesta y haces el primer pago acordado.</p>
-      <p>Los precios están en pesos colombianos (COP). La propuesta indica si incluye IVA y otros impuestos, y qué costos de terceros (dominio, hosting, anuncios, herramientas) se pagan aparte.</p>
-      <p>Si durante el proyecto pides cambios que no estaban en la propuesta, te enviaremos el costo y el tiempo adicional antes de hacerlos.</p>
+      <h2>3. Planes y servicios</h2>
+      <p>Estos son nuestros planes. Los precios están en pesos colombianos (COP) y a todos se les suma el IVA.</p>
+      <ul>
+        <li><b>Pack Lanzamiento</b> ($890.000 + IVA, en 2 pagos, o con el año completo: punto 4): página de una sección con dominio, hosting y SSL por 1 año, medición de clics y mensajes, 1 automatización a tu elección (respuesta automática en WhatsApp o aviso de cada cliente nuevo) y 10 días de marketing intensivo (1 a 2 videos diarios en 2 redes).</li>
+        <li><b>Pack con Reservas</b> ($1.990.000 + IVA, pago único): todo lo del Pack Lanzamiento, más reservas conectadas a Google Calendar, Booking o Airbnb, respuestas automáticas las 24 horas, aviso inmediato de cada cliente nuevo y un panel para cambiar textos, fotos y precios.</li>
+        <li><b>Ya tengo página</b> ($300.000 + IVA, para arrancar): para páginas hechas por Gotiastudio. Conectamos la medición y tu WhatsApp, y arrancan tus 10 días de marketing intensivo. Si tu página la hizo otro proveedor, se cotiza aparte.</li>
+        <li><b>Aceleradora</b> ($3.500.000 + IVA al mes, sin permanencia): para quienes quieren crecer rápido y necesitan posicionamiento inmediato. No lleva los 10 días de marketing intensivo porque ya incluye su propio arranque (punto 6).</li>
+      </ul>
+      <p><b>El lanzamiento</b> arranca cuando tu página está publicada y pagada. Son 10 días de marketing intensivo: los videos salen en una cuenta de prueba que compartimos contigo, así ves los resultados tú mismo, y el día 8 te mostramos los números. Lo que pasa después está en el punto 6.</p>
+      <p>Lo que incluye cada plan está en nuestra página de <a href="paquetes.html">planes</a>. Antes de empezar te confirmamos por escrito (WhatsApp o correo) el plan, el precio y lo que haya que acordar contigo, como la cifra de tráfico del lanzamiento o la mensualidad de Ya tengo página. El contrato existe cuando aceptas esa confirmación y haces el primer pago.</p>
+      <p>Los proyectos a medida (solo una página, un panel de datos u otro) se cotizan por escrito: la propuesta dice el alcance, el precio, los tiempos y lo que se entrega. Si pides cambios que no estaban en tu plan o en tu propuesta, te enviamos el costo y el tiempo adicional antes de hacerlos.</p>
     </section>
 
     <section id="pagos">
       <h2>4. Pagos</h2>
-      <p>La forma de pago (anticipo, saldo y fechas) se indica en la propuesta. Empezamos a trabajar cuando recibimos el pago inicial y publicamos o entregamos el proyecto final cuando se completa el pago acordado. Te entregamos la factura o el soporte que corresponda según la ley.</p>
+      <ul>
+        <li><b>Páginas:</b> 50 % para empezar y 50 % cuando esté lista. La publicamos cuando se completa el pago. En el Pack Lanzamiento son 2 pagos de $445.000 + IVA.</li>
+        <li><b>Año completo (Pack Lanzamiento):</b> pagas el pack y 12 meses de tu mensualidad en un solo pago y recibes 14 meses: $9.290.000 + IVA con la de $700.000, $11.090.000 + IVA con la de $850.000 o $15.290.000 + IVA con la de $1.200.000. Durante esos 14 meses el marketing sigue sin pagos adicionales.</li>
+        <li><b>Ya tengo página:</b> los $300.000 + IVA se pagan para arrancar los 10 días.</li>
+        <li><b>Aceleradora:</b> puedes pagar 50 % al iniciar y 50 % el mes siguiente.</li>
+        <li><b>Mensualidades:</b> se pagan mes a mes, sin permanencia (punto 6). Si pagas 12 meses de una vez, recibes 14.</li>
+        <li><b>Medios de pago:</b> Nequi, Llave Bre-B o QR, transferencia y tarjeta.</li>
+        <li><b>Pauta:</b> no es obligatoria, porque también trabajamos con estrategias orgánicas. Si quieres pauta, no está incluida en ningún plan: la pagas tú, directo a Meta o Google. Para los 10 días recomendamos $300.000–500.000.</li>
+      </ul>
+      <p>Te entregamos la factura o el soporte que corresponda según la ley.</p>
     </section>
 
     <section id="retracto">
@@ -98,33 +143,45 @@
 
     <section id="mensuales">
       <h2>6. Mensualidades</h2>
-      <p>Cuidado, Cuidado Automático, Cuidado Negocio, Visible, Redes, Crecimiento, Mide, Une y Decide se pagan mes a mes y se renuevan solos. Todos, salvo Crecimiento, no tienen permanencia: puedes cancelarlos avisándonos antes de la siguiente fecha de pago. Crecimiento tiene un mínimo de 3 meses. Tu página y tu dominio son tuyos: la mensualidad mantiene funcionando tus automatizaciones. Si cancelas, las automatizaciones se apagan, pero tu página sigue siendo tuya. Los meses incluidos en un paquete empiezan a contar desde la entrega del proyecto. En Mide, Une y Decide la instalación se paga aparte, los 3 primeros meses de registro de datos son gratis y la mensualidad empieza el mes 4. En Une y Decide, el trabajo del analista de datos también empieza el mes 4. El analista te orienta con base en tus números, pero no garantiza un resultado: las decisiones son tuyas.</p>
+      <p>La mensualidad es el trabajo de cada mes después del lanzamiento:</p>
+      <ul>
+        <li><b>Después del Pack Lanzamiento:</b> eliges $700.000/mes + IVA (1 video, 1 story y 1 post de texto al día), $850.000/mes + IVA (2 videos, 2 stories y 2 posts al día) o $1.200.000/mes + IVA (3 videos, 3 stories y 3 flyers al día). Todas incluyen Google Business, cuidado de tu página y reporte mensual.</li>
+        <li><b>Después del Pack con Reservas:</b> $2.190.000/mes + IVA.</li>
+        <li><b>Después de Ya tengo página:</b> la pactamos contigo, desde $700.000/mes + IVA.</li>
+        <li><b>Aceleradora:</b> $3.500.000/mes + IVA. Incluye 60 a 90 videos al mes en 4 redes, manejo de pauta, SEO y reporte semanal.</li>
+      </ul>
+      <p><b>Cuándo arranca:</b> el día 8 del lanzamiento te mostramos los números. Si no nos avisas antes del día 10 que no quieres seguir, arranca tu primer mes. Si nos avisas, no arranca la mensualidad. Si pagaste el año completo, tus 14 meses arrancan al terminar el lanzamiento. La Aceleradora arranca directo con su primer mes.</p>
+      <p><b>Qué cubre:</b> el marketing de cada mes, sin pagos adicionales, y todo lo que mantiene tu página activa las 24 horas del día: dominio, hosting, bases de datos y demás funciones, mantenimiento y mejoras para que no se caiga. También le agregamos a tu página funciones nuevas sencillas. Las funciones o automatizaciones complejas se cotizan aparte, y te decimos el costo antes de hacerlas.</p>
+      <p><b>Sin permanencia:</b> pagas un mes y trabajamos ese mes. Si no quieres seguir, no pagas el siguiente y no tienes ninguna obligación con nosotros.</p>
+      <p><b>Lo tuyo es tuyo:</b> tu página, tu dominio y tus redes son tuyos, sigas o no con la mensualidad. La cuenta de prueba del lanzamiento también es tuya: al terminar te la entregamos con sus videos y seguidores. En el Pack con Reservas también es tuyo el sistema (reservas, respuestas automáticas y panel): te lo entregamos completo para que lo manejes tú o la persona que elijas. Si no sigues después de los 10 días, tu página queda con el hosting del año incluido en tu pack. Si dejas la mensualidad, desde ese momento el mantenimiento y los costos de tu página y tus herramientas corren por tu cuenta.</p>
     </section>
 
     <section id="cliente">
       <h2>7. Lo que necesitamos de ti</h2>
       <ul>
-        <li>Enviarnos a tiempo los textos, fotos, logos, accesos y aprobaciones que hagan falta. Si se demoran, el proyecto se corre en el mismo tiempo.</li>
+        <li>Enviarnos a tiempo los textos, fotos, videos, logos, accesos (como tus redes y Google Business) y aprobaciones que hagan falta. Si se demoran, el proyecto se corre en el mismo tiempo.</li>
         <li>Que la información y los materiales que nos des sean ciertos y tengas derecho a usarlos (por ejemplo, fotos o marcas de otros).</li>
-        <li>Que lo que se venda o se anuncie en tu web sea legal.</li>
-        <li>Si usas automatizaciones o mensajes a tus clientes (WhatsApp, correo, recordatorios, ofertas): contar con su autorización para usar sus datos y escribirles, tener tu propia política de datos y respetar los canales y horarios de la Ley 2300 de 2023. Nosotros configuramos las herramientas; el uso con tus clientes es tu responsabilidad.</li>
+        <li>Que lo que se venda o se anuncie en tu web y en tus redes sea legal.</li>
+        <li>Si usas automatizaciones o mensajes a tus clientes (WhatsApp, correo, recordatorios, respuestas automáticas, ofertas): contar con su autorización para usar sus datos y escribirles, tener tu propia política de datos y respetar los canales y horarios de la Ley 2300 de 2023. Nosotros configuramos las herramientas; el uso con tus clientes es tu responsabilidad.</li>
         <li>Cuidar las claves de tu panel y de tus cuentas.</li>
       </ul>
     </section>
 
     <section id="resultados">
       <h2>8. Resultados</h2>
-      <p>Trabajamos para que tu negocio tenga más visitas y más clientes, y medimos los resultados con datos reales. Pero <b>no garantizamos ventas, un número de visitas o seguidores, ni una posición en Google</b>, porque dependen también de tu producto, tu mercado y de plataformas que no controlamos (como los algoritmos de Google y Meta).</p>
+      <p><b>Te prometemos tráfico para tu negocio y te lo demostramos.</b> Por tráfico entendemos visitas a tu página y vistas de tus videos. Antes de empezar acordamos contigo, por escrito, la cifra que buscamos en los 10 días del lanzamiento. Los videos salen en una cuenta de prueba que compartimos contigo (y que es tuya, punto 6), así ves los resultados tú mismo, y el día 8 te mostramos los números reales. Después, cada reporte te muestra cómo va.</p>
+      <p>Si no llegamos a la cifra acordada, te mostramos los números reales y tú decides si sigues: si no sigues, no arranca la mensualidad. Esto no limita los derechos que la ley te da como consumidor (punto 12).</p>
+      <p>Lo que pasa cuando ese tráfico llega, como cuántas personas te compran, depende también de tu producto, tu precio, tu atención y de plataformas que no controlamos (como Google y Meta). Por eso no garantizamos ventas.</p>
     </section>
 
     <section id="terceros">
       <h2>9. Servicios de terceros</h2>
-      <p>Algunos servicios dependen de plataformas de otras empresas: dominio y hosting, WhatsApp, Instagram, Facebook, TikTok, Google (Search, Maps, Business, Calendar, Ads), bases de datos, pasarelas de pago y herramientas de IA. Cada una tiene sus propias reglas y costos. No somos responsables por sus cambios, caídas, bloqueos de cuentas o decisiones, aunque te ayudaremos a resolverlos.</p>
+      <p>Algunos servicios dependen de plataformas de otras empresas: dominio y hosting, WhatsApp, Instagram, Facebook, TikTok, Google (Search, Maps, Business, Calendar, Ads), los anuncios de Meta, Booking, Airbnb, bases de datos, pasarelas de pago y herramientas de IA. Cada una tiene sus propias reglas y costos. No somos responsables por sus cambios, caídas, bloqueos de cuentas o decisiones (como rechazar o pausar un anuncio), aunque te ayudaremos a resolverlos.</p>
     </section>
 
     <section id="ia">
       <h2>10. Contenido con inteligencia artificial</h2>
-      <p>Parte del contenido (fotos, videos, textos) lo creamos con herramientas de IA y revisión humana. Antes de publicarlo, tú lo revisas y lo apruebas. No usamos la imagen de personas reales sin su permiso, ni creamos contenido engañoso. Cuando una plataforma lo exija, el contenido se marca como hecho con IA.</p>
+      <p>Parte del contenido (fotos, videos, textos) lo creamos con herramientas de IA, junto con fotos y videos reales de tu negocio y revisión humana. Antes de publicarlo, tú lo revisas y lo apruebas. No usamos la imagen de personas reales sin su permiso, ni creamos contenido engañoso. Cuando una plataforma lo exija, el contenido se marca como hecho con IA.</p>
     </section>
 
     <section id="propiedad">
@@ -134,7 +191,7 @@
 
     <section id="garantia">
       <h2>12. Garantía y responsabilidad</h2>
-      <p>Respondemos por la calidad de nuestro trabajo según la garantía legal de la Ley 1480 de 2011 y lo que diga tu propuesta: si algo que hicimos falla por causa nuestra, lo corregimos sin costo. No respondemos por fallas causadas por cambios que hagan otras personas, por mal uso, ni por terceros (punto 9). Nada de esto limita los derechos que la ley te da como consumidor.</p>
+      <p>Respondemos por la calidad de nuestro trabajo según la garantía legal de la Ley 1480 de 2011 y lo que diga tu plan o tu propuesta: si algo que hicimos falla por causa nuestra, lo corregimos sin costo. No respondemos por fallas causadas por cambios que hagan otras personas, por mal uso, ni por terceros (punto 9). Nada de esto limita los derechos que la ley te da como consumidor.</p>
     </section>
 
     <section id="sorteos">
@@ -152,13 +209,163 @@
       <p>Estos términos se rigen por las leyes de Colombia. Podemos actualizarlos; la versión vigente es la publicada aquí, y los cambios no afectan los proyectos ya contratados, que siguen las condiciones de su propuesta.</p>
     </section>
   </article>
+
+  <!-- ============ ENGLISH VERSION (traducción de referencia; vale la española, salvo los precios en USD) ============ -->
+  <article class="legal-doc glass" data-l="en">
+    <p class="eyebrow">Legal</p>
+    <h1>Terms and Conditions</h1>
+    <p class="legal-meta">Effective as of November 22, 2026 · Colombian Law 1480 of 2011 (Consumer Statute) and Law 527 of 1999</p>
+
+    <p class="legal-lead">These are the rules for using our website and hiring our services. We wrote them to be clear and short. If anything is unclear, <a href="#" data-wa="Hola Gotia Studio 👋 Tengo una pregunta sobre los términos y condiciones" data-wa-en="Hi Gotia Studio 👋 I have a question about the terms and conditions">message us</a>.</p>
+    <p class="legal-lead">This English version is a translation provided for reference. If it differs from the Spanish version, the Spanish version prevails, except for prices: in this version they are in US dollars (USD), as shown on the English version of our website.</p>
+
+    <nav class="legal-toc" aria-label="On this page">
+      <a href="#who">1. Who we are</a>
+      <a href="#website">2. Use of the website</a>
+      <a href="#plans">3. Plans and services</a>
+      <a href="#payments">4. Payments</a>
+      <a href="#withdrawal">5. Withdrawal and reversal</a>
+      <a href="#monthly">6. Monthly plans</a>
+      <a href="#from-you">7. What we need from you</a>
+      <a href="#results">8. Results</a>
+      <a href="#third-parties">9. Third-party services</a>
+      <a href="#ai">10. AI content</a>
+      <a href="#ip">11. Intellectual property</a>
+      <a href="#warranty">12. Warranty and liability</a>
+      <a href="#promotions">13. Giveaways and promotions</a>
+      <a href="#complaints">14. Requests, complaints and claims</a>
+      <a href="#law">15. Governing law and changes</a>
+    </nav>
+
+    <section id="who">
+      <h2>1. Who we are</h2>
+      <p>Gotiastudio is a digital studio for businesses: we build websites and launch them with social media marketing (videos, ads, Google Business and SEO). We also build custom projects, such as data dashboards.</p>
+      <ul class="legal-facts">
+        <li><b>Brand:</b> Gotiastudio, a service provided by an individual.</li>
+        <li><b>Domicile:</b> Bogotá D. C., Colombia.</li>
+        <li><b>Email:</b> <a href="mailto:gotiastudiocontacto@gmail.com">gotiastudiocontacto@gmail.com</a> · <b>WhatsApp:</b> <a href="#" data-wa="Hola Gotia Studio 👋 Quiero más información" data-wa-en="Hi Gotia Studio 👋 I'd like more information">+57 302 780 9730</a></li>
+      </ul>
+      <p>The owner's name, ID number and address for notices are given in writing in the proposal we send you before you hire us. If you need them earlier (for example, for a complaint or a legal procedure), ask by email and we'll send them.</p>
+      <p>By using this website or hiring our services, you accept these terms.</p>
+    </section>
+
+    <section id="website">
+      <h2>2. Use of the website</h2>
+      <p>This website (gotiastudio.it.com) is an informational page: it shows who we are and our plans and prices, and contact happens through WhatsApp, Instagram or email. It has no user accounts or client areas. How we measure visits to this website is explained in our <a href="politica-de-datos.html">Data Processing Policy</a> (in Spanish).</p>
+      <p>The cases we show are real and state what was measured (for example, video views, which are not the same as visits or clients). They are results of other businesses: they don't mean yours will reach the same numbers. What we do promise you is in section 8.</p>
+      <p>You may not use the website for illegal purposes, try to damage it or access its private areas without permission.</p>
+    </section>
+
+    <section id="plans">
+      <h2>3. Plans and services</h2>
+      <p>These are our plans. Prices in this version are in US dollars (USD).</p>
+      <ul>
+        <li><b>Launch Pack</b> (US$225, in 2 payments, or with the full year: section 4): a one-section website with domain, hosting and SSL for 1 year, click and message tracking, 1 automation of your choice (WhatsApp auto-reply or an alert for every new lead) and 10 days of intensive marketing (1–2 daily videos on 2 social networks).</li>
+        <li><b>Bookings Pack</b> (US$500, one-time payment): everything in the Launch Pack, plus bookings connected to Google Calendar, Booking or Airbnb, automatic replies 24/7, an instant alert for every new lead and a dashboard to change texts, photos and prices.</li>
+        <li><b>I already have a website</b> (US$75 to get started): for websites built by Gotiastudio. We connect tracking and your WhatsApp, and your 10 days of intensive marketing begin. If another provider built your website, it is quoted separately.</li>
+        <li><b>Accelerator</b> (US$875 per month, no commitment): for those who want to grow fast and need immediate visibility. It doesn't include the 10 days of intensive marketing because it has its own kick-off (section 6).</li>
+      </ul>
+      <p><b>The launch</b> starts once your website is published and paid for. It lasts 10 days of intensive marketing: the videos go out on a test account we share with you, so you can see the results yourself, and on day 8 we show you the numbers. What happens next is in section 6.</p>
+      <p>What each plan includes is on our <a href="paquetes.html">plans</a> page. Before we start, we confirm in writing (WhatsApp or email) the plan, the price and anything we need to agree with you, such as the traffic target for the launch or the monthly fee for "I already have a website". The contract exists once you accept that confirmation and make the first payment.</p>
+      <p>Custom projects (just a website, a data dashboard or something else) are quoted in writing: the proposal states the scope, price, timeline and deliverables. If you ask for changes that weren't in your plan or proposal, we send you the extra cost and time before doing them.</p>
+    </section>
+
+    <section id="payments">
+      <h2>4. Payments</h2>
+      <ul>
+        <li><b>Websites:</b> 50% to start and 50% when it's ready. We publish it once the payment is complete. For the Launch Pack, that's 2 payments of US$112.50.</li>
+        <li><b>Full year (Launch Pack):</b> you pay for the pack and 12 months of your monthly plan in a single payment and get 14 months: US$2,325 with the US$175 plan, US$2,805 with the US$215 plan or US$3,825 with the US$300 plan. During those 14 months, marketing continues with no extra payments.</li>
+        <li><b>I already have a website:</b> the US$75 is paid to start the 10 days.</li>
+        <li><b>Accelerator:</b> you can pay 50% at the start and 50% the following month.</li>
+        <li><b>Monthly plans:</b> paid month to month, with no commitment (section 6). If you pay for 12 months at once, you get 14.</li>
+        <li><b>Payment methods:</b> card or bank transfer (and Nequi or Bre-B in Colombia).</li>
+        <li><b>Ads:</b> they are optional, because we also work with organic strategies. If you want ads, they aren't included in any plan: you pay for them directly to Meta or Google. For the 10 days we recommend US$75–125.</li>
+      </ul>
+      <p>We provide the invoice or receipt required by law.</p>
+    </section>
+
+    <section id="withdrawal">
+      <h2>5. Right of withdrawal and payment reversal</h2>
+      <p><b>Withdrawal:</b> if you hired us remotely (by WhatsApp, Instagram, email or the website), you may withdraw within 5 business days after hiring us, as long as we haven't started providing the service with your agreement. We refund your money within 15 calendar days at most. This doesn't apply once the service has started with your agreement, or to custom work already in progress (article 47 of Colombian Law 1480 of 2011, amended by Law 2439 of 2024).</p>
+      <p><b>Payment reversal:</b> if you paid by card or another electronic method and were a victim of fraud, or the service wasn't provided or doesn't match what you ordered, you may request a payment reversal within 5 business days after noticing it, by notifying us and your bank or card issuer (article 51 of Colombian Law 1480 of 2011).</p>
+    </section>
+
+    <section id="monthly">
+      <h2>6. Monthly plans</h2>
+      <p>The monthly plan is the work we do each month after the launch:</p>
+      <ul>
+        <li><b>After the Launch Pack:</b> you choose US$175/month (1 video, 1 story and 1 text post a day), US$215/month (2 videos, 2 stories and 2 posts a day) or US$300/month (3 videos, 3 stories and 3 flyers a day). All include Google Business, website care and a monthly report.</li>
+        <li><b>After the Bookings Pack:</b> US$550/month.</li>
+        <li><b>After "I already have a website":</b> agreed with you, from US$175/month.</li>
+        <li><b>Accelerator:</b> US$875/month. Includes 60 to 90 videos a month on 4 social networks, ad management, SEO and a weekly report.</li>
+      </ul>
+      <p><b>When it starts:</b> on day 8 of the launch we show you the numbers. If you don't tell us before day 10 that you don't want to continue, your first month begins. If you tell us, the monthly plan doesn't start. If you paid for the full year, your 14 months start when the launch ends. The Accelerator starts directly with its first month.</p>
+      <p><b>What it covers:</b> each month's marketing, with no extra payments, and everything that keeps your website live 24/7: domain, hosting, databases and other functions, maintenance and improvements so it doesn't go down. We also add simple new features to your website. Complex features or automations are quoted separately, and we tell you the cost before doing them.</p>
+      <p><b>No commitment:</b> you pay for a month and we work that month. If you don't want to continue, you don't pay for the next one and you have no further obligation to us.</p>
+      <p><b>What's yours is yours:</b> your website, your domain and your social accounts are yours, whether or not you keep the monthly plan. The launch test account is also yours: when it ends, we hand it over with its videos and followers. With the Bookings Pack, the system (bookings, automatic replies and dashboard) is also yours: we hand it over complete so you, or whoever you choose, can run it. If you don't continue after the 10 days, your website keeps the hosting for the year included in your pack. If you stop the monthly plan, from then on the maintenance and costs of your website and tools are your responsibility.</p>
+    </section>
+
+    <section id="from-you">
+      <h2>7. What we need from you</h2>
+      <ul>
+        <li>Send us on time the texts, photos, videos, logos, access (such as your social accounts and Google Business) and approvals we need. If they're late, the project is pushed back by the same amount of time.</li>
+        <li>The information and materials you give us must be true, and you must have the right to use them (for example, photos or brands that belong to others).</li>
+        <li>What is sold or advertised on your website and social accounts must be legal.</li>
+        <li>If you use automations or send messages to your clients (WhatsApp, email, reminders, automatic replies, offers): you must have their authorization to use their data and contact them, have your own data policy, and respect the channels and hours set by Colombian Law 2300 of 2023. We set up the tools; how you use them with your clients is your responsibility.</li>
+        <li>Keep the passwords to your dashboard and accounts safe.</li>
+      </ul>
+    </section>
+
+    <section id="results">
+      <h2>8. Results</h2>
+      <p><b>We promise traffic for your business and we prove it.</b> By traffic we mean visits to your website and views of your videos. Before we start, we agree with you in writing on the target for the 10 days of the launch. The videos go out on a test account we share with you (and which is yours, section 6), so you can see the results yourself, and on day 8 we show you the real numbers. After that, each report shows you how it's going.</p>
+      <p>If we don't reach the agreed target, we show you the real numbers and you decide whether to continue: if you don't, the monthly plan doesn't start. This doesn't limit your rights as a consumer under the law (section 12).</p>
+      <p>What happens once that traffic arrives, such as how many people buy from you, also depends on your product, your price, your customer service and platforms we don't control (such as Google and Meta). That's why we don't guarantee sales.</p>
+    </section>
+
+    <section id="third-parties">
+      <h2>9. Third-party services</h2>
+      <p>Some services depend on platforms owned by other companies: domain and hosting, WhatsApp, Instagram, Facebook, TikTok, Google (Search, Maps, Business, Calendar, Ads), Meta ads, Booking, Airbnb, databases, payment gateways and AI tools. Each one has its own rules and costs. We aren't responsible for their changes, outages, account blocks or decisions (such as rejecting or pausing an ad), although we'll help you sort them out.</p>
+    </section>
+
+    <section id="ai">
+      <h2>10. Content made with artificial intelligence</h2>
+      <p>Part of the content (photos, videos, texts) is created with AI tools, together with real photos and videos of your business and human review. Before it's published, you review and approve it. We don't use the image of real people without their permission, and we don't create misleading content. When a platform requires it, the content is labeled as made with AI.</p>
+    </section>
+
+    <section id="ip">
+      <h2>11. Intellectual property</h2>
+      <p>The design, texts and code of this website belong to Gotiastudio. In your project, once you complete the payment, you keep the rights to use what we deliver for your business (your website design, content and pieces). Third-party tools, templates, libraries and components remain under their own licenses. We may show your project in our portfolio unless you ask us not to.</p>
+    </section>
+
+    <section id="warranty">
+      <h2>12. Warranty and liability</h2>
+      <p>We stand behind the quality of our work under the legal warranty of Colombian Law 1480 of 2011 and what your plan or proposal states: if something we made fails because of us, we fix it at no cost. We aren't responsible for failures caused by changes made by other people, by misuse, or by third parties (section 9). Nothing here limits the rights the law gives you as a consumer.</p>
+    </section>
+
+    <section id="promotions">
+      <h2>13. Giveaways and promotions</h2>
+      <p>Each giveaway or promotion has its own rules (how to enter, dates, prize and how the winner is chosen), published with the promotion. When the law requires it, it will have authorization from Coljuegos. Instagram, Facebook and Meta don't sponsor or run our giveaways.</p>
+    </section>
+
+    <section id="complaints">
+      <h2>14. Requests, complaints and claims</h2>
+      <p>Write to us at <a href="mailto:gotiastudiocontacto@gmail.com">gotiastudiocontacto@gmail.com</a> or on <a href="#" data-wa="Hola Gotia Studio 👋 Quiero hacer una petición, queja o reclamo" data-wa-en="Hi Gotia Studio 👋 I'd like to make a request, complaint or claim">WhatsApp</a>. We reply within 15 business days at most. If you're not satisfied, you can go to Colombia's Superintendence of Industry and Commerce (SIC). For matters about your personal data, follow the procedure in our <a href="politica-de-datos.html">Data Processing Policy</a> (in Spanish).</p>
+    </section>
+
+    <section id="law">
+      <h2>15. Governing law and changes</h2>
+      <p>These terms are governed by the laws of Colombia. We may update them; the current version is the one published here, and changes don't affect projects already hired, which follow the conditions of their proposal.</p>
+    </section>
+  </article>
 </main>
 
 <footer class="legal-foot container">
   <span>© <span id="year">2026</span> Gotiastudio</span>
-  <span><a href="politica-de-datos.html">Política de datos</a> · <a href="terminos.html" aria-current="page">Términos y condiciones</a></span>
+  <span><a href="politica-de-datos.html"><span data-l="es">Política de datos</span><span data-l="en">Privacy policy (in Spanish)</span></a> · <a href="terminos.html" aria-current="page"><span data-l="es">Términos y condiciones</span><span data-l="en">Terms and conditions</span></a></span>
 </footer>
 
-<script src="contacto.js?v=4" defer></script>
+<script src="idioma.js?v=1" defer></script>
+<script src="contacto.js?v=6" defer></script>
 </body>
 </html>

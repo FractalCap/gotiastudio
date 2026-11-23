@@ -1,0 +1,172 @@
+/* =========================================================
+   Gotiastudio — Lanzamiento (inicio y precios, nov. 2026)
+   Lo nuevo de index.html y paquetes.html: hero, resultados, 3 pasos, tarjetas de planes,
+   reglas y pagos. Va después de styles.css y usa sus mismos colores (también el modo negro),
+   su letra y su cristal. Pensado primero para celular.
+   ========================================================= */
+
+/* ---------- Secciones: menos aire que las de antes, para leer rápido ---------- */
+.lz-sec { padding-block: clamp(56px, 8vw, 112px); }
+.lz-head { display: grid; justify-items: center; text-align: center; margin-bottom: clamp(26px, 4vw, 48px); }
+.lz-head .eyebrow { margin-bottom: 14px; }
+.lz-head .h2, .lz-final .h2 { font-size: clamp(32px, 4.6vw, 60px); line-height: 1.04; text-wrap: balance; }
+.lz-head .lead { margin-top: 14px; text-wrap: balance; }
+.lz-center { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(24px, 3.5vw, 40px); }
+.lz-center .btn { flex: 0 1 auto; }
+
+/* ---------- Hero: ocupa la ventana completa (no asoma la sección siguiente), con el contenido centrado ---------- */
+.lz-hero { min-height: 100vh; min-height: 100svh; padding-top: 96px; padding-bottom: clamp(28px, 5vw, 56px); grid-template-rows: auto; align-content: center; }
+.lz-hero .hero-content { padding-block: 0; }
+.lz-hero .hero-title { font-size: clamp(34px, 5.2vw, 72px); line-height: 1.02; max-width: 11.5em; margin: 0 0 18px; text-wrap: balance; }
+.lz-hero .hero-lead { max-width: 34em; }
+.lz-hero .hero-actions { margin-top: 26px; }
+.lz-hero-note {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
+  font-size: 14px; color: var(--fg-2); letter-spacing: -.005em;
+}
+.lz-hero-note strong { color: var(--fg); font-weight: 600; }
+.lz-hero-note .pulse { flex: none; }
+/* la "G" de cristal en el celular: entra en el flujo, encima del título, para que la G y el texto
+   se centren juntos en la pantalla (sin hueco entre los dos) */
+@media (max-width: 860px) {
+  html.lite .lz-hero .hero-g { position: relative; top: auto; left: auto; translate: none; justify-self: center; width: min(50vw, calc((32svh - 90px) * 1.066)); margin-bottom: 14px; }
+  .lz-hero { padding-bottom: 86px; }   /* espacio para el botón flotante de WhatsApp (54 px + 18 px abajo): no tapa la última línea */
+  .lz-hero .hero-title { margin-bottom: 14px; }
+}
+@media (max-width: 420px) {
+  .lz-hero .hero-actions { gap: 10px; }
+  .lz-hero-note { font-size: 13px; }
+}
+@media (min-width: 861px) {
+  .lz-hero { padding-top: 110px; }
+}
+.lz-hero + .lz-sec { padding-top: clamp(32px, 5vw, 72px); }
+
+/* ---------- Resultados: casos reales ---------- */
+.casos { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.caso {
+  flex: 1 1 300px; max-width: 460px; border-radius: var(--r-lg); padding: clamp(24px, 3vw, 36px);
+  display: grid; gap: 10px; justify-items: start; overflow: hidden;
+}
+.caso[hidden] { display: none; }
+.caso .icon-bubble { margin-bottom: 6px; }
+.caso-num { font-size: clamp(48px, 7vw, 76px); line-height: .95; letter-spacing: -.05em; font-weight: 500; color: var(--fg); }
+.caso-txt { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.4; color: var(--fg-2); max-width: 24ch; }
+.caso-kicker { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3); }
+.caso-datos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 16px; color: var(--fg-2); }
+.caso-datos strong { font-size: 22px; font-weight: 600; color: var(--fg); margin-right: 4px; }
+.caso-cita { margin: 6px 0 0; padding-left: 14px; border-left: 2px solid var(--line-2); font-size: 15px; line-height: 1.55; color: var(--fg-2); }
+.caso-cita cite { display: block; margin-top: 6px; font-style: normal; font-size: 13px; color: var(--fg-3); }
+.caso video { width: 100%; border-radius: var(--r-md); }
+.caso.is-featured { box-shadow: 0 0 0 1.5px var(--accent), 0 30px 80px -30px rgba(31, 111, 229, .45); }
+.caso .lz-tag { margin-bottom: 2px; }
+.caso-ig { margin-top: 8px; }
+/* la captura de las estadísticas: la prueba de cada caso */
+.caso-foto { width: 100%; height: auto; margin-top: 8px; border-radius: var(--r-sm); box-shadow: 0 0 0 1px var(--line-2), 0 12px 30px -18px rgba(28, 74, 150, .45); }
+.caso-nota { font-size: 14px; color: var(--fg-2); }
+.lz-total { margin-top: 14px; font-size: clamp(16px, 1.4vw, 19px); color: var(--fg-2); text-wrap: balance; }
+.lz-total strong { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+/* las cifras largas (17.362.668) caben en el celular */
+.caso-num { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+/* ---------- Cómo funciona: los 3 pasos (los círculos se encienden con main.js, #steps) ---------- */
+.steps.steps-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.steps.steps-3 .step p { max-width: 30ch; color: var(--fg-2); font-size: 15px; }
+.steps.steps-3 .step h3 { font-size: 19px; }
+@media (max-width: 900px) {
+  .steps.steps-3 { grid-template-columns: 1fr; gap: 0; }
+  .steps.steps-3 .step { padding-bottom: 26px; }
+  .steps.steps-3 .step:last-child { padding-bottom: 0; }
+}
+
+/* ---------- Tarjetas de planes ---------- */
+.lz-packs { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 1080px; margin-inline: auto; align-items: stretch; }
+@media (min-width: 780px) { .lz-packs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lz-solo { max-width: 560px; margin-inline: auto; }
+
+.lz-pack {
+  position: relative; border-radius: var(--r-lg); padding: clamp(24px, 3vw, 34px);
+  display: flex; flex-direction: column; gap: 14px; overflow: hidden;
+}
+.lz-pack.is-featured { box-shadow: 0 0 0 1.5px var(--accent), 0 30px 80px -30px rgba(31, 111, 229, .45); }
+.lz-tag {
+  align-self: flex-start; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px;
+  font-size: 12px; font-weight: 600; letter-spacing: .04em; color: #fff; background: var(--accent);
+}
+:where(html[data-theme="dark"]) .lz-tag { color: #000; }
+.lz-name { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.1; letter-spacing: -.03em; }
+.lz-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.lz-price strong { font-size: clamp(34px, 4vw, 46px); line-height: 1; letter-spacing: -.04em; font-weight: 600; color: var(--fg); font-variant-numeric: tabular-nums; }
+.lz-price span { font-size: 14px; color: var(--fg-2); }
+/* Año completo (el Pack Lanzamiento + 12 meses en un pago): su propio cuadro.
+   En index.html va al lado del Pack Lanzamiento; en paquetes.html (.lz-wide) ocupa todo el ancho, debajo de los 4 planes.
+   .lz-wide: un cuadro a todo el ancho, en dos columnas (en index.html, la Aceleradora debajo de los dos precios) */
+.lz-year { background-image: linear-gradient(160deg, var(--accent-soft), transparent 70%); }
+.lz-main { display: grid; gap: 14px; justify-items: start; }
+/* los 3 precios del Año completo, uno por mensualidad */
+.lz-prices { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; width: 100%; }
+.lz-prices li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 10px 14px; border-radius: var(--r-sm); box-shadow: inset 0 0 0 1px var(--line-2); }
+.lz-prices strong { font-size: clamp(22px, 2vw, 26px); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; color: var(--fg); font-variant-numeric: tabular-nums; }
+.lz-prices span { font-size: 13.5px; color: var(--fg-2); }
+/* Pack Lanzamiento: las 3 mensualidades, con checks, dentro del cuadro "Después" */
+.lz-after .lz-inc { margin: 10px 0; gap: 7px; }
+.lz-after .lz-inc li { font-size: 14.5px; }
+@media (min-width: 780px) {
+  .lz-packs > .lz-wide {
+    grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-areas: "main list" "note list" "btn list"; gap: 14px 44px; align-items: start;
+  }
+  .lz-wide > .lz-main { grid-area: main; }
+  .lz-wide > .lz-inc { grid-area: list; align-self: center; }
+  .lz-wide > .lz-small, .lz-wide > .lz-after { grid-area: note; }
+  .lz-wide > .btn { grid-area: btn; margin-top: 0; }
+}
+.lz-for { font-size: 16px; line-height: 1.5; color: var(--fg); }
+.lz-inc { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.lz-inc li { position: relative; padding-left: 28px; font-size: 15px; line-height: 1.5; color: var(--fg-2); }
+.lz-inc li::before {
+  content: ""; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent) var(--check) center / 12px no-repeat;
+}
+:where(html[data-theme="dark"]) .lz-inc li::before { background-color: rgba(255, 255, 255, .22); }
+.lz-inc li.plus { padding-left: 0; color: var(--fg); font-weight: 500; }
+.lz-inc li.plus::before { content: none; }
+.lz-after { padding: 14px 16px; border-radius: var(--r-sm); background: var(--accent-soft); font-size: 14.5px; line-height: 1.55; color: var(--fg-2); }
+.lz-after b { font-weight: 600; color: var(--fg); }
+.lz-ideal { font-size: 14.5px; color: var(--fg-2); }
+.lz-small { font-size: 13.5px; color: var(--fg-3); }
+.lz-small a, .lz-line a, .lz-ig a, .lz-faq .lead a, .qa-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(31, 111, 229, .35); }
+.lz-pack .btn { margin-top: auto; }
+.lz-pack .lz-push { margin-top: auto; }
+.lz-pack .lz-push + .btn { margin-top: 0; }
+
+/* ---------- Paquetes: portada corta ---------- */
+.lz-top { padding-top: 120px; padding-bottom: clamp(24px, 4vw, 44px); text-align: center; }
+.lz-top .hero-title { font-size: clamp(38px, 6vw, 80px); line-height: 1; margin: 0 auto 16px; max-width: 12em; }
+.lz-top .lead { margin-inline: auto; text-wrap: balance; }
+
+/* ---------- Las reglas y cómo se paga: listas cortas ---------- */
+.lz-rules { list-style: none; margin: 0 auto; padding: 0; display: grid; gap: 10px; max-width: 720px; }
+.lz-rules li { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: var(--r-md); font-size: 15.5px; line-height: 1.45; color: var(--fg); }
+.lz-pay { list-style: none; margin: 0 auto; padding: 0; display: grid; gap: 12px; max-width: 980px; }
+@media (min-width: 780px) { .lz-pay { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.lz-pay li { border-radius: var(--r-md); padding: 20px 22px; display: grid; gap: 6px; align-content: start; }
+.lz-pay small { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); }
+.lz-pay strong { font-size: 20px; letter-spacing: -.02em; }
+.lz-pay p { font-size: 14.5px; line-height: 1.5; color: var(--fg-2); }
+.lz-line { margin: clamp(32px, 5vw, 56px) auto 0; max-width: 40em; text-align: center; font-size: 16px; color: var(--fg-2); text-wrap: balance; }
+.lz-note { margin-top: 16px; text-align: center; font-size: 13px; color: var(--fg-3); }
+
+/* ---------- Preguntas: el texto de la izquierda, más corto ---------- */
+.lz-faq .faq-copy .h2 { font-size: clamp(32px, 4.6vw, 60px); }
+.lz-faq .faq-copy .lead { margin: 16px 0 0; }
+
+/* ---------- Cierre ---------- */
+.lz-final {
+  border-radius: var(--r-xl); padding: clamp(32px, 6vw, 80px) clamp(22px, 5vw, 72px);
+  display: grid; justify-items: center; gap: 22px; text-align: center; overflow: hidden;
+}
+.lz-final .h2 { max-width: 14em; }
+.lz-final > :not(.bubble) { position: relative; z-index: 1; }   /* el texto, por encima de las burbujas */
+.lz-ig { font-size: 15px; color: var(--fg-2); }
+@media (max-width: 420px) { .lz-final .btn { width: 100%; } }
