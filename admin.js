@@ -36,7 +36,7 @@
   ];
   const SLIDES = [
     ['top', 'Portada'], ['planes', 'Los 4 planes'], ['plan-lanzamiento', 'Pack Lanzamiento'], ['plan-reservas', 'Pack con Reservas'],
-    ['plan-ya-tengo', 'Ya tengo página'], ['plan-aceleradora', 'Aceleradora'], ['plan-anual', 'Año completo'], ['reglas', 'Las reglas'], ['como-se-paga', 'Cómo se paga'],
+    ['plan-ya-tengo', 'Ya tengo página'], ['plan-aceleradora', 'Aceleradora'], ['reglas', 'Las reglas'], ['como-se-paga', 'Cómo se paga'],
     ['contacto', 'Escríbenos']
   ];
   // las de antes (hasta nov. 2026): solo para nombrar las visitas viejas
@@ -46,6 +46,7 @@
     ['packs', 'Paquetes'], ['equipo', 'Equipo']
   ];
   const OLD_SLIDES = [
+    ['plan-anual', 'Año completo'],   // quitado el 24 nov. 2026
     ['top', 'Portada'], ['auto-inicio', 'Automatizar · 2 pasos'], ['casos', 'Casos de éxito'], ['paso-1', 'Paso 1 · Tu paquete'],
     ['ejemplo-presencia', 'Presencia · recorrido'], ['plan-presencia', 'Presencia · qué incluye'],
     ['ejemplo-automatico', 'Automático · recorrido'], ['plan-automatico', 'Automático · qué incluye'],
