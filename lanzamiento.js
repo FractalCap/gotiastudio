@@ -13,3 +13,33 @@
   if (nav) new MutationObserver(paint).observe(nav, { attributes: true, attributeFilter: ['class'] });
   setTimeout(() => { shown = true; paint(); }, 600);
 })();
+
+/* Black Days: precio del Pack Lanzamiento en $590.000 (antes $890.000) por 10 días.
+   Termina el 6 de dic. de 2026 a las 23:59 (hora de Colombia). Al pasar la fecha, las piezas
+   [data-bd] se esconden y vuelven las [data-bd-off] (el precio normal), sin tocar el HTML. */
+(() => {
+  const END = new Date('2026-12-06T23:59:59-05:00').getTime();
+  const on = document.querySelectorAll('[data-bd]');
+  const off = document.querySelectorAll('[data-bd-off]');
+  const counts = document.querySelectorAll('[data-bd-count]');
+  if (!on.length) return;
+  const pad = (n) => String(n).padStart(2, '0');
+  const tick = () => {
+    const left = END - Date.now();
+    if (left <= 0) {
+      on.forEach((el) => { el.hidden = true; });
+      off.forEach((el) => { el.hidden = false; });
+      clearInterval(timer);
+      return;
+    }
+    const s = Math.floor(left / 1000);
+    const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
+    counts.forEach((el) => {
+      const en = el.closest('[data-l]')?.getAttribute('data-l') === 'en';
+      const days = d ? `${d} ${en ? (d === 1 ? 'day' : 'days') : (d === 1 ? 'día' : 'días')} ` : '';
+      el.textContent = `${days}${pad(h)}:${pad(m)}:${pad(sec)}`;
+    });
+  };
+  const timer = setInterval(tick, 1000);
+  tick();
+})();

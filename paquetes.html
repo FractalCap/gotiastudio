@@ -21,18 +21,18 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Página web para tu negocio, conectada a tu WhatsApp · Gotiastudio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="icon" href="assets/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=2">
 
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
-  <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=95">
-  <link rel="stylesheet" href="lanzamiento.css?v=12">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css?v=95">
+  <link rel="stylesheet" href="assets/css/lanzamiento.css?v=13">
 
   <script>
     // idioma: el mismo de index.html (español con COP o inglés con USD), aplicado antes de pintar.
-    // La primera vez se pregunta (html.lang-ask, idioma.js). ?lang=en|es en el enlace lo fija.
+    // La primera vez se pregunta (html.lang-ask, assets/js/idioma.js). ?lang=en|es en el enlace lo fija.
     (function () {
       var r = document.documentElement, q = null, l = null;
       r.dataset.esTitle = document.title;
@@ -87,7 +87,7 @@
      Si cambias un precio en COP, cambia también el de USD (aquí y en index.html). -->
 <div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
   <div class="lang-pick-box glass">
-    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <img class="brand-mark" src="assets/img/g-logo-64.webp" alt="" width="44" height="44" decoding="async">
     <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
     <div class="lang-pick-btns">
       <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
@@ -119,7 +119,7 @@
 <header class="nav" id="nav">
   <nav class="nav-inner glass" aria-label="Principal">
     <a href="index.html" class="brand" aria-label="Gotiastudio, ir al inicio" data-aria-en="Gotiastudio, go to home">
-      <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
+      <img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
       <span class="brand-word">Gotia<span>studio</span></span>
     </a>
     <ul class="nav-links">
@@ -164,7 +164,13 @@
         <section class="lz-pack glass spot is-featured" id="plan-lanzamiento" aria-labelledby="t-lanzamiento">
           <span class="lz-tag"><span data-l="es">Empieza aquí</span><span data-l="en">Start here</span></span>
           <h2 class="lz-name" id="t-lanzamiento"><span data-l="es">Pack Lanzamiento</span><span data-l="en">Launch Pack</span></h2>
-          <p class="lz-price"><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · pago único</span><span data-l="en">USD · one-time payment</span></p>
+          <!-- BLACK DAYS: mientras dure la oferta se ve esto; cuando termina (fecha en lanzamiento.js) vuelve solo al precio normal -->
+          <div class="bd-box" data-bd>
+            <span class="bd-badge"><span data-l="es">Black Days · −33 %</span><span data-l="en">Black Days · −33%</span></span>
+            <p class="lz-price"><s class="bd-old" data-l="es">$890.000</s><s class="bd-old" data-l="en">US$225</s><strong data-l="es">$590.000</strong><strong data-l="en">US$149</strong><span data-l="es">COP + IVA · pago único</span><span data-l="en">USD · one-time payment</span></p>
+            <p class="bd-timer"><span data-l="es">La oferta termina en</span><span data-l="en">Offer ends in</span> <b data-bd-count>10 días</b></p>
+          </div>
+          <p class="lz-price" data-bd-off hidden><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · pago único</span><span data-l="en">USD · one-time payment</span></p>
           <ul class="lz-inc">
             <li><span data-l="es">Página de una sección: oferta, servicios, fotos, WhatsApp con mensaje listo, formulario y Google Maps</span><span data-l="en">One-section website: offer, services, photos, WhatsApp with a ready-made message, contact form and Google Maps</span></li>
             <li><span data-l="es">Dominio, hosting y SSL por 1 año</span><span data-l="en">Domain, hosting and SSL for 1 year</span></li>
@@ -270,7 +276,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+        <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
         <p><span data-l="es">Te hacemos tu página y la lanzamos con 10 días de marketing intensivo.</span><span data-l="en">We build your website and launch it with 10 days of intensive marketing.</span></p>
       </div>
       <div>
@@ -311,11 +317,11 @@
 
 <a href="#" class="wa-float" data-wa="Hola, vi los planes y tengo una pregunta" data-wa-en="Hi, I saw your plans and I have a question" aria-label="¿Dudas? Escríbenos por WhatsApp" data-aria-en="Questions? Message us on WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span><span data-l="es">¿Dudas? Escríbenos</span><span data-l="en">Questions? Message us</span></span></a>
 
-<script src="idioma.js?v=1" defer></script>
-<script src="contacto.js?v=6" defer></script>
-<script src="supabase-config.js?v=2" defer></script>
-<script src="analytics.js?v=14" defer></script>
-<script src="main.js?v=38" defer></script>
-<script src="lanzamiento.js?v=1" defer></script>
+<script src="assets/js/idioma.js?v=1" defer></script>
+<script src="assets/js/contacto.js?v=6" defer></script>
+<script src="assets/js/supabase-config.js?v=2" defer></script>
+<script src="assets/js/analytics.js?v=14" defer></script>
+<script src="assets/js/main.js?v=38" defer></script>
+<script src="assets/js/lanzamiento.js?v=2" defer></script>
 </body>
 </html>
