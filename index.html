@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pagas tu página y la lanzamos con 10 días de marketing intensivo">
   <meta property="og:description" content="Tu página lista en pocos días y 10 días de videos diarios que llevan a tu WhatsApp. Ves los resultados en una cuenta de prueba compartida contigo. Desde $890.000 + IVA.">
-  <!-- Vista previa al compartir por WhatsApp. La imagen es og-imagen.jpg,
+  <!-- Vista previa al compartir por WhatsApp. La imagen es landing/img/og-imagen.jpg,
        que en la carpeta de GitHub queda en la raíz: por eso la ruta completa es /og-imagen.jpg -->
   <link rel="canonical" href="https://gotiastudio.it.com/">
   <meta property="og:url" content="https://gotiastudio.it.com/">
@@ -21,20 +21,20 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Página web para tu negocio, conectada a tu WhatsApp · Gotiastudio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="icon" href="assets/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=2">
 
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
-  <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="g-glass-alpha-480.webp" as="image" type="image/webp" fetchpriority="high"
-        imagesrcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" imagesizes="(max-width: 860px) 160px, 30vw">
-  <link rel="stylesheet" href="styles.css?v=95">
-  <link rel="stylesheet" href="lanzamiento.css?v=11">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/g-glass-alpha-480.webp" as="image" type="image/webp" fetchpriority="high"
+        imagesrcset="assets/img/g-glass-alpha-480.webp 480w, assets/img/g-glass-alpha.webp?v=2 648w" imagesizes="(max-width: 860px) 160px, 30vw">
+  <link rel="stylesheet" href="assets/css/styles.css?v=95">
+  <link rel="stylesheet" href="assets/css/lanzamiento.css?v=12">
 
   <script>
     // idioma: español (precios en COP) o inglés (USD). Se aplica antes de pintar, sin destello;
-    // la primera vez se pregunta (html.lang-ask, idioma.js). ?lang=en|es en el enlace lo fija.
+    // la primera vez se pregunta (html.lang-ask, assets/js/idioma.js). ?lang=en|es en el enlace lo fija.
     (function () {
       var r = document.documentElement, q = null, l = null;
       r.dataset.esTitle = document.title;
@@ -105,7 +105,7 @@
     "description": "Te hacemos tu página y la lanzamos con 10 días de marketing intensivo: videos diarios que llevan a tu WhatsApp, en una cuenta de prueba compartida contigo.",
     "email": "gotiastudiocontacto@gmail.com",
     "makesOffer": [
-      {"@type": "Offer", "name": "Pack Lanzamiento", "price": "890000", "priceCurrency": "COP", "description": "Página de una sección y 10 días de marketing intensivo. En 2 pagos (50 % y 50 %), más IVA."},
+      {"@type": "Offer", "name": "Pack Lanzamiento", "price": "890000", "priceCurrency": "COP", "description": "Página de una sección y 10 días de marketing intensivo. Pago único, sin mensualidades (se puede pagar 50 % y 50 %), más IVA."},
       {"@type": "Offer", "name": "Pack con Reservas", "price": "1990000", "priceCurrency": "COP", "description": "Todo lo del Pack Lanzamiento, con reservas, respuestas automáticas y panel. Pago único, más IVA."},
       {"@type": "Offer", "name": "Ya tengo página", "price": "300000", "priceCurrency": "COP", "description": "Para clientes de Gotiastudio: medición, WhatsApp y 10 días de marketing intensivo. Más IVA."},
       {"@type": "Offer", "name": "Aceleradora", "price": "3500000", "priceCurrency": "COP", "description": "60 a 90 videos al mes en 4 redes, pauta, SEO y reporte semanal. Al mes, sin permanencia, más IVA."}
@@ -120,7 +120,7 @@
      redondeados a 5 y sin IVA. Si cambias un precio en COP, cambia también el de USD. -->
 <div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
   <div class="lang-pick-box glass">
-    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <img class="brand-mark" src="assets/img/g-logo-64.webp" alt="" width="44" height="44" decoding="async">
     <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
     <div class="lang-pick-btns">
       <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
@@ -152,7 +152,7 @@
 <header class="nav" id="nav">
   <nav class="nav-inner glass" aria-label="Principal">
     <a href="#top" class="brand" aria-label="Gotiastudio, inicio" data-aria-en="Gotiastudio, home">
-      <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
+      <img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
       <span class="brand-word">Gotia<span>studio</span></span>
     </a>
     <ul class="nav-links">
@@ -186,7 +186,7 @@
     <!-- la "G" de cristal de la marca, como imagen fija -->
     <div class="hero-g" aria-hidden="true">
       <i class="hero-g-halo"></i>
-      <img src="g-glass-alpha.webp?v=2" srcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 160px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high">
+      <img src="assets/img/g-glass-alpha.webp?v=2" srcset="assets/img/g-glass-alpha-480.webp 480w, assets/img/g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 160px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high">
       <span class="lb" style="--s:13cqw;left:92%;top:4%"></span>
       <span class="lb far" style="--s:8cqw;left:6%;top:90%"></span>
       <span class="lb" style="--s:4cqw;left:24%;top:2%"></span>
@@ -200,7 +200,7 @@
         <a href="#" class="btn btn-primary" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
         <a href="paquetes.html" class="btn btn-glass glass"><span data-l="es">Ver precios</span><span data-l="en">See pricing</span> <svg class="ico"><use href="#i-arrow"/></svg></a>
       </div>
-      <p class="lz-hero-note" data-hero style="--i:5"><span class="pulse" aria-hidden="true"></span><span data-l="es">Desde <strong>$890.000 + IVA</strong> · Solo 2 lanzamientos por mes</span><span data-l="en">From <strong>US$225</strong> · Only 2 launches per month</span></p>
+      <p class="lz-hero-note" data-hero style="--i:5"><span class="pulse" aria-hidden="true"></span><span data-l="es">Desde <strong>$890.000 + IVA, pago único</strong> · Solo 2 lanzamientos por mes</span><span data-l="en">From <strong>US$225, one-time</strong> · Only 2 launches per month</span></p>
     </div>
   </section>
 
@@ -227,7 +227,7 @@
           <!-- la captura muestra 30 días, pero la cuenta lleva solo 2 semanas desde que la empezamos (dato del cliente, 20 nov. 2026) -->
           <p class="caso-txt" data-l="es">vistas de video y 905 seguidores más. <strong>La cuenta lleva solo 2 semanas</strong> desde que la empezamos, y ya tiene resultados.</p>
           <p class="caso-txt" data-l="en">video views and 905 new followers. <strong>We started the account just 2 weeks ago</strong>, and it's already getting results.</p>
-          <img class="caso-foto" src="caso-cabaleon-vistas.webp" alt="Estadísticas del Hotel Cabaleon del 21 de octubre al 19 de noviembre: 528.270 visualizaciones y 905 seguidores netos" width="720" height="450" loading="lazy" decoding="async">
+          <img class="caso-foto" src="assets/img/caso-cabaleon-vistas.webp" alt="Estadísticas del Hotel Cabaleon del 21 de octubre al 19 de noviembre: 528.270 visualizaciones y 905 seguidores netos" width="720" height="450" loading="lazy" decoding="async">
           <!-- MÁS DATOS:
           <ul class="caso-datos">
             <li><strong>[N]</strong> solicitudes de reserva</li>
@@ -246,7 +246,7 @@
           <!-- +1.000 interesados: dato del cliente (20 nov. 2026) -->
           <p class="caso-txt" data-l="es">vistas de video en 30 días, 3.676 seguidores más y <strong>+1.000 interesados</strong>.</p>
           <p class="caso-txt" data-l="en">video views in 30 days, 3,676 new followers and <strong>1,000+ leads</strong>.</p>
-          <img class="caso-foto" src="caso-mantis-vistas.webp" alt="Estadísticas de Mantis Pest Control del 21 de octubre al 19 de noviembre: 17.362.668 visualizaciones y 3.676 seguidores netos" width="720" height="447" loading="lazy" decoding="async">
+          <img class="caso-foto" src="assets/img/caso-mantis-vistas.webp" alt="Estadísticas de Mantis Pest Control del 21 de octubre al 19 de noviembre: 17.362.668 visualizaciones y 3.676 seguidores netos" width="720" height="447" loading="lazy" decoding="async">
           <a class="btn btn-glass glass btn-sm caso-ig" href="https://www.instagram.com/mantis_pestcontrol/" target="_blank" rel="noopener"><svg class="ico ico-l"><use href="#i-ig"/></svg>@mantis_pestcontrol</a>
         </article>
       </div>
@@ -283,14 +283,15 @@
           <span class="step-dot"><svg class="ico"><use href="#i-data"/></svg></span>
           <small>03</small>
           <h3><span data-l="es">Te mostramos los números</span><span data-l="en">We show you the numbers</span></h3>
-          <p><span data-l="es">El día 8 vemos cuántos te escribieron. Si sigues, desde $700.000/mes + IVA.</span><span data-l="en">On day 8 we check how many people messaged you. If you continue, from US$175/month.</span></p>
+          <p><span data-l="es">El día 8 vemos cuántos te escribieron. Pago único: sin mensualidades.</span><span data-l="en">On day 8 we check how many people messaged you. One-time payment: no monthly fees.</span></p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ 4. PRECIO: el Pack Lanzamiento y, al lado, el Año completo; debajo, la Aceleradora ============
-       Mismas tarjetas y mismos precios que en paquetes.html (#plan-lanzamiento y #plan-anual): si cambias uno, cambia el otro.
+  <!-- ============ 4. PRECIO: el Pack Lanzamiento (pago único, sin mensualidades) y, al lado, la Aceleradora ============
+       Mismas tarjetas y mismos precios que en paquetes.html (#plan-lanzamiento y #plan-aceleradora): si cambias uno, cambia el otro.
+       El Año completo y las mensualidades se quitaron el 24 nov. 2026 (copia: index.html.pre-pago-unico.bak).
        En inglés (data-l="en") los precios van en USD: 4.000 COP por dólar, redondeados a 5, sin IVA. -->
   <section class="section lz-sec" id="precios">
     <div class="container">
@@ -303,7 +304,7 @@
         <article class="lz-pack glass is-featured">
           <span class="lz-tag"><span data-l="es">Empieza aquí</span><span data-l="en">Start here</span></span>
           <h3 class="lz-name"><span data-l="es">Pack Lanzamiento</span><span data-l="en">Launch Pack</span></h3>
-          <p class="lz-price"><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · en 2 pagos (50 % y 50 %)</span><span data-l="en">USD · in 2 payments (50% and 50%)</span></p>
+          <p class="lz-price"><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · pago único</span><span data-l="en">USD · one-time payment</span></p>
           <ul class="lz-inc">
             <li><span data-l="es">Página de una sección: oferta, servicios, fotos, WhatsApp con mensaje listo, formulario y Google Maps</span><span data-l="en">One-section website: offer, services, photos, WhatsApp with a ready-made message, contact form and Google Maps</span></li>
             <li><span data-l="es">Dominio, hosting y SSL por 1 año</span><span data-l="en">Domain, hosting and SSL for 1 year</span></li>
@@ -311,45 +312,17 @@
             <li><span data-l="es">1 automatización a tu elección: respuesta automática en WhatsApp o aviso de cada cliente nuevo</span><span data-l="en">1 automation of your choice: WhatsApp auto-reply or an alert for every new lead</span></li>
             <li><span data-l="es">10 días de marketing intensivo: 1 a 2 videos diarios en 2 redes</span><span data-l="en">10 days of intensive marketing: 1–2 daily videos on 2 social networks</span></li>
           </ul>
-          <div class="lz-after">
-            <p data-l="es"><b>Después, elige tu mensualidad</b> (+ IVA, sin permanencia):</p>
-            <p data-l="en"><b>Then choose your monthly plan</b> (no commitment):</p>
-            <ul class="lz-inc">
-              <li><span data-l="es"><b>$700.000/mes:</b> 1 video, 1 story y 1 post de texto al día</span><span data-l="en"><b>US$175/month:</b> 1 video, 1 story and 1 text post a day</span></li>
-              <li><span data-l="es"><b>$850.000/mes:</b> 2 videos, 2 stories y 2 posts al día</span><span data-l="en"><b>US$215/month:</b> 2 videos, 2 stories and 2 posts a day</span></li>
-              <li><span data-l="es"><b>$1.200.000/mes:</b> 3 videos, 3 stories y 3 flyers al día</span><span data-l="en"><b>US$300/month:</b> 3 videos, 3 stories and 3 flyers a day</span></li>
-            </ul>
-            <p data-l="es">Todas incluyen Google Business, cuidado de tu página y reporte mensual.</p>
-            <p data-l="en">All include Google Business, website care and a monthly report.</p>
+          <div class="lz-after lz-unico">
+            <p data-l="es"><b>PAGO ÚNICO, sin mensualidades.</b> No te cobramos nada cada mes.</p>
+            <p data-l="en"><b>ONE-TIME PAYMENT, no monthly fees.</b> We don't charge you anything each month.</p>
+            <p data-l="es">Puedes pagarlo en 2 partes: 50 % al empezar y 50 % cuando esté lista.</p>
+            <p data-l="en">You can split it in 2: 50% to start and 50% when it's ready.</p>
           </div>
           <a href="#" class="btn btn-primary btn-block" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
         </article>
 
-        <!-- Año completo: el mismo cuadro (y los mismos precios) que en paquetes.html (#plan-anual) -->
-        <article class="lz-pack glass lz-year">
-          <div class="lz-main">
-            <span class="lz-tag"><span data-l="es">2 meses gratis</span><span data-l="en">2 months free</span></span>
-            <h3 class="lz-name"><span data-l="es">Año completo</span><span data-l="en">Full year</span></h3>
-            <p class="lz-for"><span data-l="es">El Pack Lanzamiento y 12 meses de tu mensualidad en un solo pago (COP + IVA). Recibes 14 meses.</span><span data-l="en">The Launch Pack plus 12 months of your monthly plan in a single payment (USD). You get 14 months.</span></p>
-            <ul class="lz-prices">
-              <li><strong data-l="es">$9.290.000</strong><strong data-l="en">US$2,325</strong><span data-l="es">con la de $700.000/mes · ahorras $1.400.000</span><span data-l="en">with the US$175/month plan · you save US$350</span></li>
-              <li><strong data-l="es">$11.090.000</strong><strong data-l="en">US$2,805</strong><span data-l="es">con la de $850.000/mes · ahorras $1.700.000</span><span data-l="en">with the US$215/month plan · you save US$430</span></li>
-              <li><strong data-l="es">$15.290.000</strong><strong data-l="en">US$3,825</strong><span data-l="es">con la de $1.200.000/mes · ahorras $2.400.000</span><span data-l="en">with the US$300/month plan · you save US$600</span></li>
-            </ul>
-          </div>
-          <ul class="lz-inc">
-            <li><span data-l="es">Todo lo del Pack Lanzamiento: tu página y 10 días de marketing intensivo</span><span data-l="en">Everything in the Launch Pack: your website and 10 days of intensive marketing</span></li>
-            <li><span data-l="es">14 meses de mensualidad por el precio de 12</span><span data-l="en">14 months of your monthly plan for the price of 12</span></li>
-            <li><span data-l="es">Marketing todo el año sin pagos adicionales, con Google Business y reporte mensual</span><span data-l="en">Marketing all year with no extra payments, including Google Business and a monthly report</span></li>
-            <li><span data-l="es">Tu página activa las 24 horas: dominio, hosting, mantenimiento y mejoras</span><span data-l="en">Your website live 24/7: domain, hosting, maintenance and improvements</span></li>
-            <li><span data-l="es">Funciones nuevas sencillas para tu página, incluidas</span><span data-l="en">Simple new features for your website, included</span></li>
-          </ul>
-          <p class="lz-small"><span data-l="es">La pauta es opcional (también trabajamos orgánico) y va aparte, directo a Meta o Google.</span><span data-l="en">Ads are optional (we also work organically) and are paid separately, directly to Meta or Google.</span></p>
-          <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, quiero el Año completo" data-wa-en="Hi, I want the Full year (Año completo)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero el año completo</span><span data-l="en">I want the full year</span></a>
-        </article>
-
-        <!-- Aceleradora, debajo de los dos precios y a todo el ancho: los mismos precios y textos que en paquetes.html (#plan-aceleradora) -->
-        <article class="lz-pack glass lz-wide">
+        <!-- Aceleradora, al lado del Pack Lanzamiento: los mismos precios y textos que en paquetes.html (#plan-aceleradora) -->
+        <article class="lz-pack glass">
           <div class="lz-main">
             <h3 class="lz-name"><span data-l="es">Aceleradora</span><span data-l="en">Accelerator</span></h3>
             <p class="lz-price"><strong data-l="es">$3.500.000</strong><strong data-l="en">US$875</strong><span data-l="es">COP + IVA · al mes, sin permanencia</span><span data-l="en">USD · per month, no commitment</span></p>
@@ -386,8 +359,8 @@
           <div class="qa-body"><span data-l="es">Si te la hicimos nosotros, arrancas con $300.000 + IVA. Si la hizo otro proveedor,</span><span data-l="en">If we built it, you start with US$75. If another provider built it,</span> <a href="#" data-wa="Hola, mi página la hizo otro proveedor y quiero arrancar" data-wa-en="Hi, another provider built my website and I want to get started"><span data-l="es">escríbenos</span><span data-l="en">message us</span></a>.</div>
         </details>
         <details class="qa glass">
-          <summary><span data-l="es">¿Qué pasa si no sigo después de los 10 días?</span><span data-l="en">What if I don't continue after the 10 days?</span><span class="qa-icon" aria-hidden="true"></span></summary>
-          <div class="qa-body"><span data-l="es">Tu página y tu dominio son tuyos, con hosting por 1 año.</span><span data-l="en">Your website and your domain are yours, with hosting for 1 year.</span></div>
+          <summary><span data-l="es">¿Tengo que pagar algo cada mes?</span><span data-l="en">Do I have to pay anything monthly?</span><span class="qa-icon" aria-hidden="true"></span></summary>
+          <div class="qa-body"><span data-l="es">No. El Pack Lanzamiento es un pago único, sin mensualidades. Tu página y tu dominio son tuyos, con hosting por 1 año.</span><span data-l="en">No. The Launch Pack is a one-time payment, with no monthly fees. Your website and your domain are yours, with hosting for 1 year.</span></div>
         </details>
         <details class="qa glass">
           <summary><span data-l="es">¿Me prometen resultados?</span><span data-l="en">Do you promise results?</span><span class="qa-icon" aria-hidden="true"></span></summary>
@@ -421,7 +394,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#top" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+        <a href="#top" class="brand"><img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
         <p><span data-l="es">Te hacemos tu página y la lanzamos con 10 días de marketing intensivo.</span><span data-l="en">We build your website and launch it with 10 days of intensive marketing.</span></p>
       </div>
       <div>
@@ -462,11 +435,11 @@
 
 <a href="#" class="wa-float" data-wa="Hola, vi la web y tengo una pregunta" data-wa-en="Hi, I saw your website and I have a question" aria-label="¿Dudas? Escríbenos por WhatsApp" data-aria-en="Questions? Message us on WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span><span data-l="es">¿Dudas? Escríbenos</span><span data-l="en">Questions? Message us</span></span></a>
 
-<script src="idioma.js?v=1" defer></script>
-<script src="contacto.js?v=6" defer></script>
-<script src="supabase-config.js?v=2" defer></script>
-<script src="analytics.js?v=14" defer></script>
-<script src="main.js?v=38" defer></script>
-<script src="lanzamiento.js?v=1" defer></script>
+<script src="assets/js/idioma.js?v=1" defer></script>
+<script src="assets/js/contacto.js?v=6" defer></script>
+<script src="assets/js/supabase-config.js?v=2" defer></script>
+<script src="assets/js/analytics.js?v=14" defer></script>
+<script src="assets/js/main.js?v=38" defer></script>
+<script src="assets/js/lanzamiento.js?v=1" defer></script>
 </body>
 </html>

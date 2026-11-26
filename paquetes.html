@@ -21,18 +21,18 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Página web para tu negocio, conectada a tu WhatsApp · Gotiastudio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="icon" href="assets/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=2">
 
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
-  <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=95">
-  <link rel="stylesheet" href="lanzamiento.css?v=11">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css?v=95">
+  <link rel="stylesheet" href="assets/css/lanzamiento.css?v=12">
 
   <script>
     // idioma: el mismo de index.html (español con COP o inglés con USD), aplicado antes de pintar.
-    // La primera vez se pregunta (html.lang-ask, idioma.js). ?lang=en|es en el enlace lo fija.
+    // La primera vez se pregunta (html.lang-ask, assets/js/idioma.js). ?lang=en|es en el enlace lo fija.
     (function () {
       var r = document.documentElement, q = null, l = null;
       r.dataset.esTitle = document.title;
@@ -87,7 +87,7 @@
      Si cambias un precio en COP, cambia también el de USD (aquí y en index.html). -->
 <div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
   <div class="lang-pick-box glass">
-    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <img class="brand-mark" src="assets/img/g-logo-64.webp" alt="" width="44" height="44" decoding="async">
     <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
     <div class="lang-pick-btns">
       <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
@@ -119,7 +119,7 @@
 <header class="nav" id="nav">
   <nav class="nav-inner glass" aria-label="Principal">
     <a href="index.html" class="brand" aria-label="Gotiastudio, ir al inicio" data-aria-en="Gotiastudio, go to home">
-      <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
+      <img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
       <span class="brand-word">Gotia<span>studio</span></span>
     </a>
     <ul class="nav-links">
@@ -164,7 +164,7 @@
         <section class="lz-pack glass spot is-featured" id="plan-lanzamiento" aria-labelledby="t-lanzamiento">
           <span class="lz-tag"><span data-l="es">Empieza aquí</span><span data-l="en">Start here</span></span>
           <h2 class="lz-name" id="t-lanzamiento"><span data-l="es">Pack Lanzamiento</span><span data-l="en">Launch Pack</span></h2>
-          <p class="lz-price"><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · en 2 pagos (50 % y 50 %)</span><span data-l="en">USD · in 2 payments (50% and 50%)</span></p>
+          <p class="lz-price"><strong data-l="es">$890.000</strong><strong data-l="en">US$225</strong><span data-l="es">COP + IVA · pago único</span><span data-l="en">USD · one-time payment</span></p>
           <ul class="lz-inc">
             <li><span data-l="es">Página de una sección: oferta, servicios, fotos, WhatsApp con mensaje listo, formulario y Google Maps</span><span data-l="en">One-section website: offer, services, photos, WhatsApp with a ready-made message, contact form and Google Maps</span></li>
             <li><span data-l="es">Dominio, hosting y SSL por 1 año</span><span data-l="en">Domain, hosting and SSL for 1 year</span></li>
@@ -172,16 +172,11 @@
             <li><span data-l="es">1 automatización a tu elección: respuesta automática en WhatsApp o aviso de cada cliente nuevo</span><span data-l="en">1 automation of your choice: WhatsApp auto-reply or an alert for every new lead</span></li>
             <li><span data-l="es">10 días de marketing intensivo: 1 a 2 videos diarios en 2 redes</span><span data-l="en">10 days of intensive marketing: 1–2 daily videos on 2 social networks</span></li>
           </ul>
-          <div class="lz-after">
-            <p data-l="es"><b>Después, elige tu mensualidad</b> (+ IVA, sin permanencia):</p>
-            <p data-l="en"><b>Then choose your monthly plan</b> (no commitment):</p>
-            <ul class="lz-inc">
-              <li><span data-l="es"><b>$700.000/mes:</b> 1 video, 1 story y 1 post de texto al día</span><span data-l="en"><b>US$175/month:</b> 1 video, 1 story and 1 text post a day</span></li>
-              <li><span data-l="es"><b>$850.000/mes:</b> 2 videos, 2 stories y 2 posts al día</span><span data-l="en"><b>US$215/month:</b> 2 videos, 2 stories and 2 posts a day</span></li>
-              <li><span data-l="es"><b>$1.200.000/mes:</b> 3 videos, 3 stories y 3 flyers al día</span><span data-l="en"><b>US$300/month:</b> 3 videos, 3 stories and 3 flyers a day</span></li>
-            </ul>
-            <p data-l="es">Todas incluyen Google Business, cuidado de tu página y reporte mensual.</p>
-            <p data-l="en">All include Google Business, website care and a monthly report.</p>
+          <div class="lz-after lz-unico">
+            <p data-l="es"><b>PAGO ÚNICO, sin mensualidades.</b> No te cobramos nada cada mes.</p>
+            <p data-l="en"><b>ONE-TIME PAYMENT, no monthly fees.</b> We don't charge you anything each month.</p>
+            <p data-l="es">Puedes pagarlo en 2 partes: 50 % al empezar y 50 % cuando esté lista.</p>
+            <p data-l="en">You can split it in 2: 50% to start and 50% when it's ready.</p>
           </div>
           <a href="#" class="btn btn-primary btn-block" data-wa="Hola, quiero el Pack Lanzamiento" data-wa-en="Hi, I want the Launch Pack (Pack Lanzamiento)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero mi lanzamiento</span><span data-l="en">Start my launch</span></a>
         </section>
@@ -196,7 +191,7 @@
             <li><span data-l="es">Aviso inmediato de cada cliente nuevo</span><span data-l="en">Instant alert for every new lead</span></li>
             <li><span data-l="es">Panel para cambiar textos, fotos y precios</span><span data-l="en">Dashboard to change texts, photos and prices</span></li>
           </ul>
-          <p class="lz-after"><span data-l="es"><b>Después:</b> $2.190.000/mes + IVA, sin permanencia.</span><span data-l="en"><b>Then:</b> US$550/month, no commitment.</span></p>
+          <p class="lz-after"><span data-l="es"><b>PAGO ÚNICO, sin mensualidades.</b> Puedes pagarlo 50 % al empezar y 50 % cuando esté lista.</span><span data-l="en"><b>ONE-TIME PAYMENT, no monthly fees.</b> You can pay 50% to start and 50% when it's ready.</span></p>
           <p class="lz-ideal"><span data-l="es">Ideal para hoteles, glampings, spas y consultorios.</span><span data-l="en">Ideal for hotels, glampings, spas and clinics.</span></p>
           <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, quiero el Pack con Reservas" data-wa-en="Hi, I want the Bookings Pack (Pack con Reservas)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero el Pack con Reservas</span><span data-l="en">I want the Bookings Pack</span></a>
         </section>
@@ -205,7 +200,7 @@
           <h2 class="lz-name" id="t-ya-tengo"><span data-l="es">Ya tengo página</span><span data-l="en">I already have a website</span></h2>
           <p class="lz-price"><strong data-l="es">$300.000</strong><strong data-l="en">US$75</strong><span data-l="es">COP + IVA · para arrancar</span><span data-l="en">USD · to get started</span></p>
           <p class="lz-for"><span data-l="es">Para clientes de Gotiastudio: conectamos la medición y tu WhatsApp, y arrancan tus 10 días de marketing intensivo.</span><span data-l="en">For Gotiastudio clients: we connect tracking and your WhatsApp, and your 10 days of intensive marketing begin.</span></p>
-          <p class="lz-after"><span data-l="es"><b>Después:</b> pactamos tu mensualidad desde $700.000/mes + IVA.</span><span data-l="en"><b>Then:</b> we agree on your monthly plan, from US$175/month.</span></p>
+          <p class="lz-after"><span data-l="es"><b>PAGO ÚNICO, sin mensualidades.</b></span><span data-l="en"><b>ONE-TIME PAYMENT, no monthly fees.</b></span></p>
           <p class="lz-small lz-push"><span data-l="es">¿Tu página la hizo otro proveedor?</span><span data-l="en">Did another provider build your website?</span> <a href="#" data-wa="Hola, mi página la hizo otro proveedor y quiero arrancar" data-wa-en="Hi, another provider built my website and I want to get started"><span data-l="es">Escríbenos.</span><span data-l="en">Message us.</span></a></p>
           <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, ya tengo página con Gotiastudio y quiero arrancar" data-wa-en="Hi, I already have a website with Gotiastudio and I want to get started"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero arrancar</span><span data-l="en">I want to get started</span></a>
         </section>
@@ -224,29 +219,6 @@
           <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, quiero el plan Aceleradora" data-wa-en="Hi, I want the Accelerator plan (Aceleradora)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero acelerar</span><span data-l="en">I want to accelerate</span></a>
         </section>
 
-        <!-- Año completo: el Pack Lanzamiento + 12 meses en un solo pago. El mismo cuadro (y los mismos precios) que en index.html (#precios) -->
-        <section class="lz-pack glass spot lz-year lz-wide" id="plan-anual" aria-labelledby="t-anual">
-          <div class="lz-main">
-            <span class="lz-tag"><span data-l="es">2 meses gratis</span><span data-l="en">2 months free</span></span>
-            <h2 class="lz-name" id="t-anual"><span data-l="es">Año completo</span><span data-l="en">Full year</span></h2>
-            <p class="lz-for"><span data-l="es">El Pack Lanzamiento y 12 meses de tu mensualidad en un solo pago (COP + IVA). Recibes 14 meses.</span><span data-l="en">The Launch Pack plus 12 months of your monthly plan in a single payment (USD). You get 14 months.</span></p>
-            <ul class="lz-prices">
-              <li><strong data-l="es">$9.290.000</strong><strong data-l="en">US$2,325</strong><span data-l="es">con la de $700.000/mes · ahorras $1.400.000</span><span data-l="en">with the US$175/month plan · you save US$350</span></li>
-              <li><strong data-l="es">$11.090.000</strong><strong data-l="en">US$2,805</strong><span data-l="es">con la de $850.000/mes · ahorras $1.700.000</span><span data-l="en">with the US$215/month plan · you save US$430</span></li>
-              <li><strong data-l="es">$15.290.000</strong><strong data-l="en">US$3,825</strong><span data-l="es">con la de $1.200.000/mes · ahorras $2.400.000</span><span data-l="en">with the US$300/month plan · you save US$600</span></li>
-            </ul>
-          </div>
-          <ul class="lz-inc">
-            <li><span data-l="es">Todo lo del Pack Lanzamiento: tu página y 10 días de marketing intensivo</span><span data-l="en">Everything in the Launch Pack: your website and 10 days of intensive marketing</span></li>
-            <li><span data-l="es">14 meses de mensualidad por el precio de 12</span><span data-l="en">14 months of your monthly plan for the price of 12</span></li>
-            <li><span data-l="es">Marketing todo el año sin pagos adicionales, con Google Business y reporte mensual</span><span data-l="en">Marketing all year with no extra payments, including Google Business and a monthly report</span></li>
-            <li><span data-l="es">Tu página activa las 24 horas: dominio, hosting, mantenimiento y mejoras</span><span data-l="en">Your website live 24/7: domain, hosting, maintenance and improvements</span></li>
-            <li><span data-l="es">Funciones nuevas sencillas para tu página, incluidas</span><span data-l="en">Simple new features for your website, included</span></li>
-          </ul>
-          <p class="lz-small"><span data-l="es">La pauta es opcional (también trabajamos orgánico) y va aparte, directo a Meta o Google.</span><span data-l="en">Ads are optional (we also work organically) and are paid separately, directly to Meta or Google.</span></p>
-          <a href="#" class="btn btn-glass glass btn-block" data-wa="Hola, quiero el Año completo" data-wa-en="Hi, I want the Full year (Año completo)"><svg class="ico ico-l"><use href="#i-wa"/></svg><span data-l="es">Quiero el año completo</span><span data-l="en">I want the full year</span></a>
-        </section>
-
       </div>
     </div>
   </section>
@@ -260,7 +232,7 @@
       </header>
       <ul class="lz-rules" data-stagger>
         <li class="glass"><span class="icon-bubble sm"><svg class="ico"><use href="#i-rocket"/></svg></span><span data-l="es">El lanzamiento arranca cuando tu página está publicada y pagada.</span><span data-l="en">The launch starts once your website is published and paid for.</span></li>
-        <li class="glass"><span class="icon-bubble sm"><svg class="ico"><use href="#i-data"/></svg></span><span data-l="es">El día 8 te mostramos los números. Si no nos avisas antes del día 10, arranca tu primer mes.</span><span data-l="en">On day 8 we show you the numbers. If you don't tell us otherwise before day 10, your first month begins.</span></li>
+        <li class="glass"><span class="icon-bubble sm"><svg class="ico"><use href="#i-data"/></svg></span><span data-l="es">El día 8 te mostramos los números. Sin mensualidades: después no te cobramos nada.</span><span data-l="en">On day 8 we show you the numbers. No monthly fees: we don't charge you anything afterwards.</span></li>
         <li class="glass"><span class="icon-bubble sm"><svg class="ico"><use href="#i-shield"/></svg></span><span data-l="es">Tu página, tu dominio y tus redes son tuyos.</span><span data-l="en">Your website, your domain and your social accounts are yours.</span></li>
         <li class="glass"><span class="icon-bubble sm"><svg class="ico"><use href="#i-card"/></svg></span><span data-l="es">La pauta no es obligatoria: tenemos estrategias orgánicas. Si la quieres, va aparte, pagada directo a Meta o Google.</span><span data-l="en">Ads are optional: we have organic strategies. If you want them, they're paid separately, directly to Meta or Google.</span></li>
         <li class="glass"><span class="icon-bubble sm"><svg class="ico"><use href="#i-check"/></svg></span><span data-l="es">Te prometemos tráfico para tu negocio y te lo demostramos: los videos salen en una cuenta de prueba compartida contigo, donde ves los resultados.</span><span data-l="en">We promise traffic for your business and we prove it: the videos go out on a test account shared with you, where you see the results.</span></li>
@@ -277,7 +249,7 @@
       </header>
       <ul class="lz-pay" data-stagger>
         <li class="glass"><small><span data-l="es">Páginas</span><span data-l="en">Websites</span></small><strong>50 % + 50 %</strong><p><span data-l="es">50 % para empezar y 50 % cuando esté lista.</span><span data-l="en">50% to start and 50% when it's ready.</span></p></li>
-        <li class="glass"><small><span data-l="es">Mensualidades</span><span data-l="en">Monthly plans</span></small><strong><span data-l="es">Mes a mes</span><span data-l="en">Month to month</span></strong><p><span data-l="es">Pagas un mes y trabajamos ese mes, sin permanencia. Si pagas 12 meses, recibes 14.</span><span data-l="en">You pay for a month and we work that month, no commitment. Pay for 12 months and get 14.</span></p></li>
+        <li class="glass"><small><span data-l="es">Sin mensualidades</span><span data-l="en">No monthly fees</span></small><strong><span data-l="es">Pago único</span><span data-l="en">One-time payment</span></strong><p><span data-l="es">Los packs se pagan una sola vez. Solo la Aceleradora es mensual.</span><span data-l="en">Packs are paid once. Only the Accelerator is monthly.</span></p></li>
         <li class="glass"><small><span data-l="es">Medios de pago</span><span data-l="en">Payment methods</span></small><strong><span data-l="es">Como prefieras</span><span data-l="en">Your choice</span></strong><p><span data-l="es">Nequi, Llave Bre-B o QR, transferencia y tarjeta.</span><span data-l="en">Card or bank transfer (and Nequi or Bre-B in Colombia).</span></p></li>
       </ul>
       <p class="lz-note"><span data-l="es">Precios en pesos colombianos (COP) + IVA.</span><span data-l="en">Prices in US dollars (USD).</span></p>
@@ -298,7 +270,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+        <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
         <p><span data-l="es">Te hacemos tu página y la lanzamos con 10 días de marketing intensivo.</span><span data-l="en">We build your website and launch it with 10 days of intensive marketing.</span></p>
       </div>
       <div>
@@ -339,11 +311,11 @@
 
 <a href="#" class="wa-float" data-wa="Hola, vi los planes y tengo una pregunta" data-wa-en="Hi, I saw your plans and I have a question" aria-label="¿Dudas? Escríbenos por WhatsApp" data-aria-en="Questions? Message us on WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span><span data-l="es">¿Dudas? Escríbenos</span><span data-l="en">Questions? Message us</span></span></a>
 
-<script src="idioma.js?v=1" defer></script>
-<script src="contacto.js?v=6" defer></script>
-<script src="supabase-config.js?v=2" defer></script>
-<script src="analytics.js?v=14" defer></script>
-<script src="main.js?v=38" defer></script>
-<script src="lanzamiento.js?v=1" defer></script>
+<script src="assets/js/idioma.js?v=1" defer></script>
+<script src="assets/js/contacto.js?v=6" defer></script>
+<script src="assets/js/supabase-config.js?v=2" defer></script>
+<script src="assets/js/analytics.js?v=14" defer></script>
+<script src="assets/js/main.js?v=38" defer></script>
+<script src="assets/js/lanzamiento.js?v=1" defer></script>
 </body>
 </html>

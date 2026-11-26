@@ -7,14 +7,14 @@
   <meta name="description" content="Las reglas para usar la web de Gotiastudio y contratar sus planes: lanzamiento, pagos, retracto, mensualidades, contenido con IA y más.">
   <meta name="theme-color" content="#eaf3ff">
   <meta name="color-scheme" content="light">
-  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="icon" href="assets/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=2">
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
-  <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=95">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css?v=95">
   <script>
-    // idioma: el mismo de index.html (español o inglés), aplicado antes de pintar (idioma.js)
+    // idioma: el mismo de index.html (español o inglés), aplicado antes de pintar (assets/js/idioma.js)
     (function () {
       var r = document.documentElement, q = null, l = null;
       r.dataset.esTitle = document.title;
@@ -41,7 +41,7 @@
 <!-- selector de idioma de la primera visita (el mismo de index.html) -->
 <div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
   <div class="lang-pick-box glass">
-    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <img class="brand-mark" src="assets/img/g-logo-64.webp" alt="" width="44" height="44" decoding="async">
     <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
     <div class="lang-pick-btns">
       <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
@@ -56,7 +56,7 @@
      Hay dos versiones: la española (data-l="es", la que vale) y la inglesa (data-l="en", con precios en USD
      a 4.000 COP por dólar, redondeados a 5 y sin IVA). Si cambias una, cambia la otra. -->
 <header class="legal-top container">
-  <a href="index.html" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+  <a href="index.html" class="brand"><img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
   <button class="lang-toggle" type="button" data-lang-toggle aria-label="Cambiar a inglés" data-aria-en="Switch to Spanish" title="Español / English"><span data-l="es">EN</span><span data-l="en">ES</span></button>
   <a href="index.html" class="btn btn-glass glass btn-sm"><span data-l="es">Volver a la web</span><span data-l="en">Back to the website</span></a>
 </header>
@@ -365,7 +365,7 @@
   <span><a href="politica-de-datos.html"><span data-l="es">Política de datos</span><span data-l="en">Privacy policy (in Spanish)</span></a> · <a href="terminos.html" aria-current="page"><span data-l="es">Términos y condiciones</span><span data-l="en">Terms and conditions</span></a></span>
 </footer>
 
-<script src="idioma.js?v=1" defer></script>
-<script src="contacto.js?v=6" defer></script>
+<script src="assets/js/idioma.js?v=1" defer></script>
+<script src="assets/js/contacto.js?v=6" defer></script>
 </body>
 </html>
