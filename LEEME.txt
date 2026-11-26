@@ -1,7 +1,9 @@
-Black Days (Pack Lanzamiento a $590.000 hasta el 6 dic. 2026) - archivos para subir a GitHub
+Black Days (Pack Lanzamiento a $590.000 hasta el 6 dic. 2026): archivos para subir a GitHub
 
-Dónde va cada archivo en el repositorio (reemplaza el que ya está):
-  index.html        -> en la raíz
-  paquetes.html     -> en la raíz
-  lanzamiento.css   -> assets/css/lanzamiento.css
-  lanzamiento.js    -> assets/js/lanzamiento.js
+Sube estos 4 archivos a la RAÍZ del repositorio, junto a los demás (allá no hay carpetas),
+y reemplaza los que ya están:
+  index.html
+  paquetes.html
+  lanzamiento.css
+  lanzamiento.js
+(Este LEEME.txt no se sube.)

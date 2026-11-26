@@ -35,7 +35,8 @@
     const s = Math.floor(left / 1000);
     const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
     counts.forEach((el) => {
-      const en = el.closest('[data-l]')?.getAttribute('data-l') === 'en';
+      const l = el.closest('[data-l]');
+      const en = l ? l.getAttribute('data-l') === 'en' : document.documentElement.classList.contains('lang-en');
       const days = d ? `${d} ${en ? (d === 1 ? 'day' : 'days') : (d === 1 ? 'día' : 'días')} ` : '';
       el.textContent = `${days}${pad(h)}:${pad(m)}:${pad(sec)}`;
     });
