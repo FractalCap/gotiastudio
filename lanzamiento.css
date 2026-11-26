@@ -170,3 +170,8 @@
 .lz-final > :not(.bubble) { position: relative; z-index: 1; }   /* el texto, por encima de las burbujas */
 .lz-ig { font-size: 15px; color: var(--fg-2); }
 @media (max-width: 420px) { .lz-final .btn { width: 100%; } }
+
+/* Pack Lanzamiento: el aviso "PAGO ÚNICO, sin mensualidades" (24 nov. 2026), con borde para que se vea */
+.lz-unico { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.lz-unico p + p { margin-top: 6px; }
+.lz-unico b { letter-spacing: .01em; }

@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pagas tu página y la lanzamos con 10 días de marketing intensivo">
   <meta property="og:description" content="Tu página lista en pocos días y 10 días de videos diarios que llevan a tu WhatsApp. Ves los resultados en una cuenta de prueba compartida contigo. Desde $890.000 + IVA.">
-  <!-- Vista previa al compartir por WhatsApp. La imagen es landing/img/og-imagen.jpg,
+  <!-- Vista previa al compartir por WhatsApp. La imagen es og-imagen.jpg,
        que en la carpeta de GitHub queda en la raíz: por eso la ruta completa es /og-imagen.jpg -->
   <link rel="canonical" href="https://gotiastudio.it.com/">
   <meta property="og:url" content="https://gotiastudio.it.com/">
@@ -21,20 +21,20 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Página web para tu negocio, conectada a tu WhatsApp · Gotiastudio">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/img/favicon-32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="icon" href="assets/img/favicon-192.png?v=2" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=2">
+  <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 
   <!-- la letra Manrope va en la web (sin pedirla a Google): carga antes y sin bloquear -->
-  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/g-glass-alpha-480.webp" as="image" type="image/webp" fetchpriority="high"
-        imagesrcset="assets/img/g-glass-alpha-480.webp 480w, assets/img/g-glass-alpha.webp?v=2 648w" imagesizes="(max-width: 860px) 160px, 30vw">
-  <link rel="stylesheet" href="assets/css/styles.css?v=95">
-  <link rel="stylesheet" href="assets/css/lanzamiento.css?v=12">
+  <link rel="preload" href="manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="g-glass-alpha-480.webp" as="image" type="image/webp" fetchpriority="high"
+        imagesrcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" imagesizes="(max-width: 860px) 160px, 30vw">
+  <link rel="stylesheet" href="styles.css?v=95">
+  <link rel="stylesheet" href="lanzamiento.css?v=12">
 
   <script>
     // idioma: español (precios en COP) o inglés (USD). Se aplica antes de pintar, sin destello;
-    // la primera vez se pregunta (html.lang-ask, assets/js/idioma.js). ?lang=en|es en el enlace lo fija.
+    // la primera vez se pregunta (html.lang-ask, idioma.js). ?lang=en|es en el enlace lo fija.
     (function () {
       var r = document.documentElement, q = null, l = null;
       r.dataset.esTitle = document.title;
@@ -120,7 +120,7 @@
      redondeados a 5 y sin IVA. Si cambias un precio en COP, cambia también el de USD. -->
 <div class="lang-pick" role="dialog" aria-modal="true" aria-labelledby="lang-pick-t">
   <div class="lang-pick-box glass">
-    <img class="brand-mark" src="assets/img/g-logo-64.webp" alt="" width="44" height="44" decoding="async">
+    <img class="brand-mark" src="g-logo-64.webp" alt="" width="44" height="44" decoding="async">
     <p class="lang-pick-t" id="lang-pick-t">Elige tu idioma <span lang="en">Choose your language</span></p>
     <div class="lang-pick-btns">
       <button type="button" class="btn btn-primary" data-lang-set="es">Español <small>Precios en pesos (COP)</small></button>
@@ -152,7 +152,7 @@
 <header class="nav" id="nav">
   <nav class="nav-inner glass" aria-label="Principal">
     <a href="#top" class="brand" aria-label="Gotiastudio, inicio" data-aria-en="Gotiastudio, home">
-      <img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
+      <img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async">
       <span class="brand-word">Gotia<span>studio</span></span>
     </a>
     <ul class="nav-links">
@@ -186,7 +186,7 @@
     <!-- la "G" de cristal de la marca, como imagen fija -->
     <div class="hero-g" aria-hidden="true">
       <i class="hero-g-halo"></i>
-      <img src="assets/img/g-glass-alpha.webp?v=2" srcset="assets/img/g-glass-alpha-480.webp 480w, assets/img/g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 160px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high">
+      <img src="g-glass-alpha.webp?v=2" srcset="g-glass-alpha-480.webp 480w, g-glass-alpha.webp?v=2 648w" sizes="(max-width: 860px) 160px, 30vw" alt="" width="648" height="608" decoding="async" fetchpriority="high">
       <span class="lb" style="--s:13cqw;left:92%;top:4%"></span>
       <span class="lb far" style="--s:8cqw;left:6%;top:90%"></span>
       <span class="lb" style="--s:4cqw;left:24%;top:2%"></span>
@@ -227,7 +227,7 @@
           <!-- la captura muestra 30 días, pero la cuenta lleva solo 2 semanas desde que la empezamos (dato del cliente, 20 nov. 2026) -->
           <p class="caso-txt" data-l="es">vistas de video y 905 seguidores más. <strong>La cuenta lleva solo 2 semanas</strong> desde que la empezamos, y ya tiene resultados.</p>
           <p class="caso-txt" data-l="en">video views and 905 new followers. <strong>We started the account just 2 weeks ago</strong>, and it's already getting results.</p>
-          <img class="caso-foto" src="assets/img/caso-cabaleon-vistas.webp" alt="Estadísticas del Hotel Cabaleon del 21 de octubre al 19 de noviembre: 528.270 visualizaciones y 905 seguidores netos" width="720" height="450" loading="lazy" decoding="async">
+          <img class="caso-foto" src="caso-cabaleon-vistas.webp" alt="Estadísticas del Hotel Cabaleon del 21 de octubre al 19 de noviembre: 528.270 visualizaciones y 905 seguidores netos" width="720" height="450" loading="lazy" decoding="async">
           <!-- MÁS DATOS:
           <ul class="caso-datos">
             <li><strong>[N]</strong> solicitudes de reserva</li>
@@ -246,7 +246,7 @@
           <!-- +1.000 interesados: dato del cliente (20 nov. 2026) -->
           <p class="caso-txt" data-l="es">vistas de video en 30 días, 3.676 seguidores más y <strong>+1.000 interesados</strong>.</p>
           <p class="caso-txt" data-l="en">video views in 30 days, 3,676 new followers and <strong>1,000+ leads</strong>.</p>
-          <img class="caso-foto" src="assets/img/caso-mantis-vistas.webp" alt="Estadísticas de Mantis Pest Control del 21 de octubre al 19 de noviembre: 17.362.668 visualizaciones y 3.676 seguidores netos" width="720" height="447" loading="lazy" decoding="async">
+          <img class="caso-foto" src="caso-mantis-vistas.webp" alt="Estadísticas de Mantis Pest Control del 21 de octubre al 19 de noviembre: 17.362.668 visualizaciones y 3.676 seguidores netos" width="720" height="447" loading="lazy" decoding="async">
           <a class="btn btn-glass glass btn-sm caso-ig" href="https://www.instagram.com/mantis_pestcontrol/" target="_blank" rel="noopener"><svg class="ico ico-l"><use href="#i-ig"/></svg>@mantis_pestcontrol</a>
         </article>
       </div>
@@ -394,7 +394,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#top" class="brand"><img class="brand-mark" src="assets/img/g-logo-64.webp" srcset="assets/img/g-logo-64.webp 2x, assets/img/g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
+        <a href="#top" class="brand"><img class="brand-mark" src="g-logo-64.webp" srcset="g-logo-64.webp 2x, g-logo.webp?v=2 4x" alt="" width="26" height="26" decoding="async"><span class="brand-word">Gotia<span>studio</span></span></a>
         <p><span data-l="es">Te hacemos tu página y la lanzamos con 10 días de marketing intensivo.</span><span data-l="en">We build your website and launch it with 10 days of intensive marketing.</span></p>
       </div>
       <div>
@@ -435,11 +435,11 @@
 
 <a href="#" class="wa-float" data-wa="Hola, vi la web y tengo una pregunta" data-wa-en="Hi, I saw your website and I have a question" aria-label="¿Dudas? Escríbenos por WhatsApp" data-aria-en="Questions? Message us on WhatsApp"><svg class="ico"><use href="#i-wa"/></svg><span><span data-l="es">¿Dudas? Escríbenos</span><span data-l="en">Questions? Message us</span></span></a>
 
-<script src="assets/js/idioma.js?v=1" defer></script>
-<script src="assets/js/contacto.js?v=6" defer></script>
-<script src="assets/js/supabase-config.js?v=2" defer></script>
-<script src="assets/js/analytics.js?v=14" defer></script>
-<script src="assets/js/main.js?v=38" defer></script>
-<script src="assets/js/lanzamiento.js?v=1" defer></script>
+<script src="idioma.js?v=1" defer></script>
+<script src="contacto.js?v=6" defer></script>
+<script src="supabase-config.js?v=2" defer></script>
+<script src="analytics.js?v=14" defer></script>
+<script src="main.js?v=38" defer></script>
+<script src="lanzamiento.js?v=1" defer></script>
 </body>
 </html>
